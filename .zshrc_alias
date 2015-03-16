@@ -1,0 +1,50 @@
+export EDITOR="emacsclient"
+alias e='emacsclient'
+
+export PYTHONSTARTUP=~/.pythonstartup
+alias py=python3.4
+
+alias la='ls -a'
+alias lsf='ls -F'
+
+case ${OSTYPE} in
+     linux*)
+     # sudo apt-get install xsel
+     alias pbcopy='xsel --clipboard --input'
+     alias open="gnome-open"
+esac
+
+# git
+alias gl="git log --oneline"
+alias glp="git log -p"
+alias gln="git log --name-only"
+alias gdn='git diff --name-only'
+for n in $(seq 50); do
+  alias gd$n="git diff HEAD~$n"
+  alias gdn$n="git diff --name-only HEAD~$n"
+done
+alias gci="git commit"
+alias gcm="git commit -m"
+alias gca="git commit --amend"
+alias gco='git checkout'
+
+function git-pull() {
+  local repository=${1:-origin}
+  local branch=${2:-$(git rev-parse --abbrev-ref HEAD)}
+  git pull origin $branch
+}
+alias gps=git-pull
+
+function git-pull-force() {
+  local branch=$(git rev-parse --abbrev-ref HEAD)
+  git-checkout-force tmp 2> /dev/null
+  if [ $? != 0 ]; then return 1; fi
+  git branch -D $branch > /dev/null 2>&1
+  if [ $? != 0 ]; then return 1; fi
+  git fetch
+  if [ $? != 0 ]; then return 1; fi
+  git checkout $branch
+}
+alias gplf=git-pull-force
+
+function git(){hub "$@"} # zsh

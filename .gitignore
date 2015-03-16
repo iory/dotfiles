@@ -1,0 +1,7 @@
+.*
+!/.gitignore
+!/.zshrc
+!/.zshrc_alias
+
+# ignore directory
+/plugins
