@@ -18,7 +18,6 @@ compinit
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
-bindkey -e
 # End of lines configured by zsh-newuser-install
 
 # if executed time is longer than 3 seconds, print information.
@@ -36,12 +35,15 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 setopt nobeep
 function up(){ cpath=./; for i in `seq 1 1 $1`; do cpath=$cpath../; done; cd $cpath;}
 
+# zsh highlight
+source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # zaw setting
 source $ZDOTDIR/plugins/zaw/zaw.zsh
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
-zstyle ':chpwd:*' recent-dirs-max 10000
+zstyle ':chpwd:*' recent-dirs-max 5000
 zstyle ':chpwd:*' recent-dirs-default yes
 zstyle ':completion:*' recent-dirs-insert both
 
@@ -52,6 +54,14 @@ bindkey '^X^P' zaw-process
 # bindkey '^X^F' zaw-git-files
 # bindkey '^X^B' zaw-git-branches
 
+# load .zshrc_setting file
+[ -f $ZDOTDIR/.zshrc_alias ] && . $ZDOTDIR/.zshrc_alias
+
+
+# export PATH
+export PATH=$PATH:$HOME/bin/tools/bin:$HOME/.emacs.d/bin
+
+# setting only Ubuntu
 case ${OSTYPE} in
      linux*)
      # ros setting
@@ -62,12 +72,3 @@ case ${OSTYPE} in
      # xmodmap
      xmodmap ~/.xmodmaprc
 esac
-
-# zsh highlight
-source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# export PATH
-export PATH=$PATH:~/bin/tools:~/.emacs.d/bin
-
-# load .zshrc_setting file
-[ -f $ZDOTDIR/.zshrc_alias ] && . $ZDOTDIR/.zshrc_alias

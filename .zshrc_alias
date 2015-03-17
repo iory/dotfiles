@@ -3,7 +3,9 @@ alias e='emacsclient'
 
 export PYTHONSTARTUP=~/.pythonstartup
 alias py=python3.4
+alias ipython='ipython --no-confirm-exit'
 
+alias sl='ls'
 alias la='ls -a'
 alias lsf='ls -F'
 
