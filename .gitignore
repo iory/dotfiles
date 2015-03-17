@@ -2,6 +2,7 @@
 !/.gitignore
 !/.zshrc
 !/.zshrc_alias
+!/.zshenv
 
 # ignore directory
 /plugins

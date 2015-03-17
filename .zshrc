@@ -36,38 +36,38 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 setopt nobeep
 function up(){ cpath=./; for i in `seq 1 1 $1`; do cpath=$cpath../; done; cd $cpath;}
 
-export PATH=$PATH:~/Dropbox/tools
-export PATH="~/bin:$PATH"
-
-# xmodmap
-xmodmap ~/.xmodmaprc
-
 # zaw setting
 source $ZDOTDIR/plugins/zaw/zaw.zsh
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
-zstyle ':chpwd:*' recent-dirs-max 5000
+zstyle ':chpwd:*' recent-dirs-max 10000
 zstyle ':chpwd:*' recent-dirs-default yes
 zstyle ':completion:*' recent-dirs-insert both
 
 zstyle ':filter-select' case-insensitive yes
-bindkey '^X^F' zaw-cdr # zaw-cdrをbindkey
+bindkey '^X^F' zaw-cdr
 bindkey '^R' zaw-history
 bindkey '^X^P' zaw-process
 # bindkey '^X^F' zaw-git-files
 # bindkey '^X^B' zaw-git-branches
 
-# ros setting
 case ${OSTYPE} in
      linux*)
+     # ros setting
      source /opt/ros/indigo/setup.zsh
      source $HOME/catkin_ws/zshrc.ros
      rossetip
      source $HOME/catkin_ws/semi/devel/setup.zsh
+     # xmodmap
+     xmodmap ~/.xmodmaprc
 esac
 
 # zsh highlight
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# export PATH
+export PATH=$PATH:~/bin/tools:~/.emacs.d/bin
+
 # load .zshrc_setting file
 [ -f $ZDOTDIR/.zshrc_alias ] && . $ZDOTDIR/.zshrc_alias
