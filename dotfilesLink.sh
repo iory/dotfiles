@@ -1,5 +1,5 @@
 #!/bin/sh
-ln -sf ~/.dotfiles/.gdbinit
-ln -sf ~/.dotfiles/.pythonstartup
-ln -sf ~/.dotfiles/.xmodmaprc
-ln -sf ~/.dotfiles/.zshenv
+ln -sf ~/.dotfiles/.gdbinit ~/.gdbinit
+ln -sf ~/.dotfiles/.pythonstartup ~/.pythonstartup
+ln -sf ~/.dotfiles/.xmodmaprc ~/.xmodmaprc
+ln -sf ~/.dotfiles/.zshenv ~/.zshenv
