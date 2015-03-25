@@ -16,20 +16,42 @@ case ${OSTYPE} in
      alias open="gnome-open"
 esac
 
-# git
-alias gl="git log --oneline"
-alias glp="git log -p"
-alias gln="git log --name-only"
-alias gdn='git diff --name-only'
-for n in $(seq 50); do
-  alias gd$n="git diff HEAD~$n"
-  alias gdn$n="git diff --name-only HEAD~$n"
-done
-alias gci="git commit"
-alias gcm="git commit -m"
+# ----------------------
+# Git Aliases
+# ----------------------
+alias ga='git add'
+alias gaa='git add .'
+alias gaaa='git add -A'
+alias gb='git branch'
+alias gbd='git branch -d '
+alias gc='git commit'
 alias gca="git commit --amend"
+alias gci="git commit"
+alias gcm='git commit -m'
 alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gcom='git checkout master'
+alias gd='git diff'
+alias gda='git diff HEAD'
+alias gi='git init'
+alias gl='git log --oneline'
+alias gln="git log --name-only"
+alias glp="git log -p"
+alias glg='git log --graph --oneline --decorate --all'
+alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
+alias gm='git merge --no-ff'
+alias gp='git pull'
+alias gss='git status -s'
+alias gst='git stash'
+alias gstl='git stash list'
+alias gstp='git stash pop'
+alias gstd='git stash drop'
 
+# ----------------------
+# Git Function
+# ----------------------
+# Git log find by commit message
+function glf() { git log --all --grep="$1"; }
 function git-pull() {
   local repository=${1:-origin}
   local branch=${2:-$(git rev-parse --abbrev-ref HEAD)}
@@ -50,3 +72,9 @@ function git-pull-force() {
 alias gplf=git-pull-force
 
 function git(){hub "$@"} # zsh
+
+alias gdn='git diff --name-only'
+for n in $(seq 50); do
+  alias gd$n="git diff HEAD~$n"
+  alias gdn$n="git diff --name-only HEAD~$n"
+done
