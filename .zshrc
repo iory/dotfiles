@@ -10,7 +10,7 @@ eval "$(hub alias -s)"
 
 # User configuration
 
-source $ZSH/oh-my-zsh.sh
+[[ "$TERM" != "dumb" ]] && source $ZSH/oh-my-zsh.sh
 setopt histignorealldups sharehistory
 autoload -Uz compinit
 compinit
