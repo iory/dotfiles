@@ -2,11 +2,13 @@
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
 
+# Path to my bin file
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 plugins=(git hub)
 eval "$(hub alias -s)"
 
 # User configuration
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 source $ZSH/oh-my-zsh.sh
 setopt histignorealldups sharehistory
@@ -70,5 +72,7 @@ case ${OSTYPE} in
      rossetip
      source $HOME/catkin_ws/semi/devel/setup.zsh
      # xmodmap
-     xmodmap ~/.xmodmaprc
+     if [[ ${DISPLAY} == ":0" ]] ; then
+         xmodmap ~/.xmodmaprc
+     fi
 esac
