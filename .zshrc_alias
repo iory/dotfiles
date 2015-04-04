@@ -1,8 +1,9 @@
 export EDITOR="emacsclient"
-alias e='emacsclient'
+alias e='emacsclient -a ""'
+alias emacs='emacsclient -a ""'
 
 export PYTHONSTARTUP=~/.pythonstartup
-alias py=python3.4
+alias py='ipython --no-confirm-exit'
 alias ipython='ipython --no-confirm-exit'
 
 alias sl='ls'
