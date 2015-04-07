@@ -2,6 +2,10 @@
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
 
+# encoding
+export LANG=ja_JP.UTF-8
+export LESSCHARSET=utf-8
+
 # Path to my bin file
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
