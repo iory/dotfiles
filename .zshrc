@@ -71,10 +71,16 @@ export PATH=$PATH:$HOME/bin/tools/bin:$HOME/.emacs.d/bin
 case ${OSTYPE} in
      linux*)
      # ros setting
-     source /opt/ros/indigo/setup.zsh
+     VER=$(lsb_release -sr)
+     case ${VER} in
+         14.04)
+         source /opt/ros/indigo/setup.zsh
+         source $HOME/catkin_ws/semi/devel/setup.zsh ;;
+         12.04)
+         source /opt/ros/hydro/setup.zsh ;;
+     esac
      source $HOME/catkin_ws/zshrc.ros
      rossetip
-     source $HOME/catkin_ws/semi/devel/setup.zsh
      # xmodmap
      if [[ ${DISPLAY} == ":0" ]] ; then
          xmodmap ~/.xmodmaprc
