@@ -1,0 +1,17 @@
+[user]
+	email = ab.ioryz@gmail.com
+	name = iory
+[color]
+	ui = auto
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+	grep = auto
+[push]
+	default = tracking
+[core]
+	excludesfile = ~/.gitignore
+	autocrlf = input
+[http]
+	sslVerify = false
