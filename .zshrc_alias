@@ -4,6 +4,7 @@ alias emacs='emacsclient -a ""'
 
 export PYTHONSTARTUP=~/.pythonstartup
 alias py='ipython --no-confirm-exit'
+alias ipy='ipython --no-confirm-exit'
 alias ipython='ipython --no-confirm-exit'
 
 alias sl='ls'
