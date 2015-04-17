@@ -1,0 +1,20 @@
+# pip install
+sudo apt-get install -y python-pip
+
+# upgrade ipython
+sudo pip install --upgrade ipython
+sudo apt-get install python3.4-dev
+
+# required for scipy
+sudo apt-get install gfortran libopenblas-dev liblapack-dev g++ -y
+
+# required for matplotlib
+sudo apt-get install build-essential python3-tk tk-dev libpng12-dev -y
+
+#
+sudo pip install -U mahotas
+sudo pip install -U pandas
+sudo pip install -U scikit-learn
+sudo pip install -U numpy
+sudo pip install -U scipy
+sudo pip install -U see
