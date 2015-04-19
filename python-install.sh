@@ -1,5 +1,6 @@
 # pip install
-sudo apt-get install -y python-pip
+# sudo apt-get install -y python-pip
+sudo easy_install -U pip
 
 # upgrade ipython
 sudo pip install --upgrade ipython
@@ -18,4 +19,6 @@ sudo pip install -U scikit-learn
 sudo pip install -U numpy
 sudo pip install -U scipy
 sudo pip install -U see
+sudo pip install -U pyflakes
 sudo pip install -U requests
+sudo pip install -U virtualenv
