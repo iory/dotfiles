@@ -18,3 +18,4 @@ sudo pip install -U scikit-learn
 sudo pip install -U numpy
 sudo pip install -U scipy
 sudo pip install -U see
+sudo pip install -U requests
