@@ -22,3 +22,6 @@ sudo pip install -U see
 sudo pip install -U pyflakes
 sudo pip install -U requests
 sudo pip install -U virtualenv
+
+sudo easy_install -U nose
+sudo easy_install -U guppy
