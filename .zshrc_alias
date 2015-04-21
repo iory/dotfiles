@@ -82,3 +82,8 @@ for n in $(seq 50); do
 done
 
 alias gs='echo ""; echo "*********************************************"; echo -e "   DO NOT FORGET TO PULL BEFORE COMMITTING"; echo "*********************************************"; echo ""; git status'
+
+# for ROS
+alias roseus='rlwrap roseus'
+alias irteus='rlwrap irteus'
+alias irteusgl='rlwrap irteusgl'
