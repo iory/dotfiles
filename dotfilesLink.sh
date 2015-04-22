@@ -7,6 +7,7 @@ ln -sf ~/.dotfiles/ipython-settings/00-first.py ~/.ipython/profile_default/start
 ln -sf ~/.dotfiles/.agignore ~/.agignore
 ln -sf ~/.dotfiles/.gitignore_global ~/.gitignore
 ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
+ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 
 # for arduino
 sudo ln -sf ~/.dotfiles/udev-settings/10-arduino.rules /etc/udev/rules.d/10-arduino.rules
