@@ -11,6 +11,8 @@ alias sl='ls'
 alias la='ls -a'
 alias lsf='ls -F'
 
+alias grep='ag'
+
 case ${OSTYPE} in
      linux*)
      # sudo apt-get install xsel

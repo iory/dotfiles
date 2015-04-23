@@ -57,8 +57,9 @@ zstyle ':filter-select' case-insensitive yes
 bindkey '^X^F' zaw-cdr
 bindkey '^R' zaw-history
 bindkey '^X^P' zaw-process
-# bindkey '^X^F' zaw-git-files
-# bindkey '^X^B' zaw-git-branches
+bindkey '^X^F' zaw-git-files
+bindkey '^X^B' zaw-git-branches
+# bindkey '^A' zaw-tmux
 
 # load .zshrc_setting file
 [ -f $ZDOTDIR/.zshrc_alias ] && . $ZDOTDIR/.zshrc_alias
