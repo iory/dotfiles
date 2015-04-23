@@ -85,4 +85,13 @@ case ${OSTYPE} in
      if [[ ${DISPLAY} == ":0" ]] ; then
          xmodmap ~/.xmodmaprc
      fi
+
+     if [ -d "$HOME/.local/bin" ]; then
+         PATH="$HOME/.local/bin:$PATH"
+     fi
+     # if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+     #     source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+     # fi
 esac
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
