@@ -87,3 +87,9 @@ alias gs='echo ""; echo "*********************************************"; echo -e
 alias roseus='rlwrap roseus'
 alias irteus='rlwrap irteus'
 alias irteusgl='rlwrap irteusgl'
+
+case ${OSTYPE} in
+    # for Mac only alias
+    darwin*)
+        alias lsusb='system_profiler SPUSBDataType'
+esac
