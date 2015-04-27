@@ -9,8 +9,10 @@ export LESSCHARSET=utf-8
 # Path to my bin file
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-plugins=(git hub)
-eval "$(hub alias -s)"
+if [ -e $(which hub) ]; then
+    plugins=(git hub)
+    eval "$(hub alias -s)"
+fi
 
 # User configuration
 
@@ -69,7 +71,7 @@ bindkey '^X^B' zaw-git-branches
 export PATH=$PATH:$HOME/bin/tools/bin:$HOME/.emacs.d/bin
 
 # setting only Ubuntu
-if [ -e /opt/ros ]; then
+if [ -e /opt/ros ]; then # if ros exists ...
     case ${OSTYPE} in
         linux*)
             # ros setting
