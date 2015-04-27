@@ -9,7 +9,7 @@ export LESSCHARSET=utf-8
 # Path to my bin file
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-if [ -e $(which hub) ]; then
+if [ \command -v hub >/dev/null 2>&1 ]; then # if hub command exists ...
     plugins=(git hub)
     eval "$(hub alias -s)"
 fi

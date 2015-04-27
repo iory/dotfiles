@@ -1,6 +1,9 @@
-export EDITOR="emacsclient"
-alias e='emacsclient -a ""'
-alias emacs='emacsclient -a ""'
+export EDITOR="emacs"
+if [[ ${DISPLAY} == ":0" ]] ; then
+    export EDITOR="emacsclient"
+    alias e='emacsclient -a ""'
+    alias emacs='emacsclient -a ""'
+fi
 
 export PYTHONSTARTUP=~/.pythonstartup
 alias py='ipython --no-confirm-exit'
@@ -26,6 +29,7 @@ esac
 alias ga='git add'
 alias gaa='git add .'
 alias gaaa='git add -A'
+alias gap='git add -p'
 alias gb='git branch'
 alias gbd='git branch -d '
 alias gc='git commit'
