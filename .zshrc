@@ -69,30 +69,32 @@ bindkey '^X^B' zaw-git-branches
 export PATH=$PATH:$HOME/bin/tools/bin:$HOME/.emacs.d/bin
 
 # setting only Ubuntu
-case ${OSTYPE} in
-     linux*)
-     # ros setting
-     VER=$(lsb_release -sr)
-     case ${VER} in
-         14.04)
-         source /opt/ros/indigo/setup.zsh
-         source $HOME/catkin_ws/semi/devel/setup.zsh ;;
-         12.04)
-         source /opt/ros/hydro/setup.zsh ;;
-     esac
-     source $HOME/catkin_ws/zshrc.ros
-     rossetip
-     # xmodmap
-     if [[ ${DISPLAY} == ":0" ]] ; then
-         xmodmap ~/.xmodmaprc
-     fi
+if [ -e /opt/ros ]; then
+    case ${OSTYPE} in
+        linux*)
+            # ros setting
+            VER=$(lsb_release -sr)
+            case ${VER} in
+                14.04)
+                    source /opt/ros/indigo/setup.zsh
+                    source $HOME/catkin_ws/semi/devel/setup.zsh ;;
+                12.04)
+                    source /opt/ros/hydro/setup.zsh ;;
+            esac
+            source $HOME/catkin_ws/zshrc.ros
+            rossetip
+            # xmodmap
+            if [[ ${DISPLAY} == ":0" ]] ; then
+                xmodmap ~/.xmodmaprc
+            fi
 
-     if [ -d "$HOME/.local/bin" ]; then
-         PATH="$HOME/.local/bin:$PATH"
-     fi
-     # if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-     #     source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-     # fi
-esac
+            if [ -d "$HOME/.local/bin" ]; then
+                PATH="$HOME/.local/bin:$PATH"
+            fi
+            # if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+            #     source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+            # fi
+    esac
+fi
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
