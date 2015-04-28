@@ -1,0 +1,108 @@
+# Local Variables:
+# mode: sh
+# eval: (sh-set-shell "zsh")
+# End:
+
+export EDITOR="emacs"
+if [[ ${DISPLAY} == ":0" ]] ; then
+    export EDITOR="emacsclient"
+    alias emacs-shell='emacs -nw -q -f shell'
+    alias e='emacsclient -a ""'
+    # alias emacs='emacsclient -a ""'
+fi
+
+export PYTHONSTARTUP=~/.pythonstartup
+alias py='ipython --no-confirm-exit'
+alias ipy='ipython --no-confirm-exit'
+alias ipython='ipython --no-confirm-exit'
+
+alias sl='ls'
+alias la='ls -a'
+alias lsf='ls -F'
+
+alias grep='ag'
+
+case ${OSTYPE} in
+     linux*)
+     # sudo apt-get install xsel
+     alias pbcopy='xsel --clipboard --input'
+     alias open="gnome-open"
+esac
+
+# ----------------------
+# Git Aliases
+# ----------------------
+alias ga='git add'
+alias gaa='git add .'
+alias gaaa='git add -A'
+alias gap='git add -p'
+alias gb='git branch'
+alias gbd='git branch -d '
+alias gc='git commit'
+alias gca="git commit --amend"
+alias gci="git commit"
+alias gcm='git commit -m'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gcom='git checkout master'
+alias gd='git diff'
+alias gda='git diff HEAD'
+alias gi='git init'
+alias gl='git log --oneline'
+alias gln="git log --name-only"
+alias glp="git log -p"
+alias glg='git log --graph --oneline --decorate --all'
+alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
+alias gm='git merge --no-ff'
+alias gp='git pull'
+alias gss='git status -s'
+alias gst='git stash'
+alias gstl='git stash list'
+alias gstp='git stash pop'
+alias gstd='git stash drop'
+
+# ----------------------
+# Git Function
+# ----------------------
+# Git log find by commit message
+function glf() { git log --all --grep="$1"; }
+function git-pull() {
+  local repository=${1:-origin}
+  local branch=${2:-$(git rev-parse --abbrev-ref HEAD)}
+  git pull origin $branch
+}
+alias gps=git-pull
+
+function git-pull-force() {
+  local branch=$(git rev-parse --abbrev-ref HEAD)
+  git-checkout-force tmp 2> /dev/null
+  if [ $? != 0 ]; then return 1; fi
+  git branch -D $branch > /dev/null 2>&1
+  if [ $? != 0 ]; then return 1; fi
+  git fetch
+  if [ $? != 0 ]; then return 1; fi
+  git checkout $branch
+}
+alias gplf=git-pull-force
+
+function git(){hub "$@"} # zsh
+
+alias gdn='git diff --name-only'
+for n in $(seq 50); do
+  alias gd$n="git diff HEAD~$n"
+  alias gdn$n="git diff --name-only HEAD~$n"
+done
+
+alias gs='echo ""; echo "*********************************************"; echo -e "   DO NOT FORGET TO PULL BEFORE COMMITTING"; echo "*********************************************"; echo ""; git status'
+
+# for ROS
+alias roseus='rlwrap roseus'
+alias irteus='rlwrap irteus'
+alias irteusgl='rlwrap irteusgl'
+alias rs='rostopic list'
+
+case ${OSTYPE} in
+    # for Mac only alias
+    darwin*)
+        alias lsusb='system_profiler SPUSBDataType'
+esac
