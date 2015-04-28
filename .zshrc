@@ -48,6 +48,7 @@ source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # zaw setting
 source $ZDOTDIR/plugins/zaw/zaw.zsh
+source $ZDOTDIR/percol-sources/percol.zsh
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
@@ -56,45 +57,18 @@ zstyle ':chpwd:*' recent-dirs-default yes
 zstyle ':completion:*' recent-dirs-insert both
 
 zstyle ':filter-select' case-insensitive yes
-# bindkey '^X^F' zaw-cdr
-# bindkey '^R' zaw-history
 bindkey '^X^P' zaw-process
-bindkey '^X^F' zaw-git-files
+bindkey '^X^J' zaw-git-files
 bindkey '^X^B' zaw-git-branches
 # bindkey '^A' zaw-tmux
 
 # load .zshrc_setting file
 [ -f $ZDOTDIR/.zshrc_alias ] && . $ZDOTDIR/.zshrc_alias
 
-function percol_select_history() {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-    BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
-    CURSOR=$#BUFFER             # move cursor
-    zle -R -c                   # refresh
-}
 zle -N percol_select_history
 bindkey '^R' percol_select_history
-
-function percol_select_directory() {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-    local dest=$(_z -r 2>&1 | eval $tac | percol --query "$LBUFFER" | awk '{ print $2 }')
-    if [ -n "${dest}" ]; then
-        cd ${dest}
-    fi
-    zle reset-prompt
-}
-zle -N percol_select_directory
-bindkey "^X^F" percol_select_directory
+zle -N percol-cdr
+bindkey '^X^F' percol-cdr
 
 # export PATH
 export PATH=$PATH:$HOME/bin/tools/bin:$HOME/.emacs.d/bin

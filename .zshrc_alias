@@ -1,3 +1,8 @@
+# Local Variables:
+# mode: sh
+# eval: (sh-set-shell "zsh")
+# End:
+
 export EDITOR="emacs"
 if [[ ${DISPLAY} == ":0" ]] ; then
     export EDITOR="emacsclient"
