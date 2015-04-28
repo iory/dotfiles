@@ -30,6 +30,9 @@ sudo easy_install -U guppy
 sudo apt-get build-dep -y python-opencv
 sudo pip install -U pyopencv
 
+# for percol
+sudo pip install percol
+
 # if you have an error
 # echo "/usr/lib/atlas-base" | sudo tee /etc/ld.so.conf.d/atlas-lib.conf
 # sudo ldconfig
