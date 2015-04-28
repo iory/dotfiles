@@ -1,4 +1,5 @@
-run following command.
+run following command in terminal.
+
 ```
-sh dotfilesLink.sh
+./install.sh
 ```

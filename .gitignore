@@ -3,3 +3,11 @@
 
 # ignore startwith . file
 fonts
+.*
+!/.gitignore
+!/.zshrc
+!/.zshrc_alias
+!/.zshenv
+
+# ignore directory
+/plugins
