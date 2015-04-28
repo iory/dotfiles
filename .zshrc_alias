@@ -1,8 +1,9 @@
 export EDITOR="emacs"
 if [[ ${DISPLAY} == ":0" ]] ; then
     export EDITOR="emacsclient"
+    alias emacs-shell='emacs -nw -q -f shell'
     alias e='emacsclient -a ""'
-    alias emacs='emacsclient -a ""'
+    # alias emacs='emacsclient -a ""'
 fi
 
 export PYTHONSTARTUP=~/.pythonstartup
@@ -93,6 +94,7 @@ alias gs='echo ""; echo "*********************************************"; echo -e
 alias roseus='rlwrap roseus'
 alias irteus='rlwrap irteus'
 alias irteusgl='rlwrap irteusgl'
+alias rs='rostopic list'
 
 case ${OSTYPE} in
     # for Mac only alias
