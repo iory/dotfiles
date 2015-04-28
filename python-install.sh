@@ -4,7 +4,7 @@ sudo easy_install -U pip
 
 # upgrade ipython
 sudo pip install --upgrade ipython
-sudo apt-get install python3.4-dev
+sudo apt-get install python3.4-dev -y
 
 # required for scipy
 sudo apt-get install gfortran libopenblas-dev liblapack-dev g++ -y
@@ -31,7 +31,7 @@ sudo apt-get build-dep -y python-opencv
 sudo pip install -U pyopencv
 
 # for percol
-sudo pip install percol
+sudo pip install -U percol
 
 # if you have an error
 # echo "/usr/lib/atlas-base" | sudo tee /etc/ld.so.conf.d/atlas-lib.conf
