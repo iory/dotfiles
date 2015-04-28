@@ -8,6 +8,7 @@ ln -sf ~/.dotfiles/.agignore ~/.agignore
 ln -sf ~/.dotfiles/.gitignore_global ~/.gitignore
 ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/rc.py ~/.percol.d/rc.py
 
 # for arduino
 case ${OSTYPE} in
