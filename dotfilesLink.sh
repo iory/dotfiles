@@ -13,6 +13,7 @@ ln -sf ~/.dotfiles/rc.py ~/.percol.d/rc.py
 # for arduino
 case ${OSTYPE} in
     linux*)
+    sudo ln -sf ~/.dotfiles/udev-settings/90-kinect2.rules /etc/udev/rules.d/90-kinect2.rules
     sudo ln -sf ~/.dotfiles/udev-settings/10-arduino.rules /etc/udev/rules.d/10-arduino.rules
     sudo ln -sf ~/.dotfiles/udev-settings/11-arduino.rules /etc/udev/rules.d/11-arduino.rules
 esac
