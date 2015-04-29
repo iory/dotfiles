@@ -12,6 +12,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 if [ \command -v hub >/dev/null 2>&1 ]; then # if hub command exists ...
     plugins=(git hub)
     eval "$(hub alias -s)"
+    function git(){hub "$@"} # zsh
 fi
 
 # User configuration

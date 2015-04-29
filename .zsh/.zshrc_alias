@@ -85,8 +85,6 @@ function git-pull-force() {
 }
 alias gplf=git-pull-force
 
-function git(){hub "$@"} # zsh
-
 alias gdn='git diff --name-only'
 for n in $(seq 50); do
   alias gd$n="git diff HEAD~$n"
