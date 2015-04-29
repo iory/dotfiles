@@ -29,6 +29,8 @@ case ${OSTYPE} in
      alias open="gnome-open"
 esac
 
+function git(){hub "$@"} # zsh
+
 # ----------------------
 # Git Aliases
 # ----------------------
