@@ -93,10 +93,15 @@ done
 
 alias gs='echo ""; echo "*********************************************"; echo -e "   DO NOT FORGET TO PULL BEFORE COMMITTING"; echo "*********************************************"; echo ""; git status'
 
+# for Lisp
+alias clisp="rlwrap -c clisp"
+
 # for ROS
-alias roseus='rlwrap roseus'
-alias irteus='rlwrap irteus'
-alias irteusgl='rlwrap irteusgl'
+alias roseus="rlwrap -c -b '(){}.,;|' -a -pGREEN roseus"
+alias irteus='rlwrap -c irteus'
+alias irteusgl='rlwrap -c irteusgl'
+
+# ROS alias
 alias rs='rostopic list'
 
 case ${OSTYPE} in

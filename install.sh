@@ -21,6 +21,9 @@ if [ ! -e $HOME/.percol.d ]; then
 fi
 ln -sf ~/.dotfiles/rc.py ~/.percol.d/rc.py
 
+# for lisp
+ln -sf ~/.dotfiles/completions/.roseus_completions ~/.roseus_completions
+
 # for arduino
 case ${OSTYPE} in
     linux*)
