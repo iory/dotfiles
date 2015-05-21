@@ -61,6 +61,9 @@ alias gist="git stash"
 alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gstd='git stash drop'
+alias gr='git remote'
+alias grv='git remote -v'
+
 
 # ----------------------
 # Git Function
