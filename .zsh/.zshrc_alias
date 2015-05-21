@@ -20,7 +20,7 @@ alias sl='ls'
 alias la='ls -a'
 alias lsf='ls -F'
 
-alias grep='ag'
+alias grep="ag"
 
 case ${OSTYPE} in
      linux*)
@@ -28,8 +28,6 @@ case ${OSTYPE} in
      alias pbcopy='xsel --clipboard --input'
      alias open="gnome-open"
 esac
-
-function git(){hub "$@"} # zsh
 
 # ----------------------
 # Git Aliases
@@ -58,7 +56,8 @@ alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
 alias gm='git merge --no-ff'
 alias gp='git pull'
 alias gss='git status -s'
-alias gst='git stash'
+# alias gst='git stash'
+alias gist="git stash"
 alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gstd='git stash drop'
@@ -94,6 +93,12 @@ for n in $(seq 50); do
 done
 
 alias gs='echo ""; echo "*********************************************"; echo -e "   DO NOT FORGET TO PULL BEFORE COMMITTING"; echo "*********************************************"; echo ""; git status'
+
+if which hub >/dev/null 2>&1; then
+    alias git='hub'
+    compdef hub=git
+fi
+alias g='git'
 
 # for Lisp
 alias clisp="rlwrap -c clisp"

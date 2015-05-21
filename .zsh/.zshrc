@@ -9,17 +9,15 @@ export LESSCHARSET=utf-8
 # Path to my bin file
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# if [ \command -v hub >/dev/null 2>&1 ]; then # if hub command exists ...
-plugins=(git hub)
-eval "$(hub alias -s)"
-# fi
-
 # User configuration
-
 [[ "$TERM" != "dumb" ]] && source $ZSH/oh-my-zsh.sh
 setopt histignorealldups sharehistory
 autoload -Uz compinit
 compinit
+
+autoload history-search-end
+setopt list_packed
+
 
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
@@ -48,7 +46,6 @@ source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # zaw setting
 source $ZDOTDIR/plugins/zaw/zaw.zsh
-source $ZDOTDIR/percol-sources/percol.zsh
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
@@ -57,18 +54,18 @@ zstyle ':chpwd:*' recent-dirs-default yes
 zstyle ':completion:*' recent-dirs-insert both
 
 zstyle ':filter-select' case-insensitive yes
+bindkey '^R' zaw-history
 bindkey '^X^P' zaw-process
 bindkey '^X^J' zaw-git-files
 bindkey '^X^B' zaw-git-branches
 # bindkey '^A' zaw-tmux
 
-# load .zshrc_setting file
-[ -f $ZDOTDIR/.zshrc_alias ] && . $ZDOTDIR/.zshrc_alias
 
-zle -N percol_select_history
-bindkey '^R' percol_select_history
-zle -N percol-cdr
-bindkey '^X^F' percol-cdr
+# source $ZDOTDIR/percol-sources/percol.zsh
+# zle -N percol_select_history
+# bindkey '^R' percol_select_history
+# zle -N percol-cdr
+# bindkey '^X^F' percol-cdr
 
 # export PATH
 export PATH=$PATH:$HOME/bin/tools/bin:$HOME/.emacs.d/bin
@@ -82,7 +79,8 @@ if [ -e /opt/ros ]; then # if ros exists ...
             case ${VER} in
                 14.04)
                     source /opt/ros/indigo/setup.zsh
-                    source $HOME/catkin_ws/semi/devel/setup.zsh ;;
+                    source $HOME/catkin_ws/semi/devel/setup.zsh
+                    ;;
                 12.04)
                     source /opt/ros/hydro/setup.zsh ;;
             esac
@@ -96,10 +94,10 @@ if [ -e /opt/ros ]; then # if ros exists ...
             if [ -d "$HOME/.local/bin" ]; then
                 PATH="$HOME/.local/bin:$PATH"
             fi
-            # if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-            #     source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-            # fi
     esac
 fi
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# load .zshrc_setting file
+[ -f $ZDOTDIR/.zshrc_alias ] && . $ZDOTDIR/.zshrc_alias
