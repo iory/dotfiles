@@ -79,7 +79,6 @@ if [ -e /opt/ros ]; then # if ros exists ...
             case ${VER} in
                 14.04)
                     source /opt/ros/indigo/setup.zsh
-                    source $HOME/catkin_ws/semi/devel/setup.zsh
                     ;;
                 12.04)
                     source /opt/ros/hydro/setup.zsh ;;
