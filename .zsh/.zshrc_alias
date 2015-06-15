@@ -20,7 +20,7 @@ alias sl='ls'
 alias la='ls -a'
 alias lsf='ls -F'
 
-alias grep="ag"
+# alias grep="ag"
 
 case ${OSTYPE} in
      linux*)
@@ -33,21 +33,21 @@ esac
 # Git Aliases
 # ----------------------
 alias ga='git add'
-alias gaa='git add .'
-alias gaaa='git add -A'
+# alias gaa='git add .'
+# alias gaaa='git add -A'
 alias gap='git add -p'
 alias gb='git branch'
-alias gbd='git branch -d '
-alias gc='git commit'
-alias gca="git commit --amend"
-alias gci="git commit"
+# alias gbd='git branch -d '
+# alias gc='git commit'
+# alias gca="git commit --amend"
+# alias gci="git commit"
 alias gcm='git commit -m'
 alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gcom='git checkout master'
-alias gd='git diff'
-alias gda='git diff HEAD'
-alias gi='git init'
+# alias gd='git diff'
+# alias gda='git diff HEAD'
+# alias gi='git init'
 alias gl='git log --oneline'
 alias gln="git log --name-only"
 alias glp="git log -p"
@@ -120,3 +120,5 @@ case ${OSTYPE} in
     darwin*)
         alias lsusb='system_profiler SPUSBDataType'
 esac
+
+alias chrome='google-chrome'

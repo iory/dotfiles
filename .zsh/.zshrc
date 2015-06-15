@@ -83,7 +83,7 @@ if [ -e /opt/ros ]; then # if ros exists ...
                 12.04)
                     source /opt/ros/hydro/setup.zsh ;;
             esac
-            source $HOME/catkin_ws/zshrc.ros
+            source `rospack find jsk_tools`/src/zshrc.ros
             rossetip
             # xmodmap
             if [[ ${DISPLAY} == ":0" ]] ; then
