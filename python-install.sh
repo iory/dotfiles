@@ -13,6 +13,8 @@ sudo apt-get install gfortran libopenblas-dev liblapack-dev g++ -y
 sudo apt-get install build-essential python3-tk tk-dev libpng12-dev -y
 
 #
+sudo pip install -U pygeoip
+sudo pip install -U dpkt
 sudo pip install -U mahotas
 sudo pip install -U pandas
 sudo pip install -U scikit-learn
