@@ -13,9 +13,9 @@ import bisect
 
 from see import see
 
-import cv2
 import numpy
 import numpy as np
+import cv2
 import scipy
 import scipy as sp
 import pandas as pd
