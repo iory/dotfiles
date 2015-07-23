@@ -1,4 +1,13 @@
 #!/bin/sh
+sudo apt-get install -y emacs
+sudo apt-get install -y zsh
+sudo apt-get install -y cmigemo migemo
+sudo apt-get install -y emacs-mozc
+sudo apt-get install -y ssh
+
+sudo chsh -s `which zsh`
+sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
 ln -sf ~/.dotfiles/.gdbinit ~/.gdbinit
 ln -sf ~/.dotfiles/.pythonstartup ~/.pythonstartup
 ln -sf ~/.dotfiles/.xmodmaprc ~/.xmodmaprc
