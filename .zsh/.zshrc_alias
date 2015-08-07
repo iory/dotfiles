@@ -130,6 +130,7 @@ alias sha1='echo -n "${1}" | openssl sha1 | sed "s/^.* //"'
 alias up="cd ..; ls -l"
 
 alias j="z"
+alias o="gnome-open"
 
 jj () {
     if [ $1 ]; then
