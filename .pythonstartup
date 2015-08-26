@@ -12,7 +12,7 @@ import os
 histfile = os.path.join(os.environ['HOME'], '.pythonhistory')
 try:
     readline.read_history_file(histfile)
-except IOError, e:
+except IOError as e:
     pass
 
 atexit.register(readline.write_history_file, histfile)
