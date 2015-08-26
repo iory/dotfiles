@@ -1,6 +1,6 @@
 # pip install
-# sudo apt-get install -y python-pip
-sudo easy_install -U pip
+sudo apt-get install -y python-pip
+# sudo easy_install -U pip
 
 # upgrade ipython
 sudo pip install --upgrade ipython
