@@ -96,6 +96,9 @@ if [ -e /opt/ros ]; then # if ros exists ...
     esac
 fi
 
+# add python path
+export PYTHONPATH=/usr/local/Cellar/opencv3/3.0.0/lib/python3.4/site-packages:$PYTHONPATH
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # load .zshrc_setting file

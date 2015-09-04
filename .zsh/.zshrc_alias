@@ -105,12 +105,20 @@ fi
 alias g='git'
 
 # for Lisp
-alias clisp="rlwrap -c clisp"
+if [ "$EMACS" ]; then
+    # pass
+else
+    alias clisp="rlwrap -c clisp"
+fi
 
 # for ROS
-alias roseus="rlwrap -c -b '(){}.,;|' -a -pGREEN roseus"
-alias irteus='rlwrap -c irteus'
-alias irteusgl='rlwrap -c irteusgl'
+if [ "$EMACS" ]; then
+    # pass
+else
+    alias roseus="rlwrap -c -b '(){}.,;|' -a -pGREEN roseus"
+    alias irteus='rlwrap -c irteus'
+    alias irteusgl='rlwrap -c irteusgl'
+fi
 
 # ROS alias
 alias rs='rostopic list'
