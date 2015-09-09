@@ -20,6 +20,12 @@ alias sl='ls'
 alias la='ls -a'
 alias lsf='ls -F'
 
+alias ..="cd .."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../../"
+alias ..5="cd ../../../../.."
+
 # alias grep="ag"
 
 case ${OSTYPE} in
