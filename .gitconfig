@@ -15,3 +15,5 @@
 	autocrlf = input
 [http]
 	sslVerify = false
+[credential]
+	helper = cache
