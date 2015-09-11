@@ -20,7 +20,7 @@ alias emacs='emacs -nw'
 alias ga="git add"
 alias gb="git branch"
 alias gba="git branch -a"
-alias gs="git statu"
+alias gs="git status"
 
 # display branch name
 if [ -f $BASH_COMPLETION_DIR/git ]; then
