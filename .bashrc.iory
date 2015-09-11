@@ -16,6 +16,15 @@ alias l='ls -CF'
 alias upgrade="sudo apt-get update && sudo apt-get upgrade"
 alias emacs='emacs -nw'
 
+# for ROS
+if [ "$EMACS" ]; then
+    :
+else
+    alias roseus="rlwrap -c -b '(){}.,;|' -a -pGREEN roseus"
+    alias irteus='rlwrap -c irteus'
+    alias irteusgl='rlwrap -c irteusgl'
+fi
+
 ## git
 alias ga="git add"
 alias gb="git branch"
