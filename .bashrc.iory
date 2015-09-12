@@ -16,11 +16,50 @@ alias l='ls -CF'
 alias upgrade="sudo apt-get update && sudo apt-get upgrade"
 alias emacs='emacs -nw'
 
-## git
-alias ga="git add"
-alias gb="git branch"
-alias gba="git branch -a"
-alias gs="git statu"
+# cd extend
+alias ..="cd .."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../../"
+alias ..5="cd ../../../../.."
+
+# ----------------------
+# Git Aliases
+# ----------------------
+alias ga='git add'
+# alias gaa='git add .'
+# alias gaaa='git add -A'
+alias gap='git add -p'
+alias gb='git branch'
+# alias gbd='git branch -d '
+# alias gc='git commit'
+# alias gca="git commit --amend"
+# alias gci="git commit"
+alias gcm='git commit -m'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gcom='git checkout master'
+# alias gd='git diff'
+# alias gda='git diff HEAD'
+# alias gi='git init'
+alias gl='git log --oneline'
+alias gln="git log --name-only"
+alias glp="git log -p"
+alias glg='git log --graph --oneline --decorate --all'
+alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
+alias gm='git merge --no-ff'
+alias gp='git pull'
+alias gss='git status -s'
+alias gst='git status'
+# alias gst='git stash'
+alias gist="git stash"
+alias gstl='git stash list'
+alias gstp='git stash pop'
+alias gstd='git stash drop'
+alias gr='git remote'
+alias grv='git remote -v'
+
+alias gs='echo ""; echo "*********************************************"; echo -e "   DO NOT FORGET TO PULL BEFORE COMMITTING"; echo "*********************************************"; echo ""; git status'
 
 # display branch name
 if [ -f $BASH_COMPLETION_DIR/git ]; then
@@ -28,3 +67,18 @@ if [ -f $BASH_COMPLETION_DIR/git ]; then
 else
     export PS1='\[\033[01;32m\]\u@\h\[\033[01;33m\] \w \n\[\033[01;34m\]\$\[\033[00m\] '
 fi
+
+
+# for ROS
+if [ "$EMACS" ]; then
+    :
+else
+    alias roseus="rlwrap -c -b '(){}.,;|' -a -pGREEN roseus"
+    alias irteus='rlwrap -c irteus'
+    alias irteusgl='rlwrap -c irteusgl'
+fi
+
+# ROS alias
+alias rs='rostopic list'
+
+alias open="gnome-open"
