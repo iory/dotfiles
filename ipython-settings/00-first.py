@@ -11,6 +11,9 @@ import re
 import array
 import bisect
 
+#import reduce
+from functools import reduce
+
 from see import see
 
 import numpy
