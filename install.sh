@@ -1,5 +1,14 @@
 #!/bin/sh
-sudo apt-get install -y emacs
+
+export DISTRIB_RELEASE=`cat /etc/lsb-release | grep DISTRIB_RELEASE | tr --delete DISTRIB_RELEASE=`
+
+if [ ${DISTRIB_RELEASE} = "12.04" ]; then
+    sudo add-apt-repository -y ppa:cassou/emacs
+    sudo apt-get update
+    sudo apt-get install -y emacs24 emacs24-el
+else
+    sudo apt-get install -y emacs
+fi
 sudo apt-get install -y zsh
 sudo apt-get install -y cmigemo migemo
 sudo apt-get install -y emacs-mozc
