@@ -103,3 +103,5 @@ export PYTHONPATH=/usr/local/Cellar/opencv3/3.0.0/lib/python3.4/site-packages:$P
 
 # load .zshrc_setting file
 [ -f $ZDOTDIR/.zshrc_alias ] && . $ZDOTDIR/.zshrc_alias
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
