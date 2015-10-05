@@ -63,7 +63,7 @@ alias gs='echo ""; echo "*********************************************"; echo -e
 
 # display branch name
 if [ -f $BASH_COMPLETION_DIR/git ]; then
-    export PS1='\[\033[01;32m\]\u@\h\[\033[01;33m\] \w$(__git_ps1) (ROBOT=$ROBOT)\n\[\033[01;34m\] \$\[\033[00m\]  '
+    export PS1='\[\033[01;32m\]\u@\h\[\033[01;33m\] \w$(__git_ps1) (ROBOT=$ROBOT)\n\[\033[01;34m\] \$\[\033[00m\] '
 else
     export PS1='\[\033[01;32m\]\u@\h\[\033[01;33m\] \w (ROBOT=$ROBOT)\n\[\033[01;34m\]\$\[\033[00m\] '
 fi
@@ -84,3 +84,15 @@ fi
 alias rs='rostopic list'
 
 alias open="gnome-open"
+
+# settings for peco
+_replace_by_history() {
+    declare l=$(HISTTIMEFORMAT= history | sort -k1,1nr | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' | peco --query "$READLINE_LINE")
+    READLINE_LINE="$l"
+    READLINE_POINT=${#l}
+}
+
+bind -x '"\C-r": _replace_by_history'
+bind    '"\C-xr": reverse-search-history'
+
+export PATH=$PATH:${HOME}/bin
