@@ -1,6 +1,6 @@
 # for shared pc settings
 cd
 mkdir -p local/src
-local/src
-wget http://golang.org/dl/go1.3.linux-amd64.tar.gz
-tar -C ${HOME}/local -xzf go1.3.linux-amd64.tar.gz
+cd local/src
+wget https://github.com/peco/peco/releases/download/v0.1.12/peco_linux_amd64.tar.gz
+tar -C ${HOME}/local -xzf peco_linux_amd64.tar.gz
