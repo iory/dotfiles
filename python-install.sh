@@ -7,8 +7,8 @@ sudo apt-get -qq -y update
 case ${OSTYPE} in
     linux*)
         git clone https://github.com/yyuu/pyenv ~/.pyenv
-        sudo apt-get install -qq -y make build-esseintial libssl-dev zlib1g-dev libbz2-dev
-        sudo apt-get install -qq -y libreadline-dev libsqllite3-dev wget curl llvm
+        sudo apt-get install -qq -y make build-essential libssl-dev zlib1g-dev libbz2-dev
+        sudo apt-get install -qq -y libreadline-dev libsqlite3-dev wget curl llvm
         sudo apt-get install -qq -y libfreetype6-dev libblas-dev liblapack-dev gfortran
 
         # required for scipy
@@ -25,6 +25,7 @@ case ${OSTYPE} in
     ;;
 esac
 
+exec -l $SHELL
 export PYENV_PATH=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
 eval "$(pyenv init -)"
