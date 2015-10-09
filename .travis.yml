@@ -1,0 +1,18 @@
+language:
+  - bash
+  - python
+notifications:
+  email:
+    recipients:
+      - ab.ioryz@gmail.com
+    on_success: always
+    on_failure: always
+sudo: required
+env:
+  matrix:
+install:
+  - sudo apt-get -qq update
+  - ./install.sh
+  - ./python-install.sh
+script:
+  - ipython
