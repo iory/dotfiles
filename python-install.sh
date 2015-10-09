@@ -25,11 +25,7 @@ case ${OSTYPE} in
     ;;
 esac
 
-exec -l $SHELL
-export PYENV_PATH=$HOME/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
-eval "$(pyenv init -)"
-
+sudo pip install -U -q --upgrade pip
 #
 sudo pip install -U dpkt
 sudo pip install -U mahotas
@@ -38,7 +34,7 @@ sudo pip install -U pandas
 sudo pip install -U percol
 sudo pip install -U pyflakes
 sudo pip install -U pygeoip
-sudo pip install -U pyopencv
+# sudo pip install -U pyopencv
 sudo pip install -U requests
 sudo pip install -U scikit-learn
 sudo pip install -U scipy
