@@ -43,12 +43,6 @@ ln -sf ~/.dotfiles/rc.py ~/.percol.d/rc.py
 # for lisp
 ln -sf ~/.dotfiles/completions/.roseus_completions ~/.roseus_completions
 
-# pyenv install
-git clone https://github.com/yyuu/pyenv ~/.pyenv
-sudo apt-get install -y make build-esseintial libssl-dev zlib1g-dev libbz2-dev
-sudo apt-get install -y libreadline-dev libsqllite3-dev wget curl llvm
-sudo apt-get install -y libfreetype6-dev libblas-dev liblapack-dev gfortran
-
 # for arduino
 case ${OSTYPE} in
     linux*)

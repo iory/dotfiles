@@ -65,6 +65,7 @@ brew 'pixman'
 brew 'pkg-config'
 brew 'python'
 brew 'python3'
+brew 'pyenv'
 brew 'readline'
 brew 'ricty', args: ['vim-powerline']
 brew 'sqlite'
