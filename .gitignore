@@ -8,6 +8,7 @@ fonts
 !/.zshrc
 !/.zshrc_alias
 !/.zshenv
+!.travis.yml
 
 # ignore directory
 /plugins
