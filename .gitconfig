@@ -18,4 +18,4 @@
 [credential]
 	helper = cache
 [diff "openxml"]
-    textconv = ods2txt
+    textconv = python ${HOME}/ros/${ROS_DISTRO}/src/jsk-ros-pkg/jsk_tendon_robot/tendon_tools/model/util/git-diff-ods.py

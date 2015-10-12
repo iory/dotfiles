@@ -83,6 +83,7 @@ if [ -e /opt/ros ]; then # if ros exists ...
                 12.04)
                     source /opt/ros/hydro/setup.zsh ;;
             esac
+            source ${HOME}/ros/${ROS_DISTRO}/devel/setup.zsh
             source `rospack find jsk_tools`/src/zshrc.ros
             rossetip
             # xmodmap
