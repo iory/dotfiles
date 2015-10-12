@@ -9,3 +9,5 @@ define print_and_go
   printf $arg0, $arg1
   continue
 end
+
+source ~/bin/peda/peda.py

@@ -13,6 +13,9 @@ sudo apt-get install -y zsh
 sudo apt-get install -y cmigemo migemo
 sudo apt-get install -y emacs-mozc
 sudo apt-get install -y ssh
+sudo apt-get install -y xsel
+sudo apt-get install -y rlwrap
+sudo apt-get install -y tmux
 
 # sudo chsh -s `which zsh`
 # sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
