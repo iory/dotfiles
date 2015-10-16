@@ -2,6 +2,10 @@
 
 set -x
 
+if [ ! -d ${HOME}/local ]; then
+    mkdir ${HOME}/local
+fi
+
 sudo apt-get -qq -y update
 # pyenv install
 case ${OSTYPE} in
@@ -21,29 +25,52 @@ case ${OSTYPE} in
 
         # opencv
         sudo apt-get build-dep -y -qq python-opencv
+        if [ ! -d ${HOME}/local/opencv ]; then
+            git clone https://github.com/Itseez/opencv.git ${HOME}/local/opencv
+        fi
+        cd ~/local/opencv
+        git checkout 3.0.0
+        if [ ! -d build ]; then
+            mkdir build
+        fi
+        (cd build \
+                && cmake -D CMAKE_BUILD_TYPE=RELEASE \
+                         -D CMAKE_INSTALL_PREFIX=/usr/local \
+                         -D INSTALL_C_EXAMPLES=ON \
+                         -D INSTALL_PYTHON_EXAMPLES=ON \
+                         -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+                         -D BUILD_EXAMPLES=ON .. \
+                && make -j \
+                && sudo make install \
+                && sudo ldconfig)
     ;;
     darwin*)
         brew install pyenv
     ;;
 esac
 
-sudo pip install -U -q --upgrade pip
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+pip install -U -q --upgrade pip
 #
-sudo pip install -U dpkt
-sudo pip install -U mahotas
-sudo pip install -U numpy
-sudo pip install -U pandas
-sudo pip install -U percol
-sudo pip install -U pyflakes
-sudo pip install -U pygeoip
-# sudo pip install -U pyopencv
-sudo pip install -U requests
-sudo pip install -U scikit-learn
-sudo pip install -U scipy
-sudo pip install -U see
-sudo pip install -U virtualenv
-sudo easy_install -U guppy
-sudo easy_install -U nose
+# pip install -U pyopencv
+# easy_install -U guppy
+# easy_install -U nose
+pip install -U dpkt
+pip install -U grip
+pip install -U mahotas
+pip install -U numpy
+pip install -U pandas
+pip install -U percol
+pip install -U pyflakes
+pip install -U pygeoip
+pip install -U requests
+pip install -U scikit-learn
+pip install -U scipy
+pip install -U see
+pip install -U virtualenv
 
 # if you have an error
 # echo "/usr/lib/atlas-base" | sudo tee /etc/ld.so.conf.d/atlas-lib.conf

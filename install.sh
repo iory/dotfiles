@@ -2,20 +2,37 @@
 
 export DISTRIB_RELEASE=`cat /etc/lsb-release | grep DISTRIB_RELEASE | tr --delete DISTRIB_RELEASE=`
 
-if [ ${DISTRIB_RELEASE} = "12.04" ]; then
-    sudo add-apt-repository -y ppa:cassou/emacs
-    sudo apt-get update
-    sudo apt-get install -y emacs24 emacs24-el
-else
-    sudo apt-get install -y emacs
+if [ ! -d ${HOME}/local ]; then
+    mkdir ${HOME}/local
 fi
-sudo apt-get install -y zsh
+
+EMACS_VERSION=24.5
+# if [ ${DISTRIB_RELEASE} = "12.04" ]; then
+#     sudo add-apt-repository -y ppa:cassou/emacs
+#     sudo apt-get update
+#     sudo apt-get install -y emacs24 emacs24-el
+# else
+#     sudo apt-get install -y emacs
+# fi
+
+# install emacs 24.5
+sudo apt-get install -y build-essential
+sudo apt-get build-dep -y emacs
+cd ${HOME}/local
+if [ ! -d emacs-${EMACS_VERSION}.tar.xz]
+wget -O- http://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.xz | tar xJf -
+(cd emacs-${EMACS_VERSION} \
+        && ./configure \
+        && make \
+        && sudo make install;)
+
 sudo apt-get install -y cmigemo migemo
 sudo apt-get install -y emacs-mozc
-sudo apt-get install -y ssh
-sudo apt-get install -y xsel
 sudo apt-get install -y rlwrap
+sudo apt-get install -y ssh
 sudo apt-get install -y tmux
+sudo apt-get install -y xsel
+sudo apt-get install -y zsh
 
 # sudo chsh -s `which zsh`
 # sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
