@@ -60,9 +60,9 @@ source $ZDOTDIR/.zshrc.iory
 export PATH=$PATH:$HOME/bin/tools/bin:$HOME/.emacs.d/bin
 
 # setting only Ubuntu
-if [ -e /opt/ros ]; then # if ros exists ...
-    case ${OSTYPE} in
-        linux*)
+case ${OSTYPE} in
+    linux*)
+        if [ -e /opt/ros ]; then # if ros exists ...
             # ros setting
             VER=$(lsb_release -sr)
             case ${VER} in
@@ -72,26 +72,28 @@ if [ -e /opt/ros ]; then # if ros exists ...
                 12.04)
                     source /opt/ros/hydro/setup.zsh ;;
             esac
-            source ${HOME}/ros/${ROS_DISTRO}/devel/setup.zsh
-            source `rospack find jsk_tools`/src/zshrc.ros
-            rossetip
-            # xmodmap
-            if [[ ${DISPLAY} == ":0" ]] ; then
-                xmodmap ~/.xmodmaprc
-            fi
+        fi
+        source ${HOME}/ros/${ROS_DISTRO}/devel/setup.zsh
+        source `rospack find jsk_tools`/src/zshrc.ros
+        rossetip
+        # xmodmap
+        if [[ ${DISPLAY} == ":0" ]] ; then
+            xmodmap ~/.xmodmaprc
+        fi
 
-            if [ -d "$HOME/.local/bin" ]; then
-                PATH="$HOME/.local/bin:$PATH"
-            fi
+        if [ -d "$HOME/.local/bin" ]; then
+            PATH="$HOME/.local/bin:$PATH"
+        fi
 
-            alias ls="ls --color=always"
-            export LESSOPEN='|/usr/share/source-highlight/src-hilite-lesspipe.sh %s'
-            ;;
-        darwin*)
-            export LESSOPEN='|/usr/local/bin/src-hilite-lesspipe.sh %s'
-            ;;
-    esac
-fi
+        alias ls="ls --color=always"
+        export LESSOPEN='|/usr/share/source-highlight/src-hilite-lesspipe.sh %s'
+        ;;
+    darwin*)
+        export LESSOPEN='|/usr/local/bin/src-hilite-lesspipe.sh %s'
+        alias ls='CLICOLOR_FORCE=1 ls -G'
+        alias less='less -R'
+        ;;
+esac
 
 # add python path
 export PYTHONPATH=/usr/local/Cellar/opencv3/3.0.0/lib/python3.4/site-packages:$PYTHONPATH
