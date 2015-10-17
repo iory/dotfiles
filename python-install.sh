@@ -7,6 +7,7 @@ if [ ! -d ${HOME}/local ]; then
 fi
 
 sudo apt-get -qq -y update
+
 # pyenv install
 case ${OSTYPE} in
     linux*)
@@ -22,8 +23,19 @@ case ${OSTYPE} in
 
         # required for matplotlib
         sudo apt-get install -qq -y build-essential python3-tk tk-dev libpng12-dev
+    ;;
+    darwin*)
+        brew install pyenv
+    ;;
+esac
 
-        # opencv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# install opencv
+case ${OSTYPE} in
+    linux*)
         sudo apt-get build-dep -y -qq python-opencv
         if [ ! -d ${HOME}/local/opencv ]; then
             git clone https://github.com/Itseez/opencv.git ${HOME}/local/opencv
@@ -39,19 +51,18 @@ case ${OSTYPE} in
                          -D INSTALL_C_EXAMPLES=ON \
                          -D INSTALL_PYTHON_EXAMPLES=ON \
                          -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
-                         -D BUILD_EXAMPLES=ON .. \
+                         -D BUILD_EXAMPLES=ON \
+                         -D CMAKE_INSTALL_PREFIX=$(python -c "import sys; print(sys.prefix)") \
+                         -D PYTHON_EXECUTABLE=$(which python) .. \
                 && make -j \
                 && sudo make install \
-                && sudo ldconfig)
+                && sudo ldconfig;)
     ;;
     darwin*)
         brew install pyenv
     ;;
 esac
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
 pip install -U -q --upgrade pip
 #
