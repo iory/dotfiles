@@ -19,8 +19,9 @@ EMACS_VERSION=24.5
 sudo apt-get install -y build-essential
 sudo apt-get build-dep -y emacs
 cd ${HOME}/local
-if [ ! -d emacs-${EMACS_VERSION}.tar.xz]
-wget -O- http://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.xz | tar xJf -
+if [ ! -d emacs-${EMACS_VERSION}.tar.xz ]; then
+    wget -O- http://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.xz | tar xJf -
+fi
 (cd emacs-${EMACS_VERSION} \
         && ./configure \
         && make \
@@ -28,6 +29,7 @@ wget -O- http://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.xz | tar xJf -
 
 sudo apt-get install -y cmigemo migemo
 sudo apt-get install -y emacs-mozc
+sudo apt-get install -y global
 sudo apt-get install -y rlwrap
 sudo apt-get install -y ssh
 sudo apt-get install -y tmux

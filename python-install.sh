@@ -8,10 +8,6 @@ fi
 
 sudo apt-get -qq -y update
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 # pyenv install
 case ${OSTYPE} in
     linux*)
@@ -28,6 +24,13 @@ case ${OSTYPE} in
         # required for matplotlib
         sudo apt-get install -qq -y build-essential python3-tk tk-dev libpng12-dev
 
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init -)"
+
+        pyenv install 3.4.0
+        pyenv global 3.4.0
+
         # opencv
         sudo apt-get build-dep -y -qq python-opencv
         if [ ! -d ${HOME}/local/opencv ]; then
@@ -37,7 +40,6 @@ case ${OSTYPE} in
             git clone https://github.com/Itseez/opencv_contrib.git ${HOME}/local/opencv_contrib
         fi
         cd ~/local/opencv
-        git checkout 3.0.0
         if [ ! -d build ]; then
             mkdir build
         fi
@@ -47,14 +49,22 @@ case ${OSTYPE} in
                          -D OPENCV_EXTRA_MODULES_PATH=$HOME/local/opencv_contrib/modules .. \
                 && make -j \
                 && sudo make install \
-                && sudo ldconfig)
+                && sudo ldconfig;)
     ;;
     darwin*)
         brew install pyenv
+
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init -)"
+
+        pyenv install 3.4.0
+        pyenv global 3.4.0
     ;;
 esac
 
 pip install -U -q --upgrade pip
+pip install -U ipython
 #
 # pip install -U pyopencv
 # easy_install -U guppy
