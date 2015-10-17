@@ -6,7 +6,9 @@ sudo apt-get -qq -y update
 # pyenv install
 case ${OSTYPE} in
     linux*)
-        git clone https://github.com/yyuu/pyenv ~/.pyenv
+        if [ ! -d ${HOME}/.pyenv ]; then
+            git clone https://github.com/yyuu/pyenv ~/.pyenv
+        fi
         sudo apt-get install -qq -y make build-essential libssl-dev zlib1g-dev libbz2-dev
         sudo apt-get install -qq -y libreadline-dev libsqlite3-dev wget curl llvm
         sudo apt-get install -qq -y libfreetype6-dev libblas-dev liblapack-dev gfortran
