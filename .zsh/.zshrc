@@ -22,8 +22,8 @@ setopt list_packed
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 # End of lines configured by zsh-newuser-install
 
 # if executed time is longer than 3 seconds, print information.
@@ -44,9 +44,6 @@ function up(){ cpath=./; for i in `seq 1 1 $1`; do cpath=$cpath../; done; cd $cp
 # zsh highlight
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# zaw setting
-source $ZDOTDIR/plugins/zaw/zaw.zsh
-
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 zstyle ':chpwd:*' recent-dirs-max 5000
@@ -54,18 +51,10 @@ zstyle ':chpwd:*' recent-dirs-default yes
 zstyle ':completion:*' recent-dirs-insert both
 
 zstyle ':filter-select' case-insensitive yes
-bindkey '^R' zaw-history
-bindkey '^X^P' zaw-process
-bindkey '^X^J' zaw-git-files
-bindkey '^X^B' zaw-git-branches
-# bindkey '^A' zaw-tmux
+# bindkey '^X^P' zaw-process
+# bindkey '^X^B' zaw-git-branches
 
-
-# source $ZDOTDIR/percol-sources/percol.zsh
-# zle -N percol_select_history
-# bindkey '^R' percol_select_history
-# zle -N percol-cdr
-# bindkey '^X^F' percol-cdr
+source $ZDOTDIR/.zshrc.iory
 
 # export PATH
 export PATH=$PATH:$HOME/bin/tools/bin:$HOME/.emacs.d/bin
@@ -107,6 +96,15 @@ export PYTHONPATH=/usr/local/Cellar/opencv3/3.0.0/lib/python3.4/site-packages:$P
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-export PYENV_PATH=$HOME/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
+export PATH=$PATH:${HOME}/bin:${HOME}/local/peco_linux_amd64
+
+
+# color less and grep
+export LESS=' -R '
+export LESSOPEN='|src-higlite-lesspipe.sh %s'
+export GREP_OPTIONS=' --with-filename --line-number --color=always '
+alias ls="ls --color=always"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"

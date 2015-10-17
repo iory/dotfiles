@@ -1,6 +1,7 @@
 clear mod1
 keycode 102 = Alt_L
 keycode 100 = Alt_R
+keycode 107 = Alt_R
 add mod1 = Alt_L
 add mod1 = Alt_R
 keycode 101 = Meta_R Alt_R Meta_R Alt_R
