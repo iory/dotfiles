@@ -109,7 +109,6 @@ export LESS=' -R '
 export LESSOPEN='|src-higlite-lesspipe.sh %s'
 export GREP_OPTIONS=' --with-filename --line-number --color=always '
 alias ls="ls --color=always"
-l
 alias py='ipython --no-confirm-exit'
 alias ipy='ipython --no-confirm-exit'
 alias ipython='ipython --no-confirm-exit'
