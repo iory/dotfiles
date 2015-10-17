@@ -6,11 +6,11 @@ if [ ! -d ${HOME}/local ]; then
     mkdir ${HOME}/local
 fi
 
-sudo apt-get -qq -y update
-
 # pyenv install
 case ${OSTYPE} in
     linux*)
+        sudo apt-get -qq -y update
+
         if [ ! -d ${HOME}/.pyenv ]; then
             git clone https://github.com/yyuu/pyenv ~/.pyenv
         fi
@@ -52,7 +52,8 @@ case ${OSTYPE} in
                 && sudo ldconfig;)
     ;;
     darwin*)
-        brew install pyenv
+        brew update
+        # brew install pyenv
 
         export PYENV_ROOT="$HOME/.pyenv"
         export PATH="$PYENV_ROOT/bin:$PATH"
