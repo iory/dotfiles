@@ -8,6 +8,10 @@ fi
 
 sudo apt-get -qq -y update
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 # pyenv install
 case ${OSTYPE} in
     linux*)
@@ -23,22 +27,14 @@ case ${OSTYPE} in
 
         # required for matplotlib
         sudo apt-get install -qq -y build-essential python3-tk tk-dev libpng12-dev
-    ;;
-    darwin*)
-        brew install pyenv
-    ;;
-esac
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# install opencv
-case ${OSTYPE} in
-    linux*)
+        # opencv
         sudo apt-get build-dep -y -qq python-opencv
         if [ ! -d ${HOME}/local/opencv ]; then
             git clone https://github.com/Itseez/opencv.git ${HOME}/local/opencv
+        fi
+        if [ ! -d ${HOME}/local/opencv_contrib ]; then
+            git clone https://github.com/Itseez/opencv_contrib.git ${HOME}/local/opencv_contrib
         fi
         cd ~/local/opencv
         git checkout 3.0.0
@@ -46,23 +42,17 @@ case ${OSTYPE} in
             mkdir build
         fi
         (cd build \
-                && cmake -D CMAKE_BUILD_TYPE=RELEASE \
-                         -D CMAKE_INSTALL_PREFIX=/usr/local \
-                         -D INSTALL_C_EXAMPLES=ON \
-                         -D INSTALL_PYTHON_EXAMPLES=ON \
-                         -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
-                         -D BUILD_EXAMPLES=ON \
-                         -D CMAKE_INSTALL_PREFIX=$(python -c "import sys; print(sys.prefix)") \
-                         -D PYTHON_EXECUTABLE=$(which python) .. \
+                && cmake -D CMAKE_BUILD_TYPE=Release \
+                         -D CMAKE_INSTALL_PREFIX=$HOME/local/opencv/ \
+                         -D OPENCV_EXTRA_MODULES_PATH=$HOME/local/opencv_contrib/modules .. \
                 && make -j \
                 && sudo make install \
-                && sudo ldconfig;)
+                && sudo ldconfig)
     ;;
     darwin*)
         brew install pyenv
     ;;
 esac
-
 
 pip install -U -q --upgrade pip
 #
@@ -72,6 +62,7 @@ pip install -U -q --upgrade pip
 pip install -U dpkt
 pip install -U grip
 pip install -U mahotas
+pip install -U matplotlib
 pip install -U numpy
 pip install -U pandas
 pip install -U percol
