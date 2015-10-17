@@ -1,7 +1,4 @@
-# Local Variables:
-# mode: sh
-# eval: (sh-set-shell "zsh")
-# End:
+# -*- mode: sh; ... -*-
 
 export EDITOR="emacs"
 if [[ ${DISPLAY} == ":0" ]] ; then

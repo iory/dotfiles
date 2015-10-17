@@ -1,8 +1,16 @@
+# -*- mode: sh; ... -*-
+
 # add pbcopy like mac
 alias pbcopy='xsel --clipboard --input'
 
 # setting default editor
-export EDITOR=emacs
+export EDITOR="emacs"
+if [[ ${DISPLAY} == ":0" ]] ; then
+    export EDITOR="emacsclient"
+    alias emacs-shell='emacs -nw -q -f shell'
+    alias e='emacsclient -a ""'
+    # alias emacs='emacsclient -a ""'
+fi
 
 # extend ctrl-w
 stty werase undef
@@ -39,8 +47,8 @@ alias gcm='git commit -m'
 alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gcom='git checkout master'
-# alias gd='git diff'
-# alias gda='git diff HEAD'
+alias gd='git diff'
+alias gda='git diff HEAD'
 # alias gi='git init'
 alias gl='git log --oneline'
 alias gln="git log --name-only"
@@ -50,9 +58,9 @@ alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
 alias gm='git merge --no-ff'
 alias gp='git pull'
 alias gss='git status -s'
-alias gst='git status'
-# alias gst='git stash'
-alias gist="git stash"
+# alias gst='git status'
+alias gst='git stash'
+# alias gist="git stash"
 alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gstd='git stash drop'
@@ -96,3 +104,12 @@ bind -x '"\C-r": _replace_by_history'
 bind    '"\C-xr": reverse-search-history'
 
 export PATH=$PATH:${HOME}/bin:${HOME}/local/peco_linux_amd64
+
+export LESS=' -R '
+export LESSOPEN='|src-higlite-lesspipe.sh %s'
+export GREP_OPTIONS=' --with-filename --line-number --color=always '
+alias ls="ls --color=always"
+l
+alias py='ipython --no-confirm-exit'
+alias ipy='ipython --no-confirm-exit'
+alias ipython='ipython --no-confirm-exit'
