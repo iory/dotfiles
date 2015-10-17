@@ -100,9 +100,10 @@ export PATH=$PATH:${HOME}/bin:${HOME}/local/peco_linux_amd64
 
 
 # color less and grep
-export LESS=' -R '
-export LESSOPEN='|src-higlite-lesspipe.sh %s'
+export LESS='-R'
+export LESSOPEN='|/usr/share/source-highlight/src-hilite-lesspipe.sh %s'
 export GREP_OPTIONS=' --with-filename --line-number --color=always '
+alias grep="grep --color=always"
 alias ls="ls --color=always"
 
 export PYENV_ROOT="$HOME/.pyenv"
