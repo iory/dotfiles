@@ -83,6 +83,13 @@ if [ -e /opt/ros ]; then # if ros exists ...
             if [ -d "$HOME/.local/bin" ]; then
                 PATH="$HOME/.local/bin:$PATH"
             fi
+
+            alias ls="ls --color=always"
+            export LESSOPEN='|/usr/share/source-highlight/src-hilite-lesspipe.sh %s'
+            ;;
+        darwin*)
+            export LESSOPEN='|/usr/local/bin/src-hilite-lesspipe.sh %s'
+            ;;
     esac
 fi
 
@@ -101,10 +108,8 @@ export PATH=$PATH:${HOME}/bin:${HOME}/local/peco_linux_amd64
 
 # color less and grep
 export LESS='-R'
-export LESSOPEN='|/usr/share/source-highlight/src-hilite-lesspipe.sh %s'
 export GREP_OPTIONS=' --with-filename --line-number --color=always '
 alias grep="grep --color=always"
-alias ls="ls --color=always"
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
