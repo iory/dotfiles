@@ -100,13 +100,22 @@ _replace_by_history() {
 bind -x '"\C-r": _replace_by_history'
 bind    '"\C-xr": reverse-search-history'
 
+function share_history {
+    history -a
+    history -c
+    history -r
+}
+PROMPT_COMMAND='share_history'
+shopt -u histappend
+export HISTSIZE=100000
+
 export PATH=$PATH:${HOME}/bin:${HOME}/local/peco_linux_amd64
 
-export LESS='-R'
-export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
-export GREP_OPTIONS='--color=always --with-filename --line-number'
-alias grep="grep --color=always"
-alias ls="ls --color=always"
+# export LESS='-R'
+# export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
+# export GREP_OPTIONS='--color=always --with-filename --line-number'
+# alias grep="grep --color=always"
+# alias ls="ls --color=always"
 alias py='ipython --no-confirm-exit'
 alias ipy='ipython --no-confirm-exit'
 alias ipython='ipython --no-confirm-exit'
