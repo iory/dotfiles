@@ -67,7 +67,7 @@ alias gstp='git stash pop'
 alias gstd='git stash drop'
 alias gr='git remote'
 alias grv='git remote -v'
-
+alias gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
 
 # ----------------------
 # Git Function
@@ -106,6 +106,9 @@ if which hub >/dev/null 2>&1; then
     compdef hub=git
 fi
 alias g='git'
+
+# for c++
+alias methashell='rlwrap -c methashell'
 
 # for Lisp
 if [ "$EMACS" ]; then

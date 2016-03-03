@@ -73,7 +73,6 @@ case ${OSTYPE} in
                     source /opt/ros/hydro/setup.zsh ;;
             esac
         fi
-        source ${HOME}/ros/${ROS_DISTRO}/devel/setup.zsh
         source `rospack find jsk_tools`/src/zshrc.ros
         rossetip
         # xmodmap
@@ -92,6 +91,11 @@ case ${OSTYPE} in
         export LESSOPEN='|/usr/local/bin/src-hilite-lesspipe.sh %s'
         alias ls='CLICOLOR_FORCE=1 ls -G'
         alias less='less -R'
+
+        # color less and grep
+        export LESS='-R'
+        export GREP_OPTIONS=' --with-filename --line-number --color=always '
+        alias grep="grep --color=always"
         ;;
 esac
 
@@ -107,12 +111,6 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export PATH=$PATH:${HOME}/bin:${HOME}/local/peco_linux_amd64
 
-
-# color less and grep
-export LESS='-R'
-export GREP_OPTIONS=' --with-filename --line-number --color=always '
-alias grep="grep --color=always"
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
