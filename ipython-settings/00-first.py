@@ -1,15 +1,17 @@
-import os
-import sys
-import math
-import string
-import itertools
-import fractions
-import heapq
-import collections
-import random
-import re
 import array
 import bisect
+import collections
+import decimal
+from decimal import Decimal as D
+import fractions
+import heapq
+import itertools
+import math
+import os
+import random
+import re
+import string
+import sys
 
 #import reduce
 from functools import reduce
