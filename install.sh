@@ -18,6 +18,7 @@ EMACS_VERSION=24.5
 # install emacs 24.5
 sudo apt-get install -y build-essential
 sudo apt-get build-dep -y emacs
+sudo apt-get install -y libgif-dev
 cd ${HOME}/local
 if [ ! -d emacs-${EMACS_VERSION}.tar.xz ]; then
     wget -O- http://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.xz | tar xJf -
