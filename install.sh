@@ -5,6 +5,9 @@ export DISTRIB_RELEASE=`cat /etc/lsb-release | grep DISTRIB_RELEASE | tr --delet
 if [ ! -d ${HOME}/local ]; then
     mkdir ${HOME}/local
 fi
+if [ ! -d ${HOME}/bin ]; then
+    mkdir ${HOME}/bin
+fi
 
 EMACS_VERSION=24.5
 # if [ ${DISTRIB_RELEASE} = "12.04" ]; then
@@ -29,14 +32,28 @@ fi
         && sudo make install;)
 
 sudo apt-get install -y cmigemo migemo
+sudo apt-get install -y curl
 sudo apt-get install -y emacs-mozc
 sudo apt-get install -y global
 sudo apt-get install -y rlwrap
+sudo apt-get install -y source-highlight
 sudo apt-get install -y ssh
 sudo apt-get install -y tmux
 sudo apt-get install -y xsel
 sudo apt-get install -y zsh
-sudo apt-get install -y source-highlight
+
+# hub command install (github)
+case ${OSTYPE} in
+      darwin*)
+          brew install hub
+          ;;
+      linux*)
+          if [ ! -d ~/bin/hub ]; then
+              curl https://hub.github.com/standalone -sLo ~/bin/hub
+          fi
+          chmod +x ~/bin/hub
+          ;;
+esac
 
 # sudo chsh -s `which zsh`
 # sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"

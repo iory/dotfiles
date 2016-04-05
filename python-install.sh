@@ -77,9 +77,12 @@ pip install -U matplotlib
 pip install -U numpy
 pip install -U pandas
 pip install -U percol
+pip install -U pillow
+pip install -U pycallgraphviz
 pip install -U pyflakes
 pip install -U pygeoip
 pip install -U requests
+pip install -U scikit-image
 pip install -U scikit-learn
 pip install -U scipy
 pip install -U see

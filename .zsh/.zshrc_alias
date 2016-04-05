@@ -23,6 +23,10 @@ alias ..3="cd ../../.."
 alias ..4="cd ../../../../"
 alias ..5="cd ../../../../.."
 
+alias ghc='stack ghc'
+alias ghci='stack ghci'
+alias runhaskell='stack runhaskell'
+
 # alias grep="ag"
 
 case ${OSTYPE} in
