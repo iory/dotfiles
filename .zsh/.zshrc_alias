@@ -23,9 +23,13 @@ alias ..3="cd ../../.."
 alias ..4="cd ../../../../"
 alias ..5="cd ../../../../.."
 
+# for haskell
+eval "$(stack --bash-completion-script stack)"
 alias ghc='stack ghc'
 alias ghci='stack ghci'
 alias runhaskell='stack runhaskell'
+
+alias gdb="gdb -q"
 
 # alias grep="ag"
 
@@ -110,6 +114,12 @@ if which hub >/dev/null 2>&1; then
     compdef hub=git
 fi
 alias g='git'
+
+# gibo: automatically generating gitignore tools
+if [ -e $HOME/bin/gibo/gibo-completion.zsh ]; then
+    export PATH=$PATH:$HOME/bin/gibo/
+    source $HOME/bin/gibo/gibo-completion.zsh
+fi
 
 # for c++
 alias methashell='rlwrap -c methashell'

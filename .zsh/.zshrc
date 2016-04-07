@@ -99,6 +99,11 @@ case ${OSTYPE} in
         ;;
 esac
 
+# for emacs on terminal settings
+# http://dqn.sakusakutto.jp/2014/10/emacs_shell_iterm2_zsh.html
+# oh-my-zsh
+DISABLE_AUTO_TITLE="true"
+
 # add python path
 export PYTHONPATH=/usr/local/Cellar/opencv3/3.0.0/lib/python3.4/site-packages:$PYTHONPATH
 
