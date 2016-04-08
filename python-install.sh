@@ -81,6 +81,7 @@ pip install -U pillow
 pip install -U pycallgraphviz
 pip install -U pyflakes
 pip install -U pygeoip
+pip install -U pyperclip
 pip install -U requests
 pip install -U scikit-image
 pip install -U scikit-learn

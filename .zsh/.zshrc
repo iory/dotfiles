@@ -122,6 +122,6 @@ export PATH=$PATH:${HOME}/bin:${HOME}/local/peco_linux_amd64
 # export GREP_OPTIONS=' --with-filename --line-number --color=always '
 # alias grep="grep --color=always"
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
