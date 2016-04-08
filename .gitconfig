@@ -17,5 +17,24 @@
 	sslVerify = false
 [credential]
 	helper = cache
-[diff "openxml"]
-    textconv = python ${HOME}/ros/${ROS_DISTRO}/src/jsk-ros-pkg/jsk_tendon_robot/tendon_tools/model/util/git-diff-ods.py
+[alias]
+	alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort
+	ta = log --graph --branches --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	drag = pull --rebase
+	refresh= !git fetch origin && git remote prune origin
+# diff (d)
+	dr  = "!f() { git diff "$1"^.."$1"; }; f"
+	lc  = "!f() { git ll "$1"^.."$1"; }; f"
+	diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+	d  = diff
+	di  = diff
+	dm = diff master
+	dw = diff --color-words
+	d1 = diff HEAD~
+	d2 = diff HEAD~2
+	d3 = diff HEAD~3
+# grep (gr)
+	gr  = grep
+	grn = grep -n
+	f = "!git ls-files | grep -i"

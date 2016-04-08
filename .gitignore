@@ -4,6 +4,7 @@
 # ignore startwith . file
 fonts
 .*
+!/.gitconfig
 !/.gitignore
 !/.zshrc
 !/.zshrc_alias

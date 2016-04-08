@@ -60,6 +60,7 @@ alias gcob='git checkout -b'
 alias gcom='git checkout master'
 alias gd='git diff'
 alias gda='git diff HEAD'
+alias gbw='git browse'
 # alias gi='git init'
 alias gl='git log --oneline'
 alias gln="git log --name-only"
