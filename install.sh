@@ -62,6 +62,7 @@ ln -sf ~/.dotfiles/.gdbinit ~/.gdbinit
 ln -sf ~/.dotfiles/.pythonstartup ~/.pythonstartup
 ln -sf ~/.dotfiles/.xmodmaprc ~/.xmodmaprc
 ln -sf ~/.dotfiles/.zsh/.zshenv ~/.zshenv
+ln -sf ~/.dotfiles/vimrc ~/.vimrc
 
 # ipython settings
 if [ ! -e $HOME/.ipython/profile_default/startup ]; then
