@@ -67,14 +67,21 @@ case ${OSTYPE} in
             VER=$(lsb_release -sr)
             case ${VER} in
                 14.04)
-                    source /opt/ros/indigo/setup.zsh
+                    if [ -e /opt/ros/indigo/setup.zsh ]; then
+                        source /opt/ros/indigo/setup.zsh
+                        source `rospack find jsk_tools`/src/zshrc.ros
+                        rossetip
+                    fi
                     ;;
                 12.04)
-                    source /opt/ros/hydro/setup.zsh ;;
+                    if [ -e /opt/ros/indigo/setup.zsh ]; then
+                        source /opt/ros/indigo/setup.zsh
+                        source `rospack find jsk_tools`/src/zshrc.ros
+                        rossetip
+                    fi
+                    ;;
             esac
         fi
-        source `rospack find jsk_tools`/src/zshrc.ros
-        rossetip
         # xmodmap
         if [[ ${DISPLAY} == ":0" ]] ; then
             xmodmap ~/.xmodmaprc

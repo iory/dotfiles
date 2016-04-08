@@ -24,10 +24,12 @@ alias ..4="cd ../../../../"
 alias ..5="cd ../../../../.."
 
 # for haskell
-eval "$(stack --bash-completion-script stack)"
-alias ghc='stack ghc'
-alias ghci='stack ghci'
-alias runhaskell='stack runhaskell'
+if [ -x "`which stack`" ]; then
+    eval "$(stack --bash-completion-script stack)"
+    alias ghc='stack ghc'
+    alias ghci='stack ghci'
+    alias runhaskell='stack runhaskell'
+fi
 
 alias gdb="gdb -q"
 
