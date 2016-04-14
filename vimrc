@@ -294,3 +294,5 @@ imap <c-j> <esc>
 
 noremap <C-j> <esc>
 noremap! <C-j> <esc>
+
+set number
