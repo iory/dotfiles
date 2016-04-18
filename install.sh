@@ -67,6 +67,7 @@
     ln -sf ~/.dotfiles/.xmodmaprc ~/.xmodmaprc
     ln -sf ~/.dotfiles/.zsh/.zshenv ~/.zshenv
     ln -sf ~/.dotfiles/spacemacs ~/.spacemacs
+    ln -sf ~/.dotfiles/spacemacs ~/.spacemacs
     ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
     ln -sf ~/.dotfiles/vimrc ~/.vimrc
 }

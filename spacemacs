@@ -260,10 +260,101 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
+
+  ;; helm
   (global-set-key (kbd "C-;") 'helm-for-files)
 
-  ;;jedi
+  ;; jedi
   (add-hook 'python-mode-hook 'jedi:setup)
+
+  ;; whitespace
+  (setq whitespace-style '(face           ; faceで可視化
+                           trailing       ; 行末
+                           tabs           ; タブ
+                           spaces         ; スペース
+                           empty          ; 先頭/末尾の空行
+                           space-mark     ; 表示のマッピング
+                           tab-mark
+                           ))
+
+  (setq whitespace-display-mappings
+        '((space-mark ?\u3000 [?\u25a1])
+          ;; WARNING: the mapping below has a problem.
+          ;; When a TAB occupies exactly one column, it will display the
+          ;; character ?\xBB at that column followed by a TAB which goes to
+          ;; the next TAB column.
+          ;; If this is a problem for you, please, comment the line below.
+          (tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
+
+  ;; スペースは全角のみを可視化
+  (setq whitespace-space-regexp "\\(\u3000+\\)")
+
+  ;; 保存前に自動でクリーンアップ
+  (setq whitespace-action '(auto-cleanup))
+
+  (global-whitespace-mode 1)
+
+
+  (global-set-key "\C-w" 'kill-region-or-backward-kill-word)
+  (global-set-key "\C-h" 'delete-backward-char)
+
+  (defun kill-region-or-backward-kill-word ()
+    (interactive)
+    (if (region-active-p)
+        (kill-region (point) (mark))
+      (backward-kill-word 1)))
+
+  (global-set-key "\C-w" 'kill-region-or-backward-kill-word)
+
+  (defun other-window-or-split ()
+    (interactive)
+    (when (one-window-p)
+      (split-window-horizontally))
+    (other-window 1))
+
+  (global-set-key (kbd "C-t") 'other-window-or-split)
+  (global-set-key (kbd "C-x C-z") 'open-junk-file)
+  (setq-default dotspacemacs-themes '(zonokai-red))
+
+  (add-to-list 'load-path
+               "~/.emacs.d.bak/site-lisp/yasnippet")
+  (require 'yasnippet)
+  (yas-global-mode 1)
+  (setq auto-mode-alist
+        (cons (cons "\\.launch" 'xml-mode) auto-mode-alist))
+
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; quick run
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (push '("*quickrun*") popwin:special-display-config)
+  (global-set-key (kbd "<f5>") 'quickrun)
+  (global-set-key (kbd "C-'") 'quickrun)
+
+  ;; Add C++ command for C11 and set it default in C++ file.
+  (quickrun-add-command "c++/clang++"
+                        '((:command . "g++")
+                          (:exec . ("%c -std=c++11 -lstdc++ %o -o %e %s"
+                                    "%e %a"))
+                          (:remove . ("%e")))
+                        :default "c++")
+
+  (quickrun-set-default "c++" "c++/clang++")
+
+  (quickrun-add-command "commonlisp"
+                        '((:command . "clisp")
+                          (:exec . ("%c %s")))
+                        :default "commonlisp")
+
+  ;; (quickrun-add-command "roseus"
+  ;;                       '((:command . "roseus")
+  ;;                         (:exec . ("%c %s")))
+  ;;                       :default "roseus")
+
+  ;;(quickrun-set-default "python" "python3")
+  (quickrun-set-default "lisp" "commonlisp")
+
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
