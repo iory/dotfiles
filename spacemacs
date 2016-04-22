@@ -92,7 +92,7 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner nil
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'.
    ;; (default '(recents projects))
@@ -263,9 +263,27 @@ you should place you code here."
 
   ;; helm
   (global-set-key (kbd "C-;") 'helm-for-files)
+  (define-key global-map (kbd "C-x b") 'helm-for-files)
+
 
   ;; jedi
   (add-hook 'python-mode-hook 'jedi:setup)
+
+  ;; auto-completion
+  (global-auto-complete-mode)
+  (ac-set-trigger-key "TAB")
+
+  (setq x-select-enable-clipboard t)
+  (defun xsel-cut-function (text &optional push)
+    (with-temp-buffer
+      (insert text)
+      (call-process-region (point-min) (point-max) "xsel" nil 0 nil "--clipboard" "--input")))
+  (defun xsel-paste-function()
+    (let ((xsel-output (shell-command-to-string "xsel --clipboard --output")))
+      (unless (string= (car kill-ring) xsel-output)
+        xsel-output )))
+  (setq interprogram-cut-function 'xsel-cut-function)
+  (setq interprogram-paste-function 'xsel-paste-function)
 
   ;; whitespace
   (setq whitespace-style '(face           ; faceで可視化
@@ -346,14 +364,27 @@ you should place you code here."
                           (:exec . ("%c %s")))
                         :default "commonlisp")
 
+  (quickrun-add-command "roseus"
+                        '((:command . "roseus")
+                          (:exec . ("%c %s")))
+                        :mode 'Euslisp-mode)
+  ;; (quickrun-set-default 'Euslisp "roseus")
+  ;; quickrun/major-mode-alist
+
+  ;; Use this parameter in pod-mode
   ;; (quickrun-add-command "roseus"
   ;;                       '((:command . "roseus")
-  ;;                         (:exec . ("%c %s")))
-  ;;                       :default "roseus")
+  ;;                         (:exec    . "%c %s"))
+  ;;                       :mode 'Euslisp
+  ;;                       :override t)
+
 
   ;;(quickrun-set-default "python" "python3")
-  (quickrun-set-default "lisp" "commonlisp")
+  ;; (quickrun-set-default "lisp" "commonlisp")
 
+  (when (file-exists-p "~/.emacs.d/shellenv.el")
+    (load "~/.emacs.d/shellenv.el")
+    )
 
   )
 
