@@ -13,3 +13,4 @@ fonts
 
 # ignore directory
 /plugins
+/local-settings
