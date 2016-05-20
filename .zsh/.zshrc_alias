@@ -9,13 +9,15 @@ if [[ ${DISPLAY} == ":0" ]] ; then
 fi
 
 export PYTHONSTARTUP=~/.pythonstartup
-alias py='ipython --no-confirm-exit'
-alias ipy='ipython --no-confirm-exit'
-alias ipython='ipython --no-confirm-exit'
+alias py='ipython'
+alias ipy='ipython'
+alias ipython='ipython'
 
 alias sl='ls'
 alias la='ls -a'
 alias lsf='ls -F'
+alias diff='colordiff'
+alias ccat='pygmentize -g'
 
 alias ..="cd .."
 alias ..2="cd ../.."

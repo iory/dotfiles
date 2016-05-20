@@ -285,6 +285,44 @@ you should place you code here."
   (setq interprogram-cut-function 'xsel-cut-function)
   (setq interprogram-paste-function 'xsel-paste-function)
 
+  ;; ;; Makefile-mode
+  ;; (setq auto-mode-alist
+  ;;       (append '(("Makefile\\..*$" . makefile-gmake-mode)
+  ;;                 ("Makefile_.*$" . makefile-gmake-mode)
+  ;;                 ) auto-mode-alist))
+  ;; (setq auto-mode-alist
+  ;;       (append
+  ;;        '(("CMakeLists\\.txt\\'" . cmake-mode))
+  ;;        '(("\\.cmake\\'" . cmake-mode))
+  ;;        auto-mode-alist))
+  ;; (setq-default c-basic-offset 4
+  ;;               tab-width 4
+  ;;               indent-tabs-mode nil)
+  ;; ;; yaml
+  ;; (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+  ;; (define-key yaml-mode-map "\C-m" 'newline-and-indent)
+
+  (setenv "PYTHONPATH" (exec-path-from-shell-copy-env "PYTHONPATH"))
+
+  (setq auto-mode-alist
+        (cons (cons "\\.launch" 'xml-mode) auto-mode-alist))
+  ;; ;; cfg as python
+  ;; (setq auto-mode-alist
+  ;;       (cons (cons "\\.cfg" 'python-mode) auto-mode-alist))
+
+  (auto-insert-mode)
+  (setq auto-insert-directory "~/.emacs.d/private/insert/")
+  (define-auto-insert "CMakeLists.txt" "cmake-template.txt")
+  (define-auto-insert "\\.c$" "c-template.c")
+  (define-auto-insert "\\.cpp$" "c-plusplus-template.cpp")
+  (define-auto-insert "\\.l$" "euslisp-template.l")
+  (define-auto-insert "\\.launch$" "launch-template.launch")
+  (define-auto-insert "\\.py$" "py-template.py")
+  (define-auto-insert "\\.sh$" "sh-template.sh")
+
+
+
+
   ;; whitespace
   (setq whitespace-style '(face           ; faceで可視化
                            trailing       ; 行末
@@ -294,6 +332,7 @@ you should place you code here."
                            space-mark     ; 表示のマッピング
                            tab-mark
                            ))
+
 
   (setq whitespace-display-mappings
         '((space-mark ?\u3000 [?\u25a1])
@@ -341,6 +380,17 @@ you should place you code here."
   (setq auto-mode-alist
         (cons (cons "\\.launch" 'xml-mode) auto-mode-alist))
 
+  ;; c-mode
+  (setq-default c-basic-offset 4
+                tab-width 4
+                indent-tabs-mode nil)
+
+
+  ;; C++ style
+  (add-hook 'c++-mode-hook
+            '(lambda()
+               (c-set-offset 'innamespace 0)   ; namespace {}の中はインデントしない
+               ))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; quick run
