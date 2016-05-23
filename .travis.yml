@@ -11,7 +11,7 @@ env:
   matrix:
 install:
   - sudo apt-get -qq update
-  - ./install.sh
-  - ./python-install.sh
+  - sudo ./install.sh
+  - sudo ./python-install.sh
 script:
-  - ipython
+  - ipython -c 'import sys; sys.exit()'
