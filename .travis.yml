@@ -7,6 +7,7 @@ notifications:
     on_success: always
     on_failure: always
 sudo: required
+dist: trusty
 env:
   matrix:
 install:
