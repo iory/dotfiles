@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 [ ! -d ${HOME}/local ] && mkdir ${HOME}/local
 [ ! -d ${HOME}/local/src ] && mkdir ${HOME}/local/src
 [ ! -d ${HOME}/bin ] && mkdir ${HOME}/bin
 
-:  "settings for Ubuntu" {
+:  "settings for Ubuntu" && {
     case ${OSTYPE} in
         linux*)
             gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
@@ -22,7 +22,7 @@
             cd /tmp
             git clone https://github.com/powerline/fonts.git
             cd fonts
-            ./install.sh
+            ./install.sh;;
     esac
 }
 
@@ -97,17 +97,20 @@
 : "set zsh" && {
     sudo chsh -s `which zsh`
     sudo sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    bash `pwd`/.zsh/install.sh
 }
 
-for f in .??*
-do
-    [[ "$f" == ".git" ]] && continue
-    [[ "$f" == ".DS_Store" ]] && continue
-    [[ "$f" == ".travis.yaml" ]] && continue
+: "symbolic link for dotfiles" && {
+    for f in .??*
+    do
+        [[ "$f" == ".git" ]] && continue
+        [[ "$f" == ".DS_Store" ]] && continue
+        [[ "$f" == ".travis.yaml" ]] && continue
 
-    echo "$f"
-    ln -sf `pwd`/"$f" ~/"$f"
-done
+        echo "$f"
+        ln -sf `pwd`/"$f" ~/"$f"
+    done
+}
 
 : "ipython settings" && {
     if [ ! -e $HOME/.ipython/profile_default/startup ]; then

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ZDOTDIR=$HOME/.dotfiles/.zsh
 mkdir $ZDOTDIR/plugins
 cd $ZDOTDIR/plugins
