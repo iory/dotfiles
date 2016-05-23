@@ -57,37 +57,19 @@
     ln -sf ~/.dotfiles/rc.py ~/.percol.d/rc.py
 }
 
-: "create symbolic links of config" && {
-    ln -sf ~/.dotfiles/.agignore ~/.agignore
-    ln -sf ~/.dotfiles/.gdbinit ~/.gdbinit
-    ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
-    ln -sf ~/.dotfiles/.gitignore_global ~/.gitignore
-    ln -sf ~/.dotfiles/.pythonstartup ~/.pythonstartup
-    ln -sf ~/.dotfiles/.xinitrc ~/.xinitrc
-    ln -sf ~/.dotfiles/.xmodmaprc ~/.xmodmaprc
-    ln -sf ~/.dotfiles/.zsh/.zshenv ~/.zshenv
-    ln -sf ~/.dotfiles/spacemacs ~/.spacemacs
-    ln -sf ~/.dotfiles/spacemacs ~/.spacemacs
-    ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
-    ln -sf ~/.dotfiles/vimrc ~/.vimrc
-}
+for f in .??*
+do
+    [[ "$f" == ".git" ]] && continue
+    [[ "$f" == ".DS_Store" ]] && continue
+    [[ "$f" == ".travis.yaml" ]] && continue
+
+    echo "$f"
+    ln -sf `pwd`/"$f" ~/"$f"
+done
 
 : "ipython settings" && {
     if [ ! -e $HOME/.ipython/profile_default/startup ]; then
         mkdir -p $HOME/.ipython/profile_default/startup
     fi
     ln -sf ~/.dotfiles/ipython-settings/00-first.py ~/.ipython/profile_default/startup/00-first.py
-}
-
-: "apply rlwrap to roseus" && {
-    ln -sf ~/.dotfiles/completions/.roseus_completions ~/.roseus_completions
-}
-
-: "udev conf for device" && {
-    case ${OSTYPE} in
-        linux*)
-            sudo ln -sf ~/.dotfiles/udev-settings/90-kinect2.rules /etc/udev/rules.d/90-kinect2.rules
-            sudo ln -sf ~/.dotfiles/udev-settings/10-arduino.rules /etc/udev/rules.d/10-arduino.rules
-            sudo ln -sf ~/.dotfiles/udev-settings/11-arduino.rules /etc/udev/rules.d/11-arduino.rules
-    esac
 }
