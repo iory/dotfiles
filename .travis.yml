@@ -13,6 +13,6 @@ env:
 install:
   - sudo apt-get -qq update
   - sudo ./install.sh
-  - sudo ./python-install.sh
+  - ./python-install.sh
 script:
   - ipython -c 'import sys; sys.exit()'

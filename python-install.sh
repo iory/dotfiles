@@ -11,9 +11,6 @@ case ${OSTYPE} in
     linux*)
         sudo apt-get -qq -y update
 
-        if [ ! -d ${HOME}/.pyenv ]; then
-            git clone https://github.com/yyuu/pyenv ~/.pyenv
-        fi
         sudo apt-get install -qq -y make build-essential libssl-dev zlib1g-dev libbz2-dev
         sudo apt-get install -qq -y libreadline-dev libsqlite3-dev wget curl llvm
         sudo apt-get install -qq -y libfreetype6-dev libblas-dev liblapack-dev gfortran
@@ -24,6 +21,10 @@ case ${OSTYPE} in
         # required for matplotlib
         sudo apt-get install -qq -y build-essential python3-tk tk-dev libpng12-dev
 
+        if [ ! -d ${HOME}/.pyenv ]; then
+            git clone https://github.com/yyuu/pyenv ~/.pyenv
+        fi
+
         export PYENV_ROOT="$HOME/.pyenv"
         export PATH="$PYENV_ROOT/bin:$PATH"
         eval "$(pyenv init -)"
@@ -32,7 +33,6 @@ case ${OSTYPE} in
         pyenv global 3.4.0
 
         # opencv
-        sudo apt-get build-dep -y -qq python-opencv
         if [ ! -d ${HOME}/local/opencv ]; then
             git clone https://github.com/Itseez/opencv.git ${HOME}/local/opencv
         fi
@@ -64,30 +64,30 @@ case ${OSTYPE} in
     ;;
 esac
 
-pip install -U -q --upgrade pip
-pip install -U ipython
+sudo pip install -U -q --upgrade pip
+sudo pip install -U ipython
 #
 # pip install -U pyopencv
 # easy_install -U guppy
 # easy_install -U nose
-pip install -U dpkt
-pip install -U grip
-pip install -U mahotas
-pip install -U matplotlib
-pip install -U numpy
-pip install -U pandas
-pip install -U percol
-pip install -U pillow
-pip install -U pycallgraphviz
-pip install -U pyflakes
-pip install -U pygeoip
-pip install -U pyperclip
-pip install -U requests
-pip install -U scikit-image
-pip install -U scikit-learn
-pip install -U scipy
-pip install -U see
-pip install -U virtualenv
+sudo pip install -U dpkt
+sudo pip install -U grip
+sudo pip install -U mahotas
+sudo pip install -U matplotlib
+sudo pip install -U numpy
+sudo pip install -U pandas
+sudo pip install -U percol
+sudo pip install -U pillow
+sudo pip install -U pycallgraphviz
+sudo pip install -U pyflakes
+sudo pip install -U pygeoip
+sudo pip install -U pyperclip
+sudo pip install -U requests
+sudo pip install -U scikit-image
+sudo pip install -U scikit-learn
+sudo pip install -U scipy
+sudo pip install -U see
+sudo pip install -U virtualenv
 
 # if you have an error
 # echo "/usr/lib/atlas-base" | sudo tee /etc/ld.so.conf.d/atlas-lib.conf
