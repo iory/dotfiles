@@ -21,6 +21,7 @@ expr "${0}" : "/.*" > /dev/null || current_working_directory=`(cd "${current_wor
     case ${OSTYPE} in
         linux*)
             : "install apt package" && {
+                sudo apt-get update
                 sudo apt-get install -y aptitude
                 sudo apt-get install -y cmigemo migemo
                 sudo apt-get install -y curl
@@ -51,6 +52,9 @@ expr "${0}" : "/.*" > /dev/null || current_working_directory=`(cd "${current_wor
                     && git clone https://github.com/powerline/fonts.git \
                     && cd fonts \
                     && ./install.sh;)
+
+            # custom short cut key
+            python $current_working_directory/scripts/set_shortcut.py
             ;;
     esac
 }
@@ -101,6 +105,7 @@ expr "${0}" : "/.*" > /dev/null || current_working_directory=`(cd "${current_wor
             brew install hub
             ;;
         linux*)
+            sudo apt-get install -y ruby2.0
             if [ ! -d ~/bin/hub ]; then
                 curl https://hub.github.com/standalone -sLo ~/bin/hub
             fi
