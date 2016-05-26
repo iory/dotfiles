@@ -69,7 +69,7 @@ current_working_directory=$HOME/.dotfiles
         fi;)
 }
 
-: "install emacs 24.5" || {
+: "install emacs 24.5" && {
     EMACS_VERSION=24.5
     sudo apt-get install -y build-essential
     sudo apt-get build-dep -y emacs
@@ -82,6 +82,7 @@ current_working_directory=$HOME/.dotfiles
                     && make \
                     && sudo make install;)
         fi;)
+    git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d
 }
 
 : "vim install" && {
@@ -140,5 +141,5 @@ current_working_directory=$HOME/.dotfiles
     if [ ! -e $HOME/.ipython/profile_default/startup ]; then
         mkdir -p $HOME/.ipython/profile_default/startup
     fi
-    ln -sf `pwd`/ipython-settings/00-first.py ~/.ipython/profile_default/startup/00-first.py
+    ln -sf $current_working_directory/ipython-settings/00-first.py ~/.ipython/profile_default/startup/00-first.py
 }
