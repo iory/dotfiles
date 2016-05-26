@@ -3,6 +3,16 @@
 current_working_directory=`dirname "${0}"`
 expr "${0}" : "/.*" > /dev/null || current_working_directory=`(cd "${current_working_directory}" && pwd)`
 
+:  "install dotfiles" && {
+    case ${OSTYPE} in
+        linux*)
+            sudo apt-get install -y git
+            ;;
+    esac
+
+    git clone https://github.com/iory/dotfiles.git ~/.dotfiles
+}
+
 [ ! -d ${HOME}/local ] && mkdir ${HOME}/local
 [ ! -d ${HOME}/local/src ] && mkdir ${HOME}/local/src
 [ ! -d ${HOME}/bin ] && mkdir ${HOME}/bin
