@@ -1,7 +1,6 @@
 #!/bin/bash
 
-current_working_directory=`dirname "${0}"`
-expr "${0}" : "/.*" > /dev/null || current_working_directory=`(cd "${current_working_directory}" && pwd)`
+current_working_directory=$HOME/.dotfiles
 
 :  "install dotfiles" && {
     case ${OSTYPE} in
