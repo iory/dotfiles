@@ -5,6 +5,9 @@ current_working_directory=$HOME/.dotfiles
 :  "install dotfiles" && {
     case ${OSTYPE} in
         linux*)
+	    # install latest git
+	    sudo add-apt-repository -y ppa:git-core/ppa
+	    sudo apt-get update
             sudo apt-get install -y git
             ;;
     esac
