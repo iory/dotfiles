@@ -1,5 +1,8 @@
 #!/bin/bash
 
+current_working_directory=`dirname "${0}"`
+expr "${0}" : "/.*" > /dev/null || current_working_directory=`(cd "${current_working_directory}" && pwd)`
+
 [ ! -d ${HOME}/local ] && mkdir ${HOME}/local
 [ ! -d ${HOME}/local/src ] && mkdir ${HOME}/local/src
 [ ! -d ${HOME}/bin ] && mkdir ${HOME}/bin
@@ -9,16 +12,16 @@
         linux*)
             : "install apt package" && {
                 sudo apt-get install -y aptitude
-                sudo aptitude install -y cmigemo migemo
-                sudo aptitude install -y curl
-                sudo aptitude install -y emacs-mozc
-                sudo aptitude install -y global
-                sudo aptitude install -y rlwrap
-                sudo aptitude install -y source-highlight
-                sudo aptitude install -y ssh
-                sudo aptitude install -y tmux
-                sudo aptitude install -y xsel
-                sudo aptitude install -y zsh
+                sudo apt-get install -y cmigemo migemo
+                sudo apt-get install -y curl
+                sudo apt-get install -y emacs-mozc
+                sudo apt-get install -y global
+                sudo apt-get install -y rlwrap
+                sudo apt-get install -y source-highlight
+                sudo apt-get install -y ssh
+                sudo apt-get install -y tmux
+                sudo apt-get install -y xsel
+                sudo apt-get install -y zsh
             }
 
             gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
@@ -27,7 +30,7 @@
             # gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
 
             # fcitx
-            sudo aptitude install -y fcitx fcitx-mozc
+            sudo apt-get install -y fcitx fcitx-mozc
             gsettings set org.gnome.settings-daemon.plugins.keyboard active false
 
             # change CapsLock as ctrl
@@ -50,11 +53,11 @@
         fi;)
 }
 
-: "install emacs 24.5" && {
+: "install emacs 24.5" || {
     EMACS_VERSION=24.5
-    sudo aptitude install -y build-essential
-    sudo aptitude build-dep -y emacs
-    sudo aptitude install -y libgif-dev
+    sudo apt-get install -y build-essential
+    sudo apt-get build-dep -y emacs
+    sudo apt-get install -y libgif-dev
     (cd ${HOME}/local \
         && if [ ! -d emacs-${EMACS_VERSION}.tar.xz ]; then
             wget -O- http://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.xz | tar xJf -
@@ -99,18 +102,20 @@
 : "set zsh" && {
     sudo chsh -s `which zsh`
     wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O- | sudo bash
-    bash `pwd`/.zsh/install.sh
+    bash $current_working_directory/.zsh/install.sh
 }
 
 : "symbolic link for dotfiles" && {
-    for f in .??*
-    do
-        [[ "$f" == ".git" ]] && continue
-        [[ "$f" == ".DS_Store" ]] && continue
-        [[ "$f" == ".travis.yaml" ]] && continue
+    for directory in $current_working_directory $current_working_directory/.zsh; do
+        cd $directory
+        for f in .??*; do
+            [[ "$f" == ".git" ]] && continue
+            [[ "$f" == ".DS_Store" ]] && continue
+            [[ "$f" == ".travis.yaml" ]] && continue
 
-        echo "$f"
-        ln -sf `pwd`/"$f" ~/"$f"
+            echo "$f"
+            ln -sf `pwd`/"$f" ~/"$f"
+        done
     done
 }
 
