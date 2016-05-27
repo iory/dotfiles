@@ -135,6 +135,8 @@ current_working_directory=$HOME/.dotfiles
             ln -sf `pwd`/"$f" ~/"$f"
         done
     done
+
+    bash $current_working_directory/config/install.sh
 }
 
 : "ipython settings" && {
