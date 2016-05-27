@@ -30,11 +30,13 @@ current_working_directory=$HOME/.dotfiles
                 sudo apt-get install -y emacs-mozc
                 sudo apt-get install -y global
                 sudo apt-get install -y rlwrap
+                sudo apt-get install -y silversearcher-ag
                 sudo apt-get install -y source-highlight
                 sudo apt-get install -y ssh
                 sudo apt-get install -y tmux
                 sudo apt-get install -y xsel
                 sudo apt-get install -y zsh
+                sudo apt-get install -y colordiff
             }
 
             gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
