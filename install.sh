@@ -39,6 +39,8 @@ current_working_directory=$HOME/.dotfiles
                 sudo apt-get install -y colordiff
             }
 
+            bash $current_working_directory/scripts/gsettings.sh
+
             gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
             dconf reset /org/gnome/settings-daemon/plugins/keyboard/active
             dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
