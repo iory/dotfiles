@@ -25,6 +25,7 @@ current_working_directory=$HOME/.dotfiles
             : "install apt package" && {
                 sudo apt-get update
                 sudo apt-get install -y aptitude
+                sudo apt-get install -y boxes
                 sudo apt-get install -y cmigemo migemo
                 sudo apt-get install -y curl
                 sudo apt-get install -y emacs-mozc
