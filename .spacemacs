@@ -261,6 +261,11 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
 
+  (defconst *dmacro-key* "\C-o" "繰返し指定キー")
+  (load "~/.emacs.d/private/site-lisp/dmacro.el")
+  (global-set-key *dmacro-key* 'dmacro-exec)
+  (autoload 'dmacro-exec "dmacro" nil t)
+
   ;; helm
   (global-set-key (kbd "C-;") 'helm-for-files)
   (define-key global-map (kbd "C-x b") 'helm-for-files)
