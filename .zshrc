@@ -42,7 +42,7 @@ setopt nobeep
 function up() { cpath=./; for i in `seq 1 1 $1`; do cpath=$cpath../; done; cd $cpath; }
 
 # zsh highlight
-source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZDOTDIR/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
@@ -53,8 +53,6 @@ zstyle ':completion:*' recent-dirs-insert both
 zstyle ':filter-select' case-insensitive yes
 # bindkey '^X^P' zaw-process
 # bindkey '^X^B' zaw-git-branches
-
-source $ZDOTDIR/.zshrc.iory
 
 # export PATH
 export PATH=$PATH:$HOME/bin/tools/bin:$HOME/.emacs.d/bin

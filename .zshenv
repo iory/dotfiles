@@ -1,1 +1,1 @@
-export ZDOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export ZDOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/.dotfiles
