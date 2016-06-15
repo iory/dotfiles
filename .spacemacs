@@ -46,10 +46,11 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
-     quickrun
+     euslisp-mode
      jedi
      jedi-core
-     euslisp-mode
+     quickrun
+     trr
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -290,6 +291,8 @@ you should place you code here."
   (setq interprogram-cut-function 'xsel-cut-function)
   (setq interprogram-paste-function 'xsel-paste-function)
 
+  (setq vc-follow-symlinks t)
+
   ;; ;; Makefile-mode
   ;; (setq auto-mode-alist
   ;;       (append '(("Makefile\\..*$" . makefile-gmake-mode)
@@ -311,6 +314,8 @@ you should place you code here."
 
   (setq auto-mode-alist
         (cons (cons "\\.launch" 'xml-mode) auto-mode-alist))
+  (setq auto-mode-alist
+        (cons (cons "\\.test" 'xml-mode) auto-mode-alist))
   ;; ;; cfg as python
   ;; (setq auto-mode-alist
   ;;       (cons (cons "\\.cfg" 'python-mode) auto-mode-alist))
