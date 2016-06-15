@@ -143,7 +143,9 @@ if [ -n "$ZSH_VERSION" ]; then
     bindkey '^m' do_enter
 
     setopt auto_cd
-    function chpwd() { ls }
+    function chpwd() {
+        ls
+    }
 
     function peco-ssh () {
         local selected_host=$(awk '
