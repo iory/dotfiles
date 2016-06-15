@@ -39,7 +39,7 @@ setopt share_history
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 setopt nobeep
-function up(){ cpath=./; for i in `seq 1 1 $1`; do cpath=$cpath../; done; cd $cpath;}
+function up() { cpath=./; for i in `seq 1 1 $1`; do cpath=$cpath../; done; cd $cpath; }
 
 # zsh highlight
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -59,52 +59,6 @@ source $ZDOTDIR/.zshrc.iory
 # export PATH
 export PATH=$PATH:$HOME/bin/tools/bin:$HOME/.emacs.d/bin
 
-# setting only Ubuntu
-case ${OSTYPE} in
-    linux*)
-        if [ -e /opt/ros ]; then # if ros exists ...
-            # ros setting
-            VER=$(lsb_release -sr)
-            case ${VER} in
-                14.04)
-                    if [ -e /opt/ros/indigo/setup.zsh ]; then
-                        source /opt/ros/indigo/setup.zsh
-                        source `rospack find jsk_tools`/src/zshrc.ros
-                        rossetip
-                    fi
-                    ;;
-                12.04)
-                    if [ -e /opt/ros/indigo/setup.zsh ]; then
-                        source /opt/ros/indigo/setup.zsh
-                        source `rospack find jsk_tools`/src/zshrc.ros
-                        rossetip
-                    fi
-                    ;;
-            esac
-        fi
-        # xmodmap
-        if [[ ${DISPLAY} == ":0" ]] ; then
-            xmodmap ~/.xmodmaprc
-        fi
-
-        if [ -d "$HOME/.local/bin" ]; then
-            PATH="$HOME/.local/bin:$PATH"
-        fi
-
-        alias ls="ls --color=always"
-        export LESSOPEN='|/usr/share/source-highlight/src-hilite-lesspipe.sh %s'
-        ;;
-    darwin*)
-        export LESSOPEN='|/usr/local/bin/src-hilite-lesspipe.sh %s'
-        alias ls='CLICOLOR_FORCE=1 ls -G'
-        alias less='less -R'
-
-        # color less and grep
-        export LESS='-R'
-        export GREP_OPTIONS=' --with-filename --line-number --color=always '
-        alias grep="grep --color=always"
-        ;;
-esac
 
 # for emacs on terminal settings
 # http://dqn.sakusakutto.jp/2014/10/emacs_shell_iterm2_zsh.html
@@ -114,7 +68,6 @@ DISABLE_AUTO_TITLE="true"
 # add python path
 export PYTHONPATH=/usr/local/Cellar/opencv3/3.0.0/lib/python3.4/site-packages:$PYTHONPATH
 
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # load .zshrc_setting file
 [ -f $ZDOTDIR/.zshrc_alias ] && . $ZDOTDIR/.zshrc_alias
@@ -124,6 +77,11 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH=$PATH:${HOME}/bin:${HOME}/local/peco_linux_amd64
 
 source ~/.dotfiles/sh/plugins/ros.sh
+export GITHUB_USER=iory
+source ~/.dotfiles/sh/plugins/git.sh
+source ~/.dotfiles/sh/plugins/emacs.sh
+source ~/.dotfiles/sh/plugins/util.sh
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 # color less and grep
 # export LESS='-R'
 # export GREP_OPTIONS=' --with-filename --line-number --color=always '

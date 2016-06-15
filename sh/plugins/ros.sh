@@ -1,6 +1,9 @@
-# ----------------------------------------------------
-# ROS
-# ----------------------------------------------------
+#!/bin/bash -eu
+
+#######
+# ROS #
+#######
+
 if [ -d "/opt/ros" ]; then
     alias re="rostopic echo"
     alias ri="rostopic info"
@@ -13,6 +16,7 @@ if [ -d "/opt/ros" ]; then
     alias rp='rostopic'
     alias rpb='rostopic bw'
     alias rpe='rostopic echo'
+    alias rpt='rostopic type'
     alias rph='rostopic hz'
     alias rpi='rostopic info'
     alias rpl='rostopic list'
@@ -81,3 +85,45 @@ alias cli='catkin lint'
 function imv() {
     rosrun image_view image_view image:=$1
 }
+
+if [ "$EMACS" ]; then
+    :
+else
+    alias roseus="rlwrap -c -b '(){}.,;|' -a -pGREEN roseus"
+    alias irteus='rlwrap -c irteus'
+    alias irteusgl='rlwrap -c irteusgl'
+fi
+
+# source /opt/ros
+case ${OSTYPE} in
+    linux*)
+        if [ -n "$ZSH_VERSION" ]; then
+            CURRENT_SHELL='zsh'
+        elif [ -n "$BASH_VERSION" ]; then
+            CURRENT_SHELL='bash'
+        fi
+
+        if [ -e /opt/ros ]; then # if ros exists ...
+            # ros setting
+            VER=$(lsb_release -sr)
+            case ${VER} in
+                14.04)
+                    if [ -e /opt/ros/indigo/setup.${CURRENT_SHELL} ]; then
+                        source /opt/ros/indigo/setup.${CURRENT_SHELL}
+                        source `rospack find jsk_tools`/src/${CURRENT_SHELL}rc.ros
+                        rossetip
+                    fi
+                    ;;
+                12.04)
+                    if [ -e /opt/ros/indigo/setup.${CURRENT_SHELL} ]; then
+                        source /opt/ros/indigo/setup.${CURRENT_SHELL}
+                        source `rospack find jsk_tools`/src/${CURRENT_SHELL}rc.ros
+                        rossetip
+                    fi
+                    ;;
+            esac
+        fi
+        ;;
+    darwin*)
+        ;;
+esac
