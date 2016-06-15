@@ -7,17 +7,6 @@ alias ..3="cd ../../.."
 alias ..4="cd ../../../../"
 alias ..5="cd ../../../../.."
 
-jj () {
-    if [ $1 ]; then
-        JUMPDIR=$(find . -type d -maxdepth 1 | grep $1 | tail -1)
-        if [[ -d $JUMPDIR && -n $JUMPDIR ]]; then
-            cd $JUMPDIR
-        else
-            echo "directory not found"
-        fi
-    fi
-}
-
 # ls extend
 alias l='ls -CF'
 alias la='ls -A'

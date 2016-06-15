@@ -81,6 +81,7 @@ export GITHUB_USER=iory
 source ~/.dotfiles/sh/plugins/git.sh
 source ~/.dotfiles/sh/plugins/emacs.sh
 source ~/.dotfiles/sh/plugins/util.sh
+source ~/.dotfiles/sh/plugins/peco.sh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 # color less and grep
 # export LESS='-R'
