@@ -1,6 +1,6 @@
 #!/bin/bash
 
-current_working_directory=$HOME/.dotfiles
+current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 :  "install dotfiles" && {
     case ${OSTYPE} in
@@ -123,24 +123,26 @@ current_working_directory=$HOME/.dotfiles
 }
 
 : "set zsh" && {
-    sudo chsh -s `which zsh`
+    ZDOTDIR=$current_working_directory
+    mkdir $ZDOTDIR/zsh/plugins -p
+    cd $ZDOTDIR/zsh/plugins -p
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+
     wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O- | sudo bash
     bash $current_working_directory/.zsh/install.sh
+    sudo chsh -s `which zsh`
 }
 
 : "symbolic link for dotfiles" && {
-    for directory in $current_working_directory $current_working_directory/.zsh; do
-        cd $directory
-        for f in .??*; do
-            [[ "$f" == ".git" ]] && continue
-            [[ "$f" == ".DS_Store" ]] && continue
-            [[ "$f" == ".travis.yaml" ]] && continue
+    cd $current_working_directory
+    for f in .??*; do
+        [[ "$f" == ".git" ]] && continue
+        [[ "$f" == ".DS_Store" ]] && continue
+        [[ "$f" == ".travis.yaml" ]] && continue
 
-            echo "$f"
-            ln -sf `pwd`/"$f" ~/"$f"
-        done
+        echo "$f"
+        ln -sf `pwd`/"$f" ~/"$f"
     done
-
     bash $current_working_directory/config/install.sh
 }
 

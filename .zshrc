@@ -83,10 +83,6 @@ source ~/.dotfiles/sh/plugins/emacs.sh
 source ~/.dotfiles/sh/plugins/util.sh
 source ~/.dotfiles/sh/plugins/peco.sh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-# color less and grep
-# export LESS='-R'
-# export GREP_OPTIONS=' --with-filename --line-number --color=always '
-# alias grep="grep --color=always"
 
 # export PYENV_ROOT="$HOME/.pyenv"
 # export PATH="$PYENV_ROOT/bin:$PATH"
