@@ -19,6 +19,24 @@ if [ -d "/opt/ros" ]; then
     alias rpt='rostopic type'
     alias rph='rostopic hz'
     alias rpi='rostopic info'
+    ros_topic_info_detail() {
+        echo '#################
+# rostopic info #
+#################
+'
+        rostopic info $1
+        echo '#################
+# rostopic type #
+#################
+'
+        rostopic type $1
+        echo '\n###############
+# rosmsg show #
+###############
+'
+        rostopic type $1 | rosmsg show
+    }
+    alias rpid='ros_topic_info_detail'
     alias rpl='rostopic list'
     # rosnode
     alias rn='rosnode'
@@ -58,6 +76,8 @@ if [ -d "/opt/ros" ]; then
     alias imv2='image_view2'
     # nodelet
     alias nodelet_standalone='rosrun nodelet nodelet standalone'
+
+    alias tf_view='rosrun tf view_frames'
 fi
 
 # wstool
@@ -75,6 +95,7 @@ wlsethub () {
 alias c='catkin'
 alias cb='catkin build'
 alias cbt='catkin bt'
+alias cbts='catkin bt --start-with-this'
 alias cbtv='catkin bt --verbose'
 alias crt='catkin run_tests'
 alias crtt='catkin run_tests --this --no-deps -iv'
