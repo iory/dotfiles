@@ -42,7 +42,7 @@ setopt nobeep
 function up() { cpath=./; for i in `seq 1 1 $1`; do cpath=$cpath../; done; cd $cpath; }
 
 # zsh highlight
-source $ZDOTDIR/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
@@ -65,10 +65,6 @@ DISABLE_AUTO_TITLE="true"
 
 # add python path
 export PYTHONPATH=/usr/local/Cellar/opencv3/3.0.0/lib/python3.4/site-packages:$PYTHONPATH
-
-
-# load .zshrc_setting file
-[ -f $ZDOTDIR/.zshrc_alias ] && . $ZDOTDIR/.zshrc_alias
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
