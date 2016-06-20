@@ -62,7 +62,7 @@ case ${OSTYPE} in
         # xmodmap
         if [ "$PS1" ]; then
             # Disables the bloody CapsLock button
-            if [[ ${DISPLAY} == ":0" ]] ; then
+            if [[ ${DISPLAY} == ":0" ]] && [[ -e "$HOME/.xmodmaprc" ]]; then
                 xmodmap ~/.xmodmaprc
             fi
         fi
