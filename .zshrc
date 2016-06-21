@@ -72,10 +72,11 @@ export PATH=$PATH:${HOME}/bin:${HOME}/local/peco_linux_amd64
 
 source ~/.dotfiles/sh/plugins/ros.sh
 export GITHUB_USER=iory
-source ~/.dotfiles/sh/plugins/git.sh
 source ~/.dotfiles/sh/plugins/emacs.sh
-source ~/.dotfiles/sh/plugins/util.sh
+source ~/.dotfiles/sh/plugins/git.sh
 source ~/.dotfiles/sh/plugins/peco.sh
+source ~/.dotfiles/sh/plugins/tmux.sh
+source ~/.dotfiles/sh/plugins/util.sh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # export PYENV_ROOT="$HOME/.pyenv"

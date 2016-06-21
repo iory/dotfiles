@@ -46,4 +46,5 @@ source $DIR/sh/plugins/emacs.sh
 source $DIR/sh/plugins/git.sh
 source $DIR/sh/plugins/peco.sh
 source $DIR/sh/plugins/ros.sh
+source $DIR/sh/plugins/tmux.sh
 source $DIR/sh/plugins/util.sh
