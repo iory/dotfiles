@@ -46,7 +46,7 @@ alias diff='colordiff'
 # misc
 alias chrome='google-chrome'
 dic () {
-    w3m "http://ejje.weblio.jp/content/$1" | grep "example"
+    w3m "http://ejje.weblio.jp/content/$1" | grep "用例"
 }
 alias sha1='echo -n "${1}" | openssl sha1 | sed "s/^.* //"'
 
