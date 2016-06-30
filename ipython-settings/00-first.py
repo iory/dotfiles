@@ -1,20 +1,21 @@
+from decimal import Decimal as D
 import array
 import bisect
 import collections
 import decimal
-from decimal import Decimal as D
 import fractions
 import heapq
 import itertools
 import math
-import os
 import operator as op
+import os
 import pprint
 import pyperclip
 import random
 import re
 import string
 import sys
+import time
 
 #import reduce
 from functools import reduce
