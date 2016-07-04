@@ -99,7 +99,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     # git clone https://github.com/scrooloose/nerdtree.git ~/.vim
 
     if [ ! -e $VIM_HOME/vim-hybrid ]; then
-        git clone http://github.com:w0ng/vim-hybrid.git $VIM_HOME/vim-hybrid
+        git clone http://github.com/w0ng/vim-hybrid.git $VIM_HOME/vim-hybrid
         ln -sf $VIM_HOME/vim-hybrid/colors $VIM_HOME/colors
     fi
 
