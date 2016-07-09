@@ -37,13 +37,15 @@ alias gbug='git branch -u origin/$(git_current_branch)'
 alias gbum='git branch -u $GITHUB_USER/$(git_current_branch)'
 alias gml='git pull $GITHUB_USER $(git_current_branch)'
 alias gmpull='git pull $GITHUB_USER $(git_current_branch)'
-alias gmpnp='git pull $GITHUB_USER $(git_current_branch) && git push $GITHUB_USER $(git_current_branch)'
+alias gmpnp='git pull --rebase $GITHUB_USER $(git_current_branch) && git push $GITHUB_USER $(git_current_branch)'
+alias gmpnpf='git pull --rebase $GITHUB_USER $(git_current_branch) && git push $GITHUB_USER $(git_current_branch) -f'
 
 alias gbm='git branch --all | command grep $GITHUB_USER | sed "s/ *//g"'
 
 alias gd='git diff'
 alias gdw='git diff -w'
 alias gdn='git diff --name-only'
+alias gds='git diff --staged'
 alias gda='git diff HEAD'
 # For example, gd5=git diff HEAD~5
 for n in $(seq 50); do
@@ -66,6 +68,13 @@ alias gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
 ###############
 # Git Funcion #
 ###############
+
+function git-branch-update() {
+    local branch=$(git rev-parse --abbrev-ref HEAD)
+    git fetch --all
+    git reset --hard ${1:-origin}/$branch
+}
+alias gpu=git-branch-update
 
 function git-pull() {
     local repository=${1:-origin}
