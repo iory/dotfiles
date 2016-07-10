@@ -262,6 +262,11 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
 
+  (load "~/.emacs.d/private/site-lisp/launch-extend.el")
+
+  (global-set-key (kbd "C-<tab>") 'dabbrev-expand)
+  (define-key minibuffer-local-map (kbd "C-<tab>") 'dabbrev-expand)
+
   (defconst *dmacro-key* "\C-o" "繰返し指定キー")
   (load "~/.emacs.d/private/site-lisp/dmacro.el")
   (global-set-key *dmacro-key* 'dmacro-exec)
@@ -295,6 +300,10 @@ you should place you code here."
     (setq interprogram-cut-function 'xsel-cut-function)
     (setq interprogram-paste-function 'xsel-paste-function)
     )
+
+  ;; rosemacs
+  (add-to-list 'load-path "/opt/ros/indigo/share/emacs/site-lisp")
+  (require 'rosemacs-config)
 
   ;; ;; Makefile-mode
   ;; (setq auto-mode-alist
