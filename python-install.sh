@@ -70,6 +70,7 @@ sudo pip install -U ipython
 # pip install -U pyopencv
 # easy_install -U guppy
 # easy_install -U nose
+sudo pip install -U autopep8
 sudo pip install -U dpkt
 sudo pip install -U grip
 sudo pip install -U mahotas

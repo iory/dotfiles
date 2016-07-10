@@ -27,17 +27,23 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo apt-get install -y aptitude
                 sudo apt-get install -y boxes
                 sudo apt-get install -y cmigemo migemo
+                sudo apt-get install -y colordiff
                 sudo apt-get install -y curl
                 sudo apt-get install -y emacs-mozc
                 sudo apt-get install -y global
                 sudo apt-get install -y rlwrap
+                sudo apt-get install -y ruby-dev
                 sudo apt-get install -y silversearcher-ag
                 sudo apt-get install -y source-highlight
                 sudo apt-get install -y ssh
                 sudo apt-get install -y tmux
                 sudo apt-get install -y xsel
                 sudo apt-get install -y zsh
-                sudo apt-get install -y colordiff
+            }
+
+            : "install gem" && {
+                sudo gem install -y travis
+                sudo gem install -y tmuxinator
             }
 
             bash $current_working_directory/scripts/gsettings.sh
