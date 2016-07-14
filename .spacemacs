@@ -302,8 +302,10 @@ you should place you code here."
     )
 
   ;; rosemacs
-  (add-to-list 'load-path "/opt/ros/indigo/share/emacs/site-lisp")
-  (require 'rosemacs-config)
+  (when (file-exists-p "/opt/ros/indigo/share/emacs/site-lisp")
+    (add-to-list 'load-path "/opt/ros/indigo/share/emacs/site-lisp")
+    (require 'rosemacs-config)
+    )
 
   ;; ;; Makefile-mode
   ;; (setq auto-mode-alist
