@@ -50,6 +50,7 @@ values."
      euslisp-mode
      jedi
      jedi-core
+     openwith
      quickrun
      trr
      )
@@ -307,6 +308,33 @@ you should place you code here."
     (add-to-list 'load-path "/opt/ros/indigo/share/emacs/site-lisp")
     (require 'rosemacs-config)
     )
+
+  (when (require 'openwith nil 'noerror)
+    (setq openwith-associations
+          (list
+           (list (openwith-make-extension-regexp
+                  '("mpg" "mpeg" "mp3" "mp4" "m4v"
+                    "avi" "wmv" "wav" "mov" "flv"
+                    "ogm" "ogg" "mkv"))
+                 "vlc"
+                 '(file))
+           (list (openwith-make-extension-regexp
+                  '("xbm" "pbm" "pgm" "ppm" "pnm"
+                    "png" "gif" "bmp" "tif" "jpeg" "jpg"))
+                 "open"
+                 '(file))
+           (list (openwith-make-extension-regexp
+                  '("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
+                 "open"
+                 '(file))
+           '("\\.lyx" "lyx" (file))
+           '("\\.chm" "kchmviewer" (file))
+           (list (openwith-make-extension-regexp
+                  '("pdf" "ps" "ps.gz" "dvi"))
+                 "open"
+                 '(file))
+           ))
+    (openwith-mode 1))
 
   ;; ;; Makefile-mode
   ;; (setq auto-mode-alist
