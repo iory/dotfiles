@@ -26,6 +26,7 @@ values."
      auto-completion
      better-defaults
      c-c++
+     clojure
      python
      eyebrowse
      emacs-lisp
