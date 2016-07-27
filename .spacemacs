@@ -374,7 +374,8 @@ you should place you code here."
   (define-auto-insert "\\.sh$" "sh-template.sh")
 
 
-
+  ;; auto chmod +x
+  (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
   ;; whitespace
   (setq whitespace-style '(face           ; faceで可視化
