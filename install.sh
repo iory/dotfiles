@@ -25,12 +25,15 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             : "install apt package" && {
                 sudo apt-get update
                 sudo apt-get install -y aptitude
+                sudo apt-get install -y ascii
                 sudo apt-get install -y boxes
                 sudo apt-get install -y cmigemo migemo
                 sudo apt-get install -y colordiff
                 sudo apt-get install -y curl
                 sudo apt-get install -y emacs-mozc
                 sudo apt-get install -y global
+                sudo apt-get install -y nodejs
+                sudo apt-get install -y npm
                 sudo apt-get install -y rlwrap
                 sudo apt-get install -y ruby-dev
                 sudo apt-get install -y silversearcher-ag
@@ -39,6 +42,33 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo apt-get install -y tmux
                 sudo apt-get install -y xsel
                 sudo apt-get install -y zsh
+            }
+            : "for CTF" && {
+                sudo apt-get install -y libmono-winforms2.0-cil
+                sudo apt-get install -y unrar
+                sudo apt-get install -y wireshark tshark
+
+                : "install NetworkMiner" && {
+                    wget www.netresec.com/?download=NetworkMiner -O /tmp/nm.zip
+                    sudo unzip /tmp/nm.zip -d /opt/
+                    cd /opt/NetworkMiner*
+                    sudo chmod +x NetworkMiner.exe
+                    sudo chmod -R go+w AssembledFiles/
+                    sudo chmod -R go+w Captures/
+                    sudo apt-get install -y g++-multilib
+                    sudo apt-get install -y lib32stdc++6
+                    sudo apt-get install -y libgtk2.0-0:i386
+                    sudo apt-get install -y libsm6:i386
+                    sudo apt-get install -y libxxf86vm1:i386
+                    sudo apt-get install -y ghex
+                    sudo apt-get install -y scapy
+                    git clone https://github.com/longld/peda.git ~/bin/peda
+                    git clone https://github.com/slimm609/checksec.sh.git ~/bin/checksec.sh
+                    git clone https://github.com/radare/radare2 ~/local/radare2
+                    cd radare2
+                    sudo sys/install.sh
+                    sudo pip install --upgrade git+https://github.com/Gallopsled/pwntools.git
+                }
             }
 
             : "install gem" && {

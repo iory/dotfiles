@@ -4,7 +4,7 @@ set history filename ~/.gdb_history
 set print pretty on
 set print static-members off
 set charset ASCII
-set prompt \001\033[;31mgdb$ \001\033[0m\002
+# set prompt \001\033[;31mgdb$ \001\033[0m\002
 set disassembly-flavor intel
 
 define print_and_go
@@ -12,4 +12,4 @@ define print_and_go
   continue
 end
 
-# source ~/bin/peda/peda.py
+source ~/bin/peda/peda.py
