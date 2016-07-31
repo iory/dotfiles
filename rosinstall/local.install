@@ -1,0 +1,12 @@
+- git:
+    local-name: caffe
+    uri: https://github.com/BVLC/caffe.git
+- git:
+    local-name: chainer
+    uri: https://github.com/pfnet/chainer.git
+- git:
+    local-name: coccigrep
+    uri: https://github.com/regit/coccigrep.git
+- git:
+    local-name: tmux-powerline
+    uri: https://github.com/erikw/tmux-powerline.git

@@ -76,6 +76,13 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo gem install -y tmuxinator
             }
 
+            : "set local install" && {
+                sudo apt-get install -y python-wstool
+                mkdir -p ~/local
+                ln -sf $current_working_directory/rosinstall/local.install ~/local/.rosinstall
+                (cd ~/local && wstool up)
+            }
+
             bash $current_working_directory/scripts/gsettings.sh
 
             gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
