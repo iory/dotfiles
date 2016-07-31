@@ -41,7 +41,7 @@ cleanup () {
 alias ccat='pygmentize -g'
 
 # diff extend
-alias diff='colordiff'
+alias diff='colordiff -y'
 
 # misc
 alias chrome='google-chrome'
