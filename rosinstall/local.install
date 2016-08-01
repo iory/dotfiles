@@ -8,5 +8,17 @@
     local-name: coccigrep
     uri: https://github.com/regit/coccigrep.git
 - git:
+    local-name: libfreenect2
+    uri: https://github.com/OpenKinect/libfreenect2.git
+- git:
+    local-name: opencv
+    uri: https://github.com/Itseez/opencv.git
+- git:
+    local-name: opencv_contrib
+    uri: https://github.com/Itseez/opencv_contrib.git
+- git:
+    local-name: radare2
+    uri: https://github.com/radare/radare2.git
+- git:
     local-name: tmux-powerline
     uri: https://github.com/erikw/tmux-powerline.git
