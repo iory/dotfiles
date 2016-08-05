@@ -27,10 +27,13 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo apt-get install -y aptitude
                 sudo apt-get install -y ascii
                 sudo apt-get install -y boxes
+                # pbzip2 parallel decompress
+                sudo apt-get install -y pbzip2
                 sudo apt-get install -y cmigemo migemo
                 sudo apt-get install -y colordiff
                 sudo apt-get install -y curl
                 sudo apt-get install -y emacs-mozc
+                sudo apt-get install -y gimp
                 sudo apt-get install -y global
                 sudo apt-get install -y nodejs
                 sudo apt-get install -y npm
@@ -45,6 +48,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             }
             : "for CTF" && {
                 sudo apt-get install -y libmono-winforms2.0-cil
+                sudo apt-get install -y nasm
                 sudo apt-get install -y unrar
                 sudo apt-get install -y wireshark tshark
 
