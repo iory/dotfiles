@@ -5,10 +5,10 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 :  "install dotfiles" && {
     case ${OSTYPE} in
         linux*)
-	    # install latest git
-	    sudo add-apt-repository -y ppa:git-core/ppa
-	    sudo apt-get update
-            sudo apt-get install -y git
+            # install latest git
+            sudo add-apt-repository -y ppa:git-core/ppa
+            sudo apt-get update -qq
+            sudo apt-get install -qq -y git
             ;;
     esac
 
@@ -23,34 +23,35 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     case ${OSTYPE} in
         linux*)
             : "install apt package" && {
-                sudo apt-get update
-                sudo apt-get install -y aptitude
-                sudo apt-get install -y ascii
-                sudo apt-get install -y boxes
+                sudo apt-get update -qq
+                sudo apt-get install -qq -y aptitude
+                sudo apt-get install -qq -y ascii
+                sudo apt-get install -qq -y boxes
                 # pbzip2 parallel decompress
-                sudo apt-get install -y pbzip2
-                sudo apt-get install -y cmigemo migemo
-                sudo apt-get install -y colordiff
-                sudo apt-get install -y curl
-                sudo apt-get install -y emacs-mozc
-                sudo apt-get install -y gimp
-                sudo apt-get install -y global
-                sudo apt-get install -y nodejs
-                sudo apt-get install -y npm
-                sudo apt-get install -y rlwrap
-                sudo apt-get install -y ruby-dev
-                sudo apt-get install -y silversearcher-ag
-                sudo apt-get install -y source-highlight
-                sudo apt-get install -y ssh
-                sudo apt-get install -y tmux
-                sudo apt-get install -y xsel
-                sudo apt-get install -y zsh
+                sudo apt-get install -qq -y cmigemo migemo
+                sudo apt-get install -qq -y colordiff
+                sudo apt-get install -qq -y curl
+                sudo apt-get install -qq -y emacs-mozc
+                sudo apt-get install -qq -y gimp
+                sudo apt-get install -qq -y global
+                sudo apt-get install -qq -y nodejs
+                sudo apt-get install -qq -y npm
+                sudo apt-get install -qq -y pbzip2
+                sudo apt-get install -qq -y rlwrap
+                sudo apt-get install -qq -y ruby-dev
+                sudo apt-get install -qq -y silversearcher-ag
+                sudo apt-get install -qq -y source-highlight
+                sudo apt-get install -qq -y ssh
+                sudo apt-get install -qq -y tmux
+                sudo apt-get install -qq -y unar
+                sudo apt-get install -qq -y xsel
+                sudo apt-get install -qq -y zsh
             }
             : "for CTF" && {
-                sudo apt-get install -y libmono-winforms2.0-cil
-                sudo apt-get install -y nasm
-                sudo apt-get install -y unrar
-                sudo apt-get install -y wireshark tshark
+                sudo apt-get install -qq -y libmono-winforms2.0-cil
+                sudo apt-get install -qq -y nasm
+                sudo apt-get install -qq -y unrar
+                sudo apt-get install -qq -y wireshark tshark
 
                 : "install NetworkMiner" && {
                     wget www.netresec.com/?download=NetworkMiner -O /tmp/nm.zip
@@ -59,13 +60,13 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                     sudo chmod +x NetworkMiner.exe
                     sudo chmod -R go+w AssembledFiles/
                     sudo chmod -R go+w Captures/
-                    sudo apt-get install -y g++-multilib
-                    sudo apt-get install -y lib32stdc++6
-                    sudo apt-get install -y libgtk2.0-0:i386
-                    sudo apt-get install -y libsm6:i386
-                    sudo apt-get install -y libxxf86vm1:i386
-                    sudo apt-get install -y ghex
-                    sudo apt-get install -y scapy
+                    sudo apt-get install -qq -y g++-multilib
+                    sudo apt-get install -qq -y lib32stdc++6
+                    sudo apt-get install -qq -y libgtk2.0-0:i386
+                    sudo apt-get install -qq -y libsm6:i386
+                    sudo apt-get install -qq -y libxxf86vm1:i386
+                    sudo apt-get install -qq -y ghex
+                    sudo apt-get install -qq -y scapy
                     git clone https://github.com/longld/peda.git ~/bin/peda
                     git clone https://github.com/slimm609/checksec.sh.git ~/bin/checksec.sh
                     git clone https://github.com/radare/radare2 ~/local/radare2
@@ -81,7 +82,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             }
 
             : "set local install" && {
-                sudo apt-get install -y python-wstool
+                sudo apt-get install -qq -y python-wstool
                 mkdir -p ~/local
                 ln -sf $current_working_directory/rosinstall/local.install ~/local/.rosinstall
                 (cd ~/local && wstool up)
@@ -95,7 +96,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             # gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
 
             # fcitx
-            sudo apt-get install -y fcitx fcitx-mozc
+            sudo apt-get install -qq -y fcitx fcitx-mozc
             gsettings set org.gnome.settings-daemon.plugins.keyboard active false
 
             # change CapsLock as ctrl
@@ -121,19 +122,10 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
         fi;)
 }
 
-: "install emacs 24.5" && {
-    EMACS_VERSION=24.5
-    sudo apt-get install -y build-essential
-    sudo apt-get build-dep -y emacs
-    sudo apt-get install -y libgif-dev
-    (cd ${HOME}/local \
-        && if [ ! -d emacs-${EMACS_VERSION}.tar.xz ]; then
-            wget -O- http://ftp.gnu.org/gnu/emacs/emacs-${EMACS_VERSION}.tar.xz | tar xJf -
-            (cd emacs-${EMACS_VERSION} \
-                    && ./configure \
-                    && make \
-                    && sudo make install;)
-        fi;)
+: "install emacs" && {
+    sudo apt-add-repository -y ppa:ubuntu-elisp/ppa
+    sudo apt-get -qq -y update
+    sudo apt-get install -qq -y emacs-snapshot
     git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d
 }
 
@@ -160,7 +152,8 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             brew install hub
             ;;
         linux*)
-            sudo apt-get install -y ruby2.0
+            mkdir -p ~/bin
+            sudo apt-get install -qq -y ruby2.0
             if [ ! -d ~/bin/hub ]; then
                 curl https://hub.github.com/standalone -sLo ~/bin/hub
             fi

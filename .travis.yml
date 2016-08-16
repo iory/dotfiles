@@ -1,18 +1,18 @@
-language:
-  - python
-notifications:
-  email:
-    recipients:
-      - ab.ioryz@gmail.com
-    on_success: always
-    on_failure: always
-sudo: required
-dist: trusty
+language: c
+os:
+    - linux
+      #- osx
+
 env:
-  matrix:
+  global:
+    - DOTPATH=~/.dotfiles
+
+sudo: true
 install:
-  - sudo apt-get -qq update
-  - sudo ./install.sh
-  - ./python-install.sh
+    - bash install.sh
+
+before_script:
+    - pwd
+
 script:
-  - ipython -c 'import sys; sys.exit()'
+    - make --silent test
