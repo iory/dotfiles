@@ -23,8 +23,7 @@ deploy:
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
 test:
-	@echo 'end'
-	# @DOTPATH=$(DOTPATH) bash $(DOTPATH)/install.sh
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/tests/emacs.sh
 
 update:
 	git pull origin master

@@ -27,7 +27,9 @@ values."
      better-defaults
      c-c++
      clojure
+     go
      python
+     php
      eyebrowse
      emacs-lisp
      git
@@ -52,7 +54,9 @@ values."
      jedi-core
      openwith
      quickrun
+     ssh-config-mode
      trr
+     web-beautify
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -264,115 +268,22 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
 
-  (load "~/.emacs.d/private/site-lisp/launch-extend.el")
+  (setq-default dotspacemacs-themes '(zonokai-red))
 
-  (global-set-key (kbd "C-<tab>") 'dabbrev-expand)
-  (define-key minibuffer-local-map (kbd "C-<tab>") 'dabbrev-expand)
+  ;; eww
+  (setq eww-search-prefix "http://www.google.co.jp/search?q=")
+  (defvar eww-disable-colorize t)
 
-  (defconst *dmacro-key* "\C-o" "繰返し指定キー")
-  (load "~/.emacs.d/private/site-lisp/dmacro.el")
-  (global-set-key *dmacro-key* 'dmacro-exec)
-  (autoload 'dmacro-exec "dmacro" nil t)
-
-  ;; helm
-  (global-set-key (kbd "C-;") 'helm-for-files)
-  (define-key global-map (kbd "C-x b") 'helm-for-files)
-
-
-  ;; jedi
-  (add-hook 'python-mode-hook 'jedi:setup)
-
-  ;; auto-completion
-  (global-auto-complete-mode)
-  (ac-set-trigger-key "TAB")
-
-  ;; avoid "Symbolic link to SVN-controlled source file; follow link? (yes or no)"
-  (setq vc-follow-symlinks t)
-
-  (if (eq system-type 'darwin)
-      (setq x-select-enable-clipboard t)
-    (defun xsel-cut-function (text &optional push)
-      (with-temp-buffer
-        (insert text)
-        (call-process-region (point-min) (point-max) "xsel" nil 0 nil "--clipboard" "--input")))
-    (defun xsel-paste-function()
-      (let ((xsel-output (shell-command-to-string "xsel --clipboard --output")))
-        (unless (string= (car kill-ring) xsel-output)
-          xsel-output )))
-    (setq interprogram-cut-function 'xsel-cut-function)
-    (setq interprogram-paste-function 'xsel-paste-function)
-    )
-
-  ;; rosemacs
-  (when (file-exists-p "/opt/ros/indigo/share/emacs/site-lisp")
-    (add-to-list 'load-path "/opt/ros/indigo/share/emacs/site-lisp")
-    (require 'rosemacs-config)
-    )
-
-  (when (require 'openwith nil 'noerror)
-    (setq openwith-associations
-          (list
-           (list (openwith-make-extension-regexp
-                  '("mpg" "mpeg" "mp3" "mp4" "m4v"
-                    "avi" "wmv" "wav" "mov" "flv"
-                    "ogm" "ogg" "mkv"))
-                 "vlc"
-                 '(file))
-           (list (openwith-make-extension-regexp
-                  '("xbm" "pbm" "pgm" "ppm" "pnm"
-                    "png" "gif" "bmp" "tif" "jpeg" "jpg"))
-                 "open"
-                 '(file))
-           (list (openwith-make-extension-regexp
-                  '("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
-                 "open"
-                 '(file))
-           '("\\.lyx" "lyx" (file))
-           '("\\.chm" "kchmviewer" (file))
-           (list (openwith-make-extension-regexp
-                  '("pdf" "ps" "ps.gz" "dvi"))
-                 "open"
-                 '(file))
-           ))
-    (openwith-mode 1))
-
-  ;; ;; Makefile-mode
-  ;; (setq auto-mode-alist
-  ;;       (append '(("Makefile\\..*$" . makefile-gmake-mode)
-  ;;                 ("Makefile_.*$" . makefile-gmake-mode)
-  ;;                 ) auto-mode-alist))
-  ;; (setq auto-mode-alist
-  ;;       (append
-  ;;        '(("CMakeLists\\.txt\\'" . cmake-mode))
-  ;;        '(("\\.cmake\\'" . cmake-mode))
-  ;;        auto-mode-alist))
-  ;; (setq-default c-basic-offset 4
-  ;;               tab-width 4
-  ;;               indent-tabs-mode nil)
-  ;; ;; yaml
-  ;; (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
-  ;; (define-key yaml-mode-map "\C-m" 'newline-and-indent)
-
-  (setenv "PYTHONPATH" (exec-path-from-shell-copy-env "PYTHONPATH"))
-
-  (setq auto-mode-alist
-        (cons (cons "\\.launch" 'xml-mode) auto-mode-alist))
-  (setq auto-mode-alist
-        (cons (cons "\\.test" 'xml-mode) auto-mode-alist))
-  ;; ;; cfg as python
-  ;; (setq auto-mode-alist
-  ;;       (cons (cons "\\.cfg" 'python-mode) auto-mode-alist))
-
-  (auto-insert-mode)
-  (setq auto-insert-directory "~/.emacs.d/private/insert/")
-  (define-auto-insert "CMakeLists.txt" "cmake-template.txt")
-  (define-auto-insert "\\.c$" "c-template.c")
-  (define-auto-insert "\\.cpp$" "c-plusplus-template.cpp")
-  (define-auto-insert "\\.l$" "euslisp-template.l")
-  (define-auto-insert "\\.launch$" "launch-template.launch")
-  (define-auto-insert "\\.py$" "py-template.py")
-  (define-auto-insert "\\.sh$" "sh-template.sh")
-
+  ;; settings
+  ;; -------------------------------------------------------------------------------------------
+  ;; ssh config mode
+  (autoload 'ssh-config-mode "ssh-config-mode" t)
+  (add-to-list 'auto-mode-alist '("/ssh-config\\'"     . ssh-config-mode))
+  (add-to-list 'auto-mode-alist '("/\\.ssh/config\\'"     . ssh-config-mode))
+  (add-to-list 'auto-mode-alist '("/sshd?_config\\'"      . ssh-config-mode))
+  (add-to-list 'auto-mode-alist '("/known_hosts\\'"       . ssh-known-hosts-mode))
+  (add-to-list 'auto-mode-alist '("/authorized_keys?\\'" . ssh-authorized-keys-mode))
+  (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
 
   ;; auto chmod +x
   (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
@@ -405,7 +316,6 @@ you should place you code here."
 
   (global-whitespace-mode 1)
 
-
   (global-set-key "\C-w" 'kill-region-or-backward-kill-word)
   (global-set-key "\C-h" 'delete-backward-char)
 
@@ -425,30 +335,119 @@ you should place you code here."
 
   (global-set-key (kbd "C-t") 'other-window-or-split)
   (global-set-key (kbd "C-x C-z") 'open-junk-file)
-  (setq-default dotspacemacs-themes '(zonokai-red))
 
-  (add-to-list 'load-path
-               "~/.emacs.d.bak/site-lisp/yasnippet")
-  (require 'yasnippet)
-  (yas-global-mode 1)
-  (setq auto-mode-alist
-        (cons (cons "\\.launch" 'xml-mode) auto-mode-alist))
+  ;; avoid "Symbolic link to SVN-controlled source file; follow link? (yes or no)"
+  (setq vc-follow-symlinks t)
 
+  ;; copy paste settings
+  (if (eq system-type 'darwin)
+      (setq x-select-enable-clipboard t)
+    (defun xsel-cut-function (text &optional push)
+      (with-temp-buffer
+        (insert text)
+        (call-process-region (point-min) (point-max) "xsel" nil 0 nil "--clipboard" "--input")))
+    (defun xsel-paste-function()
+      (let ((xsel-output (shell-command-to-string "xsel --clipboard --output")))
+        (unless (string= (car kill-ring) xsel-output)
+          xsel-output )))
+    (setq interprogram-cut-function 'xsel-cut-function)
+    (setq interprogram-paste-function 'xsel-paste-function)
+    )
+
+  ;; openwith
+  (when (require 'openwith nil 'noerror)
+    (setq openwith-associations
+          (list
+           (list (openwith-make-extension-regexp
+                  '("mpg" "mpeg" "mp3" "mp4" "m4v"
+                    "avi" "wmv" "wav" "mov" "flv"
+                    "ogm" "ogg" "mkv"))
+                 "vlc"
+                 '(file))
+           (list (openwith-make-extension-regexp
+                  '("xbm" "pbm" "pgm" "ppm" "pnm"
+                    "png" "gif" "bmp" "tif" "jpeg" "jpg"))
+                 "open"
+                 '(file))
+           (list (openwith-make-extension-regexp
+                  '("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
+                 "open"
+                 '(file))
+           '("\\.lyx" "lyx" (file))
+           '("\\.chm" "kchmviewer" (file))
+           (list (openwith-make-extension-regexp
+                  '("pdf" "ps" "ps.gz" "dvi"))
+                 "evince"
+                 '(file))
+           ))
+    (openwith-mode 1))
+
+  ;; auto insertion
+  (auto-insert-mode)
+  (setq auto-insert-directory "~/.emacs.d/private/insert/")
+  (define-auto-insert "CMakeLists.txt" "cmake-template.txt")
+  (define-auto-insert "\\.c$" "c-template.c")
+  (define-auto-insert "\\.cpp$" "c-plusplus-template.cpp")
+  (define-auto-insert "\\.l$" "euslisp-template.l")
+  (define-auto-insert "\\.launch$" "launch-template.launch")
+  (define-auto-insert "\\.py$" "py-template.py")
+  (define-auto-insert "\\.sh$" "sh-template.sh")
+
+  ;; auto-completion
+  (global-auto-complete-mode)
+  (ac-set-trigger-key "TAB")
+
+  (global-set-key (kbd "C-<tab>") 'dabbrev-expand)
+  (define-key minibuffer-local-map (kbd "C-<tab>") 'dabbrev-expand)
+
+  ;; helm settings
+  ;; -------------------------------------------------------------------------------------------
+  (global-set-key (kbd "C-;") 'helm-for-files)
+  (define-key global-map (kbd "C-x b") 'helm-for-files)
+
+  ;; C/C++
+  ;; -------------------------------------------------------------------------------------------
   ;; c-mode
   (setq-default c-basic-offset 4
                 tab-width 4
                 indent-tabs-mode nil)
-
-
   ;; C++ style
   (add-hook 'c++-mode-hook
             '(lambda()
                (c-set-offset 'innamespace 0)   ; namespace {}の中はインデントしない
                ))
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; quick run
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; python
+  ;; -------------------------------------------------------------------------------------------
+  ;; jedi
+  (add-hook 'python-mode-hook 'jedi:setup)
+
+  ;; ROS
+  ;; -------------------------------------------------------------------------------------------
+  (setq auto-mode-alist
+        (cons (cons "\\.cfg" 'python-mode) auto-mode-alist))
+  (setq auto-mode-alist
+        (cons (cons "\\.launch" 'xml-mode) auto-mode-alist))
+  (setq auto-mode-alist
+        (cons (cons "\\.test" 'xml-mode) auto-mode-alist))
+
+  ;; Makefile
+  ;; -------------------------------------------------------------------------------------------
+  (setq auto-mode-alist
+        (append '(("Makefile\\..*$" . makefile-gmake-mode)
+                  ("Makefile_.*$" . makefile-gmake-mode)
+                  ) auto-mode-alist))
+
+  ;; CMakeLists
+  ;; -------------------------------------------------------------------------------------------
+  (setq auto-mode-alist
+        (append
+         '(("CMakeLists\\.txt\\'" . cmake-mode))
+         '(("\\.cmake\\'" . cmake-mode))
+         auto-mode-alist))
+
+  ;; quickrun
+  ;; -------------------------------------------------------------------------------------------
   (push '("*quickrun*") popwin:special-display-config)
   (global-set-key (kbd "<f5>") 'quickrun)
   (global-set-key (kbd "C-'") 'quickrun)
@@ -460,32 +459,17 @@ you should place you code here."
                                     "%e %a"))
                           (:remove . ("%e")))
                         :default "c++")
-
   (quickrun-set-default "c++" "c++/clang++")
-
-  (quickrun-add-command "commonlisp"
-                        '((:command . "clisp")
-                          (:exec . ("%c %s")))
-                        :default "commonlisp")
 
   (quickrun-add-command "roseus"
                         '((:command . "roseus")
                           (:exec . ("%c %s")))
-                        :mode 'Euslisp-mode)
-  ;; (quickrun-set-default 'Euslisp "roseus")
-  ;; quickrun/major-mode-alist
+                        :mode 'Euslisp-mode
+                        :default "Euslisp")
+  (quickrun-set-default "Euslisp" "roseus")
 
-  ;; Use this parameter in pod-mode
-  ;; (quickrun-add-command "roseus"
-  ;;                       '((:command . "roseus")
-  ;;                         (:exec    . "%c %s"))
-  ;;                       :mode 'Euslisp
-  ;;                       :override t)
-
-
-  ;;(quickrun-set-default "python" "python3")
-  ;; (quickrun-set-default "lisp" "commonlisp")
-
+  ;; load shellenv
+  ;; -------------------------------------------------------------------------------------------
   (when (file-exists-p "~/.emacs.d/shellenv.el")
     (load "~/.emacs.d/shellenv.el")
     )
@@ -501,10 +485,14 @@ you should place you code here."
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default))))
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
+ '(package-selected-packages
+   (quote
+    (zeal-at-point yaml-mode ws-butler window-numbering web-beautify volatile-highlights vi-tilde-fringe trr toc-org ssh-config-mode spacemacs-theme spaceline powerline smooth-scrolling smeargle restart-emacs rainbow-delimiters quickrun pyvenv pytest pyenv-mode py-yapf popwin pip-requirements phpunit phpcbf php-extras php-auto-yasnippets persp-mode pcre2el page-break-lines orgit org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets openwith open-junk-file neotree move-text mmm-mode markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lorem-ipsum linum-relative leuven-theme jedi jedi-core python-environment epc ctable concurrent deferred info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gtags helm-gitignore request helm-flyspell helm-flx helm-descbinds helm-dash helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gitignore-mode github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht gh-md ggtags flycheck-pos-tip flycheck flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu euslisp-mode elisp-slime-nav drupal-mode php-mode disaster diff-hl define-word cython-mode company-quickhelp pos-tip company-go go-mode company-c-headers company-anaconda company cmake-mode clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight pkg-info clojure-mode epl buffer-move bracketed-paste auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed anaconda-mode pythonic f dash s aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup quelpa package-build use-package which-key bind-key bind-map evil paradox company-statistics clj-refactor hydra inflections edn multiple-cursors paredit cider adaptive-wrap spinner peg queue alect-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
