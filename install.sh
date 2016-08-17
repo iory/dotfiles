@@ -17,7 +17,7 @@ function error {
 
 trap error ERR
 
-current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DOTPATH="~/.dotfiles"
 
 :  "install dotfiles" && {
     case ${OSTYPE} in
@@ -29,7 +29,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             ;;
     esac
 
-    git clone https://github.com/iory/dotfiles.git ~/.dotfiles
+    git clone https://github.com/iory/dotfiles.git $DOTPATH
 }
 
 [ ! -d ${HOME}/local ] && mkdir ${HOME}/local
@@ -99,13 +99,14 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             }
 
             : "set local install" && {
-                sudo pip -q install wstool
+                sudo pip install -U -q --upgrade pip
+                sudo pip install -q wstool
                 mkdir -p ~/local
-                ln -sf $current_working_directory/rosinstall/local.install ~/local/.rosinstall
+                ln -sf $DOTPATH/rosinstall/local.install ~/local/.rosinstall
                 (cd ~/local && wstool up)
             }
 
-            # bash $current_working_directory/scripts/gsettings.sh
+            # bash $DOTPATH/scripts/gsettings.sh
 
             # gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
             # dconf reset /org/gnome/settings-daemon/plugins/keyboard/active
@@ -126,7 +127,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                     && ./install.sh;)
 
             # custom short cut key
-            python $current_working_directory/scripts/set_shortcut.py
+            python $DOTPATH/scripts/set_shortcut.py
             ;;
     esac
 }
@@ -179,7 +180,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 }
 
 : "set zsh" && {
-    ZDOTDIR=$current_working_directory
+    ZDOTDIR=$DOTPATH
     mkdir $ZDOTDIR/zsh/plugins -p
     cd $ZDOTDIR/zsh/plugins -p
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -189,7 +190,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 }
 
 : "symbolic link for dotfiles" && {
-    cd $current_working_directory
+    cd $DOTPATH
     for f in .??*; do
         [[ "$f" == ".git" ]] && continue
         [[ "$f" == ".DS_Store" ]] && continue
@@ -198,12 +199,12 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
         echo "$f"
         ln -sf `pwd`/"$f" ~/"$f"
     done
-    bash $current_working_directory/config/install.sh
+    bash $DOTPATH/config/install.sh
 }
 
 : "ipython settings" && {
     if [ ! -e $HOME/.ipython/profile_default/startup ]; then
         mkdir -p $HOME/.ipython/profile_default/startup
     fi
-    ln -sf $current_working_directory/ipython-settings/00-first.py ~/.ipython/profile_default/startup/00-first.py
+    ln -sf $DOTPATH/ipython-settings/00-first.py ~/.ipython/profile_default/startup/00-first.py
 }
