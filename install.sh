@@ -105,19 +105,19 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 (cd ~/local && wstool up)
             }
 
-            bash $current_working_directory/scripts/gsettings.sh
+            # bash $current_working_directory/scripts/gsettings.sh
 
-            gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
-            dconf reset /org/gnome/settings-daemon/plugins/keyboard/active
-            dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
-            # gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
+            # gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
+            # dconf reset /org/gnome/settings-daemon/plugins/keyboard/active
+            # dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
+            # # gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
 
-            # fcitx
-            sudo apt-get install -qq -y fcitx fcitx-mozc
-            gsettings set org.gnome.settings-daemon.plugins.keyboard active false
+            # # fcitx
+            # sudo apt-get install -qq -y fcitx fcitx-mozc
+            # gsettings set org.gnome.settings-daemon.plugins.keyboard active false
 
-            # change CapsLock as ctrl
-            dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
+            # # change CapsLock as ctrl
+            # dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
 
             # fonts install
             (cd /tmp \
