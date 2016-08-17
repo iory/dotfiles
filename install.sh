@@ -55,7 +55,6 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo apt-get install -qq -y npm
                 sudo apt-get install -qq -y pbzip2
                 sudo apt-get install -qq -y rlwrap
-                sudo apt-get install -qq -y ruby-dev
                 sudo apt-get install -qq -y silversearcher-ag
                 sudo apt-get install -qq -y source-highlight
                 sudo apt-get install -qq -y ssh
@@ -88,8 +87,12 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             }
 
             : "install gem" && {
-                sudo gem install -y travis
-                sudo gem install -y tmuxinator
+                sudo apt-add-repository -y ppa:brightbox/ruby-ng
+                sudo apt-get update -qq -y
+                sudo apt-get install -qq -y ruby2.2
+                sudo apt-get install -qq -y ruby2.2-dev
+                sudo gem install travis
+                sudo gem install tmuxinator
             }
 
             : "set local install" && {
@@ -164,7 +167,6 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             ;;
         linux*)
             mkdir -p ~/bin
-            sudo apt-get install -qq -y ruby2.0
             if [ ! -d ~/bin/hub ]; then
                 curl https://hub.github.com/standalone -sLo ~/bin/hub
             fi
