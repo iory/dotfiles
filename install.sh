@@ -1,4 +1,21 @@
-#!/bin/bash
+#!/bin/bash -e
+
+black-echo() { echo "$(tput setaf 0)$*$(tput setaf 9)"; }
+red-echo() { echo "$(tput setaf 1)$*$(tput setaf 9)"; }
+green-echo() { echo "$(tput setaf 2)$*$(tput setaf 9)"; }
+yellow-echo() { echo "$(tput setaf 3)$*$(tput setaf 9)"; }
+blue-echo() { echo "$(tput setaf 4)$*$(tput setaf 9)"; }
+magenta-echo() { echo "$(tput setaf 5)$*$(tput setaf 9)"; }
+cyan-echo() { echo "$(tput setaf 6)$*$(tput setaf 9)"; }
+white-echo() { echo "$(tput setaf 7)$*$(tput setaf 9)"; }
+
+function error {
+    red-echo "Error occured"
+    trap - ERR
+    exit 1
+}
+
+trap error ERR
 
 current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -31,6 +48,9 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo apt-get install -qq -y cmigemo migemo
                 sudo apt-get install -qq -y colordiff
                 sudo apt-get install -qq -y curl
+                sudo apt-get install -qq -y dconf-cli
+                sudo apt-get install -qq -y dconf-editor
+                sudo apt-get install -qq -y dconf-tools
                 sudo apt-get install -qq -y emacs-mozc
                 sudo apt-get install -qq -y gimp
                 sudo apt-get install -qq -y global
@@ -38,7 +58,6 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo apt-get install -qq -y npm
                 sudo apt-get install -qq -y pbzip2
                 sudo apt-get install -qq -y rlwrap
-                sudo apt-get install -qq -y ruby-dev
                 sudo apt-get install -qq -y silversearcher-ag
                 sudo apt-get install -qq -y source-highlight
                 sudo apt-get install -qq -y ssh
@@ -62,45 +81,43 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                     sudo chmod -R go+w Captures/
                     sudo apt-get install -qq -y g++-multilib
                     sudo apt-get install -qq -y lib32stdc++6
-                    sudo apt-get install -qq -y libgtk2.0-0:i386
-                    sudo apt-get install -qq -y libsm6:i386
-                    sudo apt-get install -qq -y libxxf86vm1:i386
                     sudo apt-get install -qq -y ghex
                     sudo apt-get install -qq -y scapy
                     git clone https://github.com/longld/peda.git ~/bin/peda
                     git clone https://github.com/slimm609/checksec.sh.git ~/bin/checksec.sh
-                    git clone https://github.com/radare/radare2 ~/local/radare2
-                    cd radare2
-                    sudo sys/install.sh
-                    sudo pip install --upgrade git+https://github.com/Gallopsled/pwntools.git
+                    sudo pip -q install --upgrade git+https://github.com/Gallopsled/pwntools.git
                 }
             }
 
             : "install gem" && {
-                sudo gem install -y travis
-                sudo gem install -y tmuxinator
+                sudo apt-add-repository -y ppa:brightbox/ruby-ng
+                sudo apt-get update -qq -y
+                sudo apt-get install -qq -y ruby2.2
+                sudo apt-get install -qq -y ruby2.2-dev
+                sudo gem install travis
+                sudo gem install tmuxinator
             }
 
             : "set local install" && {
-                sudo apt-get install -qq -y python-wstool
+                sudo pip -q install wstool
                 mkdir -p ~/local
                 ln -sf $current_working_directory/rosinstall/local.install ~/local/.rosinstall
                 (cd ~/local && wstool up)
             }
 
-            bash $current_working_directory/scripts/gsettings.sh
+            # bash $current_working_directory/scripts/gsettings.sh
 
-            gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
-            dconf reset /org/gnome/settings-daemon/plugins/keyboard/active
-            dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
-            # gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
+            # gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
+            # dconf reset /org/gnome/settings-daemon/plugins/keyboard/active
+            # dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
+            # # gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
 
-            # fcitx
-            sudo apt-get install -qq -y fcitx fcitx-mozc
-            gsettings set org.gnome.settings-daemon.plugins.keyboard active false
+            # # fcitx
+            # sudo apt-get install -qq -y fcitx fcitx-mozc
+            # gsettings set org.gnome.settings-daemon.plugins.keyboard active false
 
-            # change CapsLock as ctrl
-            dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
+            # # change CapsLock as ctrl
+            # dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
 
             # fonts install
             (cd /tmp \
@@ -153,7 +170,6 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             ;;
         linux*)
             mkdir -p ~/bin
-            sudo apt-get install -qq -y ruby2.0
             if [ ! -d ~/bin/hub ]; then
                 curl https://hub.github.com/standalone -sLo ~/bin/hub
             fi
@@ -168,8 +184,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     cd $ZDOTDIR/zsh/plugins -p
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
-    wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O- | sudo bash
-    bash $current_working_directory/.zsh/install.sh
+    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
     sudo chsh -s `which zsh`
 }
 
