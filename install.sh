@@ -79,16 +79,10 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                     sudo chmod -R go+w Captures/
                     sudo apt-get install -qq -y g++-multilib
                     sudo apt-get install -qq -y lib32stdc++6
-                    sudo apt-get install -qq -y libgtk2.0-0:i386
-                    sudo apt-get install -qq -y libsm6:i386
-                    sudo apt-get install -qq -y libxxf86vm1:i386
                     sudo apt-get install -qq -y ghex
                     sudo apt-get install -qq -y scapy
                     git clone https://github.com/longld/peda.git ~/bin/peda
                     git clone https://github.com/slimm609/checksec.sh.git ~/bin/checksec.sh
-                    git clone https://github.com/radare/radare2 ~/local/radare2
-                    cd radare2
-                    sudo sys/install.sh
                     sudo pip install --upgrade git+https://github.com/Gallopsled/pwntools.git
                 }
             }
