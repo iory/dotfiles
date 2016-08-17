@@ -99,7 +99,8 @@ DOTPATH="~/.dotfiles"
             }
 
             : "set local install" && {
-                sudo pip -q install wstool
+                sudo pip install -U -q --upgrade pip
+                sudo pip install -q wstool
                 mkdir -p ~/local
                 ln -sf $DOTPATH/rosinstall/local.install ~/local/.rosinstall
                 (cd ~/local && wstool up)
