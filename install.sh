@@ -82,7 +82,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                     sudo apt-get install -qq -y scapy
                     git clone https://github.com/longld/peda.git ~/bin/peda
                     git clone https://github.com/slimm609/checksec.sh.git ~/bin/checksec.sh
-                    sudo pip install --upgrade git+https://github.com/Gallopsled/pwntools.git
+                    sudo pip -q install --upgrade git+https://github.com/Gallopsled/pwntools.git
                 }
             }
 
@@ -96,7 +96,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             }
 
             : "set local install" && {
-                sudo apt-get install -qq -y python-wstool
+                sudo pip -q install wstool
                 mkdir -p ~/local
                 ln -sf $current_working_directory/rosinstall/local.install ~/local/.rosinstall
                 (cd ~/local && wstool up)
