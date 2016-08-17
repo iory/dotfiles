@@ -184,8 +184,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     cd $ZDOTDIR/zsh/plugins -p
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
-    wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O- | sudo bash
-    bash $current_working_directory/.zsh/install.sh
+    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
     sudo chsh -s `which zsh`
 }
 
