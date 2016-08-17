@@ -1,4 +1,21 @@
-#!/bin/bash
+#!/bin/bash -e
+
+black-echo() { echo "$(tput setaf 0)$*$(tput setaf 9)"; }
+red-echo() { echo "$(tput setaf 1)$*$(tput setaf 9)"; }
+green-echo() { echo "$(tput setaf 2)$*$(tput setaf 9)"; }
+yellow-echo() { echo "$(tput setaf 3)$*$(tput setaf 9)"; }
+blue-echo() { echo "$(tput setaf 4)$*$(tput setaf 9)"; }
+magenta-echo() { echo "$(tput setaf 5)$*$(tput setaf 9)"; }
+cyan-echo() { echo "$(tput setaf 6)$*$(tput setaf 9)"; }
+white-echo() { echo "$(tput setaf 7)$*$(tput setaf 9)"; }
+
+function error {
+    red-echo "Error occured"
+    trap - ERR
+    exit 1
+}
+
+trap error ERR
 
 current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
