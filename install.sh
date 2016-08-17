@@ -48,6 +48,9 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo apt-get install -qq -y cmigemo migemo
                 sudo apt-get install -qq -y colordiff
                 sudo apt-get install -qq -y curl
+                sudo apt-get install -qq -y dconf-cli
+                sudo apt-get install -qq -y dconf-editor
+                sudo apt-get install -qq -y dconf-tools
                 sudo apt-get install -qq -y emacs-mozc
                 sudo apt-get install -qq -y gimp
                 sudo apt-get install -qq -y global
