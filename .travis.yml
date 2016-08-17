@@ -8,6 +8,7 @@ env:
     - DOTPATH=~/.dotfiles
 
 sudo: true
+dist: trusty
 install:
     - bash install.sh
 
