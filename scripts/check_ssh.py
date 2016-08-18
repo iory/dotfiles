@@ -7,7 +7,7 @@ import sys
 try:
     from colorama import Fore, Style
 except:
-    print "Please install colorama by pip install coloram"
+    print "Please install colorama by pip install colorama"
     sys.exit(1)
 
 if not os.path.exists(os.path.expanduser("~/.ssh")):
