@@ -105,6 +105,9 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 (cd ~/local && wstool up)
             }
 
+            # ssh settings
+            sudo sed -i 's/[# ]*PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+
             # bash $current_working_directory/scripts/gsettings.sh
 
             # gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
