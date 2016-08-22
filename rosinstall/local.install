@@ -20,5 +20,8 @@
     local-name: radare2
     uri: https://github.com/radare/radare2.git
 - git:
+    local-name: rtags
+    uri: https://github.com/Andersbakken/rtags
+- git:
     local-name: tmux-powerline
     uri: https://github.com/erikw/tmux-powerline.git

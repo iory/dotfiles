@@ -27,6 +27,7 @@ values."
      better-defaults
      c-c++
      clojure
+     company-mode
      go
      python
      php
@@ -50,10 +51,16 @@ values."
    dotspacemacs-additional-packages
    '(
      euslisp-mode
+     irony ;; c++
+     irony-eldoc ;; c++
+     company-irony ;; c++
+     cmake-ide ;; c++
+     flycheck-irony ;; c+
      jedi
      jedi-core
      openwith
      quickrun
+     rtags ;; c++
      ssh-config-mode
      trr
      web-beautify
@@ -393,6 +400,16 @@ you should place you code here."
   (define-auto-insert "\\.py$" "py-template.py")
   (define-auto-insert "\\.sh$" "sh-template.sh")
 
+  (when (locate-library "company")
+    (global-company-mode 1)
+    (global-set-key (kbd "C-M-i") 'company-complete)
+    ;; (setq company-idle-delay nil) ;; disable auto completion
+    (define-key company-active-map (kbd "C-n") 'company-select-next)
+    (define-key company-active-map (kbd "C-p") 'company-select-previous)
+    (define-key company-search-map (kbd "C-n") 'company-select-next)
+    (define-key company-search-map (kbd "C-p") 'company-select-previous)
+    (define-key company-active-map (kbd "<tab>") 'company-complete-selection))
+
   ;; auto-completion
   (global-auto-complete-mode)
   (ac-set-trigger-key "TAB")
@@ -416,6 +433,12 @@ you should place you code here."
             '(lambda()
                (c-set-offset 'innamespace 0)   ; namespace {}の中はインデントしない
                ))
+
+  (eval-after-load "flycheck"
+    '(progn
+       (when (locate-library "flycheck-irony")
+         (flycheck-irony-setup))))
+  (rtags-enable-standard-keybindings c-mode-base-map)
 
   ;; python
   ;; -------------------------------------------------------------------------------------------

@@ -45,6 +45,8 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo apt-get install -qq -y ascii
                 sudo apt-get install -qq -y boxes
                 # pbzip2 parallel decompress
+                sudo apt-get install -qq -y clang-3.6
+                sudo apt-get install -qq -y libclang-3.6-dev
                 sudo apt-get install -qq -y cmigemo migemo
                 sudo apt-get install -qq -y colordiff
                 sudo apt-get install -qq -y curl
@@ -98,13 +100,6 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo gem install tmuxinator
             }
 
-            : "set local install" && {
-                sudo pip -q install wstool
-                mkdir -p ~/local
-                ln -sf $current_working_directory/rosinstall/local.install ~/local/.rosinstall
-                (cd ~/local && wstool up)
-            }
-
             # ssh settings
             sudo sed -i 's/[# ]*PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
 
@@ -140,13 +135,6 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             wget https://github.com/peco/peco/releases/download/v0.1.12/peco_linux_amd64.tar.gz
             tar -C ${HOME}/local -xzf peco_linux_amd64.tar.gz
         fi;)
-}
-
-: "install emacs" && {
-    sudo apt-add-repository -y ppa:ubuntu-elisp/ppa
-    sudo apt-get -qq -y update
-    sudo apt-get install -qq -y emacs-snapshot
-    git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d
 }
 
 : "vim install" && {
@@ -202,6 +190,25 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
         ln -sf `pwd`/"$f" ~/"$f"
     done
     bash $current_working_directory/config/install.sh
+}
+
+: "install emacs" && {
+    sudo apt-add-repository -y ppa:ubuntu-elisp/ppa
+    sudo apt-get -qq -y update
+    sudo apt-get install -qq -y emacs-snapshot
+    git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d
+    emacs-snapshot -nw -batch -u "${UNAME}" 2>/dev/null
+}
+
+: "set local install" && {
+    sudo pip -q install wstool
+    mkdir -p ~/local
+    ln -sf $current_working_directory/rosinstall/local.install ~/local/.rosinstall
+    (cd ~/local && wstool up)
+    # rtags install
+    (mkdir -p ~/local/rtags/build && cd ~/local/rtags/build && \
+         LIBCLANG_LLVM_CONFIG_EXECUTABLE=/usr/lib/llvm-3.6/bin/llvm-config cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
+         make && sudo make install)
 }
 
 : "ipython settings" && {
