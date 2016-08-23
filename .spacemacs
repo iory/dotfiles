@@ -292,6 +292,12 @@ you should place you code here."
   (add-to-list 'auto-mode-alist '("/authorized_keys?\\'" . ssh-authorized-keys-mode))
   (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
 
+  (defun server-restart ()
+    (interactive)
+    (server-force-delete)
+    (server-start)
+    )
+
   ;; auto chmod +x
   (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
