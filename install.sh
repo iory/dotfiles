@@ -29,7 +29,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             ;;
     esac
 
-    git clone https://github.com/iory/dotfiles.git ~/.dotfiles
+    [ ! -d ${HOME}/.dotfiles ] && git clone https://github.com/iory/dotfiles.git ~/.dotfiles
 }
 
 [ ! -d ${HOME}/local ] && mkdir ${HOME}/local
@@ -85,8 +85,8 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                     sudo apt-get install -qq -y lib32stdc++6
                     sudo apt-get install -qq -y ghex
                     sudo apt-get install -qq -y scapy
-                    git clone https://github.com/longld/peda.git ~/bin/peda
-                    git clone https://github.com/slimm609/checksec.sh.git ~/bin/checksec.sh
+                    [ ! -d ~/bin/peda ] && git clone https://github.com/longld/peda.git ~/bin/peda
+                    [ ! -d ~/bin/checksec.sh ] && git clone https://github.com/slimm609/checksec.sh.git ~/bin/checksec.sh
                     sudo pip -q install --upgrade git+https://github.com/Gallopsled/pwntools.git
                 }
             }
@@ -121,7 +121,8 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
             (cd /tmp \
                     && git clone https://github.com/powerline/fonts.git \
                     && cd fonts \
-                    && ./install.sh;)
+                    && ./install.sh \
+                    && rm -rf /tmp/fonts)
 
             # custom short cut key
             python $current_working_directory/scripts/set_shortcut.py
@@ -173,9 +174,9 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     ZDOTDIR=$current_working_directory
     mkdir $ZDOTDIR/zsh/plugins -p
     cd $ZDOTDIR/zsh/plugins -p
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+    [ ! -d zsh-syntax-highlighting ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
-    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    [ ! -d ~/.oh-my-zsh ] && git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
     sudo chsh -s `which zsh`
 }
 
@@ -196,7 +197,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     sudo apt-add-repository -y ppa:ubuntu-elisp/ppa
     sudo apt-get -qq -y update
     sudo apt-get install -qq -y emacs-snapshot
-    git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d
+    [ ! -d ~/.emacs.d ] && git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d
     emacs-snapshot -nw -batch -u "${UNAME}" 2>/dev/null
 }
 
