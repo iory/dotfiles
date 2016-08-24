@@ -406,6 +406,7 @@ you should place you code here."
   (define-auto-insert "\\.py$" "py-template.py")
   (define-auto-insert "\\.sh$" "sh-template.sh")
 
+  ;; company
   (when (locate-library "company")
     (global-company-mode 1)
     (global-set-key (kbd "C-M-i") 'company-complete)
@@ -414,7 +415,9 @@ you should place you code here."
     (define-key company-active-map (kbd "C-p") 'company-select-previous)
     (define-key company-search-map (kbd "C-n") 'company-select-next)
     (define-key company-search-map (kbd "C-p") 'company-select-previous)
-    (define-key company-active-map (kbd "<tab>") 'company-complete-selection))
+    (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+    (define-key company-active-map (kbd "C-i") 'company-complete-selection)
+    (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete))
 
   ;; auto-completion
   (global-auto-complete-mode)
