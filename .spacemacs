@@ -50,6 +50,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     demo-it
      euslisp-mode
      irony ;; c++
      irony-eldoc ;; c++
@@ -394,6 +395,30 @@ you should place you code here."
                  '(file))
            ))
     (openwith-mode 1))
+
+  ;; org-mode
+  ;; -------------------------------------------------------------------------------------------
+  (require 'org)
+  (setq org-directory "~/org")
+  (setq org-capture-templates
+        '(("m" "Memo" entry (file+headline "memo.org" "Memo")
+           "** %U%?\n%i\n")))
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (global-set-key
+   (kbd "<f6>")
+   (lambda () (interactive) (find-file "~/org/daily-projects.org")))
+
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-agenda-span 30)
+  (setq org-agenda-files '("~/org/inbox.org" "~/org/daily-projects.org"))
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (setq org-agenda-custom-commands
+        '(("a" "Agenda and all TODO's"
+           ((tags "project-CLOCK=>\"<today>\"|repeatable") (agenda "") (alltodo)))))
+  (defun org-agenda-default ()
+    (interactive)
+    (org-agenda nil "a"))
+  (global-set-key (kbd "<f6>") 'org-agenda-default)
 
   ;; auto insertion
   (auto-insert-mode)
