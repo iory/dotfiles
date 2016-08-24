@@ -56,6 +56,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo apt-get install -qq -y emacs-mozc
                 sudo apt-get install -qq -y gimp
                 sudo apt-get install -qq -y global
+                sudo apt-get install -qq -y geeqie
                 sudo apt-get install -qq -y nodejs
                 sudo apt-get install -qq -y npm
                 sudo apt-get install -qq -y pbzip2
