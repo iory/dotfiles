@@ -384,7 +384,7 @@ you should place you code here."
                  '(file))
            (list (openwith-make-extension-regexp
                   '("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
-                 "open"
+                 "libreoffice"
                  '(file))
            '("\\.lyx" "lyx" (file))
            '("\\.chm" "kchmviewer" (file))
