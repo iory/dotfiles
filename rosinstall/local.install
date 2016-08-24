@@ -11,6 +11,9 @@
     local-name: libfreenect2
     uri: https://github.com/OpenKinect/libfreenect2.git
 - git:
+    local-name: melpa
+    uri: https://github.com/melpa/melpa.git
+- git:
     local-name: opencv
     uri: https://github.com/Itseez/opencv.git
 - git:
