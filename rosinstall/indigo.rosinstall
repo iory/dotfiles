@@ -1,1 +1,112 @@
-/home/iory/ros/indigo/src.rosinstall
+- git:
+    local-name: face_recognition
+    uri: https://github.com/procrob/face_recognition.git
+- git:
+    local-name: jsk-ros-pkg/euslib
+    uri: https://github.com/jsk-ros-pkg/euslib.git
+- git:
+    local-name: jsk-ros-pkg/jsk-ros-pkg-unreleased
+    uri: https://github.com/jsk-ros-pkg/jsk-ros-pkg-unreleased.git
+- git:
+    local-name: jsk-ros-pkg/jsk_3rdparty
+    uri: https://github.com/jsk-ros-pkg/jsk_3rdparty.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_common
+    uri: https://github.com/jsk-ros-pkg/jsk_common.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_common_msgs
+    uri: https://github.com/jsk-ros-pkg/jsk_common_msgs.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_control
+    uri: https://github.com/jsk-ros-pkg/jsk_control.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_demos
+    uri: https://github.com/jsk-ros-pkg/jsk_demos.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_model_tools
+    uri: https://github.com/jsk-ros-pkg/jsk_model_tools.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_openni_kinect
+    uri: https://github.com/jsk-ros-pkg/jsk_openni_kinect.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_planning
+    uri: https://github.com/jsk-ros-pkg/jsk_planning.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_pr2eus
+    uri: https://github.com/jsk-ros-pkg/jsk_pr2eus.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_recognition
+    uri: https://github.com/jsk-ros-pkg/jsk_recognition.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_robot
+    uri: https://github.com/jsk-ros-pkg/jsk_robot.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_roseus
+    uri: https://github.com/jsk-ros-pkg/jsk_roseus.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_smart_apps
+    uri: https://github.com/jsk-ros-pkg/jsk_smart_apps.git
+    version: master
+- git:
+    local-name: jsk-ros-pkg/jsk_visualization
+    uri: https://github.com/jsk-ros-pkg/jsk_visualization.git
+    version: master
+- git:
+    local-name: multimaster_experimental
+    uri: https://github.com/willowgarage/multimaster_experimental.git
+- hg:
+    local-name: multisense
+    uri: https://bitbucket.org/crl/multisense_ros
+- git:
+    local-name: roboticsgroup/roboticsgroup_gazebo_plugins
+    uri: https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins.git
+- git:
+    local-name: ros-planning/moveit_robots
+    uri: https://github.com/ros-planning/moveit_robots.git
+- git:
+    local-name: roswww
+    uri: https://github.com/tork-a/roswww.git
+- git:
+    local-name: rtm-ros-robotics/rtmros_common
+    uri: https://github.com/start-jsk/rtmros_common.git
+- git:
+    local-name: rtm-ros-robotics/rtmros_gazebo
+    uri: https://github.com/start-jsk/rtmros_gazebo.git
+- git:
+    local-name: rtm-ros-robotics/rtmros_hironx
+    uri: https://github.com/start-jsk/rtmros_hironx.git
+- git:
+    local-name: rtm-ros-robotics/rtmros_hrp2
+    uri: https://github.com/start-jsk/rtmros_hrp2.git
+- git:
+    local-name: rtm-ros-robotics/rtmros_nextage
+    uri: https://github.com/tork-a/rtmros_nextage.git
+- git:
+    local-name: rtm-ros-robotics/rtmros_tutorials
+    uri: https://github.com/start-jsk/rtmros_tutorials.git
+- git:
+    local-name: rwt_ros
+    uri: https://github.com/tork-a/rwt_ros.git
+- git:
+    local-name: snap_map_icp
+    uri: https://github.com/code-iai/snap_map_icp.git
+    version: hydro-devel
+- git:
+    local-name: view_controller_msgs
+    uri: https://github.com/ros-visualization/view_controller_msgs.git
+    version: hydro-devel
+- git:
+    local-name: visualization_rwt
+    uri: https://github.com/tork-a/visualization_rwt.git
