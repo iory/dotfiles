@@ -11,8 +11,8 @@ sudo apt-get install -y python-rosinstall
 sudo apt-get install -y python-catkin-tools
 
 mkdir -p ~/ros/indigo/src ~/ros/indigo_parent/src
-cp ~/.dotfiles/indigo_parent.rosinstall ~/ros/indigo_parent/src/.rosinstall
-cp ~/.dotfiles/indigo.rosinstall ~/ros/indigo/src/.rosinstall
+cp ~/.dotfiles/rosinstall/indigo_parent.rosinstall ~/ros/indigo_parent/src/.rosinstall
+cp ~/.dotfiles/rosinstall/indigo.rosinstall ~/ros/indigo/src/.rosinstall
 cd ~/ros/indigo_parent/src
 wstool up
 cd ~/ros/indigo/src
