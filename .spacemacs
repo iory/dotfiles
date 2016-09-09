@@ -50,6 +50,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     demo-it
      euslisp-mode
      irony ;; c++
      irony-eldoc ;; c++
@@ -380,11 +381,11 @@ you should place you code here."
            (list (openwith-make-extension-regexp
                   '("xbm" "pbm" "pgm" "ppm" "pnm"
                     "png" "gif" "bmp" "tif" "jpeg" "jpg"))
-                 "open"
+                 "geeqie"
                  '(file))
            (list (openwith-make-extension-regexp
                   '("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
-                 "open"
+                 "libreoffice"
                  '(file))
            '("\\.lyx" "lyx" (file))
            '("\\.chm" "kchmviewer" (file))
@@ -394,6 +395,30 @@ you should place you code here."
                  '(file))
            ))
     (openwith-mode 1))
+
+  ;; org-mode
+  ;; -------------------------------------------------------------------------------------------
+  (require 'org)
+  (setq org-directory "~/org")
+  (setq org-capture-templates
+        '(("m" "Memo" entry (file+headline "memo.org" "Memo")
+           "** %U%?\n%i\n")))
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (global-set-key
+   (kbd "<f6>")
+   (lambda () (interactive) (find-file "~/org/daily-projects.org")))
+
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-agenda-span 30)
+  (setq org-agenda-files '("~/org/inbox.org" "~/org/daily-projects.org"))
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (setq org-agenda-custom-commands
+        '(("a" "Agenda and all TODO's"
+           ((tags "project-CLOCK=>\"<today>\"|repeatable") (agenda "") (alltodo)))))
+  (defun org-agenda-default ()
+    (interactive)
+    (org-agenda nil "a"))
+  (global-set-key (kbd "<f6>") 'org-agenda-default)
 
   ;; auto insertion
   (auto-insert-mode)
@@ -406,6 +431,7 @@ you should place you code here."
   (define-auto-insert "\\.py$" "py-template.py")
   (define-auto-insert "\\.sh$" "sh-template.sh")
 
+  ;; company
   (when (locate-library "company")
     (global-company-mode 1)
     (global-set-key (kbd "C-M-i") 'company-complete)
@@ -414,7 +440,9 @@ you should place you code here."
     (define-key company-active-map (kbd "C-p") 'company-select-previous)
     (define-key company-search-map (kbd "C-n") 'company-select-next)
     (define-key company-search-map (kbd "C-p") 'company-select-previous)
-    (define-key company-active-map (kbd "<tab>") 'company-complete-selection))
+    (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+    (define-key company-active-map (kbd "C-i") 'company-complete-selection)
+    (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete))
 
   ;; auto-completion
   (global-auto-complete-mode)

@@ -56,6 +56,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo apt-get install -qq -y emacs-mozc
                 sudo apt-get install -qq -y gimp
                 sudo apt-get install -qq -y global
+                sudo apt-get install -qq -y geeqie
                 sudo apt-get install -qq -y nodejs
                 sudo apt-get install -qq -y npm
                 sudo apt-get install -qq -y pbzip2
@@ -207,6 +208,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     ln -sf $current_working_directory/rosinstall/local.install ~/local/.rosinstall
     (cd ~/local && wstool up)
     # rtags install
+    sudo apt-get install -qq -y liblua5.1-0-dev
     (mkdir -p ~/local/rtags/build && cd ~/local/rtags/build && \
          LIBCLANG_LLVM_CONFIG_EXECUTABLE=/usr/lib/llvm-3.6/bin/llvm-config cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
          make && sudo make install)
