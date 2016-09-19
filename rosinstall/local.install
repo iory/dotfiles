@@ -8,6 +8,18 @@
     local-name: coccigrep
     uri: https://github.com/regit/coccigrep.git
 - git:
+    local-name: cpp/cmdline
+    uri: https://github.com/tanakh/cmdline.git
+- git:
+    local-name: cpp/opencv_utils
+    uri: https://github.com/iory/opencv_utils.git
+- git:
+    local-name: cpp/random
+    uri: https://github.com/iory/random.git
+- git:
+    local-name: cpp/stopwatch
+    uri: https://github.com/iory/stopwatch.git
+- git:
     local-name: libfreenect2
     uri: https://github.com/OpenKinect/libfreenect2.git
 - git:
