@@ -15,3 +15,6 @@ fonts
 /plugins
 /private
 /zsh
+
+# for ros
+*.bag

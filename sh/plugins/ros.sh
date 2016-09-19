@@ -81,14 +81,36 @@ if [ -d "/opt/ros" ]; then
 fi
 
 # wstool
-alias wl=wstool
-alias wli='wstool info -s'
-alias wlcd='wstool_cd'
-alias wlset='wstool set'
-alias wlup='wstool update'
-alias wllist='wstool info --only=localname'
-wlsethub () {
+alias ws=wstool
+alias wsi='wstool info -s'
+alias wscd='wstool_cd'
+alias wsset='wstool set'
+alias wsup='wstool update'
+alias wsrm='wstool remove'
+alias wslist='wstool info --only=localname'
+wssethub () {
     wstool set $1 https://github.com/$1.git --git
+}
+wsg () {
+    if [ "$1" = "" ]; then
+        exit 1
+    fi
+    USER_REPO=$(echo "$1" | sed -e 's/https:\/\/github.com\///g' | sed -e 's/git@github.com\///g')
+    USER=$(echo $USER_REPO | sed -e "s/\// /g" | awk '{print $1}')
+    REPOSITORY=$(echo $USER_REPO | sed -e "s/\// /g" | awk '{print $2}')
+    if [ "$REPOSITORY" = "" ]; then
+        REPOSITORY="$USER"
+        wstool set $REPOSITORY https://github.com/$REPOSITORY --git -y -u
+    else
+        wstool set $REPOSITORY https://github.com/$USER/$REPOSITORY --git -y -u
+    fi
+    if [ $TMP -eq 1 ]; then
+        echo "Removing"
+        wstool remove $REPOSITORY
+    elif [ $TMP -eq 2 ]; then
+        echo "Update"
+        wstool up $REPOSITORY
+    fi
 }
 
 # catkin-tools
