@@ -88,6 +88,7 @@ esac
 
 # for c++
 alias methashell='rlwrap -c methashell'
+export CPLUS_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOME/local/cpp/cmdline:$HOME/local/cpp/opencv_utils:$HOME/local/cpp/stopwatch:$HOME/local/random
 
 # for gdb
 alias gdb='gdb -q'
