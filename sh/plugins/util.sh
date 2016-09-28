@@ -6,6 +6,11 @@ alias ..2="cd ../.."
 alias ..3="cd ../../.."
 alias ..4="cd ../../../../"
 alias ..5="cd ../../../../.."
+alias dc='cd'
+mcd() {
+    mkdir -p $1
+    cd $1
+}
 
 # ls extend
 alias l='ls -CF'
@@ -14,6 +19,18 @@ alias ll='ls -alF'
 alias lsf='ls -F'
 alias sl="ls"
 alias ls="ls --color=always"
+
+# mkdir extend
+alias mkdir='mkdir -p'
+
+## set some other defaults ##
+alias df='df -H'
+alias du='du -ch'
+
+alias ps="ps auxf"
+alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+
+alias cpwd='pwd | pbcopy'
 
 if [ -n "$ZSH_VERSION" ]; then
     # grep extend
@@ -92,6 +109,12 @@ export CPLUS_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOME/local/cpp/cmdline:$HOME/local/
 
 # for gdb
 alias gdb='gdb -q'
+if [ "$EMACS" ]; then
+    # pass
+    :
+else
+    alias gdb='rlwrap -c gdb'
+fi
 
 # for haskell
 if [ -x "`which stack`" ]; then
@@ -114,3 +137,37 @@ export PYTHONSTARTUP=~/.pythonstartup
 alias py='ipython --no-confirm-exit'
 alias ipy='ipython --no-confirm-exit'
 alias ipython='ipython --no-confirm-exit'
+
+# function Extract for common file formats
+# from https://github.com/xvoland/Extract
+
+function extract {
+ if [ -z "$1" ]; then
+    # display usage if no parameters given
+    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+ else
+    if [ -f "$1" ] ; then
+        local nameInLowerCase=`echo "$1" | awk '{print tolower($0)}'`
+        case "$nameInLowerCase" in
+          *.tar.bz2)   tar xvjf ./"$1"    ;;
+          *.tar.gz)    tar xvzf ./"$1"    ;;
+          *.tar.xz)    tar xvJf ./"$1"    ;;
+          *.lzma)      unlzma ./"$1"      ;;
+          *.bz2)       bunzip2 ./"$1"     ;;
+          *.rar)       unrar x -ad ./"$1" ;;
+          *.gz)        gunzip ./"$1"      ;;
+          *.tar)       tar xvf ./"$1"     ;;
+          *.tbz2)      tar xvjf ./"$1"    ;;
+          *.tgz)       tar xvzf ./"$1"    ;;
+          *.zip)       unzip ./"$1"       ;;
+          *.Z)         uncompress ./"$1"  ;;
+          *.7z)        7z x ./"$1"        ;;
+          *.xz)        unxz ./"$1"        ;;
+          *.exe)       cabextract ./"$1"  ;;
+          *)           echo "extract: '$1' - unknown archive method" ;;
+        esac
+    else
+        echo "'$1' - file does not exist"
+    fi
+ fi
+}
