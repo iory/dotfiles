@@ -6,6 +6,11 @@ alias ..2="cd ../.."
 alias ..3="cd ../../.."
 alias ..4="cd ../../../../"
 alias ..5="cd ../../../../.."
+alias dc='cd'
+mcd() {
+    mkdir -p $1
+    cd $1
+}
 
 # ls extend
 alias l='ls -CF'
@@ -14,6 +19,18 @@ alias ll='ls -alF'
 alias lsf='ls -F'
 alias sl="ls"
 alias ls="ls --color=always"
+
+# mkdir extend
+alias mkdir='mkdir -p'
+
+## set some other defaults ##
+alias df='df -H'
+alias du='du -ch'
+
+alias ps="ps auxf"
+alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+
+alias cpwd='pwd | pbcopy'
 
 if [ -n "$ZSH_VERSION" ]; then
     # grep extend
@@ -92,6 +109,12 @@ export CPLUS_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOME/local/cpp/cmdline:$HOME/local/
 
 # for gdb
 alias gdb='gdb -q'
+if [ "$EMACS" ]; then
+    # pass
+    :
+else
+    alias gdb='rlwrap -c gdb'
+fi
 
 # for haskell
 if [ -x "`which stack`" ]; then
