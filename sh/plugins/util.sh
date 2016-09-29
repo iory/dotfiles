@@ -171,3 +171,6 @@ function extract {
     fi
  fi
 }
+
+# for opencv
+alias fcv='python -c "import cv2; print(\"\n\".join([item for item in dir(cv2)]))" | grep'
