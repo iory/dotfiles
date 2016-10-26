@@ -12,6 +12,8 @@ mcd() {
     cd $1
 }
 
+alias tmp='cd /tmp'
+
 # ls extend
 alias l='ls -CF'
 alias la='ls -A'
@@ -44,8 +46,19 @@ fi
 alias ggrep='grep --color=always --with-filename --line-number'
 
 # less extend
-export LESS='-R'
+# export LESS='-i -M -R'
+export LESS='-i -M -R -S -W -z-4 -x4'
 alias less='less -R'
+
+# colorize man
+export PAGER=less
+export LESS_TERMCAP_mb=$'\E[01;31m'      # Begins blinking.
+export LESS_TERMCAP_md=$'\E[01;31m'      # Begins bold.
+export LESS_TERMCAP_me=$'\E[0m'          # Ends mode.
+export LESS_TERMCAP_se=$'\E[0m'          # Ends standout-mode.
+export LESS_TERMCAP_so=$'\E[00;47;30m'   # Begins standout-mode.
+export LESS_TERMCAP_ue=$'\E[0m'          # Ends underline.
+export LESS_TERMCAP_us=$'\E[01;32m'      # Begins underline.
 
 # rmdir extend
 # cleanup empty dir
@@ -105,7 +118,7 @@ esac
 
 # for c++
 alias methashell='rlwrap -c methashell'
-export CPLUS_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOME/local/cpp/cmdline:$HOME/local/cpp/opencv_utils:$HOME/local/cpp/stopwatch:$HOME/local/random
+export CPLUS_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOME/local/cpp/cmdline:$HOME/local/cpp/opencv_utils:$HOME/local/cpp/stopwatch:$HOME/local/cpp/random:$HOME/local/cpp/pycpp
 
 # for gdb
 alias gdb='gdb -q'
@@ -137,6 +150,13 @@ export PYTHONSTARTUP=~/.pythonstartup
 alias py='ipython --no-confirm-exit'
 alias ipy='ipython --no-confirm-exit'
 alias ipython='ipython --no-confirm-exit'
+
+# video to gif
+function video2gif {
+    mkdir -p frames
+    ffmpeg -i $1 -r 5 'frames/frame-%03d.jpg'
+    convert -delay 20 -loop 0 frames/*.jpg $1.gif
+}
 
 # function Extract for common file formats
 # from https://github.com/xvoland/Extract

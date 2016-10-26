@@ -77,6 +77,7 @@ if [ -d "/opt/ros" ]; then
     # nodelet
     alias nodelet_standalone='rosrun nodelet nodelet standalone'
 
+    alias tf='cd /tmp && rosrun tf view_frames && evince frames.pdf &'
     alias tf_view='rosrun tf view_frames'
 fi
 
