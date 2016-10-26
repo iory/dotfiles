@@ -45,6 +45,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
                 sudo apt-get install -qq -y ascii
                 sudo apt-get install -qq -y boxes
                 # pbzip2 parallel decompress
+                sudo apt-get install -qq -y ccze
                 sudo apt-get install -qq -y clang-3.6
                 sudo apt-get install -qq -y libclang-3.6-dev
                 sudo apt-get install -qq -y cmigemo migemo
@@ -137,8 +138,8 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 : "install for peco" && {
     (cd ${HOME}/local/src \
         && if [ ! -d peco_linux_amd64 ]; then
-            wget https://github.com/peco/peco/releases/download/v0.1.12/peco_linux_amd64.tar.gz
-            tar -C ${HOME}/local -xzf peco_linux_amd64.tar.gz
+         wget https://github.com/peco/peco/releases/download/v0.4.4/peco_linux_amd64.tar.gz
+         tar -C ${HOME}/local -xzf peco_linux_amd64.tar.gz
         fi;)
 }
 
