@@ -53,6 +53,7 @@ for n in $(seq 50); do
     alias gd$n="git diff HEAD~$n"
     alias gdn$n="git diff --name-only HEAD~$n"
 done
+alias first-commit='(git init && git commit --allow-empty -m "First commit")'
 
 # alias gs='git status'
 alias gs='echo ""; echo "*********************************************"; echo -e "   DO NOT FORGET TO PULL BEFORE COMMITTING"; echo "*********************************************"; echo ""; git status'
