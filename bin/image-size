@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+from __future__ import division, print_function, absolute_import, unicode_literals
+
+import argparse
+import sys
+import os
+import subprocess
+
+
+arg_fmt = argparse.RawTextHelpFormatter
+parser = argparse.ArgumentParser(formatter_class=arg_fmt)
+parser.add_argument("filepath", metavar='P', type=str, nargs='+',
+                    help='select file.')
+parser.add_argument('-r', '--recursive', dest='recursive', action='store_const',
+                    const=True, default=False,
+                    help='recursive check')
+parser.add_argument('--format',
+                      help='file format such that jpg, png, etc...')
+args = parser.parse_args(sys.argv[1:])
+
+image_format = ('jpg', 'png', 'jpeg', 'JPEG')
+
+def image_check_directory(directory_path, recursive=False):
+    if not os.path.isdir(directory_path):
+        if filepath.endswith(image_format):
+            cmd = "identify {}".format(filepath)
+            ret  =  subprocess.check_output(cmd.split(" "))
+        return
+    for filepath in os.listdir(directory_path):
+        absolute_filepath = os.path.join(directory_path, filepath)
+        if os.path.isdir(absolute_filepath):
+            image_check_directory(absolute_filepath, recursive=recursive)
+        elif os.path.isfile(absolute_filepath):
+            if filepath.endswith(image_format):
+                cmd = "identify {}".format(absolute_filepath)
+                ret  =  subprocess.check_output(cmd.split(" "))
+                print(ret, end='')
+
+for filepath in args.filepath:
+    image_check_directory(filepath, recursive=args.recursive)
