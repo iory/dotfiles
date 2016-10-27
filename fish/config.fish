@@ -1,8 +1,4 @@
 . ~/.dotfiles/rosfish
-. ~/.config/fish/plugins/emacs.fish
-. ~/.config/fish/plugins/git.fish
-. ~/.config/fish/plugins/util.fish
-. ~/.config/fish/plugins/ros.fish
 
 if test -e ~/.fishrc.local
     . ~/.fishrc.local
