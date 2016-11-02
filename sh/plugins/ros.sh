@@ -114,6 +114,16 @@ wsg () {
     fi
 }
 
+# bag file
+function bag2csv() {
+    if [ "$3" = "" ]; then
+        CSV_FILENAME=$(echo $1 | sed 's/\.[^\.]*$//')".csv"
+    else
+        CSV_FILENAME=$3
+    fi
+    rostopic echo -b $1 -p $2 > $CSV_FILENAME
+}
+
 # catkin-tools
 alias c='catkin'
 alias cb='catkin build'
