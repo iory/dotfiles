@@ -304,6 +304,9 @@ you should place you code here."
     (server-start)
     )
 
+  ;; Enable C-h on minibuffer
+  (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
+
   ;; auto chmod +x
   (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
