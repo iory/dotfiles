@@ -1726,6 +1726,7 @@ ros::wait-for-service
 ros::service-call
 ros::time-now
 ros::roseus
+ros::get-name
 ros::get-param
 ros::has-param
 ros::roseus-add-msgs
