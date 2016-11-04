@@ -50,17 +50,17 @@ SwitchKey=Disabled
 # ALT_SUPER
 #IMSwitchHotkey=CTRL_SHIFT
 # Reload configuration
-#ReloadConfig=CTRL_5
+ReloadConfig=CTRL_ALT_SHIFT_R
 # Interval of Two Key Input
 #TimeInterval=250
 # Switching Virtual Keyboard
-#VKSwitchKey=CTRL_ALT_B
+VKSwitchKey=
 # Switching Remind Mode
 #RemindSwitchKey=
 # Switching Full Width Character Mode
 #FullWidthSwitchKey=
 # Switch Full Width Punc Mode
-#PuncSwitchKey=CTRL_.
+PuncSwitchKey=
 # Prev Page
 #PrevPageKey=- UP
 # Next Page
@@ -72,9 +72,9 @@ SwitchKey=Disabled
 # Switch Embeded Preedit
 SwitchPreedit=
 # Previous Candidate Word
-PrevWord=CTRL_P
+PrevWord= ALT_K
 # Next Candidate Word
-NextWord=CTRL_N
+NextWord= ALT_J
 
 [Program]
 # Seconds sleep before fcitx really start
