@@ -319,6 +319,14 @@ you should place you code here."
          (add-hook 'focus-in-hook
                    '(lambda () (shell-command "fcitx-remote -c")))
          )
+        ((eq system-type 'darwin)
+         (when (fboundp 'mac-auto-ascii-mode)
+           (mac-auto-ascii-mode 1))
+         (add-hook 'evil-normal-state-entry-hook
+                   '(lambda () (mac-select-input-source "com.google.inputmethod.Japanese.Roman")))
+         (add-hook 'focus-in-hook
+                   '(lambda () (mac-select-input-source "com.google.inputmethod.Japanese.Roman")))
+         )
         )
 
   ;; whitespace
