@@ -57,6 +57,7 @@ values."
    '(
      demo-it
      euslisp-mode
+     fcitx
      irony ;; c++
      irony-eldoc ;; c++
      company-irony ;; c++
@@ -309,6 +310,16 @@ you should place you code here."
 
   ;; auto chmod +x
   (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
+  (cond ((eq system-type 'gnu/linux)
+         (add-hook 'evil-normal-state-entry-hook
+                   '(lambda ()
+                      (if (string= "2\n" (shell-command-to-string "fcitx-remote"))
+                          (shell-command "fcitx-remote -c"))))
+         (add-hook 'focus-in-hook
+                   '(lambda () (shell-command "fcitx-remote -c")))
+         )
+        )
 
   ;; whitespace
   (setq whitespace-style '(face           ; faceで可視化
