@@ -140,6 +140,9 @@ function imv() {
     rosrun image_view image_view image:=$1
 }
 
+function rosshell() {
+    emacs-snapshot -nw --eval '(progn (shell) (rename-buffer "*roseus*") (auto-complete-mode) (spacemacs/toggle-smartparens-on) (delete-other-windows) (insert "\\roseus") (comint-send-input) (comint-send-input))'
+}
 if [ "$EMACS" ]; then
     :
 else
