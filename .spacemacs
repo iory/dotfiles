@@ -475,9 +475,6 @@ you should place you code here."
   (global-auto-complete-mode)
   (ac-set-trigger-key "TAB")
 
-  (global-set-key (kbd "C-<tab>") 'dabbrev-expand)
-  (define-key minibuffer-local-map (kbd "C-<tab>") 'dabbrev-expand)
-
   ;; helm settings
   ;; -------------------------------------------------------------------------------------------
   (global-set-key (kbd "C-;") 'helm-for-files)
