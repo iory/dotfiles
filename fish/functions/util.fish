@@ -84,7 +84,9 @@ alias pbcopy='xsel --clipboard --input'
 export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
 
 # xmodmap
-xmodmap ~/.xmodmaprc
+if test -e ~/.xmodmaprc
+   xmodmap ~/.xmodmaprc
+end
 
 # # for c++
 # alias methashell='rlwrap -c methashell'
