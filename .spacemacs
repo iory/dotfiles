@@ -48,6 +48,7 @@ values."
      syntax-checking
      version-control
      japanese
+     (spell-checking :variables spell-checking-enable-by-default nil)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -526,6 +527,9 @@ you should place you code here."
          '(("CMakeLists\\.txt\\'" . cmake-mode))
          '(("\\.cmake\\'" . cmake-mode))
          auto-mode-alist))
+
+  (global-set-key (kbd "C-;") 'er/expand-region)
+  (global-set-key (kbd "C-M-;") 'er/expand-region)
 
   ;; quickrun
   ;; -------------------------------------------------------------------------------------------
