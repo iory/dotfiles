@@ -518,6 +518,10 @@ you should place you code here."
     (define-key company-active-map (kbd "C-i") 'company-complete-selection)
     (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete))
 
+  ;; anzu
+  (global-set-key [remap query-replace] 'anzu-query-replace)
+  (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+
   ;; auto-completion
   (global-auto-complete-mode)
   (ac-set-trigger-key "TAB")
