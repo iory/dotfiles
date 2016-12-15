@@ -56,6 +56,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     ace-jump-mode
      demo-it
      euslisp-mode
      fcitx
@@ -306,6 +307,14 @@ you should place you code here."
     (server-force-delete)
     (server-start)
     )
+
+  (setq ace-jump-mode-move-keys
+        (append "asdfghjkl;[]qwertyuiop'zxcvbnm,./" nil))
+  ;; (setq ace-jump-mode-move-keys
+  ;;       (append "hjkl;'uiop[]nm,." nil)) ;; left-hand only-mode
+  (define-key evil-normal-state-map (kbd "L") #'evil-ace-jump-line-mode)
+  (define-key evil-normal-state-map (kbd "m") #'evil-ace-jump-char-mode)
+  (define-key evil-normal-state-map (kbd "M") #'evil-ace-jump-word-mode)
 
   ;; highlight-symbol
   (setq highlight-symbol-idle-delay 1.0)
