@@ -72,6 +72,7 @@ values."
      ssh-config-mode
      trr
      web-beautify
+     highlight-symbol
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -305,6 +306,12 @@ you should place you code here."
     (server-force-delete)
     (server-start)
     )
+
+  ;; highlight-symbol
+  (setq highlight-symbol-idle-delay 1.0)
+  (add-hook 'prog-mode-hook 'highlight-symbol-mode)
+  (add-hook 'prog-mode-hook 'highlight-symbol-nav-mode)
+  (global-set-key (kbd "M-s M-r") 'highlight-symbol-query-replace)
 
   ;; Enable C-h on minibuffer
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
