@@ -317,12 +317,6 @@ you should place you code here."
   (define-key evil-normal-state-map (kbd "m") #'evil-ace-jump-char-mode)
   (define-key evil-normal-state-map (kbd "M") #'evil-ace-jump-word-mode)
 
-  ;; highlight-symbol
-  (setq highlight-symbol-idle-delay 1.0)
-  (add-hook 'prog-mode-hook 'highlight-symbol-mode)
-  (add-hook 'prog-mode-hook 'highlight-symbol-nav-mode)
-  (global-set-key (kbd "M-s M-r") 'highlight-symbol-query-replace)
-
   ;; Enable C-h on minibuffer
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
 
@@ -603,12 +597,31 @@ you should place you code here."
                         :default "Euslisp")
   (quickrun-set-default "Euslisp" "roseus")
 
+  ;; highlight-symbol
+  (add-hook 'prog-mode-hook 'highlight-symbol-mode)
+  (add-hook 'prog-mode-hook 'highlight-symbol-nav-mode)
+  (global-set-key (kbd "M-s M-r") 'highlight-symbol-query-replace)
+  ;; (global-set-key (kbd "M-l") 'highlight-symbol-at-point)
+  (global-set-key (kbd "M-l") 'highlight-symbol)
+  (global-set-key (kbd "M-]") 'highlight-symbol-remove-all)
+  (add-hook 'highlight-symbol-hook
+            'evil-normal-state)
+  (add-hook 'highlight-symbol-jump-hook
+            'evil-normal-state)
+  (setq highlight-symbol-idle-delay 0.7)
+  (setq highlight-symbol-colors
+        '("GreenYellow" "chartreuse4" "gold1" "red1" "cyan" "RoyalBlue" "PaleGreen"))
+  (setq highlight-symbol-foreground-color "black")
+  (setq highlight-symbol-at-point highlight-symbol)
+
+  ;; disable highlight current line
+  (global-hl-line-mode -1)
+
   ;; load shellenv
   ;; -------------------------------------------------------------------------------------------
   (when (file-exists-p "~/.emacs.d/shellenv.el")
     (load "~/.emacs.d/shellenv.el")
     )
-
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
