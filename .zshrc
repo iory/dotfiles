@@ -44,6 +44,9 @@ function up() { cpath=./; for i in `seq 1 1 $1`; do cpath=$cpath../; done; cd $c
 # zsh highlight
 source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# zsh auto-suggestion
+source ~/.dotfiles/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 zstyle ':chpwd:*' recent-dirs-max 5000
