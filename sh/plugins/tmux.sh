@@ -55,6 +55,8 @@ function tmux_automatically_attach_session()
     export TMUX_POWERLINE_SEG_WEATHER_LOCATION="26237038"
 }
 
+alias tmxu='tmux'
+
 if [ "$EMACS" ]; then
     # pass
     :
