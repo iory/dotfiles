@@ -296,3 +296,4 @@ noremap <C-j> <esc>
 noremap! <C-j> <esc>
 
 set number
+inoremap <special> fd <ESC>
