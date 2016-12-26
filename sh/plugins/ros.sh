@@ -178,6 +178,9 @@ case ${OSTYPE} in
             source `catkin locate --shell-verbs`
             source `rospack find jsk_tools`/src/${CURRENT_SHELL}rc.ros
             rossetip
+
+            alias cs='catkin source'
+            alias cso='source /opt/ros/indigo/setup.$CURRENT_SHELL'
         fi
         ;;
     darwin*)
