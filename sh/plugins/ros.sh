@@ -167,20 +167,17 @@ case ${OSTYPE} in
                 14.04)
                     if [ -e /opt/ros/indigo/setup.${CURRENT_SHELL} ]; then
                         source /opt/ros/indigo/setup.${CURRENT_SHELL}
-                        source `catkin locate --shell-verbs`
-                        source `rospack find jsk_tools`/src/${CURRENT_SHELL}rc.ros
-                        rossetip
                     fi
                     ;;
                 12.04)
                     if [ -e /opt/ros/indigo/setup.${CURRENT_SHELL} ]; then
                         source /opt/ros/indigo/setup.${CURRENT_SHELL}
-                        source `catkin locate --shell-verbs`
-                        source `rospack find jsk_tools`/src/${CURRENT_SHELL}rc.ros
-                        rossetip
                     fi
                     ;;
             esac
+            source `catkin locate --shell-verbs`
+            source `rospack find jsk_tools`/src/${CURRENT_SHELL}rc.ros
+            rossetip
         fi
         ;;
     darwin*)
