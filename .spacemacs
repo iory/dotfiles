@@ -557,8 +557,8 @@ you should place you code here."
          '(("\\.cmake\\'" . cmake-mode))
          auto-mode-alist))
 
-  (global-set-key (kbd "C-;") 'er/expand-region)
-  (global-set-key (kbd "C-M-;") 'er/expand-region)
+  (global-set-key (kbd "C-l") 'er/expand-region)
+  (global-set-key (kbd "C-M-l") 'er/expand-region)
 
   ;; quickrun
   ;; -------------------------------------------------------------------------------------------
