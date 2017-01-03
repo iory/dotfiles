@@ -586,9 +586,8 @@ you should place you code here."
   (add-hook 'prog-mode-hook 'highlight-symbol-mode)
   (add-hook 'prog-mode-hook 'highlight-symbol-nav-mode)
   (global-set-key (kbd "M-s M-r") 'highlight-symbol-query-replace)
-  ;; (global-set-key (kbd "M-l") 'highlight-symbol-at-point)
-  (global-set-key (kbd "M-l") 'highlight-symbol)
-  (global-set-key (kbd "M-]") 'highlight-symbol-remove-all)
+  (global-set-key (kbd "M-l") 'highlight-symbol-at-point)
+  (global-set-key (kbd "M-[") 'highlight-symbol-remove-all)
   (add-hook 'highlight-symbol-hook
             'evil-normal-state)
   (add-hook 'highlight-symbol-jump-hook
@@ -597,7 +596,6 @@ you should place you code here."
   (setq highlight-symbol-colors
         '("GreenYellow" "chartreuse4" "gold1" "red1" "cyan" "RoyalBlue" "PaleGreen"))
   (setq highlight-symbol-foreground-color "black")
-  (setq highlight-symbol-at-point highlight-symbol)
 
   ;; disable highlight current line
   (global-hl-line-mode -1)
