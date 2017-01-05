@@ -157,7 +157,7 @@ alias ipython='ipython --no-confirm-exit'
 # video to gif
 function video2gif {
     mkdir -p frames
-    ffmpeg -i $1 -r 5 'frames/frame-%03d.jpg'
+    ffmpeg -i $1 -r $2 'frames/frame-%03d.jpg'
     convert -delay 20 -loop 0 frames/*.jpg $1.gif
 }
 
