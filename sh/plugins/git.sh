@@ -25,6 +25,7 @@ alias gbD='git branch -D'
 alias gba='git branch -a'
 alias gcm='git commit -m'
 alias gca="git commit --amend"
+alias gcmh='git commit -m "hoge"'
 alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gcom='git checkout master'
@@ -64,6 +65,9 @@ alias gstd='git stash drop'
 
 alias gr='git remote -v'
 alias grv='git remote -v'
+
+alias gf='git fetch'
+alias gfa='git fetch --all'
 
 alias gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
 
