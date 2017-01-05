@@ -24,6 +24,7 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
+     auto-insert
      better-defaults
      c-c++
      clojure
@@ -486,16 +487,6 @@ you should place you code here."
     (org-agenda nil "a"))
   (global-set-key (kbd "<f6>") 'org-agenda-default)
 
-  ;; auto insertion
-  (auto-insert-mode)
-  (setq auto-insert-directory "~/.emacs.d/private/insert/")
-  (define-auto-insert "CMakeLists.txt" "cmake-template.txt")
-  (define-auto-insert "\\.c$" "c-template.c")
-  (define-auto-insert "\\.cpp$" "c-plusplus-template.cpp")
-  (define-auto-insert "\\.l$" "euslisp-template.l")
-  (define-auto-insert "\\.launch$" "launch-template.launch")
-  (define-auto-insert "\\.py$" "py-template.py")
-  (define-auto-insert "\\.sh$" "sh-template.sh")
 
   (when (locate-library "company")
     (global-company-mode 1)
