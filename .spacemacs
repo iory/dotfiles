@@ -549,10 +549,6 @@ you should place you code here."
   ;; -------------------------------------------------------------------------------------------
   (setq auto-mode-alist
         (cons (cons "\\.cfg" 'python-mode) auto-mode-alist))
-  (setq auto-mode-alist
-        (cons (cons "\\.launch" 'xml-mode) auto-mode-alist))
-  (setq auto-mode-alist
-        (cons (cons "\\.test" 'xml-mode) auto-mode-alist))
 
   ;; Makefile
   ;; -------------------------------------------------------------------------------------------
