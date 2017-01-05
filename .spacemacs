@@ -57,6 +57,7 @@ values."
    '(
      ace-jump-mode
      demo-it
+     dockerfile-mode
      euslisp-mode
      fcitx
      irony ;; c++
