@@ -309,6 +309,17 @@ you should place you code here."
     (server-start)
     )
 
+  ;; dired
+  (setq dired-dwim-target t)
+  (setq dired-recursive-copies 'always)
+  (setq dired-isearch-filenames t)
+  (add-to-list 'dired-compress-file-suffixes '("\\.zip\\'" ".zip" "unzip"))
+  (setq dired-listing-switches (purecopy "-Ahl"))
+  (add-hook 'dired-load-hook (lambda ()
+                               (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)))
+
+
+
   (setq ace-jump-mode-move-keys
         (append "asdfghjkl;[]qwertyuiop'zxcvbnm,./" nil))
   ;; (setq ace-jump-mode-move-keys
