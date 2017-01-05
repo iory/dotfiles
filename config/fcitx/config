@@ -1,6 +1,6 @@
 [Hotkey]
 # Trigger Input Method
-TriggerKey=SUPER_SPACE
+TriggerKey=CTRL_\
 # Use extra trigger key only after using it to inactivate
 # Available Value:
 # True False
@@ -72,9 +72,9 @@ PuncSwitchKey=
 # Switch Embeded Preedit
 SwitchPreedit=
 # Previous Candidate Word
-PrevWord= ALT_K
+PrevWord=ALT_K
 # Next Candidate Word
-NextWord= ALT_J
+NextWord=ALT_J
 
 [Program]
 # Seconds sleep before fcitx really start
