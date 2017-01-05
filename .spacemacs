@@ -27,12 +27,10 @@ values."
      better-defaults
      c-c++
      clojure
-     company-mode
      elpy
      go
      python
      php
-     eyebrowse
      emacs-lisp
      git
      github
@@ -498,7 +496,6 @@ you should place you code here."
   (define-auto-insert "\\.py$" "py-template.py")
   (define-auto-insert "\\.sh$" "sh-template.sh")
 
-  ;; company
   (when (locate-library "company")
     (global-company-mode 1)
     (global-set-key (kbd "C-M-i") 'company-complete)
