@@ -32,10 +32,17 @@ import mahotas as mh
 import matplotlib.pyplot as plt
 import mahotas as mh
 
+import chainer
+import chainer.functions as F
+import chainer.links as L
+
 def pbcopy(text):
     if not isinstance(str, text):
         text = str(text)
     pyperclip.copy(text)
+
+def mem(obj):
+    return hex(id(obj))
 
 print("type()    -> analyze type of objects.")
 print("see()     -> extend dir().")
