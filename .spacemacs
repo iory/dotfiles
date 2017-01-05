@@ -28,6 +28,7 @@ values."
      c-c++
      clojure
      company-mode
+     elpy
      go
      python
      php
