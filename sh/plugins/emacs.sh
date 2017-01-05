@@ -1,12 +1,16 @@
 #!/bin/bash -eu
 
-# setting default editor
-alias emacs='emacs-snapshot'
-export EDITOR="emacs"
-
-export EDITOR="emacsclient"
 alias emacs-shell='emacs -nw -q -f shell'
-function emacsclient_ () {
-    emacsclient -a "" $1 &
+
+function ecd {
+    local cmd="(let ((buf-name (buffer-file-name (window-buffer))))
+                     (if buf-name (file-name-directory buf-name)))"
+
+    local dir="$($EMACS_PLUGIN_LAUNCHER --eval $cmd | tr -d \")"
+    if [ -n "$dir" ] ;then
+        cd "$dir"
+    else
+        echo "can not deduce current buffer filename." >/dev/stderr
+        return 1
+    fi
 }
-alias e='emacsclient_'

@@ -143,7 +143,7 @@ function imv() {
 function rosshell() {
     emacs-snapshot -nw --eval '(progn (shell) (rename-buffer "*roseus*") (auto-complete-mode) (spacemacs/toggle-smartparens-on) (delete-other-windows) (insert "\\roseus") (comint-send-input) (comint-send-input))'
 }
-if [ "$EMACS" ]; then
+if [ "$INSIDE_EMACS" ]; then
     :
 else
     alias roseus="rlwrap -c -b '(){}.,;|' -a -pGREEN roseus"

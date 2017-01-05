@@ -57,8 +57,7 @@ function tmux_automatically_attach_session()
 
 alias tmxu='tmux'
 
-if [ "$EMACS" ]; then
-    # pass
+if [ "$INSIDE_EMACS" ]; then
     :
 else
     tmux_automatically_attach_session

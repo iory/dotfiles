@@ -1,3 +1,8 @@
+# for emacs on terminal settings
+# http://dqn.sakusakutto.jp/2014/10/emacs_shell_iterm2_zsh.html
+# oh-my-zsh
+export DISABLE_AUTO_TITLE="true"
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
@@ -41,11 +46,15 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 setopt nobeep
 function up() { cpath=./; for i in `seq 1 1 $1`; do cpath=$cpath../; done; cd $cpath; }
 
-# zsh highlight
-source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# zsh auto-suggestion
-source ~/.dotfiles/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ "$INSIDE_EMACS" ]; then
+    :
+else
+    # zsh highlight
+    source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    # zsh auto-suggestion
+    source ~/.dotfiles/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
+fi
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
@@ -57,14 +66,10 @@ zstyle ':filter-select' case-insensitive yes
 # bindkey '^X^P' zaw-process
 # bindkey '^X^B' zaw-git-branches
 
-# export PATH
+# emacs plugin
+source $HOME/.oh-my-zsh/plugins/emacs/emacs.plugin.zsh
+
 export PATH=$PATH:$HOME/bin/tools/bin:$HOME/.emacs.d/bin
-
-
-# for emacs on terminal settings
-# http://dqn.sakusakutto.jp/2014/10/emacs_shell_iterm2_zsh.html
-# oh-my-zsh
-DISABLE_AUTO_TITLE="true"
 
 # add python path
 export PYTHONPATH=/usr/local/Cellar/opencv3/3.0.0/lib/python3.4/site-packages:$PYTHONPATH
