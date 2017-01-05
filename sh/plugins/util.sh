@@ -149,6 +149,9 @@ fi
 export PYTHONSTARTUP=~/.pythonstartup
 alias py='ipython --no-confirm-exit'
 alias ipy='ipython --no-confirm-exit'
+alias ipyt='ipython --no-confirm-exit'
+alias ipyth='ipython --no-confirm-exit'
+alias ipytho='ipython --no-confirm-exit'
 alias ipython='ipython --no-confirm-exit'
 
 # video to gif
