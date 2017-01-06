@@ -350,6 +350,11 @@ you should place you code here."
                    '(lambda () (mac-select-input-source "com.google.inputmethod.Japanese.Roman")))
          (add-hook 'focus-in-hook
                    '(lambda () (mac-select-input-source "com.google.inputmethod.Japanese.Roman")))
+
+         ;; change command to alt key
+         (when (eq system-type 'darwin)
+           (setq ns-command-modifier (quote meta)))
+
          )
         )
 
