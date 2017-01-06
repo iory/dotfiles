@@ -20,6 +20,12 @@
     local-name: cpp/stopwatch
     uri: https://github.com/iory/stopwatch.git
 - git:
+    local-name: fonts
+    uri: https://github.com/powerline/fonts.git
+- git:
+    local-name: iTerm2-Color-Schemes
+    uri: https://github.com/mbadolato/iTerm2-Color-Schemes.git
+- git:
     local-name: libfreenect2
     uri: https://github.com/OpenKinect/libfreenect2.git
 - git:
