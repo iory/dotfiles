@@ -47,7 +47,6 @@ values."
      shell-scripts
      syntax-checking
      version-control
-     japanese
      (spell-checking :variables spell-checking-enable-by-default nil)
      )
    ;; List of additional packages that will be installed without being
