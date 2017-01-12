@@ -68,6 +68,7 @@ values."
      flycheck-irony ;; c+
      jedi
      jedi-core
+     launch-mode
      openwith
      quickrun
      rtags ;; c++
@@ -492,6 +493,21 @@ you should place you code here."
     (org-agenda nil "a"))
   (global-set-key (kbd "<f6>") 'org-agenda-default)
 
+  (defun launch-enable-keymap (&optional prefix)
+    "Setup standard keybindings for the ros-launch file"
+    (interactive)
+    (if prefix
+        (unless (string-match " $" prefix)
+          (setq prefix (concat prefix " ")))
+      (setq prefix "C-c r")
+      )
+    (define-key launch-mode-map (kbd (concat prefix ",")) 'launch-insert-node-name)
+    (define-key launch-mode-map (kbd (concat prefix ".")) 'launch-goto-include-launch)
+    (define-key launch-mode-map (kbd (concat prefix "[")) 'launch-location-stack-forward)
+    (define-key launch-mode-map (kbd (concat prefix "]")) 'launch-location-stack-back)
+    (define-key launch-mode-map (kbd "C-.") 'launch-goto-include-launch)
+    )
+  (add-hook 'launch-mode-hook 'launch-enable-keymap)
 
   (when (locate-library "company")
     (global-company-mode 1)
