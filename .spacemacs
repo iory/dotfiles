@@ -78,6 +78,7 @@ values."
      trr
      web-beautify
      highlight-symbol
+     milkode
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -490,6 +491,9 @@ you should place you code here."
            )
          )
         )
+
+  ;; milkode
+  (global-set-key (kbd "M-g s") 'milkode:search)
 
   ;; org-mode
   ;; -------------------------------------------------------------------------------------------
