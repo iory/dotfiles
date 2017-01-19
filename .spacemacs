@@ -437,15 +437,6 @@ you should place you code here."
         (browse-url (parse-url url))
         (message "opening repo %s" url))))
 
-
-  (defun magit-open-repo ()
-    "open remote repo URL"
-    (interactive)
-    (let ((url (magit-get "remote" "origin" "url")))
-      (progn
-        (browser-url (parser-url url))
-        (message "opening repo %s" url))))
-
   (add-hook 'magit-mode-hook
             (lambda ()
               (local-set-key (kbd "o") 'magit-open-repo)))
