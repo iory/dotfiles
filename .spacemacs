@@ -348,6 +348,7 @@ you should place you code here."
                    '(lambda () (shell-command "fcitx-remote -c")))
          )
         ((eq system-type 'darwin)
+         (setq browse-url-browser-function 'browse-url-default-macosx-browser)
          (when (fboundp 'mac-auto-ascii-mode)
            (mac-auto-ascii-mode 1))
          (add-hook 'evil-normal-state-entry-hook
