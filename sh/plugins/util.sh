@@ -87,7 +87,9 @@ case ${OSTYPE} in
         alias o='gnome-open'
         alias open='gnome-open'
         alias pbcopy='xsel --clipboard --input'
-        export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
+        if [ -f /usr/share/source-highlight/src-hilite-lesspipe.sh ]; then
+           export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
+        fi
 
         # xmodmap
         if [ "$PS1" ]; then
