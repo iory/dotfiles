@@ -90,14 +90,6 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     bash $current_working_directory/config/install.sh
 }
 
-: "install emacs" && {
-    sudo apt-add-repository -y ppa:ubuntu-elisp/ppa
-    sudo apt-get -qq -y update
-    sudo apt-get install -qq -y emacs-snapshot
-    [ ! -d ~/.emacs.d ] && git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d
-    emacs-snapshot -nw -batch -u "${UNAME}" 2>/dev/null
-}
-
 : "ipython settings" && {
     if [ ! -e $HOME/.ipython/profile_default/startup ]; then
         mkdir -p $HOME/.ipython/profile_default/startup
