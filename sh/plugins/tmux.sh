@@ -57,7 +57,7 @@ function tmux_automatically_attach_session()
 
 alias tmxu='tmux'
 
-if [ "$INSIDE_EMACS" -o "$SSH_CONNECTION"]; then
+if [ "$INSIDE_EMACS" -o "$SSH_CONNECTION" ]; then
     :
 else
     tmux_automatically_attach_session
