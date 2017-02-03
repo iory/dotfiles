@@ -588,6 +588,14 @@ you should place you code here."
   ;; -------------------------------------------------------------------------------------------
   ;; jedi
   (add-hook 'python-mode-hook 'jedi:setup)
+  (pyvenv-activate venv-default)
+  (elpy-use-ipython)
+  (setq elpy-rpc-backend "jedi")
+  (define-key elpy-mode-map (kbd "C-c C-v") 'helm-flycheck)
+  (require 'smartrep)
+  (smartrep-define-key elpy-mode-map "C-c"
+                       '(("C-n" . flycheck-next-error)
+                         ("C-p" . flycheck-previous-error)))
 
   ;; ROS
   ;; -------------------------------------------------------------------------------------------
