@@ -79,6 +79,7 @@ values."
      web-beautify
      highlight-symbol
      milkode
+     smartrep
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -459,6 +460,10 @@ you should place you code here."
 
   (global-set-key (kbd "C-t") 'other-window-or-split)
   (global-set-key (kbd "C-x C-z") 'open-junk-file)
+
+  (smartrep-define-key global-map "C-x"
+    '(("{" . shrink-window-horizontally)
+      ("}" . enlarge-window-horizontally)))
 
   ;; avoid "Symbolic link to SVN-controlled source file; follow link? (yes or no)"
   (setq vc-follow-symlinks t)
