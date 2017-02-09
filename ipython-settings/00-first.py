@@ -30,6 +30,7 @@ import scipy as sp
 import pandas as pd
 import mahotas as mh
 import matplotlib.pyplot as plt
+import seaborn as sns
 import mahotas as mh
 
 import chainer
