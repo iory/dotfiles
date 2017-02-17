@@ -83,7 +83,7 @@ alias sha1='echo -n "${1}" | openssl sha1 | sed "s/^.* //"'
 # os setting
 case ${OSTYPE} in
     linux*)
-        alias f='gnome-open .'
+        alias f='gnome-open . 2>/dev/null'
         alias o='gnome-open'
         alias open='gnome-open'
         alias pbcopy='xsel --clipboard --input'
