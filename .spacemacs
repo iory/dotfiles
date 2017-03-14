@@ -464,6 +464,7 @@ you should place you code here."
   (global-set-key (kbd "C-t") 'other-window-or-split)
   (global-set-key (kbd "C-x C-z") 'spacemacs/open-junk-file)
 
+  (require 'smartrep)
   (smartrep-define-key global-map "C-x"
     '(("{" . shrink-window-horizontally)
       ("}" . enlarge-window-horizontally)))
