@@ -18,3 +18,14 @@ fonts
 
 # for ros
 *.bag
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# Python
+*.pyc
+
+# Catkin custom files
+CATKIN_IGNORE
