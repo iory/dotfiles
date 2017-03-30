@@ -21,6 +21,7 @@ pip install -U requests
 pip install -U scikit-image
 pip install -U scikit-learn
 pip install -U scipy
+pip install -U seaborn
 pip install -U see
 pip install -U virtualenv
 pip install autopep8
