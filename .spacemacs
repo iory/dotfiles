@@ -367,6 +367,17 @@ you should place you code here."
          )
         )
 
+  (defun c++-print-debug (beginning end)
+    (interactive "r")
+    (let ((cnt 0)
+          (string-length (length " std::cout << %d << std::endl;")))
+      (save-excursion
+        (goto-char beginning)
+        (while (and (search-forward ";" nil t) (< (point) (+ (- end 1) (* cnt string-length))))
+          (message "%d %d" (point) (+ end (* cnt string-length)))
+          (replace-match (format "; std::cout << %d << std::endl;" cnt))
+          (incf cnt)))))
+
   ;; parens for evil-mode
   (defun region-to-single-quote ()
     (interactive)
