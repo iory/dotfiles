@@ -1,5 +1,13 @@
 #!/bin/bash -eu
 
+: "install emacs" && {
+    sudo apt-add-repository -y ppa:ubuntu-elisp/ppa
+    sudo apt-get -qq -y update
+    sudo apt-get install -qq -y emacs-snapshot
+    [ ! -d ~/.emacs.d ] && git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d
+    emacs-snapshot -nw -batch -u "${UNAME}" 2>/dev/null
+}
+
 # install elpy layer
 ELPY_LAYER=~/.emacs.d/private/elpy
 if [ ! -d $ELPY_LAYER ]; then
