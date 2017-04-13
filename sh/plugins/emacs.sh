@@ -14,3 +14,8 @@ function ecd {
         return 1
     fi
 }
+
+# for junk file settings
+function junk {
+    cd $HOME/.emacs.d/.cache/junk/$(date +%Y/%m)
+}
