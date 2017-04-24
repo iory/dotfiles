@@ -12,6 +12,11 @@ mcd() {
     cd $1
 }
 
+mbuild() {
+    mdkir -p build
+    cd build
+}
+
 alias tmp='cd /tmp'
 
 # ls extend
@@ -161,6 +166,22 @@ function video2gif {
     mkdir -p frames
     ffmpeg -i $1 -r $2 'frames/frame-%03d.jpg'
     convert -delay 20 -loop 0 frames/*.jpg $1.gif
+}
+
+function mts2mp4() {
+    filename=$(basename "$1")
+    extension="${filename##*.}"
+    filename="${filename%.*}"
+    ffmpeg -i $1 -c:v copy -c:a aac -strict experimental -b:a 128k ${filename}.mp4
+}
+
+function video2png() {
+    filename=$(basename "$1")
+    extension="${filename##*.}"
+    filename="${filename%.*}"
+    mkdir -p $filename
+    cd $filename
+    ffmpeg  -i ../$1 -r 5 -f image2 $filename_%06d.png -q:v 1
 }
 
 # function Extract for common file formats
