@@ -17,5 +17,8 @@ function ecd {
 
 # for junk file settings
 function junk {
+    if [ ! -d $HOME/.emacs.d/.cache/junk/$(date +%Y/%m) ]; then
+        mkdir -p $HOME/.emacs.d/.cache/junk/$(date +%Y/%m)
+    fi
     cd $HOME/.emacs.d/.cache/junk/$(date +%Y/%m)
 }
