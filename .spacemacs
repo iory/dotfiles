@@ -328,6 +328,12 @@ you should place you code here."
   (add-hook 'dired-load-hook (lambda ()
                                (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)))
 
+  ;; mark settings
+  (eval-after-load 'evil-maps
+    '(progn
+       (define-key evil-motion-state-map (kbd "C-u") 'universal-argument)))
+  (setq set-mark-command-repeat-pop t)
+
   (require 'easy-kill)
   (global-set-key (kbd "M-w") 'easy-kill)
   (push '(?a buffer) easy-kill-alist)
