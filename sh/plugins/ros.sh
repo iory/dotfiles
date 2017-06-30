@@ -16,6 +16,15 @@ if [ -d "/opt/ros" ]; then
     alias rp='rostopic'
     alias rpb='rostopic bw'
     alias rpe='rostopic echo'
+    rptn () {
+        rostopic list | peco | xargs -n1 rostopic type
+    }
+    rpen () {
+        rostopic list | peco | xargs -n1 rostopic echo $1
+    }
+    rphn () {
+        rostopic list | peco | xargs -n1 rostopic hz $1
+    }
     alias rpt='rostopic type'
     alias rph='rostopic hz'
     alias rpi='rostopic info'
