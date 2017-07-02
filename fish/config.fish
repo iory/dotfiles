@@ -1,7 +1,5 @@
-. ~/.dotfiles/rosfish
 . ~/.config/fish/functions/emacs.fish
 . ~/.config/fish/functions/git.fish
-. ~/.config/fish/functions/ros.fish
 . ~/.config/fish/functions/util.fish
 
 if test -e ~/.fishrc.local
@@ -10,7 +8,7 @@ end
 
 #peco
 function fish_user_key_bindings
-    bind \cr peco_select_history
+    bind \cr 'peco_select_history (commandline -b)'
 end
 
 # suppress fish_greeting message

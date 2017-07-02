@@ -40,21 +40,6 @@ alias cpwd='pwd | pbcopy'
 # grep extend
 alias ggrep='grep --color=always --with-filename --line-number'
 
-# less extend
-# export LESS='-i -M -R'
-export LESS='-i -M -R -S -W -z-4 -x4'
-alias less='less -R'
-
-# colorize man
-set -x PAGER less
-set -x LESS_TERMCAP_mb '\E[01;31m'      # Begins blinking.
-set -x LESS_TERMCAP_md '\E[01;31m'      # Begins bold.
-set -x LESS_TERMCAP_me '\E[0m'          # Ends mode.
-set -x LESS_TERMCAP_se '\E[0m'          # Ends standout-mode.
-set -x LESS_TERMCAP_so '\E[00;47;30m'   # Begins standout-mode.
-set -x LESS_TERMCAP_ue '\E[0m'          # Ends underline.
-set -x LESS_TERMCAP_us '\E[01;32m'      # Begins underline.
-
 # rmdir extend
 # cleanup empty dir
 function cleanup
@@ -81,7 +66,6 @@ alias f='gnome-open .'
 alias o='gnome-open'
 alias open='gnome-open'
 alias pbcopy='xsel --clipboard --input'
-export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
 
 # xmodmap
 if test -e ~/.xmodmaprc
