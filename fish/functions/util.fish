@@ -32,9 +32,6 @@ alias mkdir='mkdir -p'
 alias df='df -H'
 alias du='du -ch'
 
-alias ps="ps auxf"
-alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
-
 alias cpwd='pwd | pbcopy'
 
 # grep extend
