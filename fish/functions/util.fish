@@ -65,8 +65,8 @@ alias open='gnome-open'
 alias pbcopy='xsel --clipboard --input'
 
 # xmodmap
-if test -e ~/.xmodmaprc
-   xmodmap ~/.xmodmaprc
+if [ $DISPLAY ]
+    xmodmap ~/.xmodmaprc
 end
 
 # # for c++
