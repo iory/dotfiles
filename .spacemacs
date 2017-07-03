@@ -535,6 +535,8 @@ you should place you code here."
   ;; milkode
   (global-set-key (kbd "M-g s") 'milkode:search)
 
+  (global-set-key (kbd "C-o") 'evil-open-below)
+
   ;; org-mode
   ;; -------------------------------------------------------------------------------------------
   (require 'org)
