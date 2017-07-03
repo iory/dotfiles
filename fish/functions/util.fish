@@ -23,7 +23,6 @@ alias la='ls -A'
 alias ll='ls -alF'
 alias lsf='ls -F'
 alias sl="ls"
-alias ls="ls --color=always"
 
 # mkdir extend
 alias mkdir='mkdir -p'
@@ -56,90 +55,47 @@ function dic
     w3m "http://ejje.weblio.jp/content/$argv" | grep "用例"
 end
 
-# alias sha1='echo -n "${1}" | openssl sha1 | sed "s/^.* //"'
-
-# os setting
-alias f='gnome-open .'
-alias o='gnome-open'
-alias open='gnome-open'
-alias pbcopy='xsel --clipboard --input'
-
 # xmodmap
-if [ $DISPLAY ]
-    xmodmap ~/.xmodmaprc
-end
+switch (uname)
+    case Linux
+        if [ $DISPLAY ]
+            xmodmap ~/.xmodmaprc
+        end
 
-# # for c++
-# alias methashell='rlwrap -c methashell'
-# export CPLUS_INCLUDE_PATH=$CPP_INCLUDE_PATH:$HOME/local/cpp/cmdline:$HOME/local/cpp/opencv_utils:$HOME/local/cpp/stopwatch:$HOME/local/cpp/random:$HOME/local/cpp/pycpp
+        # os setting
+        function f
+            if count $argv > /dev/null
+                gnome-open $argv
+            else
+                gnome-open $PWD
+            end
+        end
+        alias o='gnome-open'
+        alias open='gnome-open'
+        alias pbcopy='xsel --clipboard --input'
+        alias ls="ls --color=always"
+    case Darwin
+        function f
+            if count $argv > /dev/null
+                open $argv
+            else
+                open $PWD
+            end
+        end
+        alias o='open'
+end
 
 # for gdb
 alias gdb='gdb -q'
-# if [ "$EMACS" ]; then
-#     # pass
-#     :
-# else
 alias gdb='rlwrap -c gdb'
-# fi
-
-# # # for haskell
-# # if [ -x "`which stack`" ]; then
-# #     eval "(stack --bash-completion-script stack)"
-# #     alias ghc='stack ghc'
-# #     alias ghci='stack ghci'
-# #     alias runhaskell='stack runhaskell'
-# # fi
-
-# # # for Lisp
-# # if [ "$EMACS" ]; then
-# #     # pass
-# #     :
-# # else
-# #     alias clisp='rlwrap -c clisp'
-# # fi
 
 # # python settings
-# set -x PYTHONSTARTUP ~/.pythonstartup
 alias py='ipython --no-confirm-exit'
 alias ipy='ipython --no-confirm-exit'
 alias ipyt='ipython --no-confirm-exit'
 alias ipyth='ipython --no-confirm-exit'
 alias ipytho='ipython --no-confirm-exit'
 alias ipython='ipython --no-confirm-exit'
-
-# function Extract for common file formats
-# from https://github.com/xvoland/Extract
-
-# function extract {
-#  if [ -z "$1" ]; then
-#     # display usage if no parameters given
-#     echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
-#  else
-#     if [ -f "$1" ] ; then
-#         local nameInLowerCase=`echo "$1" | awk '{print tolower($0)}'`
-#         case "$nameInLowerCase" in
-#           *.tar.bz2)   tar xvjf ./"$1"    ;;
-#           *.tar.gz)    tar xvzf ./"$1"    ;;
-#           *.tar.xz)    tar xvJf ./"$1"    ;;
-#           *.lzma)      unlzma ./"$1"      ;;
-#           *.bz2)       bunzip2 ./"$1"     ;;
-#           *.rar)       unrar x -ad ./"$1" ;;
-#           *.gz)        gunzip ./"$1"      ;;
-#           *.tar)       tar xvf ./"$1"     ;;
-#           *.tbz2)      tar xvjf ./"$1"    ;;
-#           *.tgz)       tar xvzf ./"$1"    ;;
-#           *.zip)       unzip ./"$1"       ;;
-#           *.Z)         uncompress ./"$1"  ;;
-#           *.7z)        7z x ./"$1"        ;;
-#           *.xz)        unxz ./"$1"        ;;
-#           *.exe)       cabextract ./"$1"  ;;
-#           *)           echo "extract: '$1' - unknown archive method" ;;
-#         esac
-#     else
-#         echo "'$1' - file does not exist"
-#     fi
-#  fi
-# }
 
 # for opencv
 alias fcv='python -c "import cv2; print(\"\n\".join([item for item in dir(cv2)]))" | grep'

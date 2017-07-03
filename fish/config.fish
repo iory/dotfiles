@@ -26,3 +26,4 @@ end
 
 # see full path of directory names
 set -U fish_prompt_pwd_dir_length 0
+set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
