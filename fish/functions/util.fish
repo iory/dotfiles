@@ -7,6 +7,12 @@ alias ..3="cd ../../.."
 alias ..4="cd ../../../../"
 alias ..5="cd ../../../../.."
 alias dc='cd'
+
+function cd
+    builtin cd $argv
+    ls -la
+end
+
 function mcd
     mkdir -p $argv
     cd $argv
