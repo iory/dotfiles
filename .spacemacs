@@ -522,10 +522,15 @@ you should place you code here."
                         "evince"
                         '(file))
                   ))
-           (openwith-mode 1)
-           )
-         )
-        )
+           (openwith-mode 1)))
+        ((eq system-type 'darwin)
+         (when (require 'openwith nil 'noerror)
+           (setq openwith-associations
+                 (list
+                  (list (openwith-make-extension-regexp
+                         '("pdf"))
+                        "open"
+                        '(file)))))))
 
   ;; milkode
   (global-set-key (kbd "M-g s") 'milkode:search)
@@ -692,8 +697,7 @@ you should place you code here."
   ;; load shellenv
   ;; -------------------------------------------------------------------------------------------
   (when (file-exists-p "~/.emacs.d/shellenv.el")
-    (load "~/.emacs.d/shellenv.el")
-    )
+    (load "~/.emacs.d/shellenv.el"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
