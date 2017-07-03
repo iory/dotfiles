@@ -75,6 +75,8 @@ switch (uname)
         alias pbcopy='xsel --clipboard --input'
         alias ls="ls --color=always"
     case Darwin
+        # https://superuser.com/questions/834525/unable-to-launch-application-in-tmux
+        alias open='reattach-to-user-namespace open'
         function f
             if count $argv > /dev/null
                 open $argv
