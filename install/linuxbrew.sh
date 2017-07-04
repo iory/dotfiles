@@ -23,3 +23,5 @@ brew update
 brew install git
 brew install fish
 brew install tmux
+brew install hub
+
