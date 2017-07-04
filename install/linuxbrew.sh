@@ -19,7 +19,6 @@ PATH="$HOME/.linuxbrew/bin:$PATH"
 LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
 
 brew update
-brew doctor
 
 brew install git
 brew install fish
