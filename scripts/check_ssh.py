@@ -21,9 +21,7 @@ for path, permission in path_permission:
     if current_permission == permission:
         print("[OK!] %s's permission" % path)
     else:
-        print("\t[ERROR!] %s's permission is %s, not %s" % path,
-              current_permission,
-              permission)
+        print("\t[ERROR!] %s's permission is %s, not %s" % (path, current_permission, permission))
         print('\tChanging permission of %s' % path)
         os.chmod(os.path.expanduser(path), int(permission, 8))
         current_permission = oct(os.stat(os.path.expanduser(path)).st_mode)[-3:]
