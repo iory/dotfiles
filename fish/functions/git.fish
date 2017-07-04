@@ -26,6 +26,7 @@ alias gba='git branch -a'
 alias gcm='git commit -m'
 alias gca="git commit --amend"
 alias gco='git checkout'
+alias gcop='git checkout -p --'
 alias gcob='git checkout -b'
 alias gcom='git checkout master'
 alias gl='git log --oneline'

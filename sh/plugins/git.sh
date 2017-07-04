@@ -27,6 +27,7 @@ alias gcm='git commit -m'
 alias gca="git commit --amend"
 alias gcmh='git commit -m "hoge"'
 alias gco='git checkout'
+alias gcop='git checkout -p --'
 alias gcob='git checkout -b'
 alias gcom='git checkout master'
 alias gl='git log --oneline'
