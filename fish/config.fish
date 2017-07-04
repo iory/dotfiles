@@ -1,10 +1,11 @@
+if test -e ~/.fishrc.local
+    . ~/.fishrc.local
+end
+
 . ~/.config/fish/functions/emacs.fish
 . ~/.config/fish/functions/git.fish
 . ~/.config/fish/functions/util.fish
 
-if test -e ~/.fishrc.local
-    . ~/.fishrc.local
-end
 
 #peco
 function peco_recentd
