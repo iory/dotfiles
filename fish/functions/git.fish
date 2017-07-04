@@ -59,8 +59,7 @@ for n in (seq 50)
 end
 alias first-commit='git init; and git commit --allow-empty -m "First commit"'
 
-# alias gs='git status'
-alias gs='echo ""; echo "*********************************************"; echo -e "   DO NOT FORGET TO PULL BEFORE COMMITTING"; echo "*********************************************"; echo ""; git status'
+alias gs='git status'
 alias gst='git stash'
 alias gstp='git stash pop'
 alias gstl='git stash list'
@@ -103,104 +102,10 @@ function git-pull
 end
 alias gps=git-pull
 
-# function git-pull-force() {
-#     local branch=(git rev-parse --abbrev-ref HEAD)
-#     git-checkout-force tmp 2> /dev/null
-#     if [ $? != 0 ]; then return 1; fi
-#     git branch -D $branch > /dev/null 2>&1
-#     if [ $? != 0 ]; then return 1; fi
-#     git fetch
-#     if [ $? != 0 ]; then return 1; fi
-#     git checkout $branch
-# }
-# alias gplf=git-pull-force
-
 # # Git log find by commit message
 function glf
     git log --all --grep=$argv[1]
 end
-
-# ggp () {
-#   if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
-#     git push origin "${*}" && git branch -u origin/${1}
-#   else
-#     [[ "$#" = 0 ]] && local b="(_git_current_branch)"
-#     git push origin "${b:=$1}" && git branch -u origin/${b:=$1}
-#   fi
-# }
-# gmp () {
-#   if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
-#     git push $GITHUB_USER "${*}" && git branch -u $GITHUB_USER/${1}
-#   else
-#     [[ "$#" = 0 ]] && local b="(_git_current_branch)"
-#     git push $GITHUB_USER "${b:=$1}" && git branch -u $GITHUB_USER/${b:=$1}
-#   fi
-# }
-# ggp! () {
-#   if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
-#     git push origin "${*}" --force
-#   else
-#     [[ "$#" = 0 ]] && local b="(_git_current_branch)"
-#     git push origin "${b:=$1}" --force
-#   fi
-# }
-# gmp! () {
-#   if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
-#     git push $GITHUB_USER "${*}" --force
-#   else
-#     [[ "$#" = 0 ]] && local b="(_git_current_branch)"
-#     git push $GITHUB_USER "${b:=$1}" --force
-#   fi
-# }
-# alias ggpush='git push origin (current_branch) && git push -u origin/(_git_current_branch)'
-# alias ggpush!='git push origin (current_branch) --force'
-# alias gmpush='git push $GITHUB_USER (current_branch) && git branch -u $GITHUB_USER/(_git_current_branch)'
-# alias gmpush!='git push $GITHUB_USER (current_branch) --force'
-
-# _is_option () {
-#   if [[ $1 =~ "^-.*" ]]; then
-#     return 0
-#   fi
-#   return 1
-# }
-
-# grbg () {
-#   local branch arg
-#   local -a opts args
-#   for arg in $@; do
-#     if _is_option $arg; then
-#       opts=($arg $opts)
-#     else
-#       args=($arg $args)
-#     fi
-#   done
-#   if [ ${#args} -eq 0 ]; then
-#     branch="master"
-#   else
-#     branch=${args[1]}
-#   fi
-#   git rebase origin/$branch $opts
-# }
-# if which compdef &>/dev/null; then
-#   compdef _git grbg=git-checkout 2>/dev/null
-# fi
-# alias grbgi='grbg --interactive'
-# if which compdef &>/dev/null; then
-#   compdef _git grbgi=git-checkout 2>/dev/null
-# fi
-
-# alias gcsmg='gcmsg'
-
-# # for hub command
-# alias gpr='hub pull-request'
-# alias gfork='hub fork'
-# gpl () {
-#   if [ "$1" = "" ]; then
-#     hub browse -- pulls/$2 >/dev/null 2>&1
-#   else
-#     hub browse $1 pulls/$2 >/dev/null 2>&1
-#   fi
-# }
 
 function gis
     switch (count $argv)
@@ -213,103 +118,6 @@ function gis
     end
 end
 alias gbw='hub browse ^ /dev/null'
-# #}}}
 
-# # alias gbd='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
-# gbdra () {
-#   local remote
-#   if [ $# -eq 0 ]; then
-#     remote=$GITHUB_USER
-#   else
-#     remote=$1
-#   fi
-#   git branch -r --merged origin/master | grep "$remote\\/" | sed "s/$remote\\///" | egrep -v "HEAD|master|develop|release" | xargs git push $remote --delete
-# }
-# gbdr () {
-#   local remote branch
-#   if [ $# -eq 0 ]; then
-#     remote=$GITHUB_USER
-#     branch=(current_branch)
-#   elif [ $# -eq 1 ]; then
-#     remote=$GITHUB_USER
-#     branch=$1
-#   else
-#     remote=$1
-#     branch=$2
-#   fi
-#   git push $remote $branch --delete
-# }
-# if which compdef &>/dev/null; then
-#   compdef _git gbdr=git-checkout 2>/dev/null
-# fi
-
-# git_remote_to_local () {
-#   local branches
-#   branches=(`git branch --all | grep $GITHUB_USER | egrep -v 'HEAD|master|develop|release' | sed "s@^ *remotes/$GITHUB_USER/@@"`)
-#   for br in $branches; do
-#     git branch $br --track $GITHUB_USER/$br 2>/dev/null
-#   done
-# }
-# alias gremote2local=git_remote_to_local
-
-# # commit each file
-# _git_commit_each_file () {
-#   [ "$1" != "" ] && {
-#     pushd `pwd` &>/dev/null
-#     cd $1
-#   }
-#   changed_files=`git status -s | grep "^[A-Z]" | sed 's/^...//g' | sed 's/ -> /,/g'`
-#   changed_files=(`echo $changed_files`)
-#   for file in $changed_files; do
-#     msg=`echo ${file} | sed "s/.*,//g"`
-#     echo "[${msg}]" > /tmp/git_commit_message_template
-#     files=`echo ${file} | tr ',' ' '`
-#     git commit --only ${files} --verbose --template /tmp/git_commit_message_template || break
-#   done
-#   [ "$1" != "" ] && popd &>/dev/null
-# }
-# alias gceach=_git_commit_each_file
-
-# _what_ros_package () {
-#   looking_path=(pwd)
-#   found=(find $looking_path -maxdepth 1 -iname package.xml | wc -l)
-#   while [ $found -eq 0 ]; do
-#     looking_path=(dirname $looking_path)
-#     [ "$looking_path" = "/" ] && return
-#     found=(find $looking_path -maxdepth 1 -iname package.xml | wc -l)
-#   done
-#   echo (basename $looking_path)
-# }
-# # _git_commit_verbose () {
-# #   tmp_file=(mktemp -t XXXXXX)
-# #   ros_package=(_what_ros_package)
-# #   if [ "${ros_package}" != "" ]; then
-# #     echo "[${ros_package}] " > ${tmp_file}
-# #     git commit --verbose --template ${tmp_file}
-# #   else
-# #     git commit --verbose
-# #   fi
-# # }
-# # alias gc='_git_commit_verbose'
-# alias gc='git commit --verbose'
-
-# if which hub >/dev/null 2>&1; then
-#     if [ -n "$ZSH_VERSION" ]; then
-#         alias git='hub'
-#         compdef hub=git
-#     elif [ -n "$BASH_VERSION" ]; then
-#         eval "(hub alias -s)"
-#     else
-#         :
-#     fi
-# fi
-
-# if [ -n "$ZSH_VERSION" ]; then
-#     # gibo: automatically generating gitignore tools
-#     if [ -e $HOME/bin/gibo/gibo-completion.zsh ]; then
-#         export PATH=$PATH:$HOME/bin/gibo/
-#         source $HOME/bin/gibo/gibo-completion.zsh
-#     fi
-# elif [ -n "BASH_VERSION" ]; then
-#     :
-# fi
+hub alias -s  >/dev/null 2>&1
+alias git='hub'
