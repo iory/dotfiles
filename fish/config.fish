@@ -5,7 +5,7 @@ end
 . ~/.config/fish/functions/emacs.fish
 . ~/.config/fish/functions/git.fish
 . ~/.config/fish/functions/util.fish
-
+. ~/.config/fish/functions/cuda.fish
 
 #peco
 function peco_recentd
