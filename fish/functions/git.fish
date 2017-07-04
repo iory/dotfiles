@@ -34,12 +34,16 @@ alias glp="git log -p"
 alias glg='git log --graph --oneline --decorate --all'
 alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
 
-alias gbug='git branch -u origin/(git_current_branch)'
-alias gbum='git branch -u $GITHUB_USER/(git_current_branch)'
-alias gml='git pull $GITHUB_USER (git_current_branch)'
-alias gmpull='git pull $GITHUB_USER (git_current_branch)'
-alias gmpnp='git pull --rebase $GITHUB_USER (git_current_branch); and git push $GITHUB_USER (git_current_branch)'
-alias gmpnpf='git pull --rebase $GITHUB_USER (git_current_branch); and git push $GITHUB_USER (git_current_branch) -f'
+function _git_current_branch
+    git branch ^/dev/null | sed -n '/\* /s///p'
+end
+
+alias gbug='git branch -u origin/(_git_current_branch)'
+alias gbum='git branch -u $GITHUB_USER/(_git_current_branch)'
+alias gml='git pull $GITHUB_USER (_git_current_branch)'
+alias gmpull='git pull $GITHUB_USER (_git_current_branch)'
+alias gmpnp='git pull --rebase $GITHUB_USER (_git_current_branch); and git push $GITHUB_USER (_git_current_branch)'
+alias gmpnpf='git pull --rebase $GITHUB_USER (_git_current_branch); and git push $GITHUB_USER (_git_current_branch) -f'
 
 alias gbm='git branch --all | command grep $GITHUB_USER | sed "s/ *//g"'
 
@@ -71,19 +75,33 @@ alias gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
 # Git Funcion #
 ###############
 
-# function git-branch-update() {
-#     local branch=(git rev-parse --abbrev-ref HEAD)
-#     git fetch --all
-#     git reset --hard ${1:-origin}/$branch
-# }
-# alias gpu=git-branch-update
+function git-branch-update
+    set -l branch (git rev-parse --abbrev-ref HEAD)
+    git fetch --all
+    switch (count $argv)
+        case 0
+            git reset --hard origin/$branch
+        case '*'
+            git reset --hard $argv[1]/$branch
+    end
+end
+alias gpu=git-branch-update
 
-# function git-pull() {
-#     local repository=${1:-origin}
-#     local branch=${2:-(git rev-parse --abbrev-ref HEAD)}
-#     git pull origin $branch
-# }
-# alias gps=git-pull
+function git-pull
+    switch (count $argv)
+        case 0
+            set -l repository origin
+            set -l branch (git rev-parse --abbrev-ref HEAD)
+        case 1
+            set -l repository $argv[1]
+            set -l branch (git rev-parse --abbrev-ref HEAD)
+        case '*'
+            set -l repository $argv[1]
+            set -l branch $argv[2]
+    end
+    git pull $repository $branch
+end
+alias gps=git-pull
 
 # function git-pull-force() {
 #     local branch=(git rev-parse --abbrev-ref HEAD)
@@ -98,15 +116,15 @@ alias gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
 # alias gplf=git-pull-force
 
 # # Git log find by commit message
-# glf() {
-#     git log --all --grep="$1";
-# }
+function glf
+    git log --all --grep=$argv[1]
+end
 
 # ggp () {
 #   if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
 #     git push origin "${*}" && git branch -u origin/${1}
 #   else
-#     [[ "$#" = 0 ]] && local b="(git_current_branch)"
+#     [[ "$#" = 0 ]] && local b="(_git_current_branch)"
 #     git push origin "${b:=$1}" && git branch -u origin/${b:=$1}
 #   fi
 # }
@@ -114,7 +132,7 @@ alias gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
 #   if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
 #     git push $GITHUB_USER "${*}" && git branch -u $GITHUB_USER/${1}
 #   else
-#     [[ "$#" = 0 ]] && local b="(git_current_branch)"
+#     [[ "$#" = 0 ]] && local b="(_git_current_branch)"
 #     git push $GITHUB_USER "${b:=$1}" && git branch -u $GITHUB_USER/${b:=$1}
 #   fi
 # }
@@ -122,7 +140,7 @@ alias gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
 #   if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
 #     git push origin "${*}" --force
 #   else
-#     [[ "$#" = 0 ]] && local b="(git_current_branch)"
+#     [[ "$#" = 0 ]] && local b="(_git_current_branch)"
 #     git push origin "${b:=$1}" --force
 #   fi
 # }
@@ -130,13 +148,13 @@ alias gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
 #   if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
 #     git push $GITHUB_USER "${*}" --force
 #   else
-#     [[ "$#" = 0 ]] && local b="(git_current_branch)"
+#     [[ "$#" = 0 ]] && local b="(_git_current_branch)"
 #     git push $GITHUB_USER "${b:=$1}" --force
 #   fi
 # }
-# alias ggpush='git push origin (current_branch) && git push -u origin/(git_current_branch)'
+# alias ggpush='git push origin (current_branch) && git push -u origin/(_git_current_branch)'
 # alias ggpush!='git push origin (current_branch) --force'
-# alias gmpush='git push $GITHUB_USER (current_branch) && git branch -u $GITHUB_USER/(git_current_branch)'
+# alias gmpush='git push $GITHUB_USER (current_branch) && git branch -u $GITHUB_USER/(_git_current_branch)'
 # alias gmpush!='git push $GITHUB_USER (current_branch) --force'
 
 # _is_option () {
@@ -183,13 +201,17 @@ alias gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
 #     hub browse $1 pulls/$2 >/dev/null 2>&1
 #   fi
 # }
-# gis () {
-#   if [ "$1" = "" ]; then
-#     hub browse -- issues/$2 >/dev/null 2>&1
-#   else
-#     hub browse $1 issues/$2 >/dev/null 2>&1
-#   fi
-# }
+
+function gis
+    switch (count $argv)
+        case 0
+            hub browse -- issues >/dev/null 2>&1
+        case 1
+            hub browse $argv[1] issues >/dev/null 2>&1
+        case '*'
+            hub browse $argv[1] issues/$argv[2] >/dev/null 2>&1
+    end
+end
 alias gbw='hub browse ^ /dev/null'
 # #}}}
 
