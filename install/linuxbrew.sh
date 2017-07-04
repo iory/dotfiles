@@ -13,3 +13,14 @@ echo 'set -gx PATH $HOME/.linuxbrew/bin $PATH' >> ~/.fishrc.local
 echo 'set -gx LD_LIBRARY_PATH $HOME/.linuxbrew/lib $LD_LIBRARY_PATH' >> ~/.fishrc.local
 echo 'set -x MANPATH $HOME/.linuxbrew/share/man $MANPATH' >> ~/.fishrc.local
 echo 'set -x INFOPATH $HOME/.linuxbrew/share/info $INFOPATH' >> ~/.fishrc.local
+
+
+PATH="$HOME/.linuxbrew/bin:$PATH"
+LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
+
+brew update
+brew doctor
+
+brew install git
+brew install fish
+brew install tmux
