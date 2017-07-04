@@ -1,4 +1,7 @@
 from decimal import Decimal as D
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
 import array
 import bisect
 import collections
@@ -30,7 +33,6 @@ import scipy
 import scipy as sp
 import pandas as pd
 import mahotas as mh
-import matplotlib.pyplot as plt
 import seaborn as sns
 import mahotas as mh
 
