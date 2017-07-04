@@ -90,14 +90,14 @@ alias gpu=git-branch-update
 function git-pull
     switch (count $argv)
         case 0
-            set -l repository origin
-            set -l branch (git rev-parse --abbrev-ref HEAD)
+            set repository origin
+            set branch (git rev-parse --abbrev-ref HEAD)
         case 1
-            set -l repository $argv[1]
-            set -l branch (git rev-parse --abbrev-ref HEAD)
+            set repository $argv[1]
+            set branch (git rev-parse --abbrev-ref HEAD)
         case '*'
-            set -l repository $argv[1]
-            set -l branch $argv[2]
+            set repository $argv[1]
+            set branch $argv[2]
     end
     git pull $repository $branch
 end
