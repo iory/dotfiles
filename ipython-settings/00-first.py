@@ -14,7 +14,6 @@ import operator as op
 import os
 import os.path as osp
 import pprint
-import pyperclip
 import random
 import re
 import string
@@ -32,18 +31,11 @@ import cv2
 import scipy
 import scipy as sp
 import pandas as pd
-import mahotas as mh
 import seaborn as sns
-import mahotas as mh
 
 import chainer
 import chainer.functions as F
 import chainer.links as L
-
-def pbcopy(text):
-    if not isinstance(str, text):
-        text = str(text)
-    pyperclip.copy(text)
 
 def mem(obj):
     return hex(id(obj))
