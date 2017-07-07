@@ -300,6 +300,9 @@ you should place you code here."
 
   (setq-default dotspacemacs-themes '(zonokai-red))
 
+
+  (when (file-exists-p "~/.spacemacs.local.el")
+    (load "~/.spacemacs.local.el"))
   ;; eww
   (setq eww-search-prefix "http://www.google.co.jp/search?q=")
   (defvar eww-disable-colorize t)
