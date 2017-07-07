@@ -23,10 +23,6 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     [ ! -d ${HOME}/.dotfiles ] && git clone https://github.com/iory/dotfiles.git ~/.dotfiles
 }
 
-[ ! -d ${HOME}/local ] && mkdir ${HOME}/local
-[ ! -d ${HOME}/local/src ] && mkdir ${HOME}/local/src
-[ ! -d ${HOME}/bin ] && mkdir ${HOME}/bin
-
 : "vim install" && {
     VIM_HOME=$HOME/.vim
 
@@ -44,21 +40,6 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | bash
 }
 
-: "hub command install (github)" && {
-    case ${OSTYPE} in
-        darwin*)
-            brew install hub
-            ;;
-        linux*)
-            mkdir -p ~/bin
-            if [ ! -d ~/bin/hub ]; then
-                curl https://hub.github.com/standalone -sLo ~/bin/hub
-            fi
-            chmod +x ~/bin/hub
-            ;;
-    esac
-}
-
 : "set zsh" && {
     ZDOTDIR=$current_working_directory
     mkdir $ZDOTDIR/zsh/plugins -p
@@ -66,7 +47,6 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     [ ! -d zsh-syntax-highlighting ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
     [ ! -d zsh-autosuggestions ] && git clone https://github.com/zsh-users/zsh-autosuggestions.git
     [ ! -d ~/.oh-my-zsh ] && git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-    # sudo chsh -s `which zsh`
 }
 
 : "symbolic link for dotfiles" && {
