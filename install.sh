@@ -27,14 +27,6 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 [ ! -d ${HOME}/local/src ] && mkdir ${HOME}/local/src
 [ ! -d ${HOME}/bin ] && mkdir ${HOME}/bin
 
-: "install for peco" && {
-    (cd ${HOME}/local/src \
-        && if [ ! -d peco_linux_amd64 ]; then
-         wget https://github.com/peco/peco/releases/download/v0.4.4/peco_linux_amd64.tar.gz
-         tar -C ${HOME}/local -xzf peco_linux_amd64.tar.gz
-        fi;)
-}
-
 : "vim install" && {
     VIM_HOME=$HOME/.vim
 
