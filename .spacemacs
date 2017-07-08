@@ -604,6 +604,21 @@ you should place you code here."
   (global-set-key (kbd "C-;") 'helm-for-files)
   (define-key global-map (kbd "C-x b") 'helm-for-files)
 
+  ;; helm ag
+  (setq helm-ag-base-command "rg --vimgrep --no-heading") ; use ripgrep
+  (setq helm-ag-insert-at-point 'symbol)
+  (global-set-key (kbd "C-M-g") 'helm-ag)
+  (global-set-key (kbd "C-M-k") 'backward-kill-sexp)
+
+  (defun helm-ag-dotfiles ()
+    "search .dotfiles"
+    (interactive)
+    (helm-ag "~/.dotfiles/"))
+  (defun helm-projectile-ag ()
+    "Projectile"
+    (interactive)
+    (helm-ag (projectile-project-root)))
+
   ;; C/C++
   ;; -------------------------------------------------------------------------------------------
   ;; c-mode
