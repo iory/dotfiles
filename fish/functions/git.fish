@@ -76,7 +76,7 @@ abbr -a gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
 ###############
 
 function git-branch-update
-    set -l branch (git rev-parse --abbr -aev-ref HEAD)
+    set -l branch (git rev-parse --abbrev-ref HEAD)
     git fetch --all
     switch (count $argv)
         case 0
@@ -91,10 +91,10 @@ function git-pull
     switch (count $argv)
         case 0
             set repository origin
-            set branch (git rev-parse --abbr -aev-ref HEAD)
+            set branch (git rev-parse --abbrev-ref HEAD)
         case 1
             set repository $argv[1]
-            set branch (git rev-parse --abbr -aev-ref HEAD)
+            set branch (git rev-parse --abbrev-ref HEAD)
         case '*'
             set repository $argv[1]
             set branch $argv[2]
