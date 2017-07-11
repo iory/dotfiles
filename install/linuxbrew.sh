@@ -25,4 +25,4 @@ brew install fish
 brew install tmux
 brew install hub
 brew install peco
-
+brew install ripgrep
