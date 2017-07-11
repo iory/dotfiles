@@ -7,6 +7,9 @@ alias ..3="cd ../../.."
 alias ..4="cd ../../../../"
 alias ..5="cd ../../../../.."
 alias dc='cd'
+function dot
+    cd ~/.dotfiles
+end
 
 function cd
     builtin cd $argv

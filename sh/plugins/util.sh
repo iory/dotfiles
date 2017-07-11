@@ -7,6 +7,7 @@ alias ..3="cd ../../.."
 alias ..4="cd ../../../../"
 alias ..5="cd ../../../../.."
 alias dc='cd'
+alias dot='cd ~/.dotfiles'
 mcd() {
     mkdir -p $1
     cd $1
