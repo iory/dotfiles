@@ -18,6 +18,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     rust
      html
      octave
      ;; ----------------------------------------------------------------
@@ -87,6 +88,8 @@ values."
      milkode
      smartrep
      keydef
+     vimrc-mode
+     toml-mode
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
