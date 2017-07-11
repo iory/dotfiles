@@ -107,3 +107,20 @@ alias ipython='ipython --no-confirm-exit'
 
 # for opencv
 alias fcv='python -c "import cv2; print(\"\n\".join([item for item in dir(cv2)]))" | grep'
+
+
+# ghq
+function peco_select_ghq_repository
+    set -l query (commandline)
+
+    if test -n $query
+        set peco_flags --query "$query"
+    end
+    ghq list | peco --initial-filter Fuzzy $peco_flags | read line
+
+    if [ $line ]
+        ghq root | read dir
+        cd $dir/$line
+        commandline -f repaint
+    end
+end
