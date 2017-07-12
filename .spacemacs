@@ -26,7 +26,6 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
      auto-insert
      better-defaults
      c-c++
@@ -597,10 +596,6 @@ you should place you code here."
   ;; anzu
   (global-set-key [remap query-replace] 'anzu-query-replace)
   (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
-
-  ;; auto-completion
-  (global-auto-complete-mode)
-  (ac-set-trigger-key "TAB")
 
   ;; helm settings
   ;; -------------------------------------------------------------------------------------------
