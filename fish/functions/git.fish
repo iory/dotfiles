@@ -24,6 +24,8 @@ abbr -a gb 'git branch'
 abbr -a gbD 'git branch -D'
 abbr -a gba 'git branch -a'
 abbr -a gcm 'git commit -m'
+abbr -a gcaa 'git commit -a -m "Add"'
+abbr -a gcma 'git commit -m "Add"'
 abbr -a gca="git commit --amend"
 abbr -a gco 'git checkout'
 abbr -a gcop 'git checkout -p --'
