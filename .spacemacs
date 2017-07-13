@@ -144,8 +144,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(alect-black
-                         spacemacs-dark
+   dotspacemacs-themes '(spacemacs-dark
+                         alect-black
                          spacemacs-light
                          solarized-light
                          solarized-dark
@@ -299,9 +299,6 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
-
-  (setq-default dotspacemacs-themes '(zonokai-red))
-
 
   (when (file-exists-p "~/.spacemacs.local.el")
     (load "~/.spacemacs.local.el"))
