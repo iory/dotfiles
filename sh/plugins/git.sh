@@ -296,3 +296,13 @@ if [ -n "$ZSH_VERSION" ]; then
 elif [ -n "BASH_VERSION" ]; then
     :
 fi
+
+# extend ghs
+function gpi () {
+    [ "$#" -eq 0 ] && echo "Usage : gpi QUERY" && return 1
+    ghs "$@" | peco | awk '{print $1}' | ghq import
+}
+
+function gpr () {
+    ghq list --full-path | peco | xargs rm -r
+}
