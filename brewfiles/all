@@ -1,13 +1,13 @@
 # brewfile for all machines
 
 
-brew 'git'
-brew 'fish'
-brew 'tmux'
-brew 'hub'
-brew 'peco'
-brew 'ripgrep'
-brew 'grc'
-brew 'emacs'
-brew 'm-cli'
+brew "git"
+brew "fish"
+brew "tmux"
+brew "hub"
+brew "peco"
+brew "ripgrep"
+brew "grc"
+brew "emacs"
+brew "m-cli"
 brew "sonatard/tools/ghs"
