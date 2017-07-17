@@ -10,3 +10,4 @@ brew 'ripgrep'
 brew 'grc'
 brew 'emacs'
 brew 'm-cli'
+brew "sonatard/tools/ghs"
