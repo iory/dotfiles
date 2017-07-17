@@ -1,6 +1,6 @@
 # brewfile for all machines
 
-
+brew 'ripgrep'
 brew 'git'
 brew 'fish'
 brew 'tmux'
@@ -10,3 +10,9 @@ brew 'ripgrep'
 brew 'grc'
 brew 'emacs'
 brew 'm-cli'
+brew 'terminal-notifier'
+brew 'htop'
+brew 'neovim'
+brew 'asciinema'
+brew 'asciinema'
+brew 'asciinema2gif'
