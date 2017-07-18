@@ -1,18 +1,17 @@
 # brewfile for all machines
 
-brew 'ripgrep'
-brew 'git'
-brew 'fish'
-brew 'tmux'
-brew 'hub'
-brew 'peco'
-brew 'ripgrep'
-brew 'grc'
-brew 'emacs'
-brew 'm-cli'
-brew 'terminal-notifier'
-brew 'htop'
-brew 'neovim'
-brew 'asciinema'
-brew 'asciinema'
-brew 'asciinema2gif'
+brew "asciinema"
+brew "asciinema2gif"
+brew "emacs"
+brew "fish"
+brew "git"
+brew "grc"
+brew "htop"
+brew "hub"
+brew "m-cli"
+brew "neovim"
+brew "peco"
+brew "ripgrep"
+brew "sonatard/tools/ghs"
+brew "terminal-notifier"
+brew "tmux"
