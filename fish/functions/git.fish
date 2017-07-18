@@ -124,18 +124,3 @@ abbr -a gbw 'hub browse ^ /dev/null'
 
 hub alias -s  >/dev/null 2>&1
 abbr -a git 'hub'
-
-# extend ghs
-function gpi
-    switch (count $argv)
-        case 0
-            echo "Usage : gpi QUERY"
-            return 1
-      case '*'
-            ghs $argv | peco | awk '{print $1}' | ghq import
-    end
-end
-
-function gpr
-    ghq list --full-path | peco | xargs rm -r
-end
