@@ -2,3 +2,4 @@
 
 brew "ripgrep"
 brew "vim"
+brew "terminal-notifier"
