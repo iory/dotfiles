@@ -127,3 +127,8 @@ function peco_select_ghq_repository
         commandline -f repaint
     end
 end
+
+# weather
+function weather
+    curl wttr.in/tokyo
+end
