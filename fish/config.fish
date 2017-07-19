@@ -9,6 +9,7 @@ set -x PATH $HOME/.local/bin $PATH
 . ~/.config/fish/functions/util.fish
 . ~/.config/fish/functions/cuda.fish
 . ~/.config/fish/functions/ghs.fish
+. ~/.config/fish/functions/vim.fish
 switch (uname)
     case Darwin
         . ~/.config/fish/functions/itunes.fish
