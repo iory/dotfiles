@@ -62,6 +62,14 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     bash $current_working_directory/config/install.sh
 }
 
+: "symbolic link to bin" && {
+    mkdir -p $HOME/.local/bin
+    for f in $HOME/.dotfiles/bin/*; do
+        echo "$f" "->" $HOME/.local/bin/$(basename "$f")
+        ln -sf "$f" $HOME/.local/bin/$(basename $f)
+    done
+}
+
 : "ipython settings" && {
     if [ ! -e $HOME/.ipython/profile_default/startup ]; then
         mkdir -p $HOME/.ipython/profile_default/startup
