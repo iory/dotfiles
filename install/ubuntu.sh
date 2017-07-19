@@ -59,6 +59,10 @@ gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
 # caps as ctrl
 gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 
+# window resize
+gsettings set org.gnome.desktop.wm.keybindings maximize "['<Shift><Alt>k']"
+gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Shift><Alt>j']"
+
 # switch workspace
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Primary>1']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Primary>2']"
