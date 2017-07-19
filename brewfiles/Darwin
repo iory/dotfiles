@@ -1,0 +1,4 @@
+# brewfile for mac
+
+brew "ripgrep"
+brew "vim"
