@@ -67,7 +67,7 @@ end
 # xmodmap
 switch (uname)
     case Linux
-        if test (test -n $DISPLAY; and test -z $SSH_CONNECTION)
+        if test -n $DISPLAY; and test -z $SSH_CONNECTION
             xmodmap ~/.xmodmaprc
         end
 
