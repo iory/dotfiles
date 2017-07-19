@@ -12,6 +12,11 @@ sudo apt-get install -qq -y git
      && ./install.sh \
      && rm -rf /tmp/fonts)
 
+fc-cache -fv
+
+# set font
+gconftool-2 --set /apps/gnome-terminal/profiles/Default/font --type string "DejaVu Sans Mono for Powerline 12"
+
 # ssh settings
 sudo apt-get install -qq -y openssh-server
 sudo sed -i 's/[# ]*PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
