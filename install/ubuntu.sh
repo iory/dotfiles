@@ -28,11 +28,45 @@ sudo sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
 setxkbmap us
 
 # workspace like a Mac
-dconf read /org/compiz/profiles/unity/plugins/core/hsize
-dconf read /org/compiz/profiles/unity/plugins/core/vsize
-
-dconf write /org/compiz/profiles/unity/plugins/core/wsize 1
-dconf write /org/compiz/profiles/unity/plugins/core/hsize 10
+gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 1
+gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 10
 
 # disable pop up of dash by super key
 dconf write /org/compiz/profiles/unity/plugins/unityshell/show-launcher '""'
+
+gconftool-2
+gsettings --set /apps/gnome-terminal/profiles/Default/scrollback_unlimited --type bool true
+
+# disable Alt key HUB
+gsettings set org.compiz.integrated show-hud ['']
+
+# screen off time (unlimited)
+gsettings set org.gnome.desktop.session idle-delay uint32 0
+
+# lock is enabled
+gsettings set org.gnome.desktop.session idle-delay uint32 1
+
+# show date
+gsettings set com.canonical.indicator.datetime show-date true
+
+# key repeat time
+gsettings set org.gnome.desktop.peripherals.keyboard delay 144
+gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
+
+# default keybind as emacs
+gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
+
+# caps as ctrl
+gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+
+# switch workspace
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Primary>1']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Primary>2']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Primary>3']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Primary>4']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Primary>5']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Primary>6']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-7 "['<Primary>7']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-8 "['<Primary>8']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Primary>9']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-10 "['<Primary>0']"
