@@ -74,9 +74,9 @@ switch (uname)
         # os setting
         function f
             if count $argv > /dev/null
-                gnome-open $argv
+                gnome-open $argv 2>/dev/null
             else
-                gnome-open $PWD
+                gnome-open $PWD 2>/dev/null
             end
         end
         alias o='gnome-open'
