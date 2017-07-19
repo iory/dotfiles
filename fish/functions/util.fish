@@ -132,3 +132,13 @@ end
 function weather
     curl wttr.in/tokyo
 end
+
+function emptytrash -d "Empty the trash and Quarantine on OS X"
+    switch (uname)
+        case Darwin
+            sudo command rm -rfv "/Volumes/*/.Trashes"
+            sudo command rm -rfv $HOME/.Trash
+        case Linux
+            rm -rf $HOME/.local/share/Trash
+    end
+end
