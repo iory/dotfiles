@@ -38,6 +38,10 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
     ln -sf `pwd`/.vimrc $HOME/.vimrc
     curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | bash
+
+    mkdir -p $HOME/.config/nvim
+    ln -sf `pwd`/nvim/dein $HOME/.config/dein
+    ln -sf `pwd`/nvim/init.vim $HOME/.config/nvim/init.vim
 }
 
 : "set zsh" && {
