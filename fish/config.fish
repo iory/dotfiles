@@ -3,6 +3,7 @@ if test -e ~/.fishrc.local
 end
 
 set -x PATH $HOME/.local/bin $PATH
+set -x XDG_CONFIG_HOME $HOME/.config
 
 . ~/.config/fish/functions/emacs.fish
 . ~/.config/fish/functions/git.fish
