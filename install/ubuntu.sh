@@ -26,3 +26,13 @@ sudo sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
 
 # change keyboard layout
 setxkbmap us
+
+# workspace like a Mac
+dconf read /org/compiz/profiles/unity/plugins/core/hsize
+dconf read /org/compiz/profiles/unity/plugins/core/vsize
+
+dconf write /org/compiz/profiles/unity/plugins/core/wsize 1
+dconf write /org/compiz/profiles/unity/plugins/core/hsize 10
+
+# disable pop up of dash by super key
+dconf write /org/compiz/profiles/unity/plugins/unityshell/show-launcher '""'
