@@ -11,6 +11,7 @@ set -x PATH $HOME/.local/bin $PATH
 . ~/.config/fish/functions/ghs.fish
 . ~/.config/fish/functions/vim.fish
 . ~/.config/fish/functions/update.fish
+. ~/.config/fish/functions/ps.fish
 switch (uname)
     case Darwin
         . ~/.config/fish/functions/itunes.fish
