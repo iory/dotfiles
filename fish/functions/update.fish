@@ -1,6 +1,6 @@
 function update -d "Updates all software"
     switch (uname)
-        Linux
+        case Linux
             sudo apt-get -y update
             sudo apt-get -y upgrade
     end
