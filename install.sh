@@ -65,3 +65,19 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     fi
     ln -sf $current_working_directory/ipython-settings/00-first.py ~/.ipython/profile_default/startup/00-first.py
 }
+
+: "jupyter" && {
+    if type jupyter >/dev/null 2>&1; then
+        mkdir -p $(jupyter --data-dir)/nbextensions
+        if [ ! -d $(jupyter --data-dir)/nbextensions/vim_binding ]; then
+            git clone https://github.com/lambdalisue/jupyter-vim-binding $(jupyter --data-dir)/nbextensions/vim_binding
+        else
+            (cd $(jupyter --data-dir)/nbextensions/vim_binding && git pull)
+        fi
+        jupyter nbextension enable vim_binding/vim_binding
+    else
+        red-echo 'jupyter not found\!';
+        red-echo 'try to install jupyter.';
+        red-echo 'pip install jupyter';
+    fi
+}
