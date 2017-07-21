@@ -17,6 +17,19 @@ function error {
 
 trap error ERR
 
+for i in "$@"
+do
+    case $i in
+        --python)
+            INSTALL_PYTHON=1
+            shift # past argument=value
+            ;;
+        *)
+            # unknown option
+            ;;
+    esac
+done
+
 current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 :  "install dotfiles" && {
@@ -45,6 +58,8 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
         [[ "$f" == ".git" ]] && continue
         [[ "$f" == ".DS_Store" ]] && continue
         [[ "$f" == ".travis.yaml" ]] && continue
+        [ -z "$INSTALL_PYTHON" ] && [[ "$f" == ".ipython" ]] && continue
+        [ -z "$INSTALL_PYTHON" ] && [[ "$f" == ".jupyter" ]] && continue
 
         echo `pwd`/"$f" "->" ~/"$f"
         ln -sfh `pwd`/"$f" ~/"$f"
@@ -61,14 +76,7 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     done
 }
 
-: "ipython settings" && {
-    if [ ! -e $HOME/.ipython/profile_default/startup ]; then
-        mkdir -p $HOME/.ipython/profile_default/startup
-    fi
-    ln -sfh $current_working_directory/ipython-settings/00-first.py ~/.ipython/profile_default/startup/00-first.py
-}
-
-: "install jupyter extentions" && {
+: "install jupyter extentions" && [ -n "$INSTALL_PYTHON" ] && {
     green-echo "install jupyter extentions"
     if type jupyter >/dev/null 2>&1; then
         mkdir -p $(jupyter --data-dir)/nbextensions
