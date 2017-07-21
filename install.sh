@@ -30,20 +30,13 @@ do
     esac
 done
 
-current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
+DOTFILES_DIRECTORY=$HOME/.dotfiles
 :  "install dotfiles" && {
-    [ ! -d ${HOME}/.dotfiles ] && git clone https://github.com/iory/dotfiles.git ~/.dotfiles
-}
-
-: "vim install" && {
-    mkdir -p $HOME/.config/nvim
-    ln -sfh `pwd`/nvim/dein $HOME/.config/dein
-    ln -sfh `pwd`/nvim/init.vim $HOME/.config/nvim/init.vim
+    [ ! -d ${HOME}/.dotfiles ] && git clone https://github.com/iory/dotfiles.git $DOTFILES_DIRECTORY
 }
 
 : "set zsh" && {
-    ZDOTDIR=$current_working_directory
+    ZDOTDIR=$DOTFILES_DIRECTORY
     mkdir $ZDOTDIR/zsh/plugins -p
     cd $ZDOTDIR/zsh/plugins -p
     [ ! -d zsh-syntax-highlighting ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -53,18 +46,33 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 : "symbolic link for dotfiles" && {
     green-echo "symbolic link for dotfiles"
-    cd $current_working_directory
+    cd $DOTFILES_DIRECTORY
     for f in .??*; do
         [[ "$f" == ".git" ]] && continue
         [[ "$f" == ".DS_Store" ]] && continue
         [[ "$f" == ".travis.yaml" ]] && continue
-        [ -z "$INSTALL_PYTHON" ] && [[ "$f" == ".ipython" ]] && continue
-        [ -z "$INSTALL_PYTHON" ] && [[ "$f" == ".jupyter" ]] && continue
+        [ -z "$PYTHON_INSTALL" ] && [[ "$f" == ".ipython" ]] && continue
+        [ -z "$PYTHON_INSTALL" ] && [[ "$f" == ".jupyter" ]] && continue
 
         echo `pwd`/"$f" "->" ~/"$f"
         ln -sfh `pwd`/"$f" ~/"$f"
     done
-    bash $current_working_directory/config/install.sh
+
+    green-echo "symbolic link for .config files"
+    for f in config/??*; do
+        echo `pwd`/"$f" "->" ~/.config/$(basename "$f")
+        ln -sfh `pwd`/"$f" ~/.config/$(basename "$f")
+    done
+}
+
+: "vim settings install" && {
+    cd /tmp
+    wget -q https://raw.githubusercontent.com/colepeters/spacemacs-theme.vim/master/colors/spacemacs-theme.vim
+    mkdir -p $HOME/.config/nvim/colors
+    mkdir -p $HOME/.vim/colors
+    cp spacemacs-theme.vim $HOME/.config/nvim/colors/
+    cp spacemacs-theme.vim $HOME/.vim/colors/
+    rm -rf spacemacs-theme.vim
 }
 
 : "symbolic link for bin" && {

@@ -143,3 +143,9 @@ function! s:split_line_text_at_cursor()
   let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
   return [text_before_cursor, text_after_cursor]
 endfunction
+
+if (has("termguicolors"))
+  set termguicolors
+endif
+set background=dark
+colorscheme spacemacs-theme
