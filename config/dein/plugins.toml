@@ -56,3 +56,5 @@ repo = 'altercation/vim-colors-solarized'
 [[plugins]]
 repo = 'kana/vim-smartinput'
 
+[[plugins]]
+repo = 'christoomey/vim-tmux-navigator'
