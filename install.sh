@@ -25,8 +25,8 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 : "vim install" && {
     mkdir -p $HOME/.config/nvim
-    ln -sf `pwd`/nvim/dein $HOME/.config/dein
-    ln -sf `pwd`/nvim/init.vim $HOME/.config/nvim/init.vim
+    ln -sfh `pwd`/nvim/dein $HOME/.config/dein
+    ln -sfh `pwd`/nvim/init.vim $HOME/.config/nvim/init.vim
 }
 
 : "set zsh" && {
@@ -39,23 +39,25 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 }
 
 : "symbolic link for dotfiles" && {
+    green-echo "symbolic link for dotfiles"
     cd $current_working_directory
     for f in .??*; do
         [[ "$f" == ".git" ]] && continue
         [[ "$f" == ".DS_Store" ]] && continue
         [[ "$f" == ".travis.yaml" ]] && continue
 
-        echo "$f"
-        ln -sf `pwd`/"$f" ~/"$f"
+        echo `pwd`/"$f" "->" ~/"$f"
+        ln -sfh `pwd`/"$f" ~/"$f"
     done
     bash $current_working_directory/config/install.sh
 }
 
-: "symbolic link to bin" && {
+: "symbolic link for bin" && {
+    green-echo "symbolic link for bin"
     mkdir -p $HOME/.local/bin
     for f in $HOME/.dotfiles/bin/*; do
         echo "$f" "->" $HOME/.local/bin/$(basename "$f")
-        ln -sf "$f" $HOME/.local/bin/$(basename $f)
+        ln -sfh "$f" $HOME/.local/bin/$(basename $f)
     done
 }
 
@@ -63,10 +65,11 @@ current_working_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     if [ ! -e $HOME/.ipython/profile_default/startup ]; then
         mkdir -p $HOME/.ipython/profile_default/startup
     fi
-    ln -sf $current_working_directory/ipython-settings/00-first.py ~/.ipython/profile_default/startup/00-first.py
+    ln -sfh $current_working_directory/ipython-settings/00-first.py ~/.ipython/profile_default/startup/00-first.py
 }
 
-: "jupyter" && {
+: "install jupyter extentions" && {
+    green-echo "install jupyter extentions"
     if type jupyter >/dev/null 2>&1; then
         mkdir -p $(jupyter --data-dir)/nbextensions
         if [ ! -d $(jupyter --data-dir)/nbextensions/vim_binding ]; then

@@ -16,5 +16,5 @@ abs_dirname() {
 
 script_dir="$(abs_dirname "$0")"
 mkdir -p ~/.config/fcitx
-ln -sf $script_dir/fcitx/config ~/.config/fcitx/config
-ln -sf $script_dir/fcitx/conf ~/.config/fcitx/conf
+ln -sfh $script_dir/fcitx/config ~/.config/fcitx/config
+ln -sfh $script_dir/fcitx/conf ~/.config/fcitx/conf
