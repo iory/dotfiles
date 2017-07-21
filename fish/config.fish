@@ -17,6 +17,7 @@ set -x XDG_CONFIG_HOME $HOME/.config
 switch (uname)
     case Darwin
         . ~/.config/fish/functions/itunes.fish
+        . ~/.config/fish/functions/osx.fish
 end
 
 #peco
