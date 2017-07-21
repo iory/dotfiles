@@ -149,3 +149,6 @@ if (has("termguicolors"))
 endif
 set background=dark
 colorscheme spacemacs-theme
+
+let mapleader = "\<Space>"
+nmap <Leader><Leader> V
