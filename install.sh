@@ -52,8 +52,8 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
         [[ "$f" == ".git" ]] && continue
         [[ "$f" == ".DS_Store" ]] && continue
         [[ "$f" == ".travis.yaml" ]] && continue
-        [ -z "$PYTHON_INSTALL" ] && [[ "$f" == ".ipython" ]] && continue
-        [ -z "$PYTHON_INSTALL" ] && [[ "$f" == ".jupyter" ]] && continue
+        [ -z "$INSTALL_PYTHON" ] && [[ "$f" == ".ipython" ]] && continue
+        [ -z "$INSTALL_PYTHON" ] && [[ "$f" == ".jupyter" ]] && continue
 
         echo `pwd`/"$f" "->" ~/"$f"
         ln -sfh `pwd`/"$f" ~/"$f"
