@@ -36,12 +36,13 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
 }
 
 : "set zsh" && {
+    green-echo "install zsh setings"
     ZDOTDIR=$DOTFILES_DIRECTORY
-    mkdir $ZDOTDIR/zsh/plugins -p
-    cd $ZDOTDIR/zsh/plugins -p
-    [ ! -d zsh-syntax-highlighting ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-    [ ! -d zsh-autosuggestions ] && git clone https://github.com/zsh-users/zsh-autosuggestions.git
-    [ ! -d ~/.oh-my-zsh ] && git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    mkdir -p $ZDOTDIR/zsh/plugins
+    cd $ZDOTDIR/zsh/plugins
+    [ ! -d zsh-syntax-highlighting ] && git clone -q https://github.com/zsh-users/zsh-syntax-highlighting.git
+    [ ! -d zsh-autosuggestions ] && git clone -q https://github.com/zsh-users/zsh-autosuggestions.git
+    [ ! -d ~/.oh-my-zsh ] && git clone -q https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 }
 
 : "symbolic link for dotfiles" && {
