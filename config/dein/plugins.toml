@@ -1,13 +1,13 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-[[plugins]] 
+[[plugins]]
 repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-    let g:lightline = { 
+    let g:lightline = {
     \   'colorscheme': 'wombat'
     \}
 '''
