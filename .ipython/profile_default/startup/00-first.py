@@ -37,18 +37,22 @@ import chainer
 import chainer.functions as F
 import chainer.links as L
 
+
 def mem(obj):
     return hex(id(obj))
 
+
 def cvshow(img):
-    if img.ndim == 2: # gray image
+    if img.ndim == 2:  # gray image
         img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
     plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     plt.show()
 
+
 def imshow(img):
     plt.imshow(img)
     plt.show()
+
 
 print("type()    -> analyze type of objects.")
 print("see()     -> extend dir().")
