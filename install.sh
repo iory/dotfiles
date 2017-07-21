@@ -56,13 +56,13 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
         [ -z "$INSTALL_PYTHON" ] && [[ "$f" == ".jupyter" ]] && continue
 
         echo `pwd`/"$f" "->" ~/"$f"
-        ln -sfh `pwd`/"$f" ~/"$f"
+        ln -sfn `pwd`/"$f" ~/"$f"
     done
 
     green-echo "symbolic link for .config files"
     for f in config/??*; do
         echo `pwd`/"$f" "->" ~/.config/$(basename "$f")
-        ln -sfh `pwd`/"$f" ~/.config/$(basename "$f")
+        ln -sfn `pwd`/"$f" ~/.config/$(basename "$f")
     done
 }
 
@@ -81,7 +81,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     mkdir -p $HOME/.local/bin
     for f in $HOME/.dotfiles/bin/*; do
         echo "$f" "->" $HOME/.local/bin/$(basename "$f")
-        ln -sfh "$f" $HOME/.local/bin/$(basename $f)
+        ln -sfn "$f" $HOME/.local/bin/$(basename $f)
     done
 }
 
