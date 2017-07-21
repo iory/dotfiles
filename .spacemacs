@@ -658,9 +658,10 @@ you should place you code here."
          '(("CMakeLists\\.txt\\'" . cmake-mode))
          '(("\\.cmake\\'" . cmake-mode))
          auto-mode-alist))
+  (define-key evil-normal-state-map (kbd "v") #'er/expand-region)
 
-  (global-set-key (kbd "C-l") 'er/expand-region)
-  (global-set-key (kbd "C-M-l") 'er/expand-region)
+  (define-key evil-normal-state-map (kbd "H") #'mwim-beginning-of-code-or-line)
+  (define-key evil-normal-state-map (kbd "L") #'mwim-end-of-line-or-code)
 
   ;; quickrun
   ;; -------------------------------------------------------------------------------------------
