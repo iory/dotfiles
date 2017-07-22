@@ -31,6 +31,11 @@ function fish_user_key_bindings
     bind \cxk peco_kill
     bind \cc\cr peco_recentd
     bind \c] peco_select_ghq_repository
+    switch (uname)
+        case Darwin
+            bind \cc\ci _itunes_play_track
+            bind \cci _itunes_play_track
+    end
 end
 
 
