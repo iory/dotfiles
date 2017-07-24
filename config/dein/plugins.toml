@@ -58,3 +58,6 @@ repo = 'kana/vim-smartinput'
 
 [[plugins]]
 repo = 'christoomey/vim-tmux-navigator'
+
+[[plugins]]
+repo = 'terryma/vim-expand-region'

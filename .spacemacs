@@ -57,7 +57,6 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
-     ace-jump-mode
      cuda-mode
      demo-it
      dockerfile-mode
@@ -345,13 +344,8 @@ you should place you code here."
   ;; add google-this
   (google-this-mode 1)
 
-  (setq ace-jump-mode-move-keys
-        (append "asdfghjkl;[]qwertyuiop'zxcvbnm,./" nil))
-  ;; (setq ace-jump-mode-move-keys
-  ;;       (append "hjkl;'uiop[]nm,." nil)) ;; left-hand only-mode
-  (define-key evil-normal-state-map (kbd "L") #'evil-ace-jump-line-mode)
-  (define-key evil-normal-state-map (kbd "m") #'evil-ace-jump-char-mode)
-  (define-key evil-normal-state-map (kbd "M") #'evil-ace-jump-word-mode)
+  (global-set-key (kbd "M-g M-g") #'evil-avy-goto-line)
+  (global-set-key (kbd "C-;") 'evil-avy-goto-char)
 
   ;; Enable C-h on minibuffer
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
@@ -597,7 +591,6 @@ you should place you code here."
 
   ;; helm settings
   ;; -------------------------------------------------------------------------------------------
-  (global-set-key (kbd "C-;") 'helm-for-files)
   (define-key global-map (kbd "C-x b") 'helm-for-files)
 
   ;; helm ag
@@ -665,9 +658,10 @@ you should place you code here."
          '(("CMakeLists\\.txt\\'" . cmake-mode))
          '(("\\.cmake\\'" . cmake-mode))
          auto-mode-alist))
+  (define-key evil-normal-state-map (kbd "v") #'er/expand-region)
 
-  (global-set-key (kbd "C-l") 'er/expand-region)
-  (global-set-key (kbd "C-M-l") 'er/expand-region)
+  (define-key evil-normal-state-map (kbd "H") #'mwim-beginning-of-code-or-line)
+  (define-key evil-normal-state-map (kbd "L") #'mwim-end-of-line-or-code)
 
   ;; quickrun
   ;; -------------------------------------------------------------------------------------------

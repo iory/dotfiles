@@ -156,3 +156,22 @@ nmap <Leader><Leader> V
 " For vim-tmux-navigator
 " https://github.com/christoomey/vim-tmux-navigator/issues/72
 set shell=/bin/bash\ -i
+
+" Remove trailing whitespaces
+nnoremap <silent> <Leader><Space> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>:w<CR>
+
+nnoremap <Leader>o :CtrlP<CR>
+
+nnoremap <CR> G
+nnoremap <BS> gg
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>s :wq<CR>
+nnoremap <Leader>v V
+nnoremap <Leader>g gf
+
+nnoremap H 0
+nnoremap L $
+
+" expand region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)

@@ -14,9 +14,11 @@ set -x XDG_CONFIG_HOME $HOME/.config
 . ~/.config/fish/functions/update.fish
 . ~/.config/fish/functions/ps.fish
 . ~/.config/fish/functions/lock.fish
+. ~/.config/fish/functions/video.fish
 switch (uname)
     case Darwin
         . ~/.config/fish/functions/itunes.fish
+        . ~/.config/fish/functions/osx.fish
 end
 
 #peco
@@ -30,6 +32,11 @@ function fish_user_key_bindings
     bind \cxk peco_kill
     bind \cc\cr peco_recentd
     bind \c] peco_select_ghq_repository
+    switch (uname)
+        case Darwin
+            bind \cc\ci _itunes_play_track
+            bind \cci _itunes_play_track
+    end
 end
 
 

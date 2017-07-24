@@ -142,3 +142,14 @@ function emptytrash -d "Empty the trash and Quarantine on OS X"
             rm -rf $HOME/.local/share/Trash
     end
 end
+
+function count_down -d "CountDown and execute command"
+    switch (count argv)
+        case '*'
+            for i in (seq $argv[1] -1 1)
+                echo $i
+                sleep 1
+            end
+            eval $argv[2..-1]
+    end
+end

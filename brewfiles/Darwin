@@ -1,5 +1,7 @@
 # brewfile for mac
 
+brew "reattach-to-user-namespace"
 brew "ripgrep"
 brew "vim"
 brew "terminal-notifier"
+brew "wget"
