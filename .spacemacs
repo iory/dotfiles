@@ -317,6 +317,9 @@ you should place you code here."
   (add-to-list 'auto-mode-alist '("/authorized_keys?\\'" . ssh-authorized-keys-mode))
   (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
 
+  (global-set-key (kbd "C-c ]") #'helm-ghq)
+  (global-set-key (kbd "C-c C-]") #'helm-ghq)
+
   (defun server-restart ()
     (interactive)
     (server-force-delete)
