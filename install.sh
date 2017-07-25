@@ -85,6 +85,18 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     done
 }
 
+: "install applications" && {
+    case ${OSTYPE} in
+        linux*)
+            wget -q "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download" -O $HOME/.local/bin/gdrive
+            chmod +x $HOME/.local/bin/gdrive
+            ;;
+        darwin*)
+            # install from brew
+            ;;
+    esac
+}
+
 : "install jupyter extentions" && [ -n "$INSTALL_PYTHON" ] && {
     green-echo "install jupyter extentions"
     if type jupyter >/dev/null 2>&1; then
