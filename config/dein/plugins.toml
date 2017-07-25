@@ -61,3 +61,6 @@ repo = 'christoomey/vim-tmux-navigator'
 
 [[plugins]]
 repo = 'terryma/vim-expand-region'
+
+[[plugins]]
+repo = 'dag/vim-fish'
