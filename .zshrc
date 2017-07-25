@@ -85,6 +85,7 @@ source ~/.dotfiles/sh/plugins/git.sh
 source ~/.dotfiles/sh/plugins/peco.sh
 source ~/.dotfiles/sh/plugins/tmux.sh
 source ~/.dotfiles/sh/plugins/util.sh
+source ~/.dotfiles/sh/plugins/lock.sh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # export PYENV_ROOT="$HOME/.pyenv"
