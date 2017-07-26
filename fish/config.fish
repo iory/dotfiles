@@ -15,6 +15,7 @@ set -x XDG_CONFIG_HOME $HOME/.config
 . ~/.config/fish/functions/ps.fish
 . ~/.config/fish/functions/lock.fish
 . ~/.config/fish/functions/video.fish
+. ~/.config/fish/functions/gdrive.fish
 switch (uname)
     case Darwin
         . ~/.config/fish/functions/itunes.fish
