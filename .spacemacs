@@ -18,9 +18,12 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     csv
+     bibtex
      rust
      html
      octave
+     vimscript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -65,7 +68,6 @@ values."
      google-this
      lispxmp
      fcitx
-     fish-mode
      irony ;; c++
      irony-eldoc ;; c++
      company-irony ;; c++
@@ -86,7 +88,6 @@ values."
      milkode
      smartrep
      keydef
-     vimrc-mode
      toml-mode
      helm-ghq
      helm-ghs
