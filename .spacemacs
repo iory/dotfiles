@@ -89,7 +89,8 @@ values."
      vimrc-mode
      toml-mode
      helm-ghq
-     helm-ghs)
+     helm-ghs
+     auto-save-buffers-enhanced)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -317,6 +318,16 @@ you should place you code here."
     (server-force-delete)
     (server-start)
     )
+
+  ;; auto-save-buffers-enhanced
+  (setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
+  (setq auto-save-buffers-enhanced-file-related-with-scratch-buffer
+        (locate-user-emacs-file "scratch"))
+  (setq auto-save-buffers-enhanced-quiet-save-p t)
+  (setq auto-save-buffers-enhanced-interval 1)
+  (setq auto-save-buffers-enhanced-exclude-regexps '("^/ssh:" "/sudo:" "/multi:"))
+  (auto-save-buffers-enhanced-include-only-checkout-path t)
+  (auto-save-buffers-enhanced t)
 
   ;; dired
   (setq dired-dwim-target t)
