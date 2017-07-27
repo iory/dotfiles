@@ -29,7 +29,7 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-insert
+     ;; auto-insert
      better-defaults
      c-c++
      clojure
@@ -60,6 +60,8 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     replace-from-region
+     bind-key
      cuda-mode
      demo-it
      dockerfile-mode
@@ -86,7 +88,6 @@ values."
      web-beautify
      highlight-symbol
      milkode
-     smartrep
      keydef
      toml-mode
      helm-ghq
@@ -282,7 +283,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup t
+   dotspacemacs-whitespace-cleanup 'all
    ))
 
 (defun dotspacemacs/user-init ()
@@ -302,57 +303,41 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
 
-  (when (file-exists-p "~/.spacemacs.local.el")
-    (load "~/.spacemacs.local.el"))
-  ;; eww
-  (setq eww-search-prefix "http://www.google.co.jp/search?q=")
-  (defvar eww-disable-colorize t)
+  ;; load local settings
+  ;; -------------------------------------------------------------------------------------------
+  ;; (when (file-exists-p "~/.spacemacs.local.el")
+  ;;   (load "~/.spacemacs.local.el"))
+  ;; (when (file-exists-p "~/.emacs.d/shellenv.el")
+  ;;   (load "~/.emacs.d/shellenv.el"))
 
   ;; settings
   ;; -------------------------------------------------------------------------------------------
 
+  ;; disable highlight current line
+  (global-hl-line-mode -1)
+
+  (defun kill-region-or-backward-kill-word ()
+    (interactive)
+    (if (region-active-p)
+        (kill-region (point) (mark))
+      (backward-kill-word 1)))
+
+  (global-set-key "\C-w" 'kill-region-or-backward-kill-word)
+
+  (defun other-window-or-split ()
+    (interactive)
+    (when (one-window-p)
+      (split-window-horizontally))
+    (other-window 1))
+
+  (global-set-key (kbd "C-t") 'other-window-or-split)
+
+  (global-set-key "\C-h" 'delete-backward-char)
+
+  (setq whitespace-space-regexp "\\(\u3000+\\)")
+
   (global-set-key (kbd "C-c ]") #'helm-ghq)
   (global-set-key (kbd "C-c C-]") #'helm-ghq)
-
-  (defun server-restart ()
-    (interactive)
-    (server-force-delete)
-    (server-start)
-    )
-
-  ;; auto-save-buffers-enhanced
-  (setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
-  (setq auto-save-buffers-enhanced-file-related-with-scratch-buffer
-        (locate-user-emacs-file "scratch"))
-  (setq auto-save-buffers-enhanced-quiet-save-p t)
-  (setq auto-save-buffers-enhanced-interval 1)
-  (setq auto-save-buffers-enhanced-exclude-regexps '("^/ssh:" "/sudo:" "/multi:"))
-  (auto-save-buffers-enhanced-include-only-checkout-path t)
-  (auto-save-buffers-enhanced t)
-
-  ;; dired
-  (setq dired-dwim-target t)
-  (setq dired-recursive-copies 'always)
-  (setq dired-isearch-filenames t)
-  (setq dired-listing-switches (purecopy "-Ahl"))
-  (add-hook 'dired-load-hook (lambda ()
-                               (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)))
-
-  ;; mark settings
-  (eval-after-load 'evil-maps
-    '(progn
-       (define-key evil-motion-state-map (kbd "C-u") 'universal-argument)))
-  (setq set-mark-command-repeat-pop t)
-
-  (require 'easy-kill)
-  (global-set-key (kbd "M-w") 'easy-kill)
-  (push '(?a buffer) easy-kill-alist)
-
-  ;; add google-this
-  (google-this-mode 1)
-
-  (global-set-key (kbd "M-g M-g") #'evil-avy-goto-line)
-  (global-set-key (kbd "C-;") 'evil-avy-goto-char)
 
   ;; Enable C-h on minibuffer
   (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
@@ -360,42 +345,17 @@ you should place you code here."
   ;; auto chmod +x
   (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-  (cond ((eq system-type 'gnu/linux)
-         (add-hook 'evil-normal-state-entry-hook
-                   '(lambda ()
-                      (if (string= "2\n" (shell-command-to-string "fcitx-remote"))
-                          (shell-command "fcitx-remote -c"))))
-         (add-hook 'focus-in-hook
-                   '(lambda () (shell-command "fcitx-remote -c")))
-         )
-        ((eq system-type 'darwin)
-         (setq browse-url-browser-function 'browse-url-default-macosx-browser)
-         (when (fboundp 'mac-auto-ascii-mode)
-           (mac-auto-ascii-mode 1))
-         (add-hook 'evil-normal-state-entry-hook
-                   '(lambda () (mac-select-input-source "com.google.inputmethod.Japanese.Roman")))
-         (add-hook 'focus-in-hook
-                   '(lambda () (mac-select-input-source "com.google.inputmethod.Japanese.Roman")))
+  ;; avoid "Symbolic link to SVN-controlled source file; follow link? (yes or no)"
+  (setq vc-follow-symlinks t)
 
-         ;; change command to alt key
-         (when (eq system-type 'darwin)
-           (setq ns-command-modifier (quote meta)))
+  (setq set-mark-command-repeat-pop t)
 
-         )
-        )
+  ;; open junk file
+  (global-set-key (kbd "C-x C-z") 'spacemacs/open-junk-file)
 
-  (defun c++-print-debug (beginning end)
-    (interactive "r")
-    (let ((cnt 0)
-          (string-length (length " std::cout << %d << std::endl;")))
-      (save-excursion
-        (goto-char beginning)
-        (while (and (search-forward ";" nil t) (< (point) (+ (- end 1) (* cnt string-length))))
-          (message "%d %d" (point) (+ end (* cnt string-length)))
-          (replace-match (format "; std::cout << %d << std::endl;" cnt))
-          (incf cnt)))))
+  (global-set-key (kbd "C-l") 'er/expand-region)
+  (global-set-key (kbd "C-M-l") 'er/contract-region)
 
-  ;; parens for evil-mode
   (defun region-to-single-quote ()
     (interactive)
     (quote-formater "'%s'" "^\\(\"\\).*" ".*\\(\"\\)$"))
@@ -423,212 +383,29 @@ you should place you code here."
   (define-key region-bindings-mode-map (kbd "M-\"") 'region-to-double-quote)
   (define-key region-bindings-mode-map (kbd "M-9") 'region-to-bracket)
   (define-key region-bindings-mode-map (kbd "M-[") 'region-to-square-bracket)
+  (define-key region-bindings-mode-map (kbd "C-s") 'search-selection)
+  (define-key region-bindings-mode-map (kbd "C-r") 'search-selection)
+  (define-key region-bindings-mode-map (kbd "q") 'query-replace-from-region)
+  (define-key region-bindings-mode-map (kbd "C-q") 'query-replace-regexp-from-region)
+  (define-key region-bindings-mode-map (kbd ".") 'highlight-symbol-at-point)
 
-  ;; whitespace
-  (setq whitespace-style '(face           ; faceで可視化
-                           trailing       ; 行末
-                           tabs           ; タブ
-                           spaces         ; スペース
-                           empty          ; 先頭/末尾の空行
-                           space-mark     ; 表示のマッピング
-                           tab-mark
-                           ))
-
-
-  (setq whitespace-display-mappings
-        '((space-mark ?\u3000 [?\u25a1])
-          ;; WARNING: the mapping below has a problem.
-          ;; When a TAB occupies exactly one column, it will display the
-          ;; character ?\xBB at that column followed by a TAB which goes to
-          ;; the next TAB column.
-          ;; If this is a problem for you, please, comment the line below.
-          (tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
-
-  ;; スペースは全角のみを可視化
-  (setq whitespace-space-regexp "\\(\u3000+\\)")
-
-  ;; 保存前に自動でクリーンアップ
-  (setq whitespace-action '(auto-cleanup))
-
-  (global-whitespace-mode 1)
-
-  (global-set-key "\C-w" 'kill-region-or-backward-kill-word)
-  (global-set-key "\C-h" 'delete-backward-char)
-
-  (defun kill-region-or-backward-kill-word ()
-    (interactive)
-    (if (region-active-p)
-        (kill-region (point) (mark))
-      (backward-kill-word 1)))
-
-  (global-set-key "\C-w" 'kill-region-or-backward-kill-word)
-
-  (defun other-window-or-split ()
-    (interactive)
-    (when (one-window-p)
-      (split-window-horizontally))
-    (other-window 1))
-
-  (global-set-key (kbd "C-t") 'other-window-or-split)
-  (global-set-key (kbd "C-x C-z") 'spacemacs/open-junk-file)
-
-  (require 'smartrep)
-  (smartrep-define-key global-map "C-x"
-    '(("{" . shrink-window-horizontally)
-      ("}" . enlarge-window-horizontally)))
-
-  ;; avoid "Symbolic link to SVN-controlled source file; follow link? (yes or no)"
-  (setq vc-follow-symlinks t)
-
-  ;; milkode
-  (global-set-key (kbd "M-g s") 'milkode:search)
-
-  (global-set-key (kbd "C-o") 'evil-open-below)
-
-  ;; org-mode
-  ;; -------------------------------------------------------------------------------------------
-  (require 'org)
-  (setq org-directory "~/org")
-  (setq org-capture-templates
-        '(("m" "Memo" entry (file+headline "memo.org" "Memo")
-           "** %U%?\n%i\n")))
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key
-   (kbd "<f6>")
-   (lambda () (interactive) (find-file "~/org/daily-projects.org")))
-
-  (setq org-agenda-start-with-log-mode t)
-  (setq org-agenda-span 30)
-  (setq org-agenda-files '("~/org/inbox.org" "~/org/daily-projects.org"))
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (setq org-agenda-custom-commands
-        '(("a" "Agenda and all TODO's"
-           ((tags "project-CLOCK=>\"<today>\"|repeatable") (agenda "") (alltodo)))))
-  (defun org-agenda-default ()
-    (interactive)
-    (org-agenda nil "a"))
-  (global-set-key (kbd "<f6>") 'org-agenda-default)
-
-  (defun launch-enable-keymap (&optional prefix)
-    "Setup standard keybindings for the ros-launch file"
-    (interactive)
-    (if prefix
-        (unless (string-match " $" prefix)
-          (setq prefix (concat prefix " ")))
-      (setq prefix "C-c r")
-      )
-    (define-key launch-mode-map (kbd (concat prefix ",")) 'launch-insert-node-name)
-    (define-key launch-mode-map (kbd (concat prefix ".")) 'launch-goto-include-launch)
-    (define-key launch-mode-map (kbd (concat prefix "[")) 'launch-location-stack-forward)
-    (define-key launch-mode-map (kbd (concat prefix "]")) 'launch-location-stack-back)
-    (define-key launch-mode-map (kbd "C-.") 'launch-goto-include-launch)
-    )
-  (add-hook 'launch-mode-hook 'launch-enable-keymap)
-
-  (when (locate-library "company")
-    (global-company-mode 1)
-    (global-set-key (kbd "C-M-i") 'company-complete)
-    ;; (setq company-idle-delay nil) ;; disable auto completion
-    (define-key company-active-map (kbd "C-n") 'company-select-next)
-    (define-key company-active-map (kbd "C-p") 'company-select-previous)
-    (define-key company-search-map (kbd "C-n") 'company-select-next)
-    (define-key company-search-map (kbd "C-p") 'company-select-previous)
-    (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
-    (define-key company-active-map (kbd "C-i") 'company-complete-selection)
-    (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete))
+  ;; for region-bindings-mode-map
+  (defun search-selection (from to)
+    "search for selected text"
+    (interactive "r") ;; select region
+    (let ((selection (buffer-substring-no-properties from to)))
+      (deactivate-mark)
+      (region-bindings-mode-off)
+      (isearch-mode t nil nil nil)
+      (isearch-yank-string selection)))
 
   ;; anzu
   (global-set-key [remap query-replace] 'anzu-query-replace)
   (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
 
-  ;; helm settings
-  ;; -------------------------------------------------------------------------------------------
-  (define-key global-map (kbd "C-x b") 'helm-for-files)
-
-  ;; helm ag
-  (setq helm-ag-base-command "rg --vimgrep --no-heading") ; use ripgrep
-  (setq helm-ag-insert-at-point 'symbol)
-  (global-set-key (kbd "C-M-g") 'helm-ag)
-  (global-set-key (kbd "C-M-k") 'backward-kill-sexp)
-
-  (defun helm-ag-dotfiles ()
-    "search .dotfiles"
-    (interactive)
-    (helm-ag "~/.dotfiles/"))
-  (defun helm-projectile-ag ()
-    "Projectile"
-    (interactive)
-    (helm-ag (projectile-project-root)))
-
-  ;; C/C++
-  ;; -------------------------------------------------------------------------------------------
-  ;; c-mode
-  (setq-default c-basic-offset 4
-                tab-width 4
-                indent-tabs-mode nil)
-  ;; C++ style
-  (add-hook 'c++-mode-hook
-            '(lambda()
-               (c-set-offset 'innamespace 0)   ; namespace {}の中はインデントしない
-               ))
-
-  (eval-after-load "flycheck"
-    '(progn
-       (when (locate-library "flycheck-irony")
-         (flycheck-irony-setup))))
-  (rtags-enable-standard-keybindings c-mode-base-map)
-
-  ;; python
-  ;; -------------------------------------------------------------------------------------------
-  ;; jedi
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (pyvenv-activate venv-default)
-  (elpy-use-ipython)
-  (setq elpy-rpc-backend "jedi")
-  (define-key elpy-mode-map (kbd "C-c C-v") 'helm-flycheck)
-  (require 'smartrep)
-  (smartrep-define-key elpy-mode-map "C-c"
-                       '(("C-n" . flycheck-next-error)
-                         ("C-p" . flycheck-previous-error)))
-
-  ;; ROS
-  ;; -------------------------------------------------------------------------------------------
-  (setq auto-mode-alist
-        (cons (cons "\\.cfg" 'python-mode) auto-mode-alist))
-
-  ;; Makefile
-  ;; -------------------------------------------------------------------------------------------
-  (setq auto-mode-alist
-        (append '(("Makefile\\..*$" . makefile-gmake-mode)
-                  ("Makefile_.*$" . makefile-gmake-mode)
-                  ) auto-mode-alist))
-
-  (define-key evil-normal-state-map (kbd "v") #'er/expand-region)
-
-  (define-key evil-normal-state-map (kbd "H") #'mwim-beginning-of-code-or-line)
-  (define-key evil-normal-state-map (kbd "L") #'mwim-end-of-line-or-code)
-
-  ;; quickrun
-  ;; -------------------------------------------------------------------------------------------
-  (push '("*quickrun*") popwin:special-display-config)
-  (global-set-key (kbd "<f5>") 'quickrun)
-  (global-set-key (kbd "C-'") 'quickrun)
-
-  ;; Add C++ command for C11 and set it default in C++ file.
-  (quickrun-add-command "c++/clang++"
-                        '((:command . "g++")
-                          (:exec . ("%c -std=c++11 -lstdc++ %o -o %e %s"
-                                    "%e %a"))
-                          (:remove . ("%e")))
-                        :default "c++")
-  (quickrun-set-default "c++" "c++/clang++")
-
-  (quickrun-add-command "roseus"
-                        '((:command . "roseus")
-                          (:exec . ("%c %s")))
-                        :mode 'Euslisp-mode
-                        :default "Euslisp")
-  (quickrun-set-default "Euslisp" "roseus")
+  ;; easy-kill
+  (global-set-key (kbd "M-w") 'easy-kill)
+  ;; (push '(?a buffer) easy-kill-alist)
 
   ;; highlight-symbol
   (add-hook 'prog-mode-hook 'highlight-symbol-mode)
@@ -645,11 +422,70 @@ you should place you code here."
         '("GreenYellow" "chartreuse4" "gold1" "red1" "cyan" "RoyalBlue" "PaleGreen"))
   (setq highlight-symbol-foreground-color "black")
 
-  ;; disable highlight current line
-  (global-hl-line-mode -1)
+  ;; eww
+  (setq eww-search-prefix "http://www.google.co.jp/search?q=")
+  (defvar eww-disable-colorize t)
 
-  ;; load shellenv
+  ;; auto-save-buffers-enhanced
+  (setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
+  (setq auto-save-buffers-enhanced-file-related-with-scratch-buffer
+        (locate-user-emacs-file "scratch"))
+  (setq auto-save-buffers-enhanced-quiet-save-p t)
+  (setq auto-save-buffers-enhanced-interval 1)
+  (setq auto-save-buffers-enhanced-exclude-regexps '("^/ssh:" "/sudo:" "/multi:"))
+  (auto-save-buffers-enhanced-include-only-checkout-path t)
+  (auto-save-buffers-enhanced t)
+
+  ;; when into normal mode, turn input source into english
+  (cond ((eq system-type 'gnu/linux)
+         (add-hook 'evil-normal-state-entry-hook
+                   '(lambda ()
+                      (if (string= "2\n" (shell-command-to-string "fcitx-remote"))
+                          (shell-command "fcitx-remote -c"))))
+         (add-hook 'focus-in-hook
+                   '(lambda () (shell-command "fcitx-remote -c")))
+         )
+        ((eq system-type 'darwin)
+         (setq browse-url-browser-function 'browse-url-default-macosx-browser)
+         (when (fboundp 'mac-auto-ascii-mode)
+           (mac-auto-ascii-mode 1))
+         (add-hook 'evil-normal-state-entry-hook
+                   '(lambda () (mac-select-input-source "com.google.inputmethod.Japanese.Roman")))
+         (add-hook 'focus-in-hook
+                   '(lambda () (mac-select-input-source "com.google.inputmethod.Japanese.Roman")))
+
+         ;; change command to alt key
+         (when (eq system-type 'darwin)
+           (setq ns-command-modifier (quote meta)))))
+
+  ;; evil extend
   ;; -------------------------------------------------------------------------------------------
-  (when (file-exists-p "~/.emacs.d/shellenv.el")
-    (load "~/.emacs.d/shellenv.el"))
+  (define-key evil-normal-state-map (kbd "H") #'mwim-beginning-of-code-or-line)
+  (define-key evil-normal-state-map (kbd "L") #'mwim-end-of-line-or-code)
+
+  (global-set-key (kbd "M-g M-g") #'evil-avy-goto-line)
+  (global-set-key (kbd "C-;") 'evil-avy-goto-char)
+
+  (global-set-key (kbd "C-o") 'evil-open-below)
+
+  ;; mark settings
+  (define-key evil-motion-state-map (kbd "C-u") 'universal-argument)
+
+  ;; helm settings
+  ;; -------------------------------------------------------------------------------------------
+  (define-key global-map (kbd "C-x b") 'helm-for-files)
+
+  ;; helm ag
+  (setq helm-ag-base-command "rg --vimgrep --no-heading") ; use ripgrep
+  (setq helm-ag-insert-at-point 'symbol)
+  (global-set-key (kbd "C-M-g") 'helm-ag)
+
+  (defun helm-ag-dotfiles ()
+    "search .dotfiles"
+    (interactive)
+    (helm-ag "~/.dotfiles/"))
+  (defun helm-projectile-ag ()
+    "Projectile"
+    (interactive)
+    (helm-ag (projectile-project-root)))
   )
