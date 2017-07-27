@@ -308,14 +308,6 @@ you should place you code here."
 
   ;; settings
   ;; -------------------------------------------------------------------------------------------
-  ;; ssh config mode
-  (autoload 'ssh-config-mode "ssh-config-mode" t)
-  (add-to-list 'auto-mode-alist '("/ssh-config\\'"     . ssh-config-mode))
-  (add-to-list 'auto-mode-alist '("/\\.ssh/config\\'"     . ssh-config-mode))
-  (add-to-list 'auto-mode-alist '("/sshd?_config\\'"      . ssh-config-mode))
-  (add-to-list 'auto-mode-alist '("/known_hosts\\'"       . ssh-known-hosts-mode))
-  (add-to-list 'auto-mode-alist '("/authorized_keys?\\'" . ssh-authorized-keys-mode))
-  (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
 
   (global-set-key (kbd "C-c ]") #'helm-ghq)
   (global-set-key (kbd "C-c C-]") #'helm-ghq)
@@ -654,13 +646,6 @@ you should place you code here."
                   ("Makefile_.*$" . makefile-gmake-mode)
                   ) auto-mode-alist))
 
-  ;; CMakeLists
-  ;; -------------------------------------------------------------------------------------------
-  (setq auto-mode-alist
-        (append
-         '(("CMakeLists\\.txt\\'" . cmake-mode))
-         '(("\\.cmake\\'" . cmake-mode))
-         auto-mode-alist))
   (define-key evil-normal-state-map (kbd "v") #'er/expand-region)
 
   (define-key evil-normal-state-map (kbd "H") #'mwim-beginning-of-code-or-line)
