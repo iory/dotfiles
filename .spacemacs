@@ -512,4 +512,17 @@ you should place you code here."
                  '(("C-n" . flycheck-next-error)
                    ("C-p" . flycheck-previous-error)))))
 
+  ;; ROS
+  ;; -------------------------------------------------------------------------------------------
+  (setq auto-mode-alist
+        (cons (cons "\\.cfg" 'python-mode) auto-mode-alist))
+
+  ;; Makefile
+  ;; -------------------------------------------------------------------------------------------
+  (setq auto-mode-alist
+        (append '(("Makefile\\..*$" . makefile-gmake-mode)
+                  ("Makefile_.*$" . makefile-gmake-mode)
+                  ) auto-mode-alist))
+
+
   )
