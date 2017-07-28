@@ -62,39 +62,36 @@ values."
    '(
      replace-from-region
      bind-key
-     cuda-mode
      demo-it
-     dockerfile-mode
      easy-kill
-     euslisp-mode
      google-this
-     lispxmp
      fcitx
-     irony ;; c++
-     irony-eldoc ;; c++
-     company-irony ;; c++
-     cmake-ide ;; c++
-     flycheck-irony ;; c+
-     jedi
-     jedi-core
-     launch-mode
-     openwith
-     package-lint
      quickrun
-     rtags ;; c++
-     company-rtags ;; c++
-     region-bindings-mode
-     ssh-config-mode
      smartrep
-     helm-flycheck
      trr
      web-beautify
      highlight-symbol
      milkode
      keydef
+     ;; mode
+     launch-mode
+     ssh-config-mode
+     dockerfile-mode
      toml-mode
+     euslisp-mode
+     cuda-mode
+     region-bindings-mode
+     ;; emacs-lisp
+     lispxmp
+     package-lint
+     ;; c++
+     cmake-ide
+     rtags
+     company-rtags
+     ;; helm
      helm-ghq
-     helm-ghs)
+     helm-ghs
+     helm-flycheck)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
