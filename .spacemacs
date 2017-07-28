@@ -91,8 +91,7 @@ values."
      keydef
      toml-mode
      helm-ghq
-     helm-ghs
-     auto-save-buffers-enhanced)
+     helm-ghs)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -425,16 +424,6 @@ you should place you code here."
   ;; eww
   (setq eww-search-prefix "http://www.google.co.jp/search?q=")
   (defvar eww-disable-colorize t)
-
-  ;; auto-save-buffers-enhanced
-  (setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
-  (setq auto-save-buffers-enhanced-file-related-with-scratch-buffer
-        (locate-user-emacs-file "scratch"))
-  (setq auto-save-buffers-enhanced-quiet-save-p t)
-  (setq auto-save-buffers-enhanced-interval 1)
-  (setq auto-save-buffers-enhanced-exclude-regexps '("^/ssh:" "/sudo:" "/multi:"))
-  (auto-save-buffers-enhanced-include-only-checkout-path t)
-  (auto-save-buffers-enhanced t)
 
   ;; when into normal mode, turn input source into english
   (cond ((eq system-type 'gnu/linux)
