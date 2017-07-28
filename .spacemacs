@@ -306,10 +306,10 @@ you should place you code here."
 
   ;; load local settings
   ;; -------------------------------------------------------------------------------------------
-  ;; (when (file-exists-p "~/.spacemacs.local.el")
-  ;;   (load "~/.spacemacs.local.el"))
-  ;; (when (file-exists-p "~/.emacs.d/shellenv.el")
-  ;;   (load "~/.emacs.d/shellenv.el"))
+  (when (file-exists-p "~/.spacemacs.local.el")
+    (load "~/.spacemacs.local.el"))
+  (when (file-exists-p "~/.emacs.d/shellenv.el")
+    (load "~/.emacs.d/shellenv.el"))
 
   ;; settings
   ;; -------------------------------------------------------------------------------------------
