@@ -84,6 +84,8 @@ values."
      rtags ;; c++
      region-bindings-mode
      ssh-config-mode
+     smartrep
+     helm-flycheck
      trr
      web-beautify
      highlight-symbol
@@ -477,4 +479,24 @@ you should place you code here."
     "Projectile"
     (interactive)
     (helm-ag (projectile-project-root)))
+
+
+  ;; python settings
+  ;; -------------------------------------------------------------------------------------------
+  (add-hook 'anaconda-mode-hook 'flycheck-mode)
+  (add-hook 'anaconda-mode-hook
+            '(lambda ()
+               (define-key anaconda-mode-map (kbd "C-c .") 'anaconda-mode-find-assignments)
+               (define-key anaconda-mode-map (kbd "C-c z") 'python-shell-send-buffer-switch)
+               (define-key anaconda-mode-map (kbd "C-c s") 'python-shell-send-region)
+               (define-key anaconda-mode-map (kbd "C-c C-s") 'python-shell-send-region)
+               (define-key anaconda-mode-map (kbd "C-c ,") 'anaconda-mode-go-back)
+
+               (define-key anaconda-mode-map (kbd "C-c C-v") 'helm-flycheck)
+               (define-key anaconda-mode-map (kbd "C-M-i") 'anaconda-mode-complete)
+               (require 'smartrep)
+               (smartrep-define-key anaconda-mode-map "C-c"
+                 '(("C-n" . flycheck-next-error)
+                   ("C-p" . flycheck-previous-error)))))
+
   )
