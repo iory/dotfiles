@@ -564,5 +564,25 @@ you should place you code here."
                   ("Makefile_.*$" . makefile-gmake-mode)
                   ) auto-mode-alist))
 
+  ;; quickrun
+  ;; -------------------------------------------------------------------------------------------
+  (defun quickrun-maybe-region ()
+    "Run region or buffer, depending on current evil state."
+    (interactive)
+    (cond
+     ((eq evil-state 'visual)
+      (quickrun-region (region-beginning) (region-end)))
+     (t
+      (quickrun))))
+
+  (push '("*quickrun*") popwin:special-display-config)
+  (evil-define-key 'normal quickrun/mode-map
+    "q" 'delete-window)
+  (evil-leader/set-key
+    "cqq" 'quickrun-maybe-region
+    "cqr" 'quickrun-replace-region
+    "cqa" 'quickrun-with-arg
+    "cqs" 'quickrun-shell)
+  (global-set-key (kbd "<f5>") 'quickrun-maybe-region)
 
   )
