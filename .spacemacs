@@ -31,7 +31,7 @@ values."
      ;; ----------------------------------------------------------------
      ;; auto-insert
      better-defaults
-     c-c++
+     (c-c++ :variables c-c++-enable-clang-support t)
      clojure
      elpy
      go
@@ -82,6 +82,7 @@ values."
      package-lint
      quickrun
      rtags ;; c++
+     company-rtags ;; c++
      region-bindings-mode
      ssh-config-mode
      smartrep
@@ -462,6 +463,8 @@ you should place you code here."
   ;; mark settings
   (define-key evil-motion-state-map (kbd "C-u") 'universal-argument)
 
+  (require 'smartrep)
+
   ;; helm settings
   ;; -------------------------------------------------------------------------------------------
   (define-key global-map (kbd "C-x b") 'helm-for-files)
@@ -507,10 +510,50 @@ you should place you code here."
 
                (define-key anaconda-mode-map (kbd "C-c C-v") 'helm-flycheck)
                (define-key anaconda-mode-map (kbd "C-M-i") 'anaconda-mode-complete)
-               (require 'smartrep)
                (smartrep-define-key anaconda-mode-map "C-c"
                  '(("C-n" . flycheck-next-error)
                    ("C-p" . flycheck-previous-error)))))
+
+  ;; c++ settings
+  ;; -------------------------------------------------------------------------------------------
+  ;; style
+  (c-set-offset 'innamespace 0)
+  (setq c-basic-offset 4
+        tab-width 4
+        indent-tabs-mode nil)
+
+  (defun flycheck-rtags-setup ()
+    (flycheck-select-checker 'rtags)
+    (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+    (setq-local flycheck-check-syntax-automatically nil))
+  (add-hook 'c-mode-hook #'flycheck-rtags-setup)
+  (add-hook 'c++-mode-hook #'flycheck-rtags-setup)
+
+  (add-hook 'c++-mode-hook
+            '(lambda ()
+               ;; rtags
+               (setq rtags-autostart-diagnostics t)
+               (rtags-diagnostics)
+               (setq rtags-completions-enabled t)
+               (push 'company-rtags company-backends)
+               (setq rtags-display-result-backend 'helm)
+               (rtags-enable-standard-keybindings c-mode-base-map)
+
+               ;;  clang-format binding
+               ;; (define-key c++-mode-map [tab] 'clang-format-buffer)
+
+               (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
+
+               (define-key c++-mode-map (kbd "C-c .") 'rtags-find-symbol-at-point)
+               (define-key c++-mode-map (kbd "C-c ,") 'rtags-location-stack-back)
+
+               (define-key c++-mode-map (kbd "C-c C-v") 'helm-flycheck)
+               (define-key c++-mode-map (kbd "C-M-i") 'company-clang)
+               (smartrep-define-key c++-mode-map "C-c"
+                                    '(("C-n" . flycheck-next-error)
+                                      ("C-p" . flycheck-previous-error)))))
+  (spacemacs/add-to-hooks '(lambda () (add-hook 'before-save-hook 'clang-format-buffer nil t))
+                          '(c-mode-hook c++-mode-hook))
 
   ;; ROS
   ;; -------------------------------------------------------------------------------------------
