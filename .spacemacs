@@ -480,6 +480,19 @@ you should place you code here."
     (interactive)
     (helm-ag (projectile-project-root)))
 
+  ;; company settings
+  ;; -------------------------------------------------------------------------------------------
+  (global-company-mode)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1)
+  (setq company-selection-wrap-around t)
+
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
+  (define-key company-active-map (kbd "C-d") 'company-show-doc-buffer)
+  (define-key company-active-map (kbd "C-i") 'company-complete-selection)
+  (define-key company-active-map (kbd "C-s") 'company-filter-candidates)
+  (define-key company-active-map (kbd "<tab>") 'company-complete)
 
   ;; python settings
   ;; -------------------------------------------------------------------------------------------
