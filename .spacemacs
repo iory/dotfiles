@@ -467,7 +467,7 @@ you should place you code here."
   (define-key global-map (kbd "C-x b") 'helm-for-files)
 
   ;; helm ag
-  (setq helm-ag-base-command "rg --vimgrep --no-heading") ; use ripgrep
+  (setq helm-ag-base-command "rg --vimgrep --no-heading -uu") ; use ripgrep
   (setq helm-ag-insert-at-point 'symbol)
   (global-set-key (kbd "C-M-g") 'helm-ag)
 
