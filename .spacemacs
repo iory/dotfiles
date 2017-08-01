@@ -499,6 +499,12 @@ you should place you code here."
   (add-to-list 'company-backends 'company-dict)
   (setq company-dict-dir (concat user-emacs-directory "private/dict/"))
 
+  ;; emacs lisp settings
+  ;; -------------------------------------------------------------------------------------------
+  (add-hook 'emacs-lisp-mode-hook
+            '(lambda ()
+               (define-key emacs-lisp-mode-map (kbd "C-c .") 'describe-function)))
+
   ;; python settings
   ;; -------------------------------------------------------------------------------------------
   (add-hook 'anaconda-mode-hook 'flycheck-mode)
