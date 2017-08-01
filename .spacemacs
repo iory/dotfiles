@@ -73,6 +73,7 @@ values."
      highlight-symbol
      milkode
      keydef
+     company-dict
      ;; mode
      launch-mode
      ssh-config-mode
@@ -493,6 +494,10 @@ you should place you code here."
   (define-key company-active-map (kbd "C-i") 'company-complete-selection)
   (define-key company-active-map (kbd "C-s") 'company-filter-candidates)
   (define-key company-active-map (kbd "<tab>") 'company-complete)
+
+  ;; company dict
+  (add-to-list 'company-backends 'company-dict)
+  (setq company-dict-dir (concat user-emacs-directory "private/dict/"))
 
   ;; python settings
   ;; -------------------------------------------------------------------------------------------
