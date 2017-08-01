@@ -5,6 +5,111 @@
 #######
 
 if test -d '/opt/ros'
+    function __fish_ros_topic_list
+        rostopic list
+    end
+    function __fish_ros_msg_list
+      rosmsg list
+    end
+    function __fish_ros_node_list
+        rosnode list
+    end
+    function __fish_catkin_list
+        catkin list -u
+    end
+    # rostopic completion
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'echo' -d 'Print the topic msg'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'type' -d 'Print the topic type'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'list' -d 'Print the topic list'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'hz' -d 'Print the topic hz'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'bw' -d 'Print the topic bw'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'info' -d 'Print the topic info'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'pub' -d 'Publish a topic'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'find' -d 'Find a type of msgs'
+    complete -f -c rostopic -n '__fish_seen_subcommand_from echo' -a '(__fish_ros_topic_list)'
+    complete -f -c rostopic -n '__fish_seen_subcommand_from type' -a '(__fish_ros_topic_list)'
+    complete -f -c rostopic -n '__fish_seen_subcommand_from hz' -a '(__fish_ros_topic_list)'
+    complete -f -c rostopic -n '__fish_seen_subcommand_from info' -a '(__fish_ros_topic_list)'
+
+    # echo
+    complete -c rostopic -f -n '__fish_seen_subcommand_from echo' -s 'h' -l 'help' -d 'show this help message and exit'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from echo' -s 'b' -l 'bag' -d 'echo messages from .bag file'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from echo' -s 'p' -d 'echo in a plotting friendly format'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from echo' -s 'w' -d 'fixed width for numeric values'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from echo' -l 'filter' -d 'fixed width for numeric values'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from echo' -l 'nostr' -d 'exclude string fields'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from echo' -l 'noarr' -d 'exclude arrays'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from echo' -s 'c' -l 'clear' -d 'clear screen before printing next message'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from echo' -s 'a' -l 'all' -d 'display all message in bag, only valid with -b option'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from echo' -s 'n' -d 'number of messages to echo'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from echo' -l 'offset' -d 'display time as offsets from current time (in seconds)'
+
+    # list
+    complete -c rostopic -f -n '__fish_seen_subcommand_from list' -s 'h' -l 'help' -d 'show this help message and exit'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from list' -s 'b' -l 'bag' -d 'list topics in .bag file'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from list' -s 'p' -d 'list only publishers'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from list' -s 's' -d 'list only subscribers'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from list' -l 'host' -d 'group by host name'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from list' -s 'v' -l 'verbose' -d 'list full details about each topic'
+
+    # type
+    complete -c rostopic -f -n '__fish_seen_subcommand_from type' -s 'h' -l 'help' -d 'show this help message and exit'
+
+    # find
+    complete -c rostopic -f -n '__fish_seen_subcommand_from find' -s 'h' -l 'help' -d 'show this help message and exit'
+
+    # info
+    complete -c rostopic -f -n '__fish_seen_subcommand_from info' -s 'h' -l 'help' -d 'show this help message and exit'
+
+    # bw
+    complete -c rostopic -f -n '__fish_seen_subcommand_from bw' -s 'h' -l 'help' -d 'show this help message and exit'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from bw' -s 'w' -l 'window' -d 'window size, in # of messages, for calculating rate'
+
+    # hz
+    complete -c rostopic -f -n '__fish_seen_subcommand_from hz' -s 'h' -l 'help' -d 'show this help message and exit'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from hz' -s 'w' -l 'window' -d 'window size, in # of messages, for calculating rate'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from hz' -l 'wall-time' -d 'calculates rate using wall time which can be helpful when clock isnt published during simulation'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from hz' -l 'filter' -d 'only measure messages matching the specified Python expression'
+
+    # pub
+    complete -c rostopic -f -n '__fish_seen_subcommand_from pub' -s 'h' -l 'help' -d 'show this help message and exit'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from pub' -s 'v' -d 'print verbose output'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from pub' -s 'r' -l 'rate' -d 'publishing rate (hz).  For -f and stdin input, this'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from pub' -s '1' -l 'once' -d 'publish one message and exit'
+    complete -c rostopic -n '__fish_seen_subcommand_from pub' -s 'f' -l 'file' -d 'read args from YAML file (Bagy)'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from pub' -s 'l' -l 'latch' -d 'enable latching for -f, -r and piped input.  This latches the first message.'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from pub' -s 's' -l 'substitute-keywords' -d 'When publishing with a rate, performs keyword ('now' or 'auto') substitution for each message'
+
+    # rosnode completion
+    complete -f -c rosnode -n '__fish_use_subcommand' -a 'cleanup'
+    complete -f -c rosnode -n '__fish_use_subcommand' -a 'info'
+    complete -f -c rosnode -n '__fish_use_subcommand' -a 'kill'
+    complete -f -c rosnode -n '__fish_use_subcommand' -a 'machine'
+    complete -f -c rosnode -n '__fish_use_subcommand' -a 'ping'
+
+    # cleanup
+    complete -c rostopic -f -n '__fish_seen_subcommand_from cleanup' -s 'h' -l 'help' -d 'show this help message and exit'
+
+    # info
+    complete -c rostopic -f -n '__fish_seen_subcommand_from info' -s 'h' -l 'help' -d 'show this help message and exit'
+
+    # kill
+    complete -c rostopic -f -n '__fish_seen_subcommand_from kill' -s 'h' -l 'help' -d 'show this help message and exit'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from kill' -s 'a' -l 'all' -d 'kill all nodes'
+
+    # machine
+    complete -c rostopic -f -n '__fish_seen_subcommand_from machine' -s 'h' -l 'help' -d 'show this help message and exit'
+
+    # ping
+    complete -c rostopic -f -n '__fish_seen_subcommand_from ping' -s 'h' -l 'help' -d 'show this help message and exit'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from ping' -s 'a' -l 'all' -d 'ping all nodes'
+    complete -c rostopic -f -n '__fish_seen_subcommand_from ping' -s 'c' -l 'all' -d 'number of pings to send. Not available with --all'
+
+    # catkin completion
+    complete -f -c catkin -n '__fish_seen_subcommand_from b' -a '(__fish_catkin_list)'
+    complete -f -c catkin -n '__fish_seen_subcommand_from build' -a '(__fish_catkin_list)'
+    complete -f -c catkin -n '__fish_seen_subcommand_from clean' -a '(__fish_catkin_list)'
+
     source ~/.dotfiles/rosfish
     abbr -a re 'rostopic echo'
     abbr -a ri 'rostopic info'
@@ -19,6 +124,18 @@ if test -d '/opt/ros'
     abbr -a rpe 'rostopic echo'
     abbr -a rpt 'rostopic type'
     abbr -a rph 'rostopic hz'
+    function rpen -d 'rostopic echo using peco'
+        set --local topic (rostopic list | peco)
+        rostopic echo $topic $argv
+    end
+    function rptn -d 'rostopic type using peco'
+        set --local topic (rostopic list | peco)
+        rostopic type $topic $argv
+    end
+    function rphn -d 'rostopic hz using peco'
+        set --local topic (rostopic list | peco)
+        rostopic hz $topic $argv
+    end
     abbr -a rpi 'rostopic info'
     function ros_topic_info_detail
         echo '#################
