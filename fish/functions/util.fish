@@ -64,13 +64,8 @@ function dic
     w3m "http://ejje.weblio.jp/content/$argv" | grep "用例"
 end
 
-# xmodmap
 switch (uname)
     case Linux
-        if test -n $DISPLAY; and test -z $SSH_CONNECTION
-            xmodmap ~/.xmodmaprc
-        end
-
         # os setting
         function f
             if count $argv > /dev/null
