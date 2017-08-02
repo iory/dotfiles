@@ -33,7 +33,6 @@ values."
      better-defaults
      (c-c++ :variables c-c++-enable-clang-support t)
      clojure
-     elpy
      go
      python
      php
@@ -74,6 +73,7 @@ values."
      milkode
      keydef
      company-dict
+     py-autopep8
      ;; mode
      launch-mode
      ssh-config-mode
