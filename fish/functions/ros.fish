@@ -159,16 +159,16 @@ if test -d '/opt/ros'
 
 
     # rosbag completion
-    complete -c rostopic -f -n '__fish_use_subcommand' -a 'check' -d 'Determine whether a bag is playable in the current system, or if it can be migrated.'
-    complete -c rostopic -f -n '__fish_use_subcommand' -a 'compress' -d 'Compress one or more bag files.'
-    complete -c rostopic -f -n '__fish_use_subcommand' -a 'decompress' -d 'Decompress one or more bag files.'
-    complete -c rostopic -f -n '__fish_use_subcommand' -a 'filter' -d 'Filter the contents of the bag.'
-    complete -c rostopic -f -n '__fish_use_subcommand' -a 'fix' -d 'Repair the messages in a bag file so that it can be played in the current system.'
-    complete -c rostopic -f -n '__fish_use_subcommand' -a 'help' -d 'show this help message and exit'
-    complete -c rostopic -f -n '__fish_use_subcommand' -a 'info' -d 'Summarize the contents of one or more bag files.'
-    complete -c rostopic -f -n '__fish_use_subcommand' -a 'play' -d 'Play back the contents of one or more bag files in a time-synchronized fashion.'
-    complete -c rostopic -f -n '__fish_use_subcommand' -a 'record' -d 'Record a bag file with the contents of specified topics.'
-    complete -c rostopic -f -n '__fish_use_subcommand' -a 'reindex' -d 'Reindexes one or more bag files.'
+    complete -c rosbag -f -n '__fish_use_subcommand' -a 'check' -d 'Determine whether a bag is playable in the current system, or if it can be migrated.'
+    complete -c rosbag -f -n '__fish_use_subcommand' -a 'compress' -d 'Compress one or more bag files.'
+    complete -c rosbag -f -n '__fish_use_subcommand' -a 'decompress' -d 'Decompress one or more bag files.'
+    complete -c rosbag -f -n '__fish_use_subcommand' -a 'filter' -d 'Filter the contents of the bag.'
+    complete -c rosbag -f -n '__fish_use_subcommand' -a 'fix' -d 'Repair the messages in a bag file so that it can be played in the current system.'
+    complete -c rosbag -f -n '__fish_use_subcommand' -a 'help' -d 'show this help message and exit'
+    complete -c rosbag -f -n '__fish_use_subcommand' -a 'info' -d 'Summarize the contents of one or more bag files.'
+    complete -c rosbag -f -n '__fish_use_subcommand' -a 'play' -d 'Play back the contents of one or more bag files in a time-synchronized fashion.'
+    complete -c rosbag -f -n '__fish_use_subcommand' -a 'record' -d 'Record a bag file with the contents of specified topics.'
+    complete -c rosbag -f -n '__fish_use_subcommand' -a 'reindex' -d 'Reindexes one or more bag files.'
 
     # catkin completion
     complete -f -c catkin -n '__fish_seen_subcommand_from b' -a '(__fish_catkin_list)'
