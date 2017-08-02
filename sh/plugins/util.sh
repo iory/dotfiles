@@ -96,14 +96,6 @@ case ${OSTYPE} in
         if [ -f /usr/share/source-highlight/src-hilite-lesspipe.sh ]; then
            export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
         fi
-
-        # xmodmap
-        if [ "$PS1" ]; then
-            # Disables the bloody CapsLock button
-            if [[ ${DISPLAY} == ":0" ]] && [[ -e "$HOME/.xmodmaprc" ]]; then
-                xmodmap ~/.xmodmaprc
-            fi
-        fi
         ;;
     darwin*)
         alias f="open ."
