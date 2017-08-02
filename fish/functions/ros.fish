@@ -22,8 +22,14 @@ if test -d '/opt/ros'
     function __fish_ros_msg_list
       rosmsg list
     end
+    function __fish_ros_msg_package_list
+      rosmsg packages
+    end
     function __fish_ros_node_list
         rosnode list
+    end
+    function __fish_ros_node_machine_list
+      rosnode machine
     end
     function __fish_catkin_list
         catkin list -u
@@ -98,6 +104,11 @@ if test -d '/opt/ros'
     complete -f -c rosnode -n '__fish_use_subcommand' -a 'machine'
     complete -f -c rosnode -n '__fish_use_subcommand' -a 'ping'
 
+    complete -f -c rosnode -n '__fish_seen_subcommand_from ping' -a '(__fish_ros_node_list)'
+    complete -f -c rosnode -n '__fish_seen_subcommand_from info' -a '(__fish_ros_node_list)'
+    complete -f -c rosnode -n '__fish_seen_subcommand_from kill' -a '(__fish_ros_node_list)'
+    complete -f -c rosnode -n '__fish_seen_subcommand_from machine' -a '(__fish_ros_node_machine_list)'
+
     # cleanup
     complete -c rostopic -f -n '__fish_seen_subcommand_from cleanup' -s 'h' -l 'help' -d 'show this help message and exit'
 
@@ -115,6 +126,49 @@ if test -d '/opt/ros'
     complete -c rostopic -f -n '__fish_seen_subcommand_from ping' -s 'h' -l 'help' -d 'show this help message and exit'
     complete -c rostopic -f -n '__fish_seen_subcommand_from ping' -s 'a' -l 'all' -d 'ping all nodes'
     complete -c rostopic -f -n '__fish_seen_subcommand_from ping' -s 'c' -l 'all' -d 'number of pings to send. Not available with --all'
+
+    # rosmsg completion
+    complete -c rosmsg -f -n '__fish_use_subcommand' -a 'show' -d 'Show message description'
+    complete -c rosmsg -f -n '__fish_use_subcommand' -a 'list' -d 'List all messages'
+    complete -c rosmsg -f -n '__fish_use_subcommand' -a 'md5' -d 'Display message md5sum'
+    complete -c rosmsg -f -n '__fish_use_subcommand' -a 'package' -d 'List messages in a package'
+    complete -c rosmsg -f -n '__fish_use_subcommand' -a 'packages' -d 'List packages that contain messages'
+
+    complete -f -c rosmsg -n '__fish_seen_subcommand_from show' -a '(__fish_ros_msg_list)'
+    complete -f -c rosmsg -n '__fish_seen_subcommand_from md5' -a '(__fish_ros_msg_list)'
+    complete -f -c rosmsg -n '__fish_seen_subcommand_from package' -a '(__fish_ros_msg_package_list)'
+
+    # list
+    complete -c rosmsg -f -n '__fish_seen_subcommand_from list' -s 'h' -l 'help' -d 'show this help message and exit'
+
+    # show
+    complete -c rosmsg -f -n '__fish_seen_subcommand_from show' -s 'h' -l 'help' -d 'show this help message and exit'
+    complete -c rosmsg -f -n '__fish_seen_subcommand_from show' -s 'r' -l 'raw' -d 'show raw message text, including comments'
+    complete -c rosmsg -f -n '__fish_seen_subcommand_from show' -s 'b' -l 'bag' -d 'show message from .bag file'
+
+    # md5
+    complete -c rosmsg -f -n '__fish_seen_subcommand_from md5' -s 'h' -l 'help' -d 'show this help message and exit'
+
+    # package
+    complete -c rosmsg -f -n '__fish_seen_subcommand_from package' -s 'h' -l 'help' -d 'show this help message and exit'
+    complete -c rosmsg -f -n '__fish_seen_subcommand_from package' -s 's' -d 'list all msgs on a single line'
+
+    # packages
+    complete -c rosmsg -f -n '__fish_seen_subcommand_from packages' -s 'h' -l 'help' -d 'show this help message and exit'
+    complete -c rosmsg -f -n '__fish_seen_subcommand_from packages' -s 's' -d 'list all msgs on a single line'
+
+
+    # rosbag completion
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'check' -d 'Determine whether a bag is playable in the current system, or if it can be migrated.'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'compress' -d 'Compress one or more bag files.'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'decompress' -d 'Decompress one or more bag files.'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'filter' -d 'Filter the contents of the bag.'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'fix' -d 'Repair the messages in a bag file so that it can be played in the current system.'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'help' -d 'show this help message and exit'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'info' -d 'Summarize the contents of one or more bag files.'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'play' -d 'Play back the contents of one or more bag files in a time-synchronized fashion.'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'record' -d 'Record a bag file with the contents of specified topics.'
+    complete -c rostopic -f -n '__fish_use_subcommand' -a 'reindex' -d 'Reindexes one or more bag files.'
 
     # catkin completion
     complete -f -c catkin -n '__fish_seen_subcommand_from b' -a '(__fish_catkin_list)'
