@@ -21,6 +21,8 @@ switch (uname)
     case Darwin
         . ~/.config/fish/functions/itunes.fish
         . ~/.config/fish/functions/osx.fish
+    case Linux
+        . ~/.config/fish/functions/ros.fish
 end
 
 #peco

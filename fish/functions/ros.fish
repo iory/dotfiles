@@ -5,6 +5,17 @@
 #######
 
 if test -d '/opt/ros'
+    switch (uname)
+        case Linux
+            switch (lsb_release -sr)
+                case '14.04'
+                    bass source /opt/ros/indigo/setup.bash
+                case '12.04'
+                    bass source /opt/ros/hydro/setup.bash
+            end
+       source ~/.dotfiles/rosfish
+    end
+
     function __fish_ros_topic_list
         rostopic list
     end
@@ -110,7 +121,6 @@ if test -d '/opt/ros'
     complete -f -c catkin -n '__fish_seen_subcommand_from build' -a '(__fish_catkin_list)'
     complete -f -c catkin -n '__fish_seen_subcommand_from clean' -a '(__fish_catkin_list)'
 
-    source ~/.dotfiles/rosfish
     abbr -a re 'rostopic echo'
     abbr -a ri 'rostopic info'
     abbr -a rt 'rostopic'
@@ -226,18 +236,4 @@ else
     abbr -a roseus 'rlwrap -c -b "(){}.,;|" -a -pGREEN roseus'
     abbr -a irteus 'rlwrap -c irteus'
     abbr -a irteusgl 'rlwrap -c irteusgl'
-end
-
-switch (uname)
-    case Linux
-        if test -d '/opt/ros'
-            # ros setting
-            switch (lsb_release -sr)
-                case '14.04'
-                    bash /opt/ros/indigo/setup.bash
-                case '12.04'
-                    bash /opt/ros/hydro/setup.bash
-            end
-        end
-    case Darwin
 end
