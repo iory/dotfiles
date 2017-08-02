@@ -1,0 +1,8 @@
+xkb_symbols "jpus" {
+  replace key <AE13> { [ backslash, bar ] };
+};
+xkb_symbols "kana" {
+  replace key <HENK> { [ Meta_L ] };
+  replace key <MUHE> { [ Meta_R ] };
+  replace key <HKTG> { [ Meta_R ] };
+};
