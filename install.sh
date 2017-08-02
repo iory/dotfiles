@@ -95,6 +95,13 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
                 (cd $HOME/.linuxbrew && git pull)
             fi
 
+            # spacemacs
+            if [ ! -d $HOME/.linuxbrew ]; then
+                git clone https://github.com/syl20bnr/spacemacs.git $HOME/.emacs.d
+            else
+                (cd $HOME/.emacs.d && git pull)
+            fi
+
             # gdrive
             wget -q "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download" -O $HOME/.local/bin/gdrive
             chmod +x $HOME/.local/bin/gdrive
