@@ -434,8 +434,7 @@ you should place you code here."
                       (if (string= "2\n" (shell-command-to-string "fcitx-remote"))
                           (shell-command "fcitx-remote -c"))))
          (add-hook 'focus-in-hook
-                   '(lambda () (shell-command "fcitx-remote -c")))
-         )
+                   '(lambda () (shell-command "fcitx-remote -c"))))
         ((eq system-type 'darwin)
          (setq browse-url-browser-function 'browse-url-default-macosx-browser)
          (when (fboundp 'mac-auto-ascii-mode)
@@ -446,8 +445,7 @@ you should place you code here."
                    '(lambda () (mac-select-input-source "com.google.inputmethod.Japanese.Roman")))
 
          ;; change command to alt key
-         (when (eq system-type 'darwin)
-           (setq ns-command-modifier (quote meta)))))
+         (setq ns-command-modifier (quote meta))))
 
   ;; evil extend
   ;; -------------------------------------------------------------------------------------------
