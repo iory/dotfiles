@@ -92,14 +92,14 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
             if [ ! -d $HOME/.linuxbrew ]; then
                 git clone https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew
             else
-                (cd $HOME/.linuxbrew && git pull)
+                (cd $HOME/.linuxbrew && git pull origin master)
             fi
 
             # spacemacs
             if [ ! -d $HOME/.linuxbrew ]; then
                 git clone https://github.com/syl20bnr/spacemacs.git $HOME/.emacs.d
             else
-                (cd $HOME/.emacs.d && git pull)
+                (cd $HOME/.emacs.d && git pull origin master)
             fi
 
             # gdrive
@@ -119,7 +119,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
         if [ ! -d $(jupyter --data-dir)/nbextensions/vim_binding ]; then
             git clone https://github.com/lambdalisue/jupyter-vim-binding $(jupyter --data-dir)/nbextensions/vim_binding
         else
-            (cd $(jupyter --data-dir)/nbextensions/vim_binding && git pull)
+            (cd $(jupyter --data-dir)/nbextensions/vim_binding && git pull origin master)
         fi
         jupyter nbextension enable vim_binding/vim_binding
     else
