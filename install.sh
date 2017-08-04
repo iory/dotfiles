@@ -15,6 +15,12 @@ function error {
     exit 1
 }
 
+function git-pull() {
+    local repository=${1:-origin}
+    local branch=${2:-$(git rev-parse --abbrev-ref HEAD)}
+    git pull origin $branch
+}
+
 trap error ERR
 
 for i in "$@"
@@ -86,20 +92,21 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
 }
 
 : "install applications" && {
+    green-echo "install applications"
     case ${OSTYPE} in
         linux*)
             # linuxbrew
             if [ ! -d $HOME/.linuxbrew ]; then
                 git clone https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew
             else
-                (cd $HOME/.linuxbrew && git pull)
+                (cd $HOME/.linuxbrew && git-pull)
             fi
 
             # spacemacs
-            if [ ! -d $HOME/.linuxbrew ]; then
+            if [ ! -d $HOME/.emacs.d ]; then
                 git clone https://github.com/syl20bnr/spacemacs.git $HOME/.emacs.d
             else
-                (cd $HOME/.emacs.d && git pull)
+                (cd $HOME/.emacs.d && git-pull)
             fi
 
             # gdrive
