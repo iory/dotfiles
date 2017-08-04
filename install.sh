@@ -110,7 +110,15 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
                 git clone https://github.com/syl20bnr/spacemacs.git $HOME/.emacs.d
             else
                 green-echo "update spacemacs"
-                (cd $HOME/.emacs.d && git-pull)
+                pushd $HOME/.emacs.d
+                if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+                    git-pull
+                else
+                    git init
+                    git remote add origin https://github.com/syl20bnr/spacemacs.git
+                    git pull origin master
+                fi
+                popd
             fi
 
             # gdrive
