@@ -95,8 +95,12 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
             ln -sfn `pwd`/"$file" ~/.config/$(basename "$f")/"$file"
         done
         popd
-        [ -n "$INSTALL_FISH" ] && [ -n "$CLEAN" ] && (rm -rf ~/.local/share/omf && curl -L https://get.oh-my.fish | fish)
     done
+    if [ -n "$INSTALL_FISH" ] && [ -n "$CLEAN" ]; then
+        rm -rf ~/.local/share/omf
+        curl -L https://get.oh-my.fish > install-oh-my-fish.fish
+        fish install-oh-my-fish.fish --noninteractive --yes --path=~/.local/share/omf --config=~/.config/omf
+    fi
 
     # fish as login shell
     [ -n "$INSTALL_FISH_LOGIN" ] && ln -sf `pwd`/config/fish/.profile ~/
