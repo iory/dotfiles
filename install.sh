@@ -100,6 +100,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
         rm -rf ~/.local/share/omf
         curl -L https://get.oh-my.fish > install-oh-my-fish.fish
         fish install-oh-my-fish.fish --noninteractive --yes --path=~/.local/share/omf --config=~/.config/omf
+        rm -rf install-oh-my-fish.fish
     fi
 
     # fish as login shell
