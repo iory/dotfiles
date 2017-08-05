@@ -39,6 +39,10 @@ do
             INSTALL_PYTHON=1
             shift # past argument=value
             ;;
+        --clean)
+            CLEAN=1
+            shift # past argument=value
+            ;;
         *)
             # unknown option
             ;;
@@ -78,6 +82,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     green-echo "symbolic link for .config files"
     for f in config/??*; do
         [ -z "$INSTALL_FISH" ] && [[ "$f" == "fish" ]] && continue
+        [ -n "$CLEAN" ] && rm -rf ~/.config/$(basename "$f")
         pushd "$f"
         for file in $(git ls-files); do
             echo `pwd`/"$file" "->" ~/.config/$(basename "$f")/"$file"
@@ -166,6 +171,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     fi
 
     green-echo "symbolic link for .jupyter and .ipython"
+    [ -n "$CLEAN" ] && rm -rf ~/.ipython
     pushd ".ipython"
     for file in $(git ls-files); do
         echo `pwd`/"$file" "->" ~/.ipython/"$file"
@@ -174,6 +180,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     done
     popd
 
+    [ -n "$CLEAN" ] && rm -rf ~/.jupyter
     pushd ".jupyter"
     for file in $(git ls-files); do
         echo `pwd`/"$file" "->" ~/.jupyter/"$file"
