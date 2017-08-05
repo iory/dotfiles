@@ -67,8 +67,13 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
 
     green-echo "symbolic link for .config files"
     for f in config/??*; do
-        echo `pwd`/"$f" "->" ~/.config/$(basename "$f")
-        ln -sfn `pwd`/"$f" ~/.config/$(basename "$f")
+        pushd "$f"
+        for file in $(git ls-files); do
+            echo `pwd`/"$file" "->" ~/.config/$(basename "$f")/$(basename "$file")
+            mkdir -p ~/.config/$(basename "$f")/$(dirname "$file")
+            ln -sfn `pwd`/"$file" ~/.config/$(basename "$f")/$(basename "$file")
+        done
+        popd
     done
 }
 
