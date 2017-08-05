@@ -26,7 +26,16 @@ trap error ERR
 for i in "$@"
 do
     case $i in
+        --fish)
+            INSTALL_FISH=1
+            shift # past argument=value
+            ;;
         --python)
+            INSTALL_PYTHON=1
+            shift # past argument=value
+            ;;
+        --all)
+            INSTALL_FISH=1
             INSTALL_PYTHON=1
             shift # past argument=value
             ;;
@@ -68,11 +77,12 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
 
     green-echo "symbolic link for .config files"
     for f in config/??*; do
+        [ -z "$INSTALL_FISH" ] && [[ "$f" == "fish" ]] && continue
         pushd "$f"
         for file in $(git ls-files); do
-            echo `pwd`/"$file" "->" ~/.config/$(basename "$f")/$(basename "$file")
+            echo `pwd`/"$file" "->" ~/.config/$(basename "$f")/"$file"
             mkdir -p ~/.config/$(basename "$f")/$(dirname "$file")
-            ln -sfn `pwd`/"$file" ~/.config/$(basename "$f")/$(basename "$file")
+            ln -sfn `pwd`/"$file" ~/.config/$(basename "$f")/"$file"
         done
         popd
     done
