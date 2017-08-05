@@ -562,6 +562,16 @@ you should place you code here."
   (spacemacs/add-to-hooks '(lambda () (add-hook 'before-save-hook 'clang-format-buffer nil t))
                           '(c-mode-hook c++-mode-hook))
 
+  ;; euslisp settings
+  ;; -------------------------------------------------------------------------------------------
+  (add-hook 'euslisp-mode-hook
+            '(lambda ()
+               (define-key euslisp-mode-map (kbd "C-c .") 'euslisp-find-definition-function)
+               (define-key euslisp-mode-map (kbd "C-c z") 'euslisp-switch-to-shell)
+               (define-key euslisp-mode-map (kbd "C-c s") 'euslisp-shell-send-region)
+               (define-key euslisp-mode-map (kbd "C-c C-s") 'euslisp-shell-send-region)
+               (define-key euslisp-mode-map (kbd "C-c ,") 'helm-ag-pop-stack)))
+
   ;; ROS
   ;; -------------------------------------------------------------------------------------------
   (setq auto-mode-alist
