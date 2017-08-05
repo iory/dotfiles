@@ -30,6 +30,11 @@ do
             INSTALL_FISH=1
             shift # past argument=value
             ;;
+        --fish-login)
+            INSTALL_FISH=1
+            INSTALL_FISH_LOGIN=1
+            shift # past argument=value
+            ;;
         --python)
             INSTALL_PYTHON=1
             shift # past argument=value
@@ -90,7 +95,11 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
             ln -sfn `pwd`/"$file" ~/.config/$(basename "$f")/"$file"
         done
         popd
+        [ -n "$INSTALL_FISH" ] && [ -n "$CLEAN" ] && (rm -rf ~/.local/share/omf && curl -L https://get.oh-my.fish | fish)
     done
+
+    # fish as login shell
+    [ -n "$INSTALL_FISH_LOGIN" ] && ln -sf `pwd`/config/fish/.profile ~/
 }
 
 : "vim settings install" && {
