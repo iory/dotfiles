@@ -45,10 +45,11 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     green-echo "install zsh setings"
     ZDOTDIR=$DOTFILES_DIRECTORY
     mkdir -p $ZDOTDIR/zsh/plugins
-    cd $ZDOTDIR/zsh/plugins
+    pushd $ZDOTDIR/zsh/plugins
     [ ! -d zsh-syntax-highlighting ] && git clone -q https://github.com/zsh-users/zsh-syntax-highlighting.git
     [ ! -d zsh-autosuggestions ] && git clone -q https://github.com/zsh-users/zsh-autosuggestions.git
     [ ! -d ~/.oh-my-zsh ] && git clone -q https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    popd
 }
 
 : "symbolic link for dotfiles" && {
@@ -58,8 +59,8 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
         [[ "$f" == ".git" ]] && continue
         [[ "$f" == ".DS_Store" ]] && continue
         [[ "$f" == ".travis.yaml" ]] && continue
-        [ -z "$INSTALL_PYTHON" ] && [[ "$f" == ".ipython" ]] && continue
-        [ -z "$INSTALL_PYTHON" ] && [[ "$f" == ".jupyter" ]] && continue
+        [[ "$f" == ".ipython" ]] && continue
+        [[ "$f" == ".jupyter" ]] && continue
 
         echo `pwd`/"$f" "->" ~/"$f"
         ln -sfn `pwd`/"$f" ~/"$f"
@@ -78,13 +79,14 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
 }
 
 : "vim settings install" && {
-    cd /tmp
+    pushd /tmp
     wget -q https://raw.githubusercontent.com/colepeters/spacemacs-theme.vim/master/colors/spacemacs-theme.vim
     mkdir -p $HOME/.config/nvim/colors
     mkdir -p $HOME/.vim/colors
     cp spacemacs-theme.vim $HOME/.config/nvim/colors/
     cp spacemacs-theme.vim $HOME/.vim/colors/
     rm -rf spacemacs-theme.vim
+    popd
 }
 
 : "symbolic link for bin" && {
@@ -137,7 +139,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     esac
 }
 
-: "install jupyter extentions" && [ -n "$INSTALL_PYTHON" ] && {
+: "install jupyter and ipython extentions" && [ -n "$INSTALL_PYTHON" ] && {
     green-echo "install jupyter extentions"
     if type jupyter >/dev/null 2>&1; then
         mkdir -p $(jupyter --data-dir)/nbextensions
@@ -152,4 +154,21 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
         red-echo 'try to install jupyter.';
         red-echo 'pip install jupyter';
     fi
+
+    green-echo "symbolic link for .jupyter and .ipython"
+    pushd ".ipython"
+    for file in $(git ls-files); do
+        echo `pwd`/"$file" "->" ~/.ipython/"$file"
+        mkdir -p ~/.ipython/$(dirname "$file")
+        ln -sfn `pwd`/"$file" ~/.ipython/"$file"
+    done
+    popd
+
+    pushd ".jupyter"
+    for file in $(git ls-files); do
+        echo `pwd`/"$file" "->" ~/.jupyter/"$file"
+        mkdir -p ~/.jupyter/$(dirname "$file")
+        ln -sfn `pwd`/"$file" ~/.jupyter/"$file"
+    done
+    popd
 }
