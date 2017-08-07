@@ -506,6 +506,12 @@ you should place you code here."
 
   ;; python settings
   ;; -------------------------------------------------------------------------------------------
+  (defun python-shell-send-selected-region-or-current-statement (from to)
+    (interactive "r")
+    (if (region-active-p)
+        (python-shell-send-region from to)
+      (python-shell-send-region (point-at-bol) (point-at-eol))))
+
   (add-hook 'anaconda-mode-hook 'flycheck-mode)
   (add-hook 'anaconda-mode-hook
             '(lambda ()
@@ -514,6 +520,7 @@ you should place you code here."
                (define-key anaconda-mode-map (kbd "C-c s") 'python-shell-send-region)
                (define-key anaconda-mode-map (kbd "C-c C-s") 'python-shell-send-region)
                (define-key anaconda-mode-map (kbd "C-c ,") 'anaconda-mode-go-back)
+               (define-key python-mode-map (kbd "<C-return>") 'python-shell-send-selected-region-or-current-statement)
 
                (define-key anaconda-mode-map (kbd "C-c C-v") 'helm-flycheck)
                (define-key anaconda-mode-map (kbd "C-M-i") 'anaconda-mode-complete)
