@@ -571,12 +571,19 @@ you should place you code here."
 
   ;; euslisp settings
   ;; -------------------------------------------------------------------------------------------
+  (defun euslisp-shell-send-selected-region-or-current-statement (from to)
+    (interactive "r")
+    (if (region-active-p)
+        (euslisp-shell-send-region from to)
+      (euslisp-shell-send-region (point-at-bol) (point-at-eol))))
+
   (add-hook 'euslisp-mode-hook
             '(lambda ()
                (define-key euslisp-mode-map (kbd "C-c .") 'euslisp-find-definition-function)
                (define-key euslisp-mode-map (kbd "C-c z") 'euslisp-switch-to-shell)
                (define-key euslisp-mode-map (kbd "C-c s") 'euslisp-shell-send-region)
                (define-key euslisp-mode-map (kbd "C-c C-s") 'euslisp-shell-send-region)
+               (define-key euslisp-mode-map (kbd "<C-return>") 'euslisp-shell-send-selected-region-or-current-statement)
                (define-key euslisp-mode-map (kbd "C-c ,") 'helm-ag-pop-stack)))
 
   ;; ROS
