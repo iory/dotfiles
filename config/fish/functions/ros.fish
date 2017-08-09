@@ -256,6 +256,15 @@ if test -d '/opt/ros'
 
     abbr -a tf 'cd /tmp and rosrun tf view_frames and evince frames.pdf'
     abbr -a tf_view 'rosrun tf view_frames'
+    function tf_list -d 'list up tf in plain text'
+        switch (count $argv)
+            case 1
+                set n $argv[1]
+            case '*'
+                set n 100
+        end
+        rostopic echo /tf -n $n | grep -e "child_frame_id" -e "frame_id" | cut -d ':' -f2 | cut -d ' ' -f2 | sort | uniq
+    end
 end
 
 # wstool
