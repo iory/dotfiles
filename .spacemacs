@@ -456,6 +456,7 @@ you should place you code here."
   (global-set-key (kbd "C-;") 'evil-avy-goto-char)
 
   (global-set-key (kbd "C-o") 'evil-open-below)
+  (global-set-key (kbd "C-S-o") 'evil-open-above)
 
   ;; mark settings
   (define-key evil-motion-state-map (kbd "C-u") 'universal-argument)
