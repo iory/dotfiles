@@ -1,4 +1,4 @@
-#!/bin/bash -eu
+#!/bin/fish
 
 # cd extend
 alias ..="cd .."
