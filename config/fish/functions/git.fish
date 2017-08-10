@@ -70,6 +70,7 @@ abbr -a gstd 'git stash drop'
 
 abbr -a gr 'git remote -v'
 abbr -a grv 'git remote -v'
+abbr -a gru 'git remote -v | cut -f2 | cut -d \' \' -f1 | head -n1'
 
 abbr -a gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
 
