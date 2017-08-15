@@ -297,7 +297,6 @@ function imv
 end
 
 if test -n '$EMACS'
-else
     abbr -a roseus 'rlwrap -c -b "(){}.,;|" -a -pGREEN roseus'
     abbr -a irteus 'rlwrap -c irteus'
     abbr -a irteusgl 'rlwrap -c irteusgl'
