@@ -75,6 +75,7 @@ values."
      keydef
      company-dict
      py-autopep8
+     switch-buffer-functions
      ;; mode
      launch-mode
      ssh-config-mode
@@ -313,6 +314,10 @@ you should place you code here."
 
   ;; settings
   ;; -------------------------------------------------------------------------------------------
+  (add-hook 'switch-buffer-functions
+            (lambda (prev cur)
+              (when (null (string-match "Minibuf" (buffer-name cur)))
+                (evil-normal-state))))
 
   ;; disable highlight current line
   (global-hl-line-mode -1)
