@@ -15,10 +15,26 @@ function error {
     exit 1
 }
 
-function git-pull() {
-    local repository=${1:-origin}
-    local branch=${2:-$(git rev-parse --abbrev-ref HEAD)}
-    git pull origin $branch
+function git-clone-or-update-with-check () {
+    local REPO="$1"
+    local DIR="$2"
+    if [ ! -d $DIR ]; then
+        git clone -q $REPO $DIR
+    else
+        pushd $DIR
+        local repository=${3:-origin}
+        if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+            local branch=${4:-$(git rev-parse --abbrev-ref HEAD)}
+            echo $repository $branch
+            git pull $repository $branch
+        else
+            local branch=${4:-master}
+            git init
+            git remote add $repository $REPO
+            git pull $repository $branch
+        fi
+        popd
+    fi
 }
 
 trap error ERR
@@ -56,7 +72,7 @@ done
 
 DOTFILES_DIRECTORY=$HOME/.dotfiles
 :  "install dotfiles" && {
-    [ ! -d ${HOME}/.dotfiles ] && git clone https://github.com/iory/dotfiles.git $DOTFILES_DIRECTORY
+    git-clone-or-update-with-check https://github.com/iory/dotfiles.git $DOTFILES_DIRECTORY
 }
 
 : "set zsh" && {
@@ -64,9 +80,9 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     ZDOTDIR=$DOTFILES_DIRECTORY
     mkdir -p $ZDOTDIR/zsh/plugins
     pushd $ZDOTDIR/zsh/plugins
-    [ ! -d zsh-syntax-highlighting ] && git clone -q https://github.com/zsh-users/zsh-syntax-highlighting.git
-    [ ! -d zsh-autosuggestions ] && git clone -q https://github.com/zsh-users/zsh-autosuggestions.git
-    [ ! -d ~/.oh-my-zsh ] && git clone -q https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    git-clone-or-update-with-check https://github.com/zsh-users/zsh-syntax-highlighting.git zsh-syntax-highlighting
+    git-clone-or-update-with-check https://github.com/zsh-users/zsh-autosuggestions.git zsh-autosuggestions
+    git-clone-or-update-with-check https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
     popd
 }
 
@@ -132,30 +148,12 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     case ${OSTYPE} in
         linux*)
             # linuxbrew
-            if [ ! -d $HOME/.linuxbrew ]; then
-                green-echo "install linxubrew"
-                git clone https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew
-            else
-                green-echo "update linxubrew"
-                (cd $HOME/.linuxbrew && git-pull)
-            fi
+            green-echo "install/update linxubrew"
+            git-clone-or-update-with-check https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew
 
             # spacemacs
-            if [ ! -d $HOME/.emacs.d ]; then
-                green-echo "install spacemacs"
-                git clone https://github.com/syl20bnr/spacemacs.git $HOME/.emacs.d
-            else
-                green-echo "update spacemacs"
-                pushd $HOME/.emacs.d
-                if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-                    git-pull
-                else
-                    git init
-                    git remote add origin https://github.com/syl20bnr/spacemacs.git
-                    git pull origin master
-                fi
-                popd
-            fi
+            green-echo "install/update spacemacs"
+            git-clone-or-update-with-check https://github.com/syl20bnr/spacemacs.git $HOME/.emacs.d
 
             # gdrive
             if [ ! -f $HOME/.local/bin/gdrive ]; then
@@ -174,11 +172,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     green-echo "install jupyter extentions"
     if type jupyter >/dev/null 2>&1; then
         mkdir -p $(jupyter --data-dir)/nbextensions
-        if [ ! -d $(jupyter --data-dir)/nbextensions/vim_binding ]; then
-            git clone https://github.com/lambdalisue/jupyter-vim-binding $(jupyter --data-dir)/nbextensions/vim_binding
-        else
-            (cd $(jupyter --data-dir)/nbextensions/vim_binding && git pull origin master)
-        fi
+        git-clone-or-update-with-check https://github.com/lambdalisue/jupyter-vim-binding $(jupyter --data-dir)/nbextensions/vim_binding
         jupyter nbextension enable vim_binding/vim_binding
     else
         red-echo 'jupyter not found\!';
