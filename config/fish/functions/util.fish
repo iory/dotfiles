@@ -13,7 +13,7 @@ end
 
 function cd
     builtin cd $argv
-    ls -la
+    # ls -la
 end
 
 function mcd
