@@ -35,6 +35,10 @@ function peco_recentd
     cd $recentd
 end
 
+function peco_select_ps
+  ps ax -o pid,time,command | peco --query "$LBUFFER" | awk '{print $1}'
+end
+
 function fish_user_key_bindings
     bind \cr 'peco_select_history (commandline -b)'
     bind \cxk peco_kill
