@@ -19,6 +19,9 @@ fonts
 # for ros
 *.bag
 
+# log
+*.log
+
 # Emacs
 *~
 \#*\#
