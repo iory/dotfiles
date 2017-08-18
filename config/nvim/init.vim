@@ -155,7 +155,7 @@ nmap <Leader><Leader> V
 
 " For vim-tmux-navigator
 " https://github.com/christoomey/vim-tmux-navigator/issues/72
-set shell=/bin/bash\ -i
+set shell=/bin/bash\ --rcfile\ ~/.bash_profile
 
 " Remove trailing whitespaces
 nnoremap <silent> <Leader><Space> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>:w<CR>
