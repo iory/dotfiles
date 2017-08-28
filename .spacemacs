@@ -310,7 +310,8 @@ you should place you code here."
   (when (file-exists-p "~/.spacemacs.local.el")
     (load "~/.spacemacs.local.el"))
   (evil-leader/set-key
-    "fes" '(lambda () (interactive) (find-file "~/.spacemacs.local.el")))
+    "fes" '(lambda () (interactive) (find-file "~/.spacemacs.local.el"))
+    "fef" '(lambda () (interactive) (find-file "~/")))
 
   ;; settings
   ;; -------------------------------------------------------------------------------------------
