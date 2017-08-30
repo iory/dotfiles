@@ -112,6 +112,7 @@ end
 
 
 complete -c itunes -f -n '__fish_use_subcommand' -a 'help' -s h -l help -d 'Print the help and exit'
+complete -c itunes -f -n '__fish_use_subcommand' -a 'status' -d 'Print the current information'
 complete -c itunes -f -n '__fish_use_subcommand' -a 'launch' -d 'Launch iTunes'
 complete -c itunes -f -n '__fish_use_subcommand' -a 'quit' -d 'Quit iTunes'
 complete -c itunes -f -n '__fish_use_subcommand' -a 'play' -d 'Starts playback'
