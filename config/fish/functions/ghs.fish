@@ -9,6 +9,19 @@ function gpr
         case 0
             echo "Usage : gpi QUERY"
             return 1
+        case 1
+            set --local USERNAME (echo $argv[1] | sed -Ene 's#(https://|git@)github.com[/:]([^/]*)/(.*)(\.git)?#\2#p')
+            set --local REPO (echo $argv[1] | sed -Ene 's#(https://|git@)github.com[/:]([^/]*)/(.*)(\.git)?#\3#p')
+            switch (count $USERNAME)
+                case 0
+                    ghs $argv[1] | peco | awk '{print $1}' | ghq import
+                case '*'
+                    set --local RESULT (ghs $REPO -u $USERNAME)
+                    set --local NLINE (echo $RESULT | wc | awk '{print $1}')
+                    if [ (echo $NLINE) -eq 1 ]
+                        echo $RESULT | awk '{print $1}' | ghq import
+                    end
+            end
         case '*'
             ghs $argv | peco | awk '{print $1}' | ghq import
     end
