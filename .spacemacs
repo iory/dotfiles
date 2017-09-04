@@ -605,6 +605,11 @@ you should place you code here."
                   ("Makefile_.*$" . makefile-gmake-mode)
                   ) auto-mode-alist))
 
+  ;; fish-mode
+  ;; -------------------------------------------------------------------------------------------
+  (add-hook 'fish-mode
+            '(lambda () (setq tab-width 4)))
+
   ;; quickrun
   ;; -------------------------------------------------------------------------------------------
   (defun quickrun-maybe-region ()
