@@ -607,7 +607,7 @@ you should place you code here."
 
   ;; fish-mode
   ;; -------------------------------------------------------------------------------------------
-  (add-hook 'fish-mode
+  (add-hook 'fish-mode-hook
             '(lambda () (setq tab-width 4)))
 
   ;; quickrun
