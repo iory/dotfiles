@@ -11,11 +11,6 @@ function dot
     cd ~/.dotfiles
 end
 
-function cd
-    builtin cd $argv
-    # ls -la
-end
-
 function mcd
     mkdir -p $argv
     cd $argv
