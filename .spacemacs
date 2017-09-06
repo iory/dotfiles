@@ -311,7 +311,7 @@ you should place you code here."
     (load "~/.spacemacs.local.el"))
   (evil-leader/set-key
     "fes" '(lambda () (interactive) (find-file "~/.spacemacs.local.el"))
-    "fef" '(lambda () (interactive) (find-file "~/")))
+    "fef" '(lambda () (interactive) (find-file "~/.fishrc.local")))
 
   ;; settings
   ;; -------------------------------------------------------------------------------------------
