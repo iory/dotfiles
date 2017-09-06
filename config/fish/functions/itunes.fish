@@ -73,6 +73,10 @@ function itunes -d "Control iTunes. Use -h or --help for a more detailed descrip
                 end
 
                 set opt "set sound volume to $newvol"
+            case shuffle
+                set opt "set shuffle enabled to true"
+            case order
+                set opt "set shuffle enabled to false"
             case "" -h --help -help
                 __show_help
                 return 0
@@ -96,8 +100,8 @@ function __show_help
     e_tabbed 'play' 'Start playback'
     e_tabbed 'pause' 'Pause playback'
     e_tabbed 'stop' 'Stop playback'
-    #e_tabbed 'shuffle' 'Shuffle playback'
-    #e_tabbed 'order' 'Playback in order'
+    e_tabbed 'shuffle' 'Shuffle playback'
+    e_tabbed 'order' 'Playback in order'
     e_tabbed 'mute' 'Mute the volume'
     e_tabbed 'unmute' 'Umute the volume'
     e_tabbed 'next' 'Play the next track'
@@ -121,7 +125,8 @@ complete -c itunes -f -n '__fish_use_subcommand' -a 'next' -d 'Play the next tra
 complete -c itunes -f -n '__fish_use_subcommand' -a 'previous' -d 'Play the previous track'
 complete -c itunes -f -n '__fish_use_subcommand' -a 'pause' -d 'Pauses playback'
 complete -c itunes -f -n '__fish_use_subcommand' -a 'stop' -d 'Stop playback'
-complete -c itunes -f -n '__fish_use_subcommand' -a 'pause' -d 'Pauses playback'
+complete -c itunes -f -n '__fish_use_subcommand' -a 'shuffle' -d 'Shuffle playback'
+complete -c itunes -f -n '__fish_use_subcommand' -a 'order' -d 'Playback in order'
 complete -c itunes -f -n '__fish_use_subcommand' -a 'mute' -d 'Mute the volume'
 complete -c itunes -f -n '__fish_use_subcommand' -a 'unmute' -d 'Umute the volume'
 complete -c itunes -f -n '__fish_use_subcommand' -a 'vol volume' -d 'Sets the volume'
