@@ -4,7 +4,13 @@
 from time import strftime
 import os.path
 import contextlib
-import cStringIO
+try:
+    from cStringIO import StringIO
+except:
+    try:
+        from StringIO import StringIO
+    except:
+        from io import StringIO
 import sys
 
 # create a context which we can use for any block which we can use for any
@@ -15,7 +21,7 @@ import sys
 @contextlib.contextmanager
 def nostdout():
     save_stdout = sys.stdout
-    sys.stdout = cStringIO.StringIO()
+    sys.stdout = StringIO()
     yield
     sys.stdout = save_stdout
 
