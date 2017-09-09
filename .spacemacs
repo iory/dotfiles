@@ -589,6 +589,8 @@ you should place you code here."
                (define-key euslisp-mode-map (kbd "C-c .") 'euslisp-find-definition-function)
                (define-key euslisp-mode-map (kbd "C-c z") 'euslisp-switch-to-shell)
                (define-key euslisp-mode-map (kbd "C-c s") 'euslisp-shell-send-region)
+               (define-key euslisp-mode-map (kbd "C-c d")
+                 '(lambda () (interactive) (euslisp-shell-send-string "(send *irtviewer* :draw-objects)")))
                (define-key euslisp-mode-map (kbd "C-c C-s") 'euslisp-shell-send-region)
                (define-key euslisp-mode-map (kbd "<C-return>") 'euslisp-shell-send-selected-region-or-current-statement)
                (define-key euslisp-mode-map (kbd "C-c ,") 'helm-ag-pop-stack)))
