@@ -29,6 +29,10 @@ switch (uname)
         . ~/.config/fish/functions/ros.fish
 end
 
+if test -n $SSH_CONNECTION
+    set -x EDITOR vim
+end
+
 #peco
 function peco_recentd
     z -l | peco | awk '{ print $2 }' | read recentd
