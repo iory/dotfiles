@@ -17,3 +17,8 @@ try:
     import numpy as np
 except ImportError:
     pass
+
+
+def mem(obj):
+    """Return memory address"""
+    return hex(id(obj))
