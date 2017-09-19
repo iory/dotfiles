@@ -12,6 +12,7 @@ function gpr
         case 1
             set --local USERNAME (echo $argv[1] | sed -Ene 's#(https://|git@)github.com[/:]([^/]*)/(.*)(\.git)?#\2#p')
             set --local REPO (echo $argv[1] | sed -Ene 's#(https://|git@)github.com[/:]([^/]*)/(.*)(\.git)?#\3#p')
+            set --local REPO (basename $REPO .git)
             switch (count $USERNAME)
                 case 0
                     ghs $argv[1] | peco | awk '{print $1}' | ghq import
