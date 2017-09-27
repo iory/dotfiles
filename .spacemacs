@@ -599,6 +599,9 @@ you should place you code here."
   ;; -------------------------------------------------------------------------------------------
   (setq auto-mode-alist
         (cons (cons "\\.cfg" 'python-mode) auto-mode-alist))
+  (setq auto-mode-alist
+        (cons (cons "\\.urdf" 'nxml-mode) auto-mode-alist))
+  (setq nxml-slash-auto-complete-flag t)
 
   ;; Makefile
   ;; -------------------------------------------------------------------------------------------
