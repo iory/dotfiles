@@ -30,7 +30,7 @@ switch (uname)
         . ~/.config/fish/functions/ros.fish
 end
 
-if test -n $SSH_CONNECTION
+if test -n "$SSH_CONNECTION"
     set -x EDITOR vim
 end
 

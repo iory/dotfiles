@@ -15,7 +15,7 @@ function ecd
 end
 
 # setting default editor
-set -x EDITOR "emacsclient"
+set -x EDITOR "emacsclient --no-wait"
 alias emacs-shell 'emacs -nw -q -f shell'
 
 function junk
