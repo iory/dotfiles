@@ -12,6 +12,7 @@ set -x XDG_CONFIG_HOME $HOME/.config
 . ~/.config/fish/functions/ghs.fish
 . ~/.config/fish/functions/vim.fish
 . ~/.config/fish/functions/update.fish
+. ~/.config/fish/functions/ranger.fish
 . ~/.config/fish/functions/ps.fish
 . ~/.config/fish/functions/lock.fish
 . ~/.config/fish/functions/video.fish
