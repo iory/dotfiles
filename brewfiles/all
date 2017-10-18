@@ -1,6 +1,8 @@
 # brewfile for all machines
 
 brew "emacs"
+brew "ffmpeg"
+brew "ffmpegthumbnailer"
 brew "fish"
 brew "ghq"
 brew "git"
@@ -10,6 +12,7 @@ brew "hub"
 brew "neovim"
 brew "peco"
 brew "python3"
+brew "ranger"
 brew "ruby"
 brew "sonatard/tools/ghs"
 brew "tmux"
