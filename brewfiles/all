@@ -1,7 +1,5 @@
 # brewfile for all machines
 
-brew "asciinema"
-brew "asciinema2gif"
 brew "emacs"
 brew "fish"
 brew "ghq"
