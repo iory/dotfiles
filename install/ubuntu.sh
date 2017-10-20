@@ -5,6 +5,8 @@ sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt-get update -qq
 sudo apt-get install -qq -y git
 
+sudo apt-get remove unity-webapps-common
+
 # fonts install
 (cd /tmp \
      && git clone https://github.com/powerline/fonts.git \
