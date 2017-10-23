@@ -1,3 +1,3 @@
 function ft -d "Switch tmux session"
-    tmux list-sessions -F "#{session_name}" | fzf | xargs tmux switch-client -t
+    tmux list-sessions | fzf | awk '{print $1}' | tr -d ":" | xargs tmux switch-client -t
 end
