@@ -67,7 +67,7 @@ function fish_user_key_bindings
     end
 end
 
-abbr -a j 'recented'
+abbr -a j 'recentd'
 
 # suppress fish_greeting message
 function fish_greeting
