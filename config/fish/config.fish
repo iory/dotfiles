@@ -11,6 +11,7 @@ set -x XDG_CONFIG_HOME $HOME/.config
 . ~/.config/fish/functions/cuda.fish
 . ~/.config/fish/functions/ghs.fish
 . ~/.config/fish/functions/vim.fish
+. ~/.config/fish/functions/tmux.fish
 . ~/.config/fish/functions/update.fish
 . ~/.config/fish/functions/ranger.fish
 . ~/.config/fish/functions/ps.fish
