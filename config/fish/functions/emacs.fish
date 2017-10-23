@@ -27,7 +27,11 @@ end
 
 
 function fe -d "edit selected file"
-    set --local dir (find . -path '*/\.*' -prune -o -print 2> /dev/null | fzf +m)
+    set --local query $argv
+    if test -n "$query"
+        set flags --query "$query"
+    end
+    set --local dir (find . -path '*/\.*' -prune -o -print 2> /dev/null | fzf $flags +m)
     if test -n "$dir"
         e $dir
     end
