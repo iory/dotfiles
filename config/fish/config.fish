@@ -36,9 +36,19 @@ if test -n "$SSH_CONNECTION"
 end
 
 #peco
-function peco_recentd
-    z -l | peco | awk '{ print $2 }' | read recentd
-    cd $recentd
+function recentd
+    set -l query (commandline)
+
+    if test -n $query
+        set flags --query "$query"
+    end
+
+    z -l | tail -r | fzf $flags | awk '{ print $2 }' | read recent
+    if [ $recent ]
+        cd $recent
+        commandline -r ''
+        commandline -f repaint
+    end
 end
 
 function peco_select_ps
@@ -48,7 +58,7 @@ end
 function fish_user_key_bindings
     bind \cr 'peco_select_history (commandline -b)'
     bind \cxk peco_kill
-    bind \cc\cr peco_recentd
+    bind \cxb recentd
     bind \c] peco_select_ghq_repository
     switch (uname)
         case Darwin
@@ -57,7 +67,7 @@ function fish_user_key_bindings
     end
 end
 
-
+abbr -a j 'recented'
 
 # suppress fish_greeting message
 function fish_greeting
