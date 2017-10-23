@@ -43,7 +43,12 @@ function recentd
         set flags --query "$query"
     end
 
-    z -l | tail -r | fzf $flags | awk '{ print $2 }' | read recent
+    switch (uname)
+        case Darwin
+            z -l | tail -r | fzf $flags | awk '{ print $2 }' | read recent
+        case Linux
+            z -l | tac | fzf $flags | awk '{ print $2 }' | read recent
+    end
     if [ $recent ]
         cd $recent
         commandline -r ''
