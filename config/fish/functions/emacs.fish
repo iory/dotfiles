@@ -24,3 +24,11 @@ function junk
     end
         cd $HOME/.emacs.d/.cache/junk/(date +%Y/%m)
 end
+
+
+function fe -d "edit selected file"
+    set --local dir (find . -path '*/\.*' -prune -o -print 2> /dev/null | fzf +m)
+    if test -n "$dir"
+        e $dir
+    end
+end
