@@ -125,3 +125,24 @@ abbr -a gbw 'hub browse ^ /dev/null'
 
 hub alias -s  >/dev/null 2>&1
 abbr -a git 'hub'
+
+
+function fco -d "checkout git branch/tag"
+    set --local tags (string join '\n' (git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}'))
+    set --local branches (string join '\n' (git branch --all | grep -v HEAD | \
+    sed "s/.* //"    |  \
+    sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}'))
+    set --local target (echo -e (string join '\n' (echo -e "$tags"; echo -e "$branches")) | \
+    fzf --no-hscroll --ansi +m -d "\t")
+
+    set --local branch_name (echo "$target" | awk '{print $2}')
+    if [ (echo "$target" | awk '{print $1}') = "tag" ]
+        if test (git branch --list $branch_name)
+            git checkout $branch_name
+        else
+            git checkout -b $branch_name "refs/tags/$branch_name"
+        end
+    else
+        git checkout (echo "$target" | awk '{print $2}')
+    end
+end
