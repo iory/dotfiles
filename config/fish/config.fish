@@ -37,15 +37,15 @@ end
 
 #peco
 function recentd
-    set -l query (commandline)
+    set -l query $argv
 
-    if test -n $query
+    if test -n "$query"
         set flags --query "$query"
     end
 
     switch (uname)
         case Darwin
-            z -l | tail -r | fzf $flags | awk '{ print $2 }' | read recent
+            z -l | tail -r | fzf $flags| awk '{ print $2 }' | read recent
         case Linux
             z -l | tac | fzf $flags | awk '{ print $2 }' | read recent
     end
