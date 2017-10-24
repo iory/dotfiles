@@ -146,3 +146,9 @@ function fco -d "checkout git branch/tag"
         git checkout (echo "$target" | awk '{print $2}')
     end
 end
+
+
+function fbr -d "checkout git branch"
+    set --local branch (git branch -vv | fzf +m)
+    git checkout (echo "$branch" | awk '{print $1}'| sed "s/.* //")
+end
