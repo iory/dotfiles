@@ -312,7 +312,11 @@ you should place you code here."
     (load "~/.spacemacs.local.el"))
   (evil-leader/set-key
     "fes" '(lambda () (interactive) (find-file "~/.spacemacs.local.el"))
-    "fef" '(lambda () (interactive) (find-file "~/.fishrc.local")))
+    "fef" '(lambda () (interactive) (find-file "~/.fishrc.local"))
+    "fea" '(lambda () (interactive) (find-file "~/.ssh/config"))
+    "fj" 'spacemacs/open-junk-file
+    "fJ" '(lambda () (interactive) (helm-find-files-1
+                                    (f-slash (format-time-string (f-dirname open-junk-file-format))))))
 
   ;; settings
   ;; -------------------------------------------------------------------------------------------
