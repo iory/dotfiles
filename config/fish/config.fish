@@ -26,6 +26,7 @@ set -x XDG_CONFIG_HOME $HOME/.config
 . ~/.config/fish/functions/ip.fish
 . ~/.config/fish/functions/bass_completion.fish
 . ~/.config/fish/functions/python.fish
+. ~/.config/fish/functions/gym.fish
 switch (uname)
     case Darwin
         . ~/.config/fish/functions/itunes.fish
