@@ -6,6 +6,8 @@ sudo apt-get update -qq
 sudo apt-get install -qq -y git
 
 sudo apt-get remove unity-webapps-common
+# delete unnecessary app
+sudo apt-get remove --purge -y update-manager
 
 # fonts install
 (cd /tmp \
