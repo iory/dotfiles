@@ -153,3 +153,10 @@ function fbr -d "checkout git branch"
     set --local branch (git branch -vv | fzf +m)
     git checkout (echo "$branch" | awk '{print $1}'| sed "s/.* //")
 end
+
+function gaf -d "git add using fzf"
+    set --local GIT_FILENAME (git status --short | fzf +m | awk '{print $2}')
+    if test -n "$GIT_FILENAME"
+        git add $argv "$GIT_FILENAME"
+    end
+end
