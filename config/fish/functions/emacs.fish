@@ -36,3 +36,19 @@ function fe -d "edit selected file"
         e $dir
     end
 end
+
+
+function fel -d "edit selected file using locate"
+    set --local query $argv
+    if test -n "$query"
+        set --local dir (locate "$query" 2> /dev/null | fzf +m  --preview 'highlight -O ansi -l {} 2> /dev/null | head -500')
+        if test -n "$dir"
+            e $dir
+        end
+    else
+        set --local dir (find / -path '*/\.*' -prune -o -print 2> /dev/null | fzf +m  --preview 'highlight -O ansi -l {} 2> /dev/null | head -500')
+        if test -n "$dir"
+            e $dir
+        end
+    end
+end
