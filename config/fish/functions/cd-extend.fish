@@ -13,4 +13,11 @@ function fzf-bcd-widget -d 'cd backwards'
     commandline -f repaint
 end
 
+function cdhf -d 'cd from prevdir'
+    set --local DIR (echo $dirprev | xargs -n1 | sort -u | fzf)
+    if test -n "$DIR"
+        cd $DIR
+    end
+end
+
 abbr -a jj 'fzf-bcd-widget'
