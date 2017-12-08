@@ -1,6 +1,12 @@
+import platform
+
 try:
     import matplotlib
-    matplotlib.use('Agg')
+
+    if platform.system() == 'Darwin':
+        matplotlib.use('TkAgg')
+    elif platform.system() == 'Linux':
+        matplotlib.use('Qt5Agg')
     import matplotlib.pyplot as plt
 except ImportError:
     pass
