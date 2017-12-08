@@ -62,6 +62,7 @@ for n in (seq 50)
 end
 abbr -a first-commit 'git init; and git commit --allow-empty -m "First commit"'
 
+abbr -a s 'git status'
 abbr -a gs 'git status'
 abbr -a gst 'git stash'
 abbr -a gstp 'git stash pop'
