@@ -2,25 +2,24 @@ import platform
 
 try:
     import matplotlib
-
     if platform.system() == 'Darwin':
         matplotlib.use('TkAgg')
     elif platform.system() == 'Linux':
         matplotlib.use('Qt5Agg')
-    import matplotlib.pyplot as plt
+    import matplotlib.pyplot as plt  # NOQA
 except ImportError:
     pass
 
-import collections
-import itertools
-import os
-import os.path as osp
-import sys
-import datetime
+import collections  # NOQA
+import itertools  # NOQA
+import os  # NOQA
+import os.path as osp  # NOQA
+import sys  # NOQA
+import datetime  # NOQA
 
 try:
-    import numpy
-    import numpy as np
+    import numpy  # NOQA
+    import numpy as np  # NOQA
 except ImportError:
     pass
 
