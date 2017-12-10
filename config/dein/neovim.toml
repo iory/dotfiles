@@ -52,3 +52,33 @@ on_event = 'TextYankPost'
 
 [[pluginsn]]
 repo = 'maxbrunsfeld/vim-emacs-bindings'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'Shougo/vimfiler.vim'
+depends = 'unite.vim'
+on_if = "isdirectory(bufname('%'))"
+hook_add = 'nnoremap <silent>   [Space]v   :<C-u>VimFiler -invisible<CR>'
+hook_source = '''
+call vimfiler#custom#profile('default', 'context', {
+      \ 'safe' : 0,
+      \ 'auto_expand' : 1,
+      \ 'parent' : 0,
+      \ })
+
+let g:vimfiler_as_default_explorer = 1
+" Like Textmate icons.
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = ' '
+let g:vimfiler_readonly_file_icon = '✗'
+let g:vimfiler_marked_file_icon = '✓'
+
+autocmd MyAutoCmd FileType vimfiler call s:vimfiler_my_settings()
+function! s:vimfiler_my_settings() abort "{{{
+  nmap <buffer> <Tab> <Plug>(vimfiler_switch_to_other_window)
+endfunction"}}}
+'''
