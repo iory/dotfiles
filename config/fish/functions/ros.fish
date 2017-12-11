@@ -280,7 +280,7 @@ function wssethub
 end
 
 # catkin-tools
-abbr -a c 'catkin'
+abbr -a ca 'catkin'
 abbr -a cb 'catkin build'
 abbr -a cbt 'catkin bt'
 abbr -a cbts 'catkin bt --start-with-this'
