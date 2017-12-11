@@ -51,6 +51,7 @@ abbr -a gmpnpf 'git pull --rebase $GITHUB_USER (_git_current_branch); and git pu
 abbr -a gbm 'git branch --all | command grep $GITHUB_USER | sed "s/ *//g"'
 
 abbr -a gd 'git diff'
+abbr -a gd. 'git diff .'
 abbr -a gdw 'git diff -w'
 abbr -a gdn 'git diff --name-only'
 abbr -a gds 'git diff --staged'
@@ -63,7 +64,9 @@ end
 abbr -a first-commit 'git init; and git commit --allow-empty -m "First commit"'
 
 abbr -a s 'git status'
+abbr -a s. 'git status .'
 abbr -a gs 'git status'
+abbr -a gs. 'git status .'
 abbr -a gst 'git stash'
 abbr -a gstp 'git stash pop'
 abbr -a gstl 'git stash list'
@@ -160,3 +163,28 @@ function gaf -d "git add using fzf"
         git add $argv "$GIT_FILENAME"
     end
 end
+
+function git-fzf-edit -d "edit current git controlled file"
+    git rev-parse --is-inside-work-tree > /dev/null 2>&1
+    if test $status -eq 0
+        set --local CURRENT_GIT_ROOT_DIR (hub rev-parse --show-toplevel)
+        set --local SELECTED_FILE (hub ls-files --full-name --exclude-standard -cmo "$CURRENT_GIT_ROOT_DIR" | fzf +m)
+        if test -n "$SELECTED_FILE"
+            eval $EDITOR "$CURRENT_GIT_ROOT_DIR/$SELECTED_FILE"
+        end
+    end
+end
+
+function git-cd -d "cd to current git controlled file"
+    git rev-parse --is-inside-work-tree > /dev/null 2>&1
+    if test $status -eq 0
+        set --local CURRENT_GIT_ROOT_DIR (hub rev-parse --show-toplevel)
+        set --local SELECTED_FILE (hub ls-files --full-name --exclude-standard -cmo "$CURRENT_GIT_ROOT_DIR" | fzf +m)
+        if test -n "$SELECTED_FILE"
+            cd (dirname "$CURRENT_GIT_ROOT_DIR/$SELECTED_FILE")
+        end
+    end
+end
+
+abbr -a ge git-fzf-edit
+abbr -a gcd git-cd

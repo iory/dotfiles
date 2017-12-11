@@ -20,4 +20,14 @@ function cdhf -d 'cd from prevdir'
     end
 end
 
+function cd-root-directory -d "cd to root-directory"
+    git rev-parse --is-inside-work-tree > /dev/null 2>&1
+    if test $status -eq 0
+        cd (git rev-parse --show-toplevel)
+    else
+        cd ~/
+    end
+end
+
+abbr -a c cd-root-directory
 abbr -a jj 'fzf-bcd-widget'
