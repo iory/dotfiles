@@ -31,7 +31,6 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ;; auto-insert
-     (ranger :variables ranger-max-preview-size 10)
      better-defaults
      (c-c++ :variables c-c++-enable-clang-support t)
      clojure
