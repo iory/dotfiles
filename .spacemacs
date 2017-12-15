@@ -327,6 +327,9 @@ you should place you code here."
   ;; disable highlight current line
   (global-hl-line-mode -1)
 
+  ;; truncate lines
+  (setq-default truncate-lines t)
+
   (defun kill-region-or-backward-kill-word ()
     (interactive)
     (if (region-active-p)
