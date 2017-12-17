@@ -8,6 +8,8 @@ import argparse
 import datetime
 import requests
 
+from pynotify import notify_send
+
 
 def send_line_notify(token, msg):
     msg = "{}\n{}".format(datetime.datetime.now().strftime('%H:%M'),
@@ -57,4 +59,5 @@ while True:
         break
     time.sleep(1)  # [sec]
 
+notify_send("timer", "{} time".format(start_str))
 send_line_notify(args.access_token, args.message)
