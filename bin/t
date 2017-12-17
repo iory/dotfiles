@@ -1,0 +1,2 @@
+#!/bin/sh
+exec python ~/.dotfiles/bin/timer.py "$@" --access-token "$LINENOTIFY_TOKEN" &
