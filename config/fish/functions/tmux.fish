@@ -22,3 +22,13 @@ function ft -d "Switch tmux session"
         tmux
     end
 end
+
+
+function tmux-capture-pane -d "capture pane"
+    mkdir -p ~/tmp/(date +%Y/%m)
+    tmux capture-pane -S -10000; tmux show-buffer > ~/tmp/(date +%Y/%m/%d-%H%M%s).tmux
+    echo ~/tmp/(date +%Y/%m/%d-%H%M%s).tmux
+end
+
+abbr -a ts 'tmux-capture-pane'
+abbr -a tse 'e (tmux-capture-pane)'
