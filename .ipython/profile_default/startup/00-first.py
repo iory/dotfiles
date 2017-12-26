@@ -23,6 +23,13 @@ try:
 except ImportError:
     pass
 
+try:
+    import torch  # NOQA
+    from torch.autograd import Variable  # NOQA
+    import torch.nn as nn  # NOQA
+except ImportError:
+    pass
+
 
 def mem(obj):
     """Return memory address"""
