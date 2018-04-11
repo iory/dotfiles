@@ -149,7 +149,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
         linux*)
             # linuxbrew
             green-echo "install/update linxubrew"
-            git-clone-or-update-with-check https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew
+            git-clone-or-update-with-check https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew origin master
 
             # spacemacs
             green-echo "install/update spacemacs"
