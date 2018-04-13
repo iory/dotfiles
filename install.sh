@@ -161,6 +161,15 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
                 wget -q "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download" -O $HOME/.local/bin/gdrive
                 chmod +x $HOME/.local/bin/gdrive
             fi
+
+            # ripgrep
+            pushd /tmp
+            RIPGREP=ripgrep-0.8.1-x86_64-unknown-linux-musl
+            rm -rf /tmp/$RIPGREP.tar.gz
+            wget https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/$RIPGREP.tar.gz
+            tar xvzf $RIPGREP.tar.gz
+            cp $RIPGREP/rg ~/.local/bin
+            popd
             ;;
         darwin*)
             # install from brew
