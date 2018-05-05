@@ -1,5 +1,7 @@
 # brewfile for all machines
 
+tap 'sonatard/tools'
+
 brew "emacs"
 brew "ffmpeg"
 brew "ffmpegthumbnailer"
