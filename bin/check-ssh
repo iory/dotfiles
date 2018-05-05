@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import os
+from glob import glob
 
 if not os.path.exists(os.path.expanduser("~/.ssh")):
     os.makedirs(os.path.expanduser("~/.ssh"))
@@ -10,8 +11,10 @@ path_permission = [('~/', '755'),
                    ('~/.ssh', '700'),
                    ('~/.ssh/authorized_keys', '600'),
                    ('~/.ssh/id_rsa', '600'),
-                   ('~/.ssh/config', '600'),
                    ]
+
+for path in glob(os.path.expanduser('~/.ssh/config*')):
+    path_permission.append((path, '600'))
 
 print('[check ssh server and client settings]')
 for path, permission in path_permission:
