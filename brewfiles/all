@@ -1,7 +1,5 @@
 # brewfile for all machines
 
-tap 'sonatard/tools'
-
 brew "emacs"
 brew "ffmpeg"
 brew "ffmpegthumbnailer"
@@ -18,6 +16,5 @@ brew "peco"
 brew "python3"
 brew "ranger"
 brew "ruby"
-brew "sonatard/tools/ghs"
 brew "tmux"
 brew "tree"
