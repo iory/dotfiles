@@ -170,6 +170,17 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
             tar xvzf $RIPGREP.tar.gz
             cp $RIPGREP/rg ~/.local/bin
             popd
+            # ghs
+            GHS_RELEASE_VERSION="0.0.10"
+            GHS_FILE='ghs-$GHS_RELEASE_VERSION-linux_amd64.tar.gz'
+            pushd /tmp
+            rm -rf $GHS_FILE
+            wget https://github.com/sonatard/ghs/releases/download/$GHS_RELEASE_VERSION/$GHS_FILE
+            tar xvzf $GHS_FILE
+            cp $GHS_FILE/ghs ~/.local/bin
+            popd
+            # pyenv
+            git-clone-or-update-with-check https://github.com/yyuu/pyenv.git $HOME/.emacs.pyenv
             ;;
         darwin*)
             # install from brew
