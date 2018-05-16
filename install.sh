@@ -172,11 +172,11 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
             popd
             # ghs
             GHS_RELEASE_VERSION="0.0.10"
-            GHS_FILE='ghs-$GHS_RELEASE_VERSION-linux_amd64.tar.gz'
+            GHS_FILE="ghs-$GHS_RELEASE_VERSION-linux_amd64"
             pushd /tmp
-            rm -rf $GHS_FILE
-            wget https://github.com/sonatard/ghs/releases/download/$GHS_RELEASE_VERSION/$GHS_FILE
-            tar xvzf $GHS_FILE
+            rm -rf $GHS_FILE.tar.gz
+            wget https://github.com/sonatard/ghs/releases/download/$GHS_RELEASE_VERSION/$GHS_FILE.tar.gz
+            tar xvzf $GHS_FILE.tar.gz
             cp $GHS_FILE/ghs ~/.local/bin
             popd
             # pyenv
