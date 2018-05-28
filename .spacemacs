@@ -547,6 +547,7 @@ you should place you code here."
   ;; c++ settings
   ;; -------------------------------------------------------------------------------------------
   ;; style
+  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
   (c-set-offset 'innamespace 0)
   (setq c-basic-offset 4
         tab-width 4
