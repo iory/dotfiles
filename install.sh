@@ -163,22 +163,27 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
             fi
 
             # ripgrep
-            pushd /tmp
-            RIPGREP=ripgrep-0.8.1-x86_64-unknown-linux-musl
-            rm -rf /tmp/$RIPGREP.tar.gz
-            wget https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/$RIPGREP.tar.gz
-            tar xvzf $RIPGREP.tar.gz
-            cp $RIPGREP/rg ~/.local/bin
-            popd
+            if [ ! -f $HOME/.local/bin/rg ]; then
+                pushd /tmp
+                RIPGREP=ripgrep-0.8.1-x86_64-unknown-linux-musl
+                rm -rf /tmp/$RIPGREP.tar.gz
+                wget https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/$RIPGREP.tar.gz
+                tar xvzf $RIPGREP.tar.gz
+                cp $RIPGREP/rg ~/.local/bin
+                popd
+            fi
+
             # ghs
-            GHS_RELEASE_VERSION="0.0.10"
-            GHS_FILE="ghs-$GHS_RELEASE_VERSION-linux_amd64"
-            pushd /tmp
-            rm -rf $GHS_FILE.tar.gz
-            wget https://github.com/sonatard/ghs/releases/download/$GHS_RELEASE_VERSION/$GHS_FILE.tar.gz
-            tar xvzf $GHS_FILE.tar.gz
-            cp $GHS_FILE/ghs ~/.local/bin
-            popd
+            if [ ! -f $HOME/.local/bin/ghs ]; then
+                GHS_RELEASE_VERSION="0.0.10"
+                GHS_FILE="ghs-$GHS_RELEASE_VERSION-linux_amd64"
+                pushd /tmp
+                rm -rf $GHS_FILE.tar.gz
+                wget https://github.com/sonatard/ghs/releases/download/$GHS_RELEASE_VERSION/$GHS_FILE.tar.gz
+                tar xvzf $GHS_FILE.tar.gz
+                cp $GHS_FILE/ghs ~/.local/bin
+                popd
+            fi
             # pyenv
             git-clone-or-update-with-check https://github.com/yyuu/pyenv.git $HOME/.emacs.pyenv
             ;;
