@@ -186,6 +186,17 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
             fi
             # pyenv
             git-clone-or-update-with-check https://github.com/yyuu/pyenv.git $HOME/.emacs.pyenv
+
+            # timg
+            if [ ! -f $HOME/.local/bin/timg ]; then
+                rm -rf /tmp/time
+                git clone https://github.com/hzeller/timg.git /tmp/time
+                pushd /tmp/time/src
+                sudo apt -y install libwebp-dev libgraphicsmagick++-dev
+                make
+                cp timg ~/.local/bin
+                popd
+            fi
             ;;
         darwin*)
             # install from brew
