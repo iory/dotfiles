@@ -185,7 +185,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
                 popd
             fi
             # pyenv
-            git-clone-or-update-with-check https://github.com/yyuu/pyenv.git $HOME/.emacs.pyenv
+            git-clone-or-update-with-check https://github.com/yyuu/pyenv.git $HOME/.pyenv
 
             # timg
             if [ ! -f $HOME/.local/bin/timg ]; then
