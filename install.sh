@@ -113,10 +113,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
         popd
     done
     if [ -n "$INSTALL_FISH" ] && [ -n "$CLEAN" ]; then
-        rm -rf ~/.local/share/omf
-        curl -L https://get.oh-my.fish > install-oh-my-fish.fish
-        fish install-oh-my-fish.fish --noninteractive --yes --path=~/.local/share/omf --config=~/.config/omf
-        rm -rf install-oh-my-fish.fish
+        curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
     fi
 
     # fish as login shell
