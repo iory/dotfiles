@@ -297,6 +297,35 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq custom-file "~/.emacs.d/.cache"))
 
+(defconst evil-collection-anaconda-mode-maps '(anaconda-view-mode-map
+                                               anaconda-mode-map))
+
+(defun evil-collection-anaconda-mode-setup ()
+  "Set up `evil' bindings for `anaconda-mode'."
+  ;; Bindings don't seem to be set the first time.
+  (add-hook 'anaconda-mode-hook #'evil-normalize-keymaps)
+
+  ;; latest anaconda has replaced view mode by an xref implementation,
+  ;; anaconda stable uses `anaconda-view-mode-map'
+  (when (boundp 'anaconda-view-mode-map)
+    (evil-collection-define-key 'normal 'anaconda-view-mode-map
+      "gj" 'next-error-no-select
+      "gk" 'previous-error-no-select
+      (kbd "C-j") 'next-error-no-select
+      (kbd "C-k") 'previous-error-no-select
+      "]" 'next-error-no-select
+      "[" 'previous-error-no-select
+      "q" 'quit-window))
+
+  (evil-collection-define-key
+   'normal 'anaconda-mode-map
+   "gh" 'anaconda-mode-find-assignments
+   "gd" 'anaconda-mode-find-definitions
+   (kbd "C-t") (if (fboundp 'anaconda-mode-go-back)
+                   'anaconda-mode-go-back
+                 'xref-pop-marker-stack)
+   "K" 'anaconda-mode-show-doc))
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -535,7 +564,9 @@ you should place you code here."
                (define-key anaconda-mode-map (kbd "C-c z") 'python-shell-send-buffer-switch)
                (define-key anaconda-mode-map (kbd "C-c s") 'python-shell-send-region)
                (define-key anaconda-mode-map (kbd "C-c C-s") 'python-shell-send-region)
-               (define-key anaconda-mode-map (kbd "C-c ,") 'anaconda-mode-go-back)
+               (define-key anaconda-mode-map (kbd "C-c ,") (if (fboundp 'anaconda-mode-go-back)
+                                                               'anaconda-mode-go-back
+                                                             'xref-pop-marker-stack))
                (define-key python-mode-map (kbd "<C-return>") 'python-shell-send-selected-region-or-current-statement)
 
                (define-key anaconda-mode-map (kbd "C-c C-v") 'helm-flycheck)
@@ -543,6 +574,7 @@ you should place you code here."
                (smartrep-define-key anaconda-mode-map "C-c"
                  '(("C-n" . flycheck-next-error)
                    ("C-p" . flycheck-previous-error)))))
+  (evil-collection-anaconda-mode-setup)
 
   ;; c++ settings
   ;; -------------------------------------------------------------------------------------------
