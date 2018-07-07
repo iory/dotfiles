@@ -5,5 +5,5 @@ function update -d "Updates all software"
             sudo apt-get -y upgrade
     end
     brewup
-    omf install
+    fisher install
 end
