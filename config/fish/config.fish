@@ -5,7 +5,7 @@ end
 set -x PATH $HOME/.local/bin $PATH
 set -x XDG_CONFIG_HOME $HOME/.config
 
-. ~/.config/fish/functions/emacs.fish
+. ~/.config/fish/functions/emacs-extend.fish
 . ~/.config/fish/functions/git.fish
 . ~/.config/fish/functions/util.fish
 . ~/.config/fish/functions/cuda.fish
