@@ -37,6 +37,9 @@ abbr -a glp 'git log -p'
 abbr -a glg 'git log --graph --oneline --decorate --all'
 abbr -a gld 'git log --pretty=format:"%h %ad %s" --date=short --all'
 
+# git grep
+abbr -a gg 'git grep'
+
 function _git_current_branch
     git branch ^/dev/null | sed -n '/\* /s///p'
 end
