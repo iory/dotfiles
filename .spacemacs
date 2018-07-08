@@ -64,6 +64,7 @@ values."
      bind-key
      demo-it
      easy-kill
+     evil-collection
      google-this
      fcitx
      quickrun
@@ -286,6 +287,8 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup 'all
+   ;; for evil-collection
+   evil-want-integration nil
    ))
 
 (defun dotspacemacs/user-init ()
@@ -296,35 +299,6 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq custom-file "~/.emacs.d/.cache"))
-
-(defconst evil-collection-anaconda-mode-maps '(anaconda-view-mode-map
-                                               anaconda-mode-map))
-
-(defun evil-collection-anaconda-mode-setup ()
-  "Set up `evil' bindings for `anaconda-mode'."
-  ;; Bindings don't seem to be set the first time.
-  (add-hook 'anaconda-mode-hook #'evil-normalize-keymaps)
-
-  ;; latest anaconda has replaced view mode by an xref implementation,
-  ;; anaconda stable uses `anaconda-view-mode-map'
-  (when (boundp 'anaconda-view-mode-map)
-    (evil-collection-define-key 'normal 'anaconda-view-mode-map
-      "gj" 'next-error-no-select
-      "gk" 'previous-error-no-select
-      (kbd "C-j") 'next-error-no-select
-      (kbd "C-k") 'previous-error-no-select
-      "]" 'next-error-no-select
-      "[" 'previous-error-no-select
-      "q" 'quit-window))
-
-  (evil-collection-define-key
-   'normal 'anaconda-mode-map
-   "gh" 'anaconda-mode-find-assignments
-   "gd" 'anaconda-mode-find-definitions
-   (kbd "C-t") (if (fboundp 'anaconda-mode-go-back)
-                   'anaconda-mode-go-back
-                 'xref-pop-marker-stack)
-   "K" 'anaconda-mode-show-doc))
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -574,6 +548,10 @@ you should place you code here."
                (smartrep-define-key anaconda-mode-map "C-c"
                  '(("C-n" . flycheck-next-error)
                    ("C-p" . flycheck-previous-error)))))
+  (require 'evil-collection-anaconda-mode)
+  (evil-collection-define-key
+    'normal 'anaconda-mode-map
+    "gh" 'anaconda-mode-find-assignments)
   (evil-collection-anaconda-mode-setup)
 
   ;; c++ settings
