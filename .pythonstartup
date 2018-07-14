@@ -1,9 +1,18 @@
 # -*- coding: utf-8 -*-
 
-import readline
-import rlcompleter
 import atexit
 import os
+import readline
+import rlcompleter
+import sys
+
+
+if sys.executable != '/usr/bin/python':
+    # ignore ros_distro's python path
+    ros_distro = os.getenv("ROS_DISTRO")
+    sys.path.remove('/opt/ros/{}/lib/python2.7/dist-packages'.format(
+        ros_distro))
+
 
 # tab complete
 # readline.parse_and_bind('tab: complete')
