@@ -1,3 +1,5 @@
+set -x PYTHONSTARTUP ~/.pythonstartup
+
 # python settings
 alias p='ipython --no-confirm-exit'
 alias py='ipython --no-confirm-exit'
