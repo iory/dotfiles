@@ -66,7 +66,6 @@ values."
      easy-kill
      evil-collection
      google-this
-     fcitx
      quickrun
      smartrep
      trr
@@ -444,15 +443,7 @@ you should place you code here."
   (defvar eww-disable-colorize t)
 
   ;; when into normal mode, turn input source into english
-  (cond ((eq system-type 'gnu/linux)
-         (setq fcitx-active-evil-states '(insert emacs hybrid)) ; if you use hybrid mode
-         (fcitx-aggressive-setup)
-         (fcitx-prefix-keys-add "M-m")
-         (setq fcitx-use-dbus t)
-         (add-hook 'evil-normal-state-entry-hook
-                   #'fcitx--active-evil-states-exit)
-         (add-hook 'focus-in-hook
-                   #'fcitx--active-evil-states-exit))
+  (cond ((eq system-type 'gnu/linux))
         ((eq system-type 'darwin)
          (setq browse-url-browser-function 'browse-url-default-macosx-browser)
          (when (fboundp 'mac-auto-ascii-mode)
