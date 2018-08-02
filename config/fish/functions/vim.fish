@@ -5,3 +5,5 @@ function vim --wraps=nvim
         command vim $argv
     end
 end
+
+abbr -a v 'vim'
