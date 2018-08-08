@@ -345,10 +345,21 @@ you should place you code here."
   (defun other-window-or-split ()
     (interactive)
     (when (one-window-p)
-      (split-window-horizontally))
+      (split-window-vertically))
     (other-window 1))
 
   (global-set-key (kbd "C-t") 'other-window-or-split)
+  (define-key evil-normal-state-map (kbd "C-t") #'other-window-or-split)
+
+  (evil-leader/set-key
+    "-" 'spacemacs/split-window-vertically-and-switch
+    "\\" 'spacemacs/split-window-horizontally-and-switch
+    "j" 'windmove-down
+    "k" 'windmove-up
+    "h" 'windmove-left
+    "l" 'windmove-right)
+
+  ;; (define-key evil-normal-state-map (kbd "C-SPC") #'other-window-or-split)
 
   (global-set-key "\C-h" 'delete-backward-char)
 
