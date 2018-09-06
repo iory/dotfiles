@@ -1,6 +1,7 @@
 #!/bin/bash -eu
 
-sudo apt -y remove docker docker-engine docker.io
+which docker > /dev/null 2>&1 \
+    && sudo apt -y remove docker docker-engine docker.io
 sudo apt update
 
 sudo apt -y install \
