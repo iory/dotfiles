@@ -64,6 +64,10 @@ do
             CLEAN=1
             shift # past argument=value
             ;;
+        --zsh)
+            INSTALL_ZSH=1
+            shift # past argument=value
+            ;;
         *)
             # unknown option
             ;;
@@ -76,14 +80,16 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
 }
 
 : "set zsh" && {
-    green-echo "install zsh setings"
-    ZDOTDIR=$DOTFILES_DIRECTORY
-    mkdir -p $ZDOTDIR/zsh/plugins
-    pushd $ZDOTDIR/zsh/plugins
-    git-clone-or-update-with-check https://github.com/zsh-users/zsh-syntax-highlighting.git zsh-syntax-highlighting
-    git-clone-or-update-with-check https://github.com/zsh-users/zsh-autosuggestions.git zsh-autosuggestions
-    git-clone-or-update-with-check https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-    popd
+    if [ -n "$INSTALL_ZSH" ]; then
+        green-echo "install zsh setings"
+        ZDOTDIR=$DOTFILES_DIRECTORY
+        mkdir -p $ZDOTDIR/zsh/plugins
+        pushd $ZDOTDIR/zsh/plugins
+        git-clone-or-update-with-check https://github.com/zsh-users/zsh-syntax-highlighting.git zsh-syntax-highlighting
+        git-clone-or-update-with-check https://github.com/zsh-users/zsh-autosuggestions.git zsh-autosuggestions
+        git-clone-or-update-with-check https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+        popd
+    fi
 }
 
 : "symbolic link for dotfiles" && {
