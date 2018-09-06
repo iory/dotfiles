@@ -4,7 +4,7 @@
 
 # If you have nvidia-docker 1.0 installed: we need to remove it and all existing GPU containers
 docker volume ls -q -f driver=nvidia-docker | xargs -r -I{} -n1 docker ps -q -a -f volume={} | xargs -r docker rm -f
-which htop > /dev/null 2>&1 && sudo apt-get purge -y nvidia-docker
+which nvidia-docker > /dev/null 2>&1 && sudo apt-get purge -y nvidia-docker
 
 # Add the package repositories
 curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \
