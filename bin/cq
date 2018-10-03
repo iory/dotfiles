@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import argparse
+import os
+
+
+METADATA_DIR_NAME = '.catkin_tools'
+CATKIN_WORKSPACE_ROOT = os.environ.get('CATKIN_WORKSPACE_ROOT',
+                                       os.path.expanduser('~/catkin_ws'))
+
+
+def find_workspace(search_start_path=CATKIN_WORKSPACE_ROOT, depth=2):
+    if depth < 0:
+        return []
+    workspaces = []
+    child_paths = list(filter(
+        lambda f: os.path.isdir(os.path.join(search_start_path, f)),
+        os.listdir(search_start_path)))
+    if METADATA_DIR_NAME in child_paths:
+        workspaces.append(search_start_path)
+        child_paths = list(filter(lambda x: x != METADATA_DIR_NAME,
+                                  child_paths))
+    for child_path in child_paths:
+        workspaces.extend(find_workspace(
+            os.path.join(search_start_path, child_path), depth=depth-1))
+    return workspaces
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='catkin workspace tools')
+    parser.add_argument('--list', '-l', action='store_true')
+    parser.add_argument('--depth', '-d', type=int, default=1)
+    args = parser.parse_args()
+
+    if args.list is True:
+        worksapces = find_workspace(depth=args.depth)
+        for w in sorted(worksapces):
+            print(w)
