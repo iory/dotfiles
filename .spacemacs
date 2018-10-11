@@ -76,6 +76,7 @@ values."
      company-dict
      py-autopep8
      switch-buffer-functions
+     openwith
      ;; mode
      launch-mode
      ssh-config-mode
@@ -330,6 +331,18 @@ you should place you code here."
 
   ;; disable highlight current line
   (global-hl-line-mode -1)
+
+  ;; openwith
+  (setq openwith-associations
+        (cond ((eq system-type 'gnu/linux))
+              ((eq system-type 'darwin)
+               '(("\\.pdf$" "open" (file))
+                 ("\\.mp4$" "open" (file))
+                 ("\\.mp3$" "open" (file))
+                 ("\\.wav" "open" (file))
+                 ("\\.xls$\\|\\.xlsx$\\|\\.docx?$|\\.doc?$\\.pptx?$|\\.ppt?$" "open"  (file))))))
+  (openwith-mode 1)
+  (setq large-file-warning-threshold nil)
 
   ;; truncate lines
   (setq-default truncate-lines t)
