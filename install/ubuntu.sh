@@ -45,10 +45,11 @@ gsettings --set /apps/gnome-terminal/profiles/Default/scrollback_unlimited --typ
 gsettings set org.compiz.integrated show-hud ['']
 
 # screen off time (unlimited)
-gsettings set org.gnome.desktop.session idle-delay uint32 0
+gsettings set org.gnome.desktop.session idle-delay 0
 
-# lock is enabled
-gsettings set org.gnome.desktop.session idle-delay uint32 1
+# disable lock screen
+gsettings set org.gnome.desktop.lockdown disable-lock-screen 'true'
+gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend 'false'
 
 # show date
 gsettings set com.canonical.indicator.datetime show-date true
