@@ -24,4 +24,13 @@ sudo apt -y install docker-ce
 set -x
 sudo groupadd docker
 sudo gpasswd -a $USER docker
-sudo initctl restart docker
+
+VERSION=$(lsb_release -sr)
+case ${VERSION} in
+    14.04)
+        sudo initctl restart docker
+        ;;
+    16.04)
+        sudo systemctl restart docker
+        ;;
+esac
