@@ -11,13 +11,14 @@ import requests
 from pynotify import notify_send
 
 
-def send_line_notify(token, msg):
-    msg = "{}\n{}".format(datetime.datetime.now().strftime('%H:%M'),
-                        msg)
+def send_line_notify(token, message, files=None):
+
+    message = "{}\n{}".format(datetime.datetime.now().strftime('%H:%M'),
+                        message)
     line_notify_token = args.access_token
     line_notify_api = 'https://notify-api.line.me/api/notify'
     headers = {'Authorization': 'Bearer ' + line_notify_token}
-    payload = {'message': msg}
+    payload = {'message': message}
     line_notify = requests.post(line_notify_api,
                                 data=payload,
                                 headers=headers)
