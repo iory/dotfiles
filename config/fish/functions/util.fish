@@ -98,7 +98,7 @@ function peco_select_ghq_repository
     if test -n $query
         set peco_flags --query "$query"
     end
-    ghq list | peco --initial-filter Fuzzy $peco_flags | read line
+    ghq list | peco $peco_flags | read line
 
     if [ $line ]
         ghq root | read dir
