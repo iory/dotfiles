@@ -189,5 +189,9 @@ function git-cd -d "cd to current git controlled file"
     end
 end
 
+function empty-commit -d "Add empty commit"
+    git commit -m "Empty commit" --allow-empty
+end
+
 abbr -a ge git-fzf-edit
 abbr -a gcd git-cd
