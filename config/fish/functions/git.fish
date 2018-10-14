@@ -195,3 +195,14 @@ end
 
 abbr -a ge git-fzf-edit
 abbr -a gcd git-cd
+
+# get current commit's hash
+function get-current-commit-hash -d "get current commit's sha hash"
+    set --local sha (git rev-parse HEAD)
+    if type -q pbcopy
+        echo "$sha" | pbcopy
+    end
+    echo "$sha"
+end
+
+abbr -a sha get-current-commit-hash
