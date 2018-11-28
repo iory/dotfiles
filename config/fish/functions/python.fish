@@ -11,3 +11,7 @@ alias ipython='ipython --no-confirm-exit'
 
 # for opencv
 alias fcv='python -c "import cv2; print(\"\n\".join([item for item in dir(cv2)]))" | grep'
+
+function jupyte2python -d "Convert jupyer nodebook file to python text file"
+    jupyter nbconvert --to python $argv[1]
+end
