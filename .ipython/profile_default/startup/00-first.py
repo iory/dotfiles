@@ -17,12 +17,12 @@ import os.path as osp  # NOQA
 import sys  # NOQA
 import datetime  # NOQA
 
-
+# check ROS
 if sys.executable != '/usr/bin/python':
     # ignore ros_distro's python path
     ros_distro = os.getenv("ROS_DISTRO")
-    if '/opt/ros/{}/lib/python2.7/dist-packages'.format(
-        ros_distro) in sys.path:
+    if '/opt/ros/{}/lib/python2.7/dist-packages'.\
+       format(ros_distro) in sys.path:
         sys.path.remove('/opt/ros/{}/lib/python2.7/dist-packages'.format(
             ros_distro))
 
