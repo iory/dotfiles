@@ -26,7 +26,7 @@ abbr -a gba 'git branch -a'
 abbr -a gcm 'git commit -m'
 abbr -a gcaa 'git commit -a -m "Add"'
 abbr -a gcma 'git commit -m "Add"'
-abbr -a gca="git commit --amend"
+abbr -a gca "git commit --amend"
 abbr -a gco 'git checkout'
 abbr -a gcop 'git checkout -p --'
 abbr -a gcob 'git checkout -b'
@@ -79,7 +79,7 @@ abbr -a gr 'git remote -v'
 abbr -a grv 'git remote -v'
 abbr -a gru 'git remote -v | cut -f2 | cut -d \' \' -f1 | head -n1'
 
-abbr -a gans="git diff -w --no-color | git apply --cached --ignore-whitespace"
+abbr -a gans "git diff -w --no-color | git apply --cached --ignore-whitespace"
 
 ###############
 # Git Funcion #
