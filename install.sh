@@ -194,6 +194,12 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
             # install from brew
             ;;
     esac
+
+    # docker tools
+    if [ ! -f $HOME/.local/bin/ctop ]; then
+        wget https://github.com/bcicen/ctop/releases/download/v0.7.1/ctop-0.7.1-linux-amd64 -O $HOME/.local/bin/ctop
+        chmod u+x $HOME/.local/bin/ctop
+    fi
 }
 
 : "install jupyter and ipython extentions" && [ -n "$INSTALL_PYTHON" ] && {
