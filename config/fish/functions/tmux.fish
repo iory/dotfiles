@@ -30,5 +30,18 @@ function tmux-capture-pane -d "capture pane"
     echo ~/tmp/(date +%Y/%m/%d-%H%M%s).tmux
 end
 
+
+function tmux-capture-pane-edit -d "capture pane and open by $EDITOR"
+    set DIR (date +%Y/%m)
+    set FILENAME (date +%d-%H-%M-%S)
+    mkdir -p ~/.tmux/log/$DIR
+    tmux capture-pane -S -10000000 && tmux show-buffer > ~/.tmux/log/$DIR/$FILENAME.txt
+    eval $EDITOR ~/.tmux/log/$DIR/$FILENAME.txt
+end
+
 abbr -a ts 'tmux-capture-pane'
 abbr -a tse 'e (tmux-capture-pane)'
+
+alias tp="tmux capture-pane -S -1000000000 -e && tmux save-buffer - | less -r +Gk"
+alias tv="tmux capture-pane -S -1000000000 && tmux save-buffer - | vim - +'set nonumber' +'norm G' -R"
+alias te='tmux-capture-pane-edit'
