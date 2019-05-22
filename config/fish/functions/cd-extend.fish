@@ -31,3 +31,22 @@ end
 
 abbr -a c cd-root-directory
 abbr -a jj 'fzf-bcd-widget'
+
+alias u='cd ..' # up
+alias b='cd ..' # back
+alias bb='cd ../../'
+alias bbb='cd ../../../'
+alias bbbb='cd ../../../../'
+alias bbbbb='cd ../../../../../'
+alias bbbbbb='cd ../../../../../../'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../../'
+
+alias ..1='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
+alias ..4='cd ../../../..'
+alias ..5='cd ../../../../..'
