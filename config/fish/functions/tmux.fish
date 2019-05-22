@@ -25,22 +25,16 @@ end
 
 
 function tmux-capture-pane -d "capture pane"
-    mkdir -p ~/tmp/(date +%Y/%m)
-    tmux capture-pane -S -10000; tmux show-buffer > ~/tmp/(date +%Y/%m/%d-%H%M%s).tmux
-    echo ~/tmp/(date +%Y/%m/%d-%H%M%s).tmux
+    set TMUX_LOG_DIR ~/.tmux/log/(date +%Y/%m)
+    set TMUX_LOG_FILENAME $TMUX_LOG_DIR/(date +%d-%H%M%s).tmux
+    mkdir -p $TMUX_LOG_DIR
+    tmux capture-pane -S -100000000 && tmux show-buffer > $TMUX_LOG_FILENAME
+    echo $TMUX_LOG_FILENAME
 end
 
 
-function tmux-capture-pane-edit -d "capture pane and open by $EDITOR"
-    set DIR (date +%Y/%m)
-    set FILENAME (date +%d-%H-%M-%S)
-    mkdir -p ~/.tmux/log/$DIR
-    tmux capture-pane -S -10000000 && tmux show-buffer > ~/.tmux/log/$DIR/$FILENAME.txt
-    eval $EDITOR ~/.tmux/log/$DIR/$FILENAME.txt
-end
-
-alias ts='tmux-capture-pane'
-alias tse='$EDITOR (tmux-capture-pane)'
+abbr -a ts 'tmux-capture-pane'
+abbr -a tse 'eval $EDITOR (tmux-capture-pane)'
 
 alias tp="tmux capture-pane -S -1000000000 -e && tmux save-buffer - | less -r +Gk"
 alias tv="tmux capture-pane -S -1000000000 && tmux save-buffer - | vim - +'set nonumber' +'norm G' -R"
