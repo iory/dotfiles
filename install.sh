@@ -148,15 +148,19 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
 
 : "install applications" && {
     green-echo "install applications"
+
+    # spacemacs
+    green-echo "install/update spacemacs"
+    git-clone-or-update-with-check https://github.com/syl20bnr/spacemacs.git $HOME/.emacs.d
+
+    # pyenv
+    git-clone-or-update-with-check https://github.com/yyuu/pyenv.git $HOME/.pyenv
+
     case ${OSTYPE} in
         linux*)
             # linuxbrew
             green-echo "install/update linxubrew"
             git-clone-or-update-with-check https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew origin master
-
-            # spacemacs
-            green-echo "install/update spacemacs"
-            git-clone-or-update-with-check https://github.com/syl20bnr/spacemacs.git $HOME/.emacs.d
 
             # gdrive
             if [ ! -f $HOME/.local/bin/gdrive ]; then
@@ -187,8 +191,6 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
                 cp $GHS_FILE/ghs ~/.local/bin
                 popd
             fi
-            # pyenv
-            git-clone-or-update-with-check https://github.com/yyuu/pyenv.git $HOME/.pyenv
             ;;
         darwin*)
             # install from brew
