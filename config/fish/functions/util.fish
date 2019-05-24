@@ -132,3 +132,12 @@ function count_down -d "CountDown and execute command"
             eval $argv[2..-1]
     end
 end
+
+
+function update_dotfiles
+    cd ~/.dotfiles
+    git stash
+    git pull
+    bash ~/.dotfiles/install.sh
+    fisher
+end
