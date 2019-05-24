@@ -78,6 +78,7 @@ function fish_user_key_bindings
     bind \cxk peco_kill
     bind \cxb recentd
     bind \c] peco_select_ghq_repository
+    bind \cg peco_select_ghq_repository
     bind \cxc peco_select_catkin_workspace
     switch (uname)
         case Darwin
