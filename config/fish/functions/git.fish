@@ -130,8 +130,10 @@ function gis
 end
 abbr -a gbw 'hub browse ^ /dev/null'
 
-hub alias -s  >/dev/null 2>&1
-abbr -a git 'hub'
+if not functions -q hub
+    hub alias -s  >/dev/null 2>&1
+    abbr -a git 'hub'
+end
 
 
 function fco -d "checkout git branch/tag"
