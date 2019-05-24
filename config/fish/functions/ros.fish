@@ -265,6 +265,28 @@ if test -d '/opt/ros'
         end
         rostopic echo /tf -n $n | grep -e "child_frame_id" -e "frame_id" | cut -d ':' -f2 | cut -d ' ' -f2 | sort | uniq
     end
+
+
+    function peco_select_chq_workspace
+        set -l query (commandline)
+
+        if test -n $query
+            set peco_flags --query "$query"
+        end
+
+        chq list | peco $peco_flags | read line
+
+        if [ $line ]
+            cd $line
+            commandline -f repaint
+            catkin list -u | peco $peco_flags | read line
+            if [ $line ]
+                cd (catkin locate $line)
+                commandline -f repaint
+            end
+        end
+    end
+
 end
 
 # wstool
