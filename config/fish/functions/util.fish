@@ -141,3 +141,5 @@ function update_dotfiles
     bash ~/.dotfiles/install.sh
     fisher
 end
+
+abbr -a ud update_dotfiles
