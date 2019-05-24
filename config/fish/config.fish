@@ -8,6 +8,7 @@ set -x PATH $HOME/.local/bin $PATH
 . ~/.config/fish/functions/fisher-extend.fish
 
 # source config
+. ~/.config/fish/functions/anaconda-extend.fish
 . ~/.config/fish/functions/emacs-extend.fish
 . ~/.config/fish/functions/cq.fish
 . ~/.config/fish/functions/git.fish
