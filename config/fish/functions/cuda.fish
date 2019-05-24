@@ -15,7 +15,9 @@ end
 
 function cuda-smi --wraps=cuda-smi
     command -sq cuda-smi
-    if test $status -ne 0
+    if test $status -eq 0
+        command cuda-smi
+    else
         command -sq nvcc
         if test $status -eq 0
             set TMPDIR (mktemp -d)
@@ -27,7 +29,7 @@ function cuda-smi --wraps=cuda-smi
             cp (pwd)/cuda-smi $HOME/.local/bin/cuda-smi
             popd
             rm -rf $TMPDIR
+            command cuda-smi
         end
     end
-    command cuda-smi
 end
