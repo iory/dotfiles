@@ -291,6 +291,10 @@ abbr -a crtt 'catkin run_tests --this --no-deps -iv'
 abbr -a crl 'catkin roslint'
 abbr -a crlt 'catkin roslint --this --no-deps -iv'
 abbr -a cli 'catkin lint'
+abbr -a cs 'bass source (catkin locate)/devel/setup.bash'
+abbr -a cso 'bass source /opt/ros/kinetic/setup.bash'
+abbr -a cr 'cd (catkin locate)'
+
 
 function imv
     rosrun image_view image_view image:=$argv[1]
@@ -300,4 +304,100 @@ if test -n '$EMACS'
     abbr -a roseus 'rlwrap -c -b "(){}.,;|" -a -pGREEN roseus'
     abbr -a irteus 'rlwrap -c irteus'
     abbr -a irteusgl 'rlwrap -c irteusgl'
+end
+
+
+function catkin --wraps=catkin
+    for path in $PATH
+        string match -rq 'linuxbrew|pyenv' $path
+        if test $status -eq 0
+        else
+            set -x NEW_PATH $NEW_PATH $path
+        end
+    end
+
+    for path in (string split : $LD_LIBRARY_PATH)
+        string match -rq 'linuxbrew|pyenv' $path
+        if test $status -eq 0
+        else
+            set -x NEW_LD_PATH "$NEW_LD_PATH":"$path"
+        end
+    end
+
+    for path in (string split : $LIBRARY_PATH)
+        string match -rq 'linuxbrew|pyenv' $path
+        if test $status -eq 0
+        else
+            set -x NEW_LIBRARY_PATH "$NEW_LIBRARY_PATH":"$path"
+        end
+    end
+
+    # echo $NEW_LD_PATH
+    if [ $argv[1] = "source" ]
+        set -gx PATH $NEW_PATH; set -gx LD_LIBRARY_PATH $NEW_LD_PATH; set -x LIBRARY_PATH $NEW_LIBRARY_PATH; set -gx  SHELL /bin/bash; command catkin $argv
+    else
+        set -lx PATH $NEW_PATH; set -lx LD_LIBRARY_PATH $NEW_LD_PATH; set -x LIBRARY_PATH $NEW_LIBRARY_PATH; set -lx  SHELL /bin/bash; command catkin $argv
+    end
+end
+
+
+function rosdep --wraps=rosdep
+    for path in $PATH
+        string match -rq 'linuxbrew|pyenv' $path
+        if test $status -eq 0
+        else
+            set -x NEW_PATH $NEW_PATH $path
+        end
+    end
+
+    for path in (string split : $LD_LIBRARY_PATH)
+        string match -rq 'linuxbrew|pyenv' $path
+        if test $status -eq 0
+        else
+            set -x NEW_LD_PATH "$NEW_LD_PATH":"$path"
+        end
+    end
+
+    set -gx PATH $NEW_PATH; set -gx LD_LIBRARY_PATH $NEW_LD_PATH; set -gx  SHELL /bin/bash; command rosdep $argv
+end
+
+
+function roslaunch --wraps=roslaunch
+    for path in $PATH
+        string match -rq 'linuxbrew|pyenv' $path
+        if test $status -eq 0
+        else
+            set -x NEW_PATH $NEW_PATH $path
+        end
+    end
+
+    for path in (string split : $LD_LIBRARY_PATH)
+        string match -rq 'linuxbrew|pyenv' $path
+        if test $status -eq 0
+        else
+            set -x NEW_LD_PATH "$NEW_LD_PATH":"$path"
+        end
+    end
+    set -lx PATH $NEW_PATH; set -lx LD_LIBRARY_PATH $NEW_LD_PATH; set -lx  SHELL /bin/bash; command roslaunch $argv
+end
+
+
+function rosrun --wraps=rosrun
+    for path in $PATH
+        string match -rq 'linuxbrew|pyenv' $path
+        if test $status -eq 0
+        else
+            set -x NEW_PATH $NEW_PATH $path
+        end
+    end
+
+    for path in (string split : $LD_LIBRARY_PATH)
+        string match -rq 'linuxbrew|pyenv' $path
+        if test $status -eq 0
+        else
+            set -x NEW_LD_PATH "$NEW_LD_PATH":"$path"
+        end
+    end
+
+    set -lx PATH $NEW_PATH; set -lx LD_LIBRARY_PATH $NEW_LD_PATH; set -lx  SHELL /bin/bash; command rosrun $argv
 end
