@@ -24,6 +24,7 @@ alias gb='git branch'
 alias gbD='git branch -D'
 alias gba='git branch -a'
 alias gcm='git commit -m'
+alias gcma='git commit -m "Add"'
 alias gca="git commit --amend"
 alias gcmh='git commit -m "hoge"'
 alias gco='git checkout'
@@ -35,6 +36,10 @@ alias gln="git log --name-only"
 alias glp="git log -p"
 alias glg='git log --graph --oneline --decorate --all'
 alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
+
+function git_current_branch {
+    git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+}
 
 alias gbug='git branch -u origin/$(git_current_branch)'
 alias gbum='git branch -u $GITHUB_USER/$(git_current_branch)'

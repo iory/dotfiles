@@ -62,3 +62,7 @@ if [ "$INSIDE_EMACS" -o "$SSH_CONNECTION" ]; then
 else
     tmux_automatically_attach_session
 fi
+
+
+alias tp="tmux capture-pane -S -1000000000 -e && tmux save-buffer - | less -r +Gk"
+alias tv="tmux capture-pane -S -32768 && tmux save-buffer - | vim - +'set nonumber' +'norm G' -R"
