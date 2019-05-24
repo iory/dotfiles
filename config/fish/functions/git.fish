@@ -1,5 +1,7 @@
 #!/bin/fish
 
+set -q GITHUB_USER; or set GITHUB_USER iory
+
 ###############
 # Git Aliases #
 ###############
