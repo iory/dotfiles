@@ -209,4 +209,20 @@ function get-current-commit-hash -d "get current commit's sha hash"
     echo "$sha"
 end
 
+
+function get-git-url -d 'get git url and copy it'
+    switch (count $argv)
+        case 0
+            set url (git remote get-url origin)
+        case '*'
+            set url (git remote get-url $argv[1])
+    end
+    if type -q pbcopy
+        echo "$url" | pbcopy
+    end
+    echo "$url"
+end
+
+
 abbr -a sha get-current-commit-hash
+abbr -a grg get-git-url
