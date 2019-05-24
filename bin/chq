@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+
+import os
+
+
+def _recursive_find_catkin_workspaces(rootpath, max_depth):
+    if os.path.exists(os.path.join(rootpath, '.catkin_tools')):
+        return [rootpath]
+    if max_depth <= 0:
+        return []
+    catkin_workspaces = []
+    for filepath in os.listdir(rootpath):
+        abs_path = os.path.join(rootpath, filepath)
+        if os.path.isdir(abs_path):
+            workspace = _recursive_find_catkin_workspaces(
+                abs_path, max_depth - 1)
+            if len(workspace) > 0:
+                catkin_workspaces.extend(workspace)
+    return catkin_workspaces
+
+
+def find_catkin_workspaces(rootpath=None, max_depth=2):
+    if rootpath is None:
+        if 'CATKIN_WSS_ROOT' in os.environ:
+            rootpath = os.environ['CATKIN_WSS_ROOT']
+        else:
+            rootpath = ''
+    if len(rootpath) == 0:
+        rootpath = os.path.expanduser('~/catkin_ws')
+
+    catkin_workspaces = _recursive_find_catkin_workspaces(
+        rootpath, max_depth)
+    return catkin_workspaces
+
+
+if __name__ == '__main__':
+    catkin_workspaces = find_catkin_workspaces()
+    for path in catkin_workspaces:
+        print(path)
