@@ -52,3 +52,9 @@ function fel -d "edit selected file using locate"
         end
     end
 end
+
+
+abbr -a jk 'junk'
+abbr -a jn 'junk'
+abbr -a jnk 'junk'
+abbr -a jy 'junk'
