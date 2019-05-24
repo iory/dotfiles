@@ -146,7 +146,6 @@ else
 fi
 
 # python settings
-export PYTHONSTARTUP=~/.pythonstartup
 alias py='ipython --no-confirm-exit'
 alias ipy='ipython --no-confirm-exit'
 alias ipyt='ipython --no-confirm-exit'

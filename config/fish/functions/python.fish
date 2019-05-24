@@ -1,5 +1,3 @@
-set -x PYTHONSTARTUP ~/.pythonstartup
-
 # python settings
 abbr -a p 'ipython --no-confirm-exit'
 abbr -a py 'ipython --no-confirm-exit'
