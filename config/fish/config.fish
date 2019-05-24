@@ -3,6 +3,7 @@ if test -e ~/.fishrc.local
 end
 
 set -x PATH $HOME/.local/bin $PATH
+. ~/.config/fish/functions/linuxbrew.fish
 
 # automatically install fisher
 . ~/.config/fish/functions/fisher-extend.fish
@@ -15,7 +16,6 @@ set -x PATH $HOME/.local/bin $PATH
 . ~/.config/fish/functions/util.fish
 . ~/.config/fish/functions/cuda.fish
 . ~/.config/fish/functions/ghs.fish
-. ~/.config/fish/functions/linuxbrew.fish
 . ~/.config/fish/functions/vim.fish
 . ~/.config/fish/functions/tmux.fish
 . ~/.config/fish/functions/update.fish
