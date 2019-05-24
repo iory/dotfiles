@@ -130,7 +130,7 @@ function gis
 end
 abbr -a gbw 'hub browse ^ /dev/null'
 
-if not functions -q hub
+if type -q hub
     hub alias -s  >/dev/null 2>&1
     abbr -a git 'hub'
 end
