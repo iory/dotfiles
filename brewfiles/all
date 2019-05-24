@@ -1,8 +1,5 @@
 # brewfile for all machines
 
-brew "emacs"
-brew "ffmpeg"
-brew "ffmpegthumbnailer"
 brew "fish"
 brew "fzf"
 brew "ghq"
