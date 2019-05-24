@@ -1,13 +1,3 @@
-if test -e ~/.fishrc.local
-    . ~/.fishrc.local
-end
-
-set -x PATH $HOME/.local/bin $PATH
-. ~/.config/fish/functions/linuxbrew.fish
-
-# automatically install fisher
-. ~/.config/fish/functions/fisher-extend.fish
-
 # source config
 . ~/.config/fish/functions/anaconda-extend.fish
 . ~/.config/fish/functions/emacs-extend.fish
