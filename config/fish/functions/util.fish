@@ -64,13 +64,13 @@ switch (uname)
         # os setting
         function f
             if count $argv > /dev/null
-                gnome-open $argv 2>/dev/null
+                xdg-open $argv 2>/dev/null
             else
-                gnome-open $PWD 2>/dev/null
+                xdg-open $PWD 2>/dev/null
             end
         end
-        alias o='gnome-open'
-        alias open='gnome-open'
+        alias o='xdg-open'
+        alias open='xdg-open'
         alias pbcopy='xsel --clipboard --input'
         alias ls="ls --color=always"
     case Darwin
