@@ -7,7 +7,7 @@ end
 function gpr
     switch (count $argv)
         case 0
-            echo "Usage : gpi QUERY"
+            echo "Usage : gpr QUERY"
             return 1
         case 1
             set --local USERNAME (echo $argv[1] | sed -Ene 's#(https://|git@)github.com[/:]([^/]*)/(.*)(\.git)?#\2#p')
@@ -27,6 +27,13 @@ function gpr
             ghs $argv | peco | awk '{print $1}' | ghq import
     end
 end
+
+
+function gprh -d 'git pull here'
+    set --local TMP (ghs $argv | peco | awk '{print $1}')
+    git clone $TMP
+end
+
 
 function gpd
     ghq list --full-path | peco | xargs rm -r
