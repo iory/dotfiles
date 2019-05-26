@@ -11,6 +11,7 @@ if test -d '/opt/ros'
                 switch (lsb_release -sr)
                     case '16.04'
                         bass source /opt/ros/kinetic/setup.bash
+                        source /opt/ros/kinetic/share/rosbash/rosfish
                     case '14.04'
                         bass source /opt/ros/indigo/setup.bash
                     case '12.04'
