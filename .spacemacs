@@ -18,84 +18,26 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
-     auto-completion
-     csv
-     bibtex
-     rust
-     html
-     octave
-     vimscript
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     ;; auto-insert
      better-defaults
-     (c-c++ :variables c-c++-enable-clang-support t)
-     clojure
-     go
-     python
-     php
-     emacs-lisp
      git
-     github
-     markdown
-     yaml
-     org
-     dash
-     latex
-     haskell
-     gtags
      javascript
-     spell-checking
+     lsp
+     python
      shell-scripts
-     syntax-checking
-     version-control
-     (spell-checking :variables spell-checking-enable-by-default nil)
+     systemd
+     yaml
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
-   '(
-     replace-from-region
-     bind-key
-     demo-it
+   '(region-bindings-mode
      easy-kill
-     evil-collection
-     google-this
-     quickrun
-     smartrep
-     trr
-     web-beautify
-     highlight-symbol
-     milkode
-     keydef
-     company-dict
-     py-autopep8
-     switch-buffer-functions
-     openwith
-     ;; mode
-     launch-mode
-     ssh-config-mode
-     dockerfile-mode
-     toml-mode
-     euslisp-mode
-     cuda-mode
-     region-bindings-mode
-     ;; emacs-lisp
-     lispxmp
-     package-lint
-     ;; c++
-     cmake-ide
-     rtags
-     company-rtags
-     ;; helm
      helm-ghq
      helm-ghs
-     helm-flycheck)
+     highlight-indent-guides
+     launch-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages
    '(;; https://github.com/syl20bnr/spacemacs/issues/9374
@@ -152,14 +94,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         alect-black
-                         spacemacs-light
-                         solarized-light
-                         solarized-dark
-                         leuven
-                         monokai
-                         zenburn)
+   dotspacemacs-themes '(spacemacs-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -278,7 +213,7 @@ values."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
@@ -288,7 +223,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup 'all
+   dotspacemacs-whitespace-cleanup 'changed
    ;; for evil-collection
    evil-want-integration nil
    ))
@@ -300,7 +235,30 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq custom-file "~/.emacs.d/.cache"))
+  (setq custom-file "~/.emacs.d/.cache")
+
+  ;; C-h to delete
+  (global-set-key "\C-h" 'delete-backward-char)
+
+  ;; Enable C-h on minibuffer
+  (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
+
+  ;; delete *scratch* message
+  (setq initial-scratch-message 'nil)
+
+  ;; avoid "Symbolic link to SVN-controlled source file; follow link? (yes or no)"
+  (setq vc-follow-symlinks t)
+
+  ;; alt to meta key
+  (setq x-super-keysym 'meta)
+
+  ;; truncate lines
+  (setq-default truncate-lines t)
+
+  ;; disable highlight current line
+  (global-hl-line-mode -1)
+
+  (setq whitespace-space-regexp "\\(\u3000+\\)"))
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -322,82 +280,19 @@ you should place you code here."
     "fJ" '(lambda () (interactive) (helm-find-files-1
                                     (f-slash (format-time-string (f-dirname open-junk-file-format))))))
 
-  ;; settings
-  ;; -------------------------------------------------------------------------------------------
   (add-hook 'switch-buffer-functions
             (lambda (prev cur)
               (when (null (string-match "Minibuf" (buffer-name cur)))
                 (evil-normal-state))))
 
-  ;; disable highlight current line
-  (global-hl-line-mode -1)
-
-  ;; openwith
-  (setq openwith-associations
-        (cond ((eq system-type 'gnu/linux))
-              ((eq system-type 'darwin)
-               '(("\\.pdf$" "open" (file))
-                 ("\\.mp4$" "open" (file))
-                 ("\\.mp3$" "open" (file))
-                 ("\\.wav" "open" (file))
-                 ("\\.xls$\\|\\.xlsx$\\|\\.docx?$|\\.doc?$\\.pptx?$|\\.ppt?$" "open"  (file))))))
-  (openwith-mode 1)
-  (setq large-file-warning-threshold nil)
-
-  ;; truncate lines
-  (setq-default truncate-lines t)
-
-  (defun kill-region-or-backward-kill-word ()
-    (interactive)
-    (if (region-active-p)
-        (kill-region (point) (mark))
-      (backward-kill-word 1)))
-
-  (global-set-key "\C-w" 'kill-region-or-backward-kill-word)
-
-  (defun other-window-or-split ()
-    (interactive)
-    (when (one-window-p)
-      (split-window-vertically))
-    (other-window 1))
-
-  (global-set-key (kbd "C-t") 'other-window-or-split)
-  (define-key evil-normal-state-map (kbd "C-t") #'other-window-or-split)
-
-  (evil-leader/set-key
-    "-" 'spacemacs/split-window-vertically-and-switch
-    "\\" 'spacemacs/split-window-horizontally-and-switch
-    "j" 'windmove-down
-    "k" 'windmove-up
-    "h" 'windmove-left
-    "l" 'windmove-right)
-
-  ;; (define-key evil-normal-state-map (kbd "C-SPC") #'other-window-or-split)
-
-  (global-set-key "\C-h" 'delete-backward-char)
-
-  (setq whitespace-space-regexp "\\(\u3000+\\)")
-
-  (global-set-key (kbd "C-c ]") #'helm-ghq)
-  (global-set-key (kbd "C-c C-]") #'helm-ghq)
-
-  ;; Enable C-h on minibuffer
-  (define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
-
-  ;; auto chmod +x
-  (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-  ;; avoid "Symbolic link to SVN-controlled source file; follow link? (yes or no)"
-  (setq vc-follow-symlinks t)
-
-  (setq set-mark-command-repeat-pop t)
-
   ;; open junk file
   (global-set-key (kbd "C-x C-z") 'spacemacs/open-junk-file)
 
+  ;; expand region
   (global-set-key (kbd "C-l") 'er/expand-region)
   (global-set-key (kbd "C-M-l") 'er/contract-region)
 
+  (require 'region-bindings-mode)
   (defun region-to-single-quote ()
     (interactive)
     (quote-formater "'%s'" "^\\(\"\\).*" ".*\\(\"\\)$"))
@@ -418,8 +313,6 @@ you should place you code here."
           (delete-region (region-beginning) (region-end))
           (insert (format quote-format text)))
       (error "Not Region selection")))
-
-  (require 'region-bindings-mode)
   (region-bindings-mode-enable)
   (define-key region-bindings-mode-map (kbd "M-'") 'region-to-single-quote)
   (define-key region-bindings-mode-map (kbd "M-\"") 'region-to-double-quote)
@@ -445,234 +338,45 @@ you should place you code here."
   (global-set-key [remap query-replace] 'anzu-query-replace)
   (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
 
+  ;; evil keybind
+  (evil-leader/set-key
+    "-" 'spacemacs/split-window-vertically-and-switch
+    "\\" 'spacemacs/split-window-horizontally-and-switch)
+
   ;; easy-kill
   (global-set-key (kbd "M-w") 'easy-kill)
-  ;; (push '(?a buffer) easy-kill-alist)
 
-  ;; highlight-symbol
-  (add-hook 'prog-mode-hook 'highlight-symbol-mode)
-  (add-hook 'prog-mode-hook 'highlight-symbol-nav-mode)
-  (global-set-key (kbd "M-s M-r") 'highlight-symbol-query-replace)
-  (global-set-key (kbd "M-l") 'highlight-symbol-at-point)
-  (global-set-key (kbd "M-[") 'highlight-symbol-remove-all)
-  (add-hook 'highlight-symbol-hook
-            'evil-normal-state)
-  (add-hook 'highlight-symbol-jump-hook
-            'evil-normal-state)
-  (setq highlight-symbol-idle-delay 0.7)
-  (setq highlight-symbol-colors
-        '("GreenYellow" "chartreuse4" "gold1" "red1" "cyan" "RoyalBlue" "PaleGreen"))
-  (setq highlight-symbol-foreground-color "black")
+  ;; ace-window settings
+  (setq aw-keys '(?j ?k ?l ?i ?o ?h ?y ?u ?p))
+  (custom-set-faces
+   '(aw-leading-char-face
+     ((t (:height 4.0 :foreground "#f1fa8c")))))
+  (evil-leader/set-key
+    "ww" 'ace-window)
 
-  ;; eww
-  (setq eww-search-prefix "http://www.google.co.jp/search?q=")
-  (defvar eww-disable-colorize t)
+  ;; helm-ghq
+  (evil-leader/set-key
+    "fg" 'helm-ghq
+    "fk" 'helm-ghq)
+  (global-set-key (kbd "C-c ]") #'helm-ghq)
+  (global-set-key (kbd "C-c C-]") #'helm-ghq)
 
-  ;; when into normal mode, turn input source into english
-  (cond ((eq system-type 'gnu/linux))
-        ((eq system-type 'darwin)
-         (setq browse-url-browser-function 'browse-url-default-macosx-browser)
-         (when (fboundp 'mac-auto-ascii-mode)
-           (mac-auto-ascii-mode 1))
-         (add-hook 'evil-normal-state-entry-hook
-                   '(lambda () (mac-select-input-source "com.google.inputmethod.Japanese.Roman")))
-         (add-hook 'focus-in-hook
-                   '(lambda () (mac-select-input-source "com.google.inputmethod.Japanese.Roman")))
-
-         ;; change command to alt key
-         (setq ns-command-modifier (quote meta))))
-
-  ;; evil extend
-  ;; -------------------------------------------------------------------------------------------
-  (define-key evil-normal-state-map (kbd "H") #'mwim-beginning-of-code-or-line)
-  (define-key evil-normal-state-map (kbd "L") #'mwim-end-of-line-or-code)
-
-  (global-set-key (kbd "M-g M-g") #'evil-avy-goto-line)
-  (global-set-key (kbd "C-;") 'evil-avy-goto-char)
-
-  (global-set-key (kbd "C-o") 'evil-open-below)
-  (global-set-key (kbd "C-S-o") 'evil-open-above)
-
-  ;; mark settings
-  (define-key evil-motion-state-map (kbd "C-u") 'universal-argument)
-
-  (require 'smartrep)
-
-  ;; helm settings
-  ;; -------------------------------------------------------------------------------------------
-  (define-key global-map (kbd "C-x b") 'helm-for-files)
+  ;; helm-ghs
+  (evil-leader/set-key
+    "fh" 'helm-ghs)
 
   ;; helm ag
   (setq helm-ag-base-command "rg --vimgrep --no-heading -uu") ; use ripgrep
   (setq helm-ag-insert-at-point 'symbol)
   (global-set-key (kbd "C-M-g") 'helm-ag)
 
-  (defun helm-ag-dotfiles ()
-    "search .dotfiles"
-    (interactive)
-    (helm-ag "~/.dotfiles/"))
-  (defun helm-projectile-ag ()
-    "Projectile"
-    (interactive)
-    (helm-ag (projectile-project-root)))
+  (require 'highlight-indent-guides)
+  (setq highlight-indent-guides-auto-enabled t)
+  (setq highlight-indent-guides-responsive t)
+  (setq highlight-indent-guides-method 'character)
 
-  ;; company settings
+  ;; helm settings
   ;; -------------------------------------------------------------------------------------------
-  (global-company-mode)
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 1)
-  (setq company-selection-wrap-around t)
-
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous)
-  (define-key company-active-map (kbd "C-d") 'company-show-doc-buffer)
-  (define-key company-active-map (kbd "C-i") 'company-complete-selection)
-  (define-key company-active-map (kbd "C-s") 'company-filter-candidates)
-  (define-key company-active-map (kbd "<tab>") 'company-complete)
-
-  ;; company dict
-  (add-to-list 'company-backends 'company-dict)
-  (setq company-dict-dir (concat user-emacs-directory "private/dict/"))
-
-  ;; emacs lisp settings
-  ;; -------------------------------------------------------------------------------------------
-  (add-hook 'emacs-lisp-mode-hook
-            '(lambda ()
-               (define-key emacs-lisp-mode-map (kbd "C-c .") 'describe-function)))
-
-  ;; python settings
-  ;; -------------------------------------------------------------------------------------------
-  (defun python-shell-send-selected-region-or-current-statement (from to)
-    (interactive "r")
-    (if (region-active-p)
-        (python-shell-send-region from to)
-      (python-shell-send-region (point-at-bol) (point-at-eol))))
-
-  (add-hook 'anaconda-mode-hook 'flycheck-mode)
-  (add-hook 'anaconda-mode-hook
-            '(lambda ()
-               (define-key anaconda-mode-map (kbd "C-c .") 'anaconda-mode-find-assignments)
-               (define-key anaconda-mode-map (kbd "C-c z") 'python-shell-send-buffer-switch)
-               (define-key anaconda-mode-map (kbd "C-c s") 'python-shell-send-region)
-               (define-key anaconda-mode-map (kbd "C-c C-s") 'python-shell-send-region)
-               (define-key anaconda-mode-map (kbd "C-c ,") (if (fboundp 'anaconda-mode-go-back)
-                                                               'anaconda-mode-go-back
-                                                             'xref-pop-marker-stack))
-               (define-key python-mode-map (kbd "<C-return>") 'python-shell-send-selected-region-or-current-statement)
-
-               (define-key anaconda-mode-map (kbd "C-c C-v") 'helm-flycheck)
-               (define-key anaconda-mode-map (kbd "C-M-i") 'anaconda-mode-complete)
-               (smartrep-define-key anaconda-mode-map "C-c"
-                 '(("C-n" . flycheck-next-error)
-                   ("C-p" . flycheck-previous-error)))))
-  (require 'evil-collection-anaconda-mode)
-  (evil-collection-define-key
-    'normal 'anaconda-mode-map
-    "gh" 'anaconda-mode-find-assignments)
-  (evil-collection-anaconda-mode-setup)
-
-  ;; c++ settings
-  ;; -------------------------------------------------------------------------------------------
-  ;; style
-  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-  (c-set-offset 'innamespace 0)
-  (setq c-basic-offset 4
-        tab-width 4
-        indent-tabs-mode nil)
-
-  (defun flycheck-rtags-setup ()
-    (flycheck-select-checker 'rtags)
-    (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-    (setq-local flycheck-check-syntax-automatically nil))
-  (add-hook 'c-mode-hook #'flycheck-rtags-setup)
-  (add-hook 'c++-mode-hook #'flycheck-rtags-setup)
-
-  (add-hook 'c++-mode-hook
-            '(lambda ()
-               ;; rtags
-               (setq rtags-autostart-diagnostics t)
-               (rtags-diagnostics)
-               (setq rtags-completions-enabled t)
-               (push 'company-rtags company-backends)
-               (setq rtags-display-result-backend 'helm)
-               (rtags-enable-standard-keybindings c-mode-base-map)
-
-               ;;  clang-format binding
-               ;; (define-key c++-mode-map [tab] 'clang-format-buffer)
-
-               (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
-
-               (define-key c++-mode-map (kbd "C-c .") 'rtags-find-symbol-at-point)
-               (define-key c++-mode-map (kbd "C-c ,") 'rtags-location-stack-back)
-
-               (define-key c++-mode-map (kbd "C-c C-v") 'helm-flycheck)
-               (define-key c++-mode-map (kbd "C-M-i") 'company-clang)
-               (smartrep-define-key c++-mode-map "C-c"
-                                    '(("C-n" . flycheck-next-error)
-                                      ("C-p" . flycheck-previous-error)))))
-  (spacemacs/add-to-hooks '(lambda () (add-hook 'before-save-hook 'clang-format-buffer nil t))
-                          '(c-mode-hook c++-mode-hook))
-
-  ;; euslisp settings
-  ;; -------------------------------------------------------------------------------------------
-  (defun euslisp-shell-send-selected-region-or-current-statement (from to)
-    (interactive "r")
-    (if (region-active-p)
-        (euslisp-shell-send-region from to)
-      (euslisp-shell-send-region (point-at-bol) (point-at-eol))))
-
-  (add-hook 'euslisp-mode-hook
-            '(lambda ()
-               (define-key euslisp-mode-map (kbd "C-c .") 'euslisp-find-definition-function)
-               (define-key euslisp-mode-map (kbd "C-c z") 'euslisp-switch-to-shell)
-               (define-key euslisp-mode-map (kbd "C-c s") 'euslisp-shell-send-region)
-               (define-key euslisp-mode-map (kbd "C-c d")
-                 '(lambda () (interactive) (euslisp-shell-send-string "(send *irtviewer* :draw-objects)")))
-               (define-key euslisp-mode-map (kbd "C-c C-s") 'euslisp-shell-send-region)
-               (define-key euslisp-mode-map (kbd "<C-return>") 'euslisp-shell-send-selected-region-or-current-statement)
-               (define-key euslisp-mode-map (kbd "C-c ,") 'helm-ag-pop-stack)))
-
-  ;; ROS
-  ;; -------------------------------------------------------------------------------------------
-  (setq auto-mode-alist
-        (cons (cons "\\.cfg" 'python-mode) auto-mode-alist))
-  (setq auto-mode-alist
-        (cons (cons "\\.urdf" 'nxml-mode) auto-mode-alist))
-  (setq nxml-slash-auto-complete-flag t)
-
-  ;; Makefile
-  ;; -------------------------------------------------------------------------------------------
-  (setq auto-mode-alist
-        (append '(("Makefile\\..*$" . makefile-gmake-mode)
-                  ("Makefile_.*$" . makefile-gmake-mode)
-                  ) auto-mode-alist))
-
-  ;; fish-mode
-  ;; -------------------------------------------------------------------------------------------
-  (add-hook 'fish-mode-hook
-            '(lambda () (setq tab-width 4)))
-
-  ;; quickrun
-  ;; -------------------------------------------------------------------------------------------
-  (defun quickrun-maybe-region ()
-    "Run region or buffer, depending on current evil state."
-    (interactive)
-    (cond
-     ((eq evil-state 'visual)
-      (quickrun-region (region-beginning) (region-end)))
-     (t
-      (quickrun))))
-
-  (push '("*quickrun*") popwin:special-display-config)
-  (evil-define-key 'normal quickrun/mode-map
-    "q" 'delete-window)
-  (evil-leader/set-key
-    "cqq" 'quickrun-maybe-region
-    "cqr" 'quickrun-replace-region
-    "cqa" 'quickrun-with-arg
-    "cqs" 'quickrun-shell)
-  (global-set-key (kbd "<f5>") 'quickrun-maybe-region)
-
-  (setq x-super-keysym 'meta)
+  (define-key global-map (kbd "C-x b") 'helm-for-files)
 
   )
