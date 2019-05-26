@@ -379,4 +379,7 @@ you should place you code here."
   ;; -------------------------------------------------------------------------------------------
   (define-key global-map (kbd "C-x b") 'helm-for-files)
 
+  ;; lsp settings
+  (add-hook 'python-mode-hook #'lsp)
+
   )
