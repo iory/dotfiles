@@ -124,6 +124,17 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
 
     # fish as login shell
     [ -n "$INSTALL_FISH_LOGIN" ] && ln -sf `pwd`/config/fish/.profile ~/
+
+    # for ranger
+    case ${OSTYPE} in
+        darwin*)
+            unlink ~/.config/ranger/rifle.conf
+            ln -sf `pwd`/config/ranger/rifle.mac.conf ~/.config/ranger/rifle.conf
+            unlink ~/.config/ranger/rc.conf
+            ln -sf `pwd`/config/ranger/rc.mac.conf ~/.config/ranger/rc.conf
+        ;;
+    esac
+
 }
 
 : "vim settings install" && {
