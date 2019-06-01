@@ -2,6 +2,7 @@
 . ~/.config/fish/functions/anaconda-extend.fish
 . ~/.config/fish/functions/emacs-extend.fish
 . ~/.config/fish/functions/cq.fish
+. ~/.config/fish/functions/date-extend.fish
 . ~/.config/fish/functions/git.fish
 . ~/.config/fish/functions/util.fish
 . ~/.config/fish/functions/cuda.fish
