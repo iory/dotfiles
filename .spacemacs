@@ -33,12 +33,14 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
-   '(region-bindings-mode
+   '(
      easy-kill
      helm-ghq
      helm-ghs
      highlight-indent-guides
-     launch-mode)
+     launch-mode
+     region-bindings-mode
+     )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages
    '(;; https://github.com/syl20bnr/spacemacs/issues/9374
