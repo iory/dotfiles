@@ -40,6 +40,7 @@ values."
      highlight-indent-guides
      launch-mode
      region-bindings-mode
+     ssh-config-mode
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages
