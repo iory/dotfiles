@@ -165,6 +165,7 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     git-clone-or-update-with-check https://github.com/syl20bnr/spacemacs.git $HOME/.emacs.d
 
     # pyenv
+    green-echo "install/update pyenv"
     git-clone-or-update-with-check https://github.com/yyuu/pyenv.git $HOME/.pyenv
 
     case ${OSTYPE} in
