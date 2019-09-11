@@ -1,6 +1,7 @@
 # brewfile for mac
 
 brew "binutils"
+brew "bluetoothconnector"
 brew "clang-format"
 brew "gdb"
 brew "gdrive"
