@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import os
 from glob import glob
+import os
 
 if not os.path.exists(os.path.expanduser("~/.ssh")):
     os.makedirs(os.path.expanduser("~/.ssh"))
