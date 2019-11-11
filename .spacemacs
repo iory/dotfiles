@@ -18,6 +18,8 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(csv
+     cmake
+     docker
      auto-completion
      better-defaults
      git
