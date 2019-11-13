@@ -9,6 +9,9 @@ if test -d '/opt/ros'
         case Linux
             if type -q bass
                 switch (lsb_release -sr)
+                    case '18.04'
+                        bass source /opt/ros/melodic/setup.bash
+                        source /opt/ros/melodic/share/rosbash/rosfish
                     case '16.04'
                         bass source /opt/ros/kinetic/setup.bash
                         source /opt/ros/kinetic/share/rosbash/rosfish
@@ -316,7 +319,7 @@ abbr -a crl 'catkin roslint'
 abbr -a crlt 'catkin roslint --this --no-deps -iv'
 abbr -a cli 'catkin lint'
 abbr -a cs 'bass source (catkin locate)/devel/setup.bash'
-abbr -a cso 'bass source /opt/ros/kinetic/setup.bash'
+abbr -a cso 'bass source /opt/ros/$ROS_DISTRO/setup.bash'
 abbr -a cr 'cd (catkin locate)'
 
 
