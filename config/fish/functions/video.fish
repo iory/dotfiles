@@ -28,3 +28,12 @@ end
 function video-split -d "split video"
     ffmpeg -i $argv[1] -ss $argv[2] -t $argv[3] splited-"$argv[1]"
 end
+
+
+function video2gif -d "Convert video file to gif"
+    set --local tmpfile (mktemp -d)
+    set --local extension (echo $argv[1] | awk -F. '{print $NF}')
+    set --local filename (basename $argv[1] .$extension)
+    ffmpeg -i $argv[1] -vf "palettegen" -y $tmpfile/palette.png
+    ffmpeg -i $argv[1] -i $tmpfile/palette.png -lavfi "fps=12,scale=900:-1:flags=lanczos [x]; [x][1:v] paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle" -y "$filename".gif
+end
