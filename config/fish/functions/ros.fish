@@ -409,6 +409,26 @@ function roslaunch --wraps=roslaunch
 end
 
 
+function rostest --wraps=rostest
+    for path in $PATH
+        string match -rq 'linuxbrew|pyenv' $path
+        if test $status -eq 0
+        else
+            set -x NEW_PATH $NEW_PATH $path
+        end
+    end
+
+    for path in (string split : $LD_LIBRARY_PATH)
+        string match -rq 'linuxbrew|pyenv' $path
+        if test $status -eq 0
+        else
+            set -x NEW_LD_PATH "$NEW_LD_PATH":"$path"
+        end
+    end
+    set -lx PATH $NEW_PATH; set -lx LD_LIBRARY_PATH $NEW_LD_PATH; set -lx  SHELL /bin/bash; command rostest $argv
+end
+
+
 function rosrun --wraps=rosrun
     for path in $PATH
         string match -rq 'linuxbrew|pyenv' $path
