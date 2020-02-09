@@ -4,6 +4,5 @@ function update -d "Updates all software"
             sudo apt-get -y update
             sudo apt-get -y upgrade
     end
-    brewup
     fisher install
 end

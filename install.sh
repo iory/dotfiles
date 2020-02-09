@@ -170,10 +170,6 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
 
     case ${OSTYPE} in
         linux*)
-            # linuxbrew
-            green-echo "install/update linxubrew"
-            git-clone-or-update-with-check https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew origin master
-
             # gdrive
             if [ ! -f $HOME/.local/bin/gdrive ]; then
                 green-echo "install gdrive"
