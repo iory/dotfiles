@@ -181,6 +181,17 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
                 chmod +x $HOME/.local/bin/gdrive
             fi
 
+            # fzf
+            if [ ! -f $HOME/.local/bin/fzf ]; then
+                green-echo "install fzf"
+                pushd /tmp
+                wget -q "https://github.com/junegunn/fzf-bin/releases/download/0.20.0/fzf-0.20.0-linux_amd64.tgz" -O /tmp/fzf-0.20.0-linux_amd64.tgz
+                tar xvzf /tmp/fzf-0.20.0-linux_amd64.tgz
+                mv /tmp/fzf $HOME/.local/bin/fzf
+                rm -rf /tmp/fzf-0.20.0-linux_amd64.tgz
+                popd
+            fi
+
             # ripgrep
             if [ ! -f $HOME/.local/bin/rg ]; then
                 pushd /tmp
