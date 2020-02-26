@@ -170,6 +170,18 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
 
     case ${OSTYPE} in
         linux*)
+            # exa
+            if [ ! -f $HOME/.local/bin/exa ]; then
+                green-echo "install exa"
+                pushd /tmp
+                wget -q "https://github.com/ogham/exa/releases/download/v0.9.0/exa-linux-x86_64-0.9.0.zip" -O /tmp/exa-linux-x86_64-0.9.0.zip
+                unzip /tmp/exa-linux-x86_64-0.9.0.zip
+                mv exa-linux-x86_64 $HOME/.local/bin/exa
+                rm -rf /tmp/exa-linux-x86_64-0.9.0.zip
+                chmod +x $HOME/.local/bin/exa
+                popd
+            fi
+
             # gdrive
             if [ ! -f $HOME/.local/bin/gdrive ]; then
                 green-echo "install gdrive"
