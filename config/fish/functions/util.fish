@@ -143,3 +143,5 @@ function update_dotfiles
 end
 
 abbr -a ud update_dotfiles
+
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
