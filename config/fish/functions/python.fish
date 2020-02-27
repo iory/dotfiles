@@ -13,3 +13,6 @@ abbr -a fcv=h 'python -c "import cv2; print(\"\n\".join([item for item in dir(cv
 function jupyte2python -d "Convert jupyer nodebook file to python text file"
     jupyter nbconvert --to python $argv[1]
 end
+
+# For python3.7 breakpoint()
+export PYTHONBREAKPOINT=ipdb.set_trace
