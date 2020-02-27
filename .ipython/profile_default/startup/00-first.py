@@ -1,5 +1,12 @@
 import platform
 
+# For IPython.embed
+from traitlets.config import get_config
+ipython_config = get_config()
+
+if platform.system() == 'Linux':
+    ipython_config.InteractiveShellEmbed.colors = "Linux"
+
 try:
     import matplotlib
     if platform.system() == 'Darwin':
