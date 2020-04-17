@@ -28,6 +28,7 @@
 . ~/.config/fish/functions/gym.fish
 . ~/.config/fish/functions/less_extend.fish
 . ~/.config/fish/functions/du_extend.fish
+. ~/.config/fish/functions/fd-extend.fish
 switch (uname)
     case Darwin
         . ~/.config/fish/functions/brewup.fish
