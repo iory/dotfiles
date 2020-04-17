@@ -232,6 +232,8 @@ values."
    dotspacemacs-whitespace-cleanup 'changed
    ;; for evil-collection
    evil-want-integration nil
+   ;; for server
+   dotspacemacs-enable-server t
    ))
 
 (defun dotspacemacs/user-init ()
