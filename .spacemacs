@@ -25,7 +25,9 @@ values."
      git
      javascript
      lsp
-     python
+     (python :variables
+             python-backend 'anaconda
+             python-test-runner 'pytest)
      shell-scripts
      systemd
      yaml
