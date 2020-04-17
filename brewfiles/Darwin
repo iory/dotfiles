@@ -1,8 +1,11 @@
 # brewfile for mac
 
+brew "bat"
 brew "binutils"
 brew "bluetoothconnector"
 brew "clang-format"
+brew "exa"
+brew "fd"
 brew "gdb"
 brew "gdrive"
 brew "m-cli"

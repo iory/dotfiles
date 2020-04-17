@@ -30,6 +30,7 @@
 . ~/.config/fish/functions/du_extend.fish
 switch (uname)
     case Darwin
+        . ~/.config/fish/functions/brewup.fish
         . ~/.config/fish/functions/itunes.fish
         . ~/.config/fish/functions/osx.fish
     case Linux
