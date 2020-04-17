@@ -36,6 +36,8 @@ switch (uname)
     case Linux
         . ~/.config/fish/functions/ros.fish
 end
+. ~/.config/fish/functions/exa-utils.fish
+. ~/.config/fish/functions/rg-utils.fish
 
 if test -n "$SSH_CONNECTION"
     set -x EDITOR vim
