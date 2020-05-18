@@ -15,16 +15,16 @@ function gpr
             set --local REPO (basename $REPO .git)
             switch (count $USERNAME)
                 case 0
-                    ghs $argv[1] | peco | awk '{print $1}' | ghq import
+                    ghs $argv[1] | peco | awk '{print $1}' | ghq get
                 case '*'
                     set --local RESULT (ghs $REPO -u $USERNAME)
                     set --local NLINE (echo $RESULT | wc | awk '{print $1}')
                     if [ (echo $NLINE) -eq 1 ]
-                        echo $RESULT | awk '{print $1}' | ghq import
+                        echo $RESULT | awk '{print $1}' | ghq get
                     end
             end
         case '*'
-            ghs $argv | peco | awk '{print $1}' | ghq import
+            ghs $argv | peco | awk '{print $1}' | ghq get
     end
 end
 
