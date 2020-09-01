@@ -10,10 +10,11 @@ function video2png -d "Simple ffmpeg wrapper"
 end
 
 function video2mp4 -d "convert video to mp4 format"
+    # https://stackoverflow.com/questions/20847674/ffmpeg-libx264-height-not-divisible-by-2
     set --local filename $argv[1]
     set --local extension (echo $argv[1] | awk -F. '{print $NF}')
     set --local filename (basename $argv[1] .$extension)
-    ffmpeg -i $argv[1] -vcodec libx264 -pix_fmt yuv420p -c:a aac -strict experimental -b:a 128k "$filename".mp4
+    ffmpeg -i $argv[1] -vcodec libx264 -pix_fmt yuv420p -c:a aac -strict experimental -b:a 128k -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" "$filename".mp4
 end
 
 
