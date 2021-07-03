@@ -9,6 +9,9 @@ if test -d '/opt/ros'
         case Linux
             if type -q bass
                 switch (lsb_release -sr)
+                    case '20.04'
+                        bass source /opt/ros/noetic/setup.bash
+                        source /opt/ros/noetic/share/rosbash/rosfish
                     case '18.04'
                         bass source /opt/ros/melodic/setup.bash
                         source /opt/ros/melodic/share/rosbash/rosfish
