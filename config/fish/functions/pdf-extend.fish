@@ -40,3 +40,18 @@ function pdfdeploy
             fish_pdfmin "$filename.pdf"
     end
 end
+
+
+function imgdeploy
+    switch (count $argv)
+        case 0
+            echo "imgdeploy requires target pdf file."
+            return 1
+        case '*'
+            set --local filename $argv[1]
+            set --local extension (echo $argv[1] | awk -F. '{print $NF}')
+            set --local filename (basename $argv[1] .$extension)
+            convert "$filename.$extension" -fuzz 5% -trim "$filename-trim.$extension"
+            mv "$filename-trim.$extension" "$filename.$extension"
+    end
+end
