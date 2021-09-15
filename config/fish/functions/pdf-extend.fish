@@ -55,3 +55,19 @@ function imgdeploy
             mv "$filename-trim.$extension" "$filename.$extension"
     end
 end
+
+
+function pdfdeploy-for-submit
+    switch (count $argv)
+        case 0
+            echo "pdfdeploy-for-submit requires target pdf file."
+            return 1
+        case '*'
+            set --local filename $argv[1]
+            set --local extension (echo $argv[1] | awk -F. '{print $NF}')
+            set --local filename (basename $argv[1] .$extension)
+            gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dEmbedAllFonts=true -sOutputFile="$filename-deploy.pdf" -f "$filename.pdf"
+            mv "$filename-deploy.pdf" "$filename.pdf"
+
+    end
+end
