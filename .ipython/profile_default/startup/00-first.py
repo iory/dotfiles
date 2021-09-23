@@ -1,4 +1,5 @@
 import platform
+import sys
 
 # For IPython.embed
 from traitlets.config import get_config
@@ -16,6 +17,10 @@ try:
     import matplotlib.pyplot as plt  # NOQA
 except ImportError:
     pass
+
+if sys.version_info.major == 3:
+    import pathlib  # NOQA
+    from pathlib import Path  # NOQA
 
 import collections  # NOQA
 import itertools  # NOQA
