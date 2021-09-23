@@ -33,7 +33,7 @@ function source_activate_conda_env -d 'activate and source function for anaconda
     if test $length -gt 0
         if ! test -d ~/.pyenv/versions/anaconda3-5.3.1/envs/$argv[1]
             echo "Automatically create conda env"
-            conda create -n $argv[1] python=3.7 -y
+            conda create -n $argv[1] python=3.9 -y
         end
         conda activate $argv[1]
     end
