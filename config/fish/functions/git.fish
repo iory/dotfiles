@@ -88,6 +88,10 @@ abbr -a gans "git diff -w --no-color | git apply --cached --ignore-whitespace"
 # Git Funcion #
 ###############
 
+function git-ignore
+    echo "*" >> .gitignore
+end
+
 function git-branch-update
     set -l branch (git rev-parse --abbrev-ref HEAD)
     git fetch --all
