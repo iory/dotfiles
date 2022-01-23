@@ -16,9 +16,6 @@ abbr -a g1msg 'git log -1 --format="%s" | cat'
 abbr -a g1sh 'git log -1 --format="%h" | cat'
 abbr -a gram 'git remote add {$GITHUB_USER}; and git fetch {$GITHUB_USER}'
 
-# Use hub as git client
-# type hub &>/dev/null && abbr -a git=hub
-
 abbr -a ga 'git add'
 abbr -a ga. 'git add .'
 abbr -a gap 'git add -p'
@@ -125,22 +122,16 @@ function glf
     git log --all --grep=$argv[1]
 end
 
-function gis
-    switch (count $argv)
-        case 0
-            hub browse -- issues >/dev/null 2>&1
-        case 1
-            hub browse $argv[1] issues >/dev/null 2>&1
-        case '*'
-            hub browse $argv[1] issues/$argv[2] >/dev/null 2>&1
-    end
+## GitHub CLI
+if type -q gh
+    eval (gh completion -s fish | source)
 end
-abbr -a gbw 'hub browse ^ /dev/null'
 
-if type -q hub
-    hub alias -s  >/dev/null 2>&1
-    abbr -a git 'hub'
-end
+abbr -a gi 'gh issue'
+abbr -a gis 'gh issue status'
+abbr -a gil 'gh issue list'
+abbr -a gpv 'gh pr view'
+abbr -a gbw 'gh repo view --web'
 
 
 function fco -d "checkout git branch/tag"
@@ -179,8 +170,8 @@ end
 function git-fzf-edit -d "edit current git controlled file"
     git rev-parse --is-inside-work-tree > /dev/null 2>&1
     if test $status -eq 0
-        set --local CURRENT_GIT_ROOT_DIR (hub rev-parse --show-toplevel)
-        set --local SELECTED_FILE (hub ls-files --full-name --exclude-standard -cmo "$CURRENT_GIT_ROOT_DIR" | fzf +m)
+        set --local CURRENT_GIT_ROOT_DIR (git rev-parse --show-toplevel)
+        set --local SELECTED_FILE (git ls-files --full-name --exclude-standard -cmo "$CURRENT_GIT_ROOT_DIR" | fzf +m)
         if test -n "$SELECTED_FILE"
             eval $EDITOR "$CURRENT_GIT_ROOT_DIR/$SELECTED_FILE"
         end
@@ -190,8 +181,8 @@ end
 function git-cd -d "cd to current git controlled file"
     git rev-parse --is-inside-work-tree > /dev/null 2>&1
     if test $status -eq 0
-        set --local CURRENT_GIT_ROOT_DIR (hub rev-parse --show-toplevel)
-        set --local SELECTED_FILE (hub ls-files --full-name --exclude-standard -cmo "$CURRENT_GIT_ROOT_DIR" | fzf +m)
+        set --local CURRENT_GIT_ROOT_DIR (git rev-parse --show-toplevel)
+        set --local SELECTED_FILE (git ls-files --full-name --exclude-standard -cmo "$CURRENT_GIT_ROOT_DIR" | fzf +m)
         if test -n "$SELECTED_FILE"
             cd (dirname "$CURRENT_GIT_ROOT_DIR/$SELECTED_FILE")
         end
