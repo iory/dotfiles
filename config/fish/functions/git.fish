@@ -132,6 +132,7 @@ abbr -a gis 'gh issue status'
 abbr -a gil 'gh issue list'
 abbr -a gpv 'gh pr view'
 abbr -a gbw 'gh repo view --web'
+abbr -a gc 'gh repo clone'
 
 
 function fco -d "checkout git branch/tag"
