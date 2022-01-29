@@ -1,5 +1,4 @@
 # source config
-. ~/.config/fish/completions/gh.fish
 . ~/.config/fish/functions/anaconda-extend.fish
 . ~/.config/fish/functions/bass_completion.fish
 . ~/.config/fish/functions/cd-extend.fish
