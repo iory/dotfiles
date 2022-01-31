@@ -1,4 +1,4 @@
-FISH_BIN="$HOME/.linuxbrew/bin/fish"
+FISH_BIN="/usr/bin/fish"
 
 # The replacement is only done in non-fish login interactive shell in
 # SSH connection and fish executable exists.
