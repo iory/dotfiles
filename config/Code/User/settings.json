@@ -1,3 +1,7 @@
 {
-    "security.workspace.trust.untrustedFiles": "open"
+    "editor.renderWhitespace": "all",
+    "files.trimTrailingWhitespace": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "trailing-spaces.deleteModifiedLinesOnly": true,
+    "trailing-spaces.trimOnSave": true,
 }
