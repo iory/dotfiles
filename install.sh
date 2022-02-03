@@ -157,6 +157,16 @@ DOTFILES_DIRECTORY=$HOME/.dotfiles
     done
 }
 
+: "visual code settings install" && {
+    # install extention
+    if hash code 2>/dev/null; then
+        cat config/Code/extensions | while read line
+        do
+            code --install-extension $line
+        done
+    fi
+}
+
 : "install applications" && {
     green-echo "install applications"
 
