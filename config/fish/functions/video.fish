@@ -9,6 +9,19 @@ function video2png -d "Simple ffmpeg wrapper"
     popd
 end
 
+
+function video2jpg -d "Simple ffmpeg wrapper"
+    set --local filename $argv[1]
+    set --local extension (echo $argv[1] | awk -F. '{print $NF}')
+    set --local filename (basename $argv[1] .$extension)
+    mkdir -p $filename
+    pushd $filename
+    echo $filename
+    ffmpeg  -i ../$argv[1] -r 5 -f image2 "$filename"_%06d.jpg -q:v 1
+    popd
+end
+
+
 function video2mp4 -d "convert video to mp4 format"
     # https://stackoverflow.com/questions/20847674/ffmpeg-libx264-height-not-divisible-by-2
     set --local filename $argv[1]
