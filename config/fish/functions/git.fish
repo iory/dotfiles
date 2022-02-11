@@ -131,7 +131,7 @@ abbr -a gi 'gh issue'
 abbr -a gis 'gh issue status'
 abbr -a gil 'gh issue list'
 abbr -a gpv 'gh pr view'
-abbr -a gbw 'gh repo view --web'
+abbr -a gbw 'gh repo view --web ^ /dev/null'
 abbr -a gc 'gh repo clone'
 
 
