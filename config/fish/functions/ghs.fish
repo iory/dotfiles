@@ -22,9 +22,11 @@ function gpr
                     end
                     switch (printf "%s\n" $tmp | wc -l)
                         case 1
-                            printf "%s\n" $tmp | awk '{print $1}' | ghq get --look
+                            set --local reponame (printf "%s\n" $tmp | awk '{print $1}')
+                            ghq get --look $reponame
                         case '*'
-                            printf "%s\n" $tmp | peco | awk '{print $1}' | ghq get --look
+                            set --local reponame (printf "%s\n" $tmp | peco | awk '{print $1}')
+                            ghq get --look $reponame
                     end
                 case '*'
                     set --local RESULT (ghs $REPO -u $USERNAME)
@@ -34,7 +36,8 @@ function gpr
                     end
             end
         case '*'
-            ghs $argv | peco | awk '{print $1}' | ghq get --look
+            set --local reponame (ghs $argv | peco | awk '{print $1}')
+            ghq get --look $reponame
     end
 end
 
