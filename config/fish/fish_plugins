@@ -1,8 +1,8 @@
-barnybug/docker-fish-completion
-edc/bass
-jethrokuan/z
-laughedelic/pisces
-oh-my-fish/plugin-emacs
-oh-my-fish/plugin-extract
-oh-my-fish/plugin-peco
 oh-my-fish/theme-agnoster
+oh-my-fish/plugin-emacs
+oh-my-fish/plugin-peco
+edc/bass
+oh-my-fish/plugin-extract
+jethrokuan/z
+iory/ros-tools
+iory/compress
