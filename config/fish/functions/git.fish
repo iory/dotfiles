@@ -41,7 +41,7 @@ abbr -a gld 'git log --pretty=format:"%h %ad %s" --date=short --all'
 abbr -a gg 'git grep'
 
 function _git_current_branch
-    git branch ^/dev/null | sed -n '/\* /s///p'
+    git branch | sed -n '/\* /s///p'
 end
 
 abbr -a gbug 'git branch -u origin/(_git_current_branch)'
