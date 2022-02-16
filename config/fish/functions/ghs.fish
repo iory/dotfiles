@@ -15,16 +15,26 @@ function gpr
             set --local REPO (basename $REPO .git)
             switch (count $USERNAME)
                 case 0
-                    ghs $argv[1] | peco | awk '{print $1}' | ghq get
+                    set --local tmp (ghs $argv[1])
+                    if [ "$tmp" = 'Error: Repository not found' ]
+                        echo 'Error: Repository not found'
+                        return 1
+                    end
+                    switch (printf "%s\n" $tmp | wc -l)
+                        case 1
+                            printf "%s\n" $tmp | awk '{print $1}' | ghq get --look
+                        case '*'
+                            printf "%s\n" $tmp | peco | awk '{print $1}' | ghq get --look
+                    end
                 case '*'
                     set --local RESULT (ghs $REPO -u $USERNAME)
-                    set --local NLINE (echo $RESULT | wc | awk '{print $1}')
+                    set --local NLINE (echo $RESULT | wc -l)
                     if [ (echo $NLINE) -eq 1 ]
-                        echo $RESULT | awk '{print $1}' | ghq get
+                        echo $RESULT | awk '{print $1}' | ghq get --look
                     end
             end
         case '*'
-            ghs $argv | peco | awk '{print $1}' | ghq get
+            ghs $argv | peco | awk '{print $1}' | ghq get --look
     end
 end
 
