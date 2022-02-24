@@ -19,10 +19,10 @@ set -x EDITOR "emacsclient --no-wait"
 alias emacs-shell 'emacs -nw -q -f shell'
 
 function junk
-    if [ ! -d $HOME/.emacs.d/.cache/junk/(date +%Y/%m) ]
-        mkdir -p $HOME/.emacs.d/.cache/junk/(date +%Y/%m)
+    if [ ! -d $HOME/junk/(date +%Y/%m) ]
+        mkdir -p $HOME/junk/(date +%Y/%m)
     end
-        cd $HOME/.emacs.d/.cache/junk/(date +%Y/%m)
+        cd $HOME/junk/(date +%Y/%m)
 end
 
 
