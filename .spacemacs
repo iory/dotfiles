@@ -289,6 +289,7 @@ you should place you code here."
     "fj" 'spacemacs/open-junk-file
     "fJ" '(lambda () (interactive) (helm-find-files-1
                                     (f-slash (format-time-string (f-dirname open-junk-file-format))))))
+  (setq open-junk-file-format "~/junk/%Y/%m/%d-%H%M%S.")
 
   (add-hook 'switch-buffer-functions
             (lambda (prev cur)
