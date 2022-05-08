@@ -11,6 +11,7 @@
 . ~/.config/fish/functions/fd-extend.fish
 . ~/.config/fish/functions/gdb.fish
 . ~/.config/fish/functions/gdrive.fish
+. ~/.config/fish/functions/gh.fish
 . ~/.config/fish/functions/ghs.fish
 . ~/.config/fish/functions/git.fish
 . ~/.config/fish/functions/gym.fish
@@ -75,7 +76,8 @@ function fish_user_key_bindings
     bind \cxk peco_kill
     bind \cxb recentd
     bind \c] peco_select_ghq_repository
-    bind \cg peco_select_ghq_repository
+    bind \ccc gh-peco-checkout-pull-request
+    bind \ccv gh-peco-view-pull-request
     bind \cxc peco_select_catkin_workspace
     switch (uname)
         case Darwin
