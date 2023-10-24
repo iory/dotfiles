@@ -9,6 +9,8 @@ if test -d '/opt/ros'
         case Linux
             if type -q bass
                 switch (lsb_release -sr)
+                    case '22.04'
+                        bass source /opt/ros/humble/setup.bash
                     case '20.04'
                         bass source /opt/ros/noetic/setup.bash
                         source /opt/ros/noetic/share/rosbash/rosfish
